@@ -447,7 +447,7 @@ function itemOptions(it,j){
     {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:"リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります",cost:APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
     {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true,k:"buy"},
     {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
-    {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
+    {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   return [
     {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:cityDesc,cost:cityCost,when:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
@@ -458,7 +458,7 @@ function itemOptions(it,j){
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
 }
 // 「おすすめ」を選んだ理由（routeKey と同じ順で判定している）
-function recWhy(k,j){return {post:`家電4品目は${j.nm}では回収しないため`,city:"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.worry.includes("sell")?"「売れるか知りたい」を選んだため":"収集が間に合わない見込みで、車がないため"}[k]||""}
+function recWhy(k,j){return {post:j.ar&&j.ar.kaden?"家電4品目は家電リサイクルで出すのが基本のため":`家電4品目は${j.nm}では回収しないため`,city:"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.worry.includes("sell")?"「売れるか知りたい」を選んだため":"収集が間に合わない見込みで、車がないため"}[k]||""}
 function itemCards(rs,j){
   if(!rs.length) return `<div class="free"><h3>出したい物を入れると、品目ごとの選択肢が出ます</h3></div>`;
   return `<div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
@@ -491,7 +491,7 @@ function toMsg(){const to=AREAS[A.to];if(to)return `→ ${esc(to.n)}の情報を
 function newHome(rs){
   const to=AREAS[A.to];
   if(!to){return A.toq?`<div class="free nh"><h3>新居の「${esc(A.toq)}」の情報はまだありません</h3><p>このサイトは政令市・東京23区・佐倉市に対応しています。お住まいになる自治体の公式サイトで「粗大ごみ」のページを確認してください。<a href="https://www.google.com/search?q=${encodeURIComponent(A.toq+" 粗大ごみ")}" target="_blank" rel="noopener">「${esc(A.toq)} 粗大ごみ」を検索</a></p></div>`:""}
-  const mine=rs.filter(it=>it.cat!=="unk").map(it=>{if(it.cat==="app")return `<li><b>${esc(it.label)}</b>：家電4品目は${to.n}でも粗大ごみでは出せません。お店か家電リサイクル券で</li>`;
+  const mine=rs.filter(it=>it.cat!=="unk").map(it=>{if(it.cat==="app")return `<li><b>${esc(it.label)}</b>：${to.kaden?`家電4品目は粗大ごみとは手続きが別です（お店か家電リサイクル券が基本）。${esc(to.kaden)}`:`家電4品目は${to.n}でも粗大ごみでは出せません。お店か家電リサイクル券で`}</li>`;
     const fs=itemFees(to,it.label);return `<li><b>${esc(it.label)}</b>：${fs.length?`${feeList(fs)}（目安）`:"料金は品目ごと。下の記事か公式ページで確認"}</li>`}).join("");
   const mv=[...(to.mv0===1?[`前の家から持ってきた物を出すときの決まりは、${to.n}の公式ページには特に書かれていませんでした。${to.n}の家庭のごみとして、新しい住所で申し込みます（申し込むときに「引越しで持ってきた物」と伝えると安心です）`]:to.mv0?[to.mv0]:[]),...(to.mv||[]),"申し込みは、住み始めてから新しい住所で。住む前に申し込めるかは受付で確かめてください","処理券やシールは自治体ごとに別の物です。前の自治体で買った券は使えません"];
   return `<div class="where nh"><h3>新居の${to.n}で粗大ごみを出すとき</h3><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>

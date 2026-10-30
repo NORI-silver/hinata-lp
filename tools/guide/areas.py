@@ -70,6 +70,12 @@ for f in sorted(glob.glob(os.path.join(HERE, "city", "*.html"))):
         a["mv0"] = 1 if "特に書かれていませんでした" in lead else lead
         a["mv"] = [safe_html(x) for x in re.findall(r"<li>(.*?)</li>", mv.group(2), re.S)
                    if not re.match(r"(申し込みは、住み始めてから|処理券やシールは自治体ごと|段ボールや梱包材は)", txt(x))]
+    # 家電4品目を市が条件つきで収集すると記事に書いた地域（広島・相模原・岡山）は、その一文を残す
+    kp = re.search(r"<h2>出せない物と家電4品目</h2>.*?<p>(家電4品目は.*?)</p>", s, re.S)
+    if kp:
+        ks = [x + "。" for x in txt(kp.group(1)).split("。") if re.search(r"大型ごみ収集|市へ頼む|市の戸別収集", x)]
+        if ks:
+            a["kaden"] = "".join(ks)
     rows = fee_rows(s)
     if rows:
         a["items"] = rows
