@@ -48,6 +48,21 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
     if not os.path.exists(os.path.join(CD,_m["key"]+".html")): continue
     C[_m["key"]]=(_m["name"],_m["title"],_m["desc"]); REGION[_m["key"]]=_m["region"]
     if _m.get("mover"): MOVER[_m["key"]]=_m["mover"]
+
+# タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
+# 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto"}
+NOMOCHI={"koto","meguro","chuo"}
+NOFEE={"shizuoka"}
+def _title(k):
+    n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
+    has_c="受付センター" in body
+    if k in OOGATA: return f"{n}の大型ごみ（粗大ごみ）の出し方｜料金・持ち込み・申込"
+    if k in NOMOCHI: return f"{n}の粗大ごみの出し方｜料金・申込・受付センター・買取"
+    if k in NOFEE: return f"{n}の粗大ごみの出し方｜持ち込み・申込・受付センター・家電"
+    if has_c: return f"{n}の粗大ごみの出し方｜料金・持ち込み・申込・受付センター"
+    return f"{n}の粗大ごみの出し方｜料金・持ち込み・申込・家電・買取"
+for _k in list(C): C[_k]=(C[_k][0],_title(_k),C[_k][2])
 _top=open(os.path.join(ROOT,"index.html"),encoding="utf-8").read()
 DIAG=set(re.findall(r"^  (\w+):\[",_top.split("const CITIES={",1)[1].split("\n};",1)[0],re.M))
 fees=open(os.path.join(ROOT,"guide/fees/index.html"),encoding="utf-8").read()
