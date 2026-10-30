@@ -51,8 +51,8 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto"}
-NOMOCHI={"koto","meguro","chuo"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa"}
+NOMOCHI={"koto","meguro","chuo","mitaka"}
 NOFEE={"shizuoka"}
 def _title(k):
     n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
