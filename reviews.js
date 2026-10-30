@@ -4,7 +4,7 @@
  * 点数・口コミは backend/reviews.gs が毎回取り寄せる（規約で保存しない）。出どころの「Google Maps」は訳さずそのまま出す。 */
 (function(){
 // backend/reviews.gs をウェブアプリとして公開した URL。空のあいだは、お店の名前と地図へのリンクだけを出す
-var GAS_URL = "";
+var GAS_URL = "https://script.google.com/macros/s/AKfycbw36d8YjMsAUqsVjVIU8u7ORWclYjX0kyid2XcGlljrHyJIjPJGmp3jEADxTr56UskjvA/exec";
 var AREAS = {yokohama:"横浜市", kawasaki:"川崎市", setagaya:"世田谷区", suginami:"杉並区", saitama:"さいたま市", chiba:"千葉市", sakura:"佐倉市"};
 var CHAINS = ["セカンドストリート", "ハードオフ", "トレジャーファクトリー"];
 var memo = {}; // 同じページを開いているあいだだけ覚える（保存はしない）
