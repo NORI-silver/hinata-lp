@@ -48,6 +48,8 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
     if not os.path.exists(os.path.join(CD,_m["key"]+".html")): continue
     C[_m["key"]]=(_m["name"],_m["title"],_m["desc"]); REGION[_m["key"]]=_m["region"]
     if _m.get("mover"): MOVER[_m["key"]]=_m["mover"]
+_top=open(os.path.join(ROOT,"index.html"),encoding="utf-8").read()
+DIAG=set(re.findall(r"^  (\w+):\[",_top.split("const CITIES={",1)[1].split("\n};",1)[0],re.M))
 fees=open(os.path.join(ROOT,"guide/fees/index.html"),encoding="utf-8").read()
 HEAD_TPL=fees.split("<title>")[0]  # doctype..viewport/robots
 FOOT=fees[fees.index("  <footer class=\"foot\">"):]
@@ -119,6 +121,9 @@ for k,(name,title,desc) in C.items():
     <p>まだ使える家具や家電は、出張査定・キャンセル無料をはっきり書いているチェーンの買取店に見てもらうと、処分代がかからず、値段がつくこともあります。値段がつかなければ断って、{name}の粗大ごみに切り替えます。セカンドストリート、ハードオフ・オフハウス、トレジャーファクトリーなどのチェーンが出張買取をしています（どのお店とも提携していません）。</p>
     <div class="shops" data-city="{k}" data-name="{name}"></div>
 '''
+    # 診断ツールの CITIES にある市区だけ、その市区を選んだ状態で開く（/?city=key）
+    if k in DIAG: cta_href,cta_go=f"/?city={k}",f"{name}で出し方を診断する"
+    else: cta_href,cta_go="/","無料で診断する"
     # 同じ地方から最大6件。区は区どうし・市は市どうしを優先し、記事ごとに並びをずらして偏らないようにする
     same=[x for x in C if REGION[x]==REGION[k]]
     kind=lambda x:C[x][0][-1]
@@ -126,10 +131,10 @@ for k,(name,title,desc) in C.items():
     i=pref.index(k); pref=pref[i+1:]+pref[:i]
     others=(pref+[x for x in same if kind(x)!=kind(k)])[:6]
     tail=f'''  </article>
-  <a class="cta" href="/">
+  <a class="cta" href="{cta_href}">
     <b>あなたの粗大ごみ、どう出すのがいい？</b>
     <span>引越し日と出したい物を入れると、品目ごとに使える出し方と料金の目安がわかります。無料で、入力内容はどこにも送りません。</span>
-    <span class="go">無料で診断する</span>
+    <span class="go">{cta_go}</span>
   </a>
   <section class="related" aria-label="ほかの地域">
     <h2>近くの地域の粗大ごみ</h2>
