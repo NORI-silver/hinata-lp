@@ -39,7 +39,7 @@
 {"@type":"Question","name":"粗大ごみは引越しの何日前に申し込めばいいですか？","acceptedAnswer":{"@type":"Answer","text":"自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。"}},
 {"@type":"Question","name":"粗大ごみの料金はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"自治体と品目の大きさで決まります。たとえば千葉市は390円から1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日に各市の公式サイトで確認）。正確な金額は各自治体の手数料一覧で確認してください。"}},
 {"@type":"Question","name":"この診断にお金はかかりますか？","acceptedAnswer":{"@type":"Answer","text":"かかりません。診断は無料です。市や郵便局、買取店への支払いは、それぞれに直接行います。"}},
-{"@type":"Question","name":"入力した内容や写真はどこかに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。"}}
+{"@type":"Question","name":"入力した内容や写真はどこかに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。"}}
 ]}
 </script>
 <style>
@@ -257,7 +257,7 @@ details p{margin:8px 0 0;color:var(--muted)}
       <details><summary>粗大ごみは引越しの何日前に申し込めばいいですか？</summary><p>自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。</p></details>
       <details><summary>粗大ごみの料金はいくらですか？</summary><p>自治体と品目の大きさで決まります。たとえば千葉市は390円〜1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日確認）。正確な金額は各自治体の手数料一覧で確認してください。</p></details>
       <details><summary>この診断にお金はかかりますか？</summary><p>かかりません。市や郵便局、買取店への支払いは、それぞれに直接行います。</p></details>
-      <details><summary>入力した内容や写真はどこかに送られますか？</summary><p>送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。</p></details>
+      <details><summary>入力した内容や写真はどこかに送られますか？</summary><p>送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。</p></details>
     </section>
   </main>
 
@@ -381,13 +381,13 @@ function handlers(j,rs){
   const rows=[
     ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
     ["post","家電リサイクル券センター（家電4品目）",`電話 ${telA(RKC)}<br>買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます`,extA("近くの指定引取場所を探す",pref),"対応:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:メーカー・大きさで違います"],
-    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"出張査定・キャンセル無料かどうかを確認してから頼みます。提携しているお店ではありません",SHOPS.map(n=>extA(`${n}の口コミを見る`,mapQ(`${n} ${area}`))).join(""),"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
+    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(n))).join(""):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
     ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
   return `<div class="where"><h3>${j.cname}で粗大ごみを出せるところ</h3><p class="wsub">あなたの品目を出せる所に色がつきます。連絡先は2026年10月30日に各公式ページで確認しました${j.url?`・<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>`:""}</p><div class="wl">${rows.map(([k,name,info,links,spec])=>{
     const mine=rs.filter(r=>itemOptions(r,j).some(o=>o.ok&&o.h===k));
     return `<div class="w ${mine.length?"on":"off"}"><span class="wk">${HNAME[k]}</span><span class="wn">${name}</span>
-      <span class="wd">${info}</span>${links?`<span class="wls">${links}</span>`:""}
+      <span class="wd">${info}</span>${links?`<div class="wls">${links}</div>`:""}
       <span class="wd num">${spec}</span>
       ${mine.length?`<span class="wmine">あなたの ${mine.map(r=>esc(r.label)).join("、")} を出せます</span>`:`<span class="wnone">今回の品目では使いません</span>`}</div>`}).join("")}</div></div>`;
 }
@@ -433,6 +433,7 @@ function draw(){
   if(tight&&j.web) h+=`<div class="soon"><b>空き枠のお知らせ（準備中）</b><br>${j.cname}の予約ページを見張って、空きが出たらお知らせするしくみを準備しています。</div>`;
   h+=handlers(j,rs);
   $("out").innerHTML=h;
+  if(window.hinataShops)window.hinataShops.scan();
 }
 function cityTable(){
   const tb=document.querySelector("#citytbl tbody");if(!tb)return;
@@ -493,5 +494,6 @@ document.addEventListener("change",e=>{
 drawQs();draw();cityTable();
 })();
 </script>
+<script src="/reviews.js" defer></script>
 </body>
 </html>
