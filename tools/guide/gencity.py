@@ -51,7 +51,7 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka"}
 NOMOCHI={"koto","meguro","chuo","mitaka"}
 NOFEE={"shizuoka"}
 def _title(k):
@@ -63,6 +63,18 @@ def _title(k):
     if has_c: return f"{n}の粗大ごみの出し方｜料金・持ち込み・申込・受付センター"
     return f"{n}の粗大ごみの出し方｜料金・持ち込み・申込・家電・買取"
 for _k in list(C): C[_k]=(C[_k][0],_title(_k),C[_k][2])
+# 「引越しで間に合わないとき」の文を、予約のしくみが違う市だけ差し替える
+LATE1={
+ "matsuyama":"次の申込期間（地区ごと・年6回）を市のページで確かめて、早めに申し込む",
+ "higashiosaka":"受付に電話して、早い収集日がないか聞く（初めての人はインターネットで申し込めません）",
+ "wakayama":"受付に電話して、早い収集日がないか聞く（初めての人はインターネットで申し込めません）",
+ "sakura":"収集業者に電話して、早い収集日がないか聞く",
+ "kumamoto":"受付に電話して、早い収集日がないか聞く",
+ "gifu":"受付に電話して、早い収集日がないか聞く",
+}
+LATE3={
+ "soka":"少しなら環境業務センターへ持ち込む（引越しで一度にたくさん出る分は持ち込めません）",
+}
 _top=open(os.path.join(ROOT,"index.html"),encoding="utf-8").read()
 DIAG=set(re.findall(r"^  (\w+):\[",_top.split("const CITIES={",1)[1].split("\n};",1)[0],re.M))
 fees=open(os.path.join(ROOT,"guide/fees/index.html"),encoding="utf-8").read()
@@ -111,25 +123,30 @@ for k,(name,title,desc) in C.items():
   <article>
 '''
     body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
+    if MOVER.get(k): mv_intro=f"<p>{name}の公式ページでは、引越しや転入について次のように案内しています（{CHECK}確認）。最後の3つは、どの市区でも気をつけたいことです。</p>"
+    else: mv_intro=f"<p>前の家から持ってきた家具などを{name}で粗大ごみに出すときの決まりは、{name}の公式ページには特に書かれていませんでした（{CHECK}確認）。{name}の家庭のごみとして申し込むので、申し込むときに「引越しで持ってきた物」と伝えて確かめると安心です。</p>"
+    late1=LATE1.get(k,"予約ページをこまめに見る（キャンセルで早い日が空くことがあります）")
+    late3="" if k in NOMOCHI else "<li>"+LATE3.get(k,"自家用車があれば、上の持ち込み先へ")+"</li>"
     extra="".join(f"<li>{x}</li>" for x in MOVER.get(k,[]))
     body+=f'''
     <h2>{name}に引っ越してきた人へ</h2>
-    <p>前の家から持ってきた家具などを{name}で粗大ごみに出すときの決まりは、{name}の公式ページには特に書かれていませんでした（{CHECK}確認）。{name}の家庭のごみとして申し込むので、申し込むときに「引越しで持ってきた物」と伝えて確かめると安心です。</p>
+    {mv_intro}
     <ul>
+      {extra}
       <li>申し込みは、住み始めてから新しい住所で。住む前に申し込めるかは受付で確かめてください。</li>
       <li>処理券やシールは自治体ごとに別の物です。前の自治体で買った券は使えません。</li>
       <li>段ボールや梱包材は粗大ごみではありません。{name}の分け方に従って出します。</li>
-      {extra}
     </ul>
 
     <h2>引越しで間に合わないとき</h2>
     <p>収集の予約が引越しに間に合わないときは、次の順番で考えます。</p>
     <ol>
-      <li>予約ページをこまめに見る（キャンセルで早い日が空くことがあります）</li>
+      <li>{late1}</li>
       <li>まだ使える物は買取に出す（下の買取店へ）</li>
-      <li>自家用車があれば、上の持ち込み先へ</li>
+      {late3}
       <li>それでも無理なら新居へ運ぶ（<a href="/guide/new-home/">損しやすい理由</a>も読んでください）</li>
     </ol>
+    <p>品目ごとの出し方と、ほかの市区との料金の比べ方：<a href="/guide/item/futon/">布団</a>・<a href="/guide/item/sofa/">ソファ</a>・<a href="/guide/item/bed/">マットレス・ベッド</a>・<a href="/guide/item/bicycle/">自転車</a></p>
     <p>「無料で回収します」という巡回・チラシの業者に頼むのはやめましょう。家庭のごみを運べるのは市区と市区の許可業者だけです（<a href="/guide/scam/">ぼったくりの実例と見分け方</a>）。</p>
 
     <h2>{name}の近くのリサイクルショップ（買取）</h2>
