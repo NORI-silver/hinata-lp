@@ -153,7 +153,14 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .w .wk{font-size:12px;font-weight:700;color:var(--accent)}
 .w .wn{font-size:13px;font-weight:700}
 .w .wd{font-size:12px;color:var(--muted);line-height:1.6}
-.w.off{opacity:.45;background:transparent}
+.w.off{opacity:.72;background:transparent}
+.w .wd a{color:var(--accent);font-weight:700}
+.wls{display:flex;flex-direction:column;gap:4px;margin:4px 0}
+.wa{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:8px;padding:5px 9px;background:var(--bg)}
+.wa::after{content:" ↗";font-weight:400}
+.wa:hover{background:var(--accent-soft)}
+.lnk{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;font-size:12px;cursor:pointer}
+.pick{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);font-size:13px;display:flex;flex-direction:column;gap:8px}
 .w.on{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
 .wsub{margin:-6px 0 0;font-size:12px;color:var(--muted)}
 .wmine{font-size:12px;font-weight:700;color:var(--good);margin-top:4px}
@@ -226,37 +233,6 @@ details p{margin:8px 0 0;color:var(--muted)}
 
   <main class="guide">
     <section>
-      <h2>引越しで粗大ごみが間に合わないときの出し方</h2>
-      <p>市区町村の粗大ごみ回収は、申し込みから収集まで1〜3週間ほどかかることがあります。引越しシーズン（3〜4月）はさらに混みます。予約が間に合わないときは、次の方法を組み合わせます。</p>
-      <div class="routes">
-        <div class="route"><img src="/img/route-city.webp" width="640" height="640" alt="処理券を貼って、ごみ置き場の前に出した椅子" loading="lazy"><h3>1. 市区町村の粗大ごみ回収（いちばん安い）</h3><p>Webか電話で申し込み、コンビニなどで処理券を買って貼り、決められた日の朝に出します。予約ページはキャンセルで空きが出ることもあるので、こまめに確認すると早い日が取れる場合があります。</p></div>
-        <div class="route"><img src="/img/route-buy.webp" width="640" height="640" alt="玄関先で、まだきれいなチェストを引き取りに来た作業着の人" loading="lazy"><h3>2. 買取に出す（まだ使える物）</h3><p>出張査定・キャンセル無料をはっきり書いているチェーン店を選ぶと安心です。値段がつかなければ断って、ほかの方法に切り替えます。</p></div>
-        <div class="route"><img src="/img/route-drop.webp" width="640" height="640" alt="車のトランクに積んだ自転車と小さな棚" loading="lazy"><h3>3. 受入施設へ自分で持ち込む（自家用車がある人）</h3><p>自治体によっては、収集より安い料金で持ち込めます。予約が必要なところと不要なところがあります。</p></div>
-        <div class="route"><img src="/img/route-move.webp" width="640" height="640" alt="ソファと段ボール箱を積んだ引越しトラック" loading="lazy"><h3>4. 新居で出す</h3><p>どうしても間に合わない物は、引越し荷物に入れて運び、新しい自治体で出します。運ぶ量が増えるので引越し料金が上がることがあります。</p></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>粗大ごみの出し方（基本の流れ）</h2>
-      <p>多くの自治体では、次の順番で出します。細かい決まりは自治体ごとに違うので、お住まいの市区の公式ページもあわせて確認してください。</p>
-      <img class="gimg" src="/img/sticker.webp" width="1200" height="800" alt="本棚の側面に処理券（シール）を貼っているところ" loading="lazy">
-      <ol>
-        <li><b>申し込む</b>：インターネットか電話で、出したい物と収集日を申し込みます。品目ごとの手数料もここでわかります。</li>
-        <li><b>処理券（シール）を買う</b>：コンビニやスーパーなどで、手数料分の処理券を買います。</li>
-        <li><b>処理券を貼る</b>：受付番号や名前を書いて、物の見えるところに貼ります。</li>
-        <li><b>決められた日の朝に出す</b>：指定された場所に、収集日の朝に出します。立ち会いはいらないことが多いです。</li>
-      </ol>
-      <p>引越しが決まったら、まず粗大ごみの申し込みを済ませるのがおすすめです。3〜4月は予約が混み、希望の日が取れないことがあります。</p>
-    </section>
-
-    <section>
-      <h2>冷蔵庫・洗濯機・テレビ・エアコンは粗大ごみに出せません</h2>
-      <img class="gimg" src="/img/appliances.webp" width="1200" height="600" alt="冷蔵庫・洗濯機・テレビ・エアコンの4つ" loading="lazy">
-      <p>この4品目は家電リサイクル法の対象で、市区町村の粗大ごみでは回収していません。買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込み、指定引取場所に運びます（引越し会社が引き取ってくれる場合もあります）。料金はメーカーと大きさで決まります。</p>
-      <p>製造から年数の浅い物は、買取で値段がつくこともあります。</p>
-    </section>
-
-    <section>
       <h2>対応している市区の粗大ごみ受付と料金の目安</h2>
       <p>2026年10月30日に各自治体の公式サイトで確認した内容です。変わることがあるので、申し込む前に公式サイトをご確認ください。</p>
       <div class="tblw"><table class="tbl" id="citytbl">
@@ -266,26 +242,18 @@ details p{margin:8px 0 0;color:var(--muted)}
 <tr><td><a href="https://www.city.kawasaki.jp/300/page/0000012773.html" target="_blank" rel="noopener">川崎市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">¥300・¥600・¥1,200の3区分</td><td data-h="収集まで">1〜2週間ほど</td><td data-h="持ち込み">受付センターに確認</td></tr>
 <tr><td><a href="https://www.city.setagaya.lg.jp/02239/382.html" target="_blank" rel="noopener">世田谷区</a></td><td data-h="申し込み">インターネット、電話</td><td data-h="料金" class="num">品目ごと（区の手数料一覧）</td><td data-h="収集まで">2週間ほど</td><td data-h="持ち込み">船橋粗大ごみ中継所（収集の半額程度）</td></tr>
 <tr><td><a href="https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html" target="_blank" rel="noopener">杉並区</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">処理券A¥200・B¥300の組み合わせ</td><td data-h="収集まで">2〜3週間</td><td data-h="持ち込み">日曜のみ・1点¥400（要申込）</td></tr>
-<tr><td>さいたま市</td><td data-h="申し込み">インターネット、電話</td><td data-h="料金" class="num">品目ごと（市の手数料一覧）</td><td data-h="収集まで">1〜2週間ほど</td><td data-h="持ち込み">市の公式サイトで確認</td></tr>
+<tr><td><a href="https://www.city.saitama.lg.jp/001/006/010/003/p072165.html" target="_blank" rel="noopener">さいたま市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">品目ごと（市の手数料一覧）</td><td data-h="収集まで">1〜2週間ほど</td><td data-h="持ち込み">市の3施設へ持込（予約制）</td></tr>
 <tr><td><a href="https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html" target="_blank" rel="noopener">千葉市</a></td><td data-h="申し込み">インターネット・LINE、電話（一部品目は電話のみ）</td><td data-h="料金" class="num">¥390〜¥1,560</td><td data-h="収集まで">1〜2週間</td><td data-h="持ち込み">清掃施設へ自己搬入</td></tr>
-<tr><td>佐倉市</td><td data-h="申し込み">電話</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">1〜2週間前に電話</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・10kgで約¥350）</td></tr>
+<tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">1〜2週間前に電話</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・10kgで約¥350）</td></tr>
 </tbody>
       </table></div>
-      <h3>市区ごとの粗大ごみの出し方</h3>
-      <p><b>横浜市の粗大ごみ</b>：インターネット・チャット・LINE（24時間）、電話で申し込みます。料金は品目ごとに決まっていて、市の手数料一覧で確認できます。収集までの目安は1〜2週間ほどです。持ち込みは市内4か所の自己搬入ヤードでできます。</p>
-      <p><b>川崎市の粗大ごみ</b>：インターネット（24時間）、電話で申し込みます。料金の目安は¥300・¥600・¥1,200の3区分です。収集までの目安は1〜2週間ほどです。持ち込みは受付センターに確認してください。</p>
-      <p><b>世田谷区の粗大ごみ</b>：インターネット、電話で申し込みます。料金は品目ごとに決まっていて、区の手数料一覧で確認できます。収集までの目安は2週間ほどです。持ち込みは船橋粗大ごみ中継所で、収集の半額程度です。</p>
-      <p><b>杉並区の粗大ごみ</b>：インターネット（24時間）、電話で申し込みます。料金の目安は処理券A¥200・B¥300の組み合わせです。収集までの目安は2〜3週間です。持ち込みは日曜のみ、1点¥400（申し込みが必要）です。</p>
-      <p><b>さいたま市の粗大ごみ</b>：インターネット、電話で申し込みます。料金は品目ごとに決まっていて、市の手数料一覧で確認できます。収集までの目安は1〜2週間ほどです。持ち込みは市の公式サイトで確認してください。</p>
-      <p><b>千葉市の粗大ごみ</b>：インターネット・LINE、電話（一部品目は電話のみ）で申し込みます。料金の目安は¥390〜¥1,560です。収集までの目安は1〜2週間です。持ち込みは清掃施設へ自分で運び込めます。</p>
-      <p><b>佐倉市の粗大ごみ</b>：電話で申し込みます。料金は市の公式サイトで確認してください。電話の申し込みは収集日の1〜2週間前までが目安です。持ち込みは酒々井リサイクル文化センターで、予約不要・10kgで約¥350です。</p>
-      <p>上記以外の地域は、お住まいの自治体の公式サイトで「粗大ごみ」のページを確認してください。</p>
+      <p>出し方の流れや、間に合わないときの方法は<a href="/guide/late/">こちらの記事</a>にまとめています。上記以外の地域は、お住まいの自治体の公式サイトで「粗大ごみ」のページを確認してください。</p>
     </section>
 
     <section>
       <h2>よくある質問</h2>
       <details><summary>引越しまでに粗大ごみの予約が間に合わないときは？</summary><p>まだ使える物は出張買取（断っても無料のお店）、自家用車がある場合は受入施設への持込、それも難しい場合は新居に運んで新しい自治体で出す方法があります。市の予約ページはキャンセルで空きが出ることもあるので、こまめに確認するのも手です。</p></details>
-      <details><summary>冷蔵庫や洗濯機は粗大ごみに出せますか？</summary><p>冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコンの家電4品目は、市区町村の粗大ごみには出せません。買い替えるお店か買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます。</p></details>
+      <details><summary>冷蔵庫や洗濯機は粗大ごみに出せますか？</summary><p>冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコンの家電4品目は家電リサイクル法の対象で、市区町村の粗大ごみには出せません。買い替えるお店か買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます。</p></details>
       <details><summary>粗大ごみは引越しの何日前に申し込めばいいですか？</summary><p>自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。</p></details>
       <details><summary>粗大ごみの料金はいくらですか？</summary><p>自治体と品目の大きさで決まります。たとえば千葉市は390円〜1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日確認）。正確な金額は各自治体の手数料一覧で確認してください。</p></details>
       <details><summary>この診断にお金はかかりますか？</summary><p>かかりません。市や郵便局、買取店への支払いは、それぞれに直接行います。</p></details>
@@ -297,6 +265,7 @@ details p{margin:8px 0 0;color:var(--muted)}
     <section>
       <h2>粗大ごみの基礎知識</h2>
       <ul>
+        <li><a href="/guide/late/">引越しで粗大ごみが間に合わないときの出し方（4つの方法と基本の流れ）</a></li>
         <li><a href="/guide/problem/">粗大ごみが引越しに間に合わない理由（何が問題？）</a></li>
         <li><a href="/guide/fees/">出し方と料金の目安（役所・郵便局・持込施設・買取）</a></li>
         <li><a href="/guide/scam/">不用品回収のぼったくりに注意（実例と見分け方）</a></li>
@@ -322,12 +291,34 @@ const CITIES={
   kawasaki:["川崎市",10,true,"¥300・¥600・¥1,200の3区分","インターネット（24時間）、電話","受付センターに確認","https://www.city.kawasaki.jp/300/page/0000012773.html"],
   setagaya:["世田谷区",14,true,"品目ごと（区の手数料一覧）","インターネット、電話","船橋粗大ごみ中継所（収集の半額程度）","https://www.city.setagaya.lg.jp/02239/382.html"],
   suginami:["杉並区",14,true,"処理券A¥200・B¥300の組み合わせ","インターネット（24時間）、電話","日曜のみ・1点¥400（要申込）","https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html"],
-  saitama:["さいたま市",10,true,"品目ごと（市の手数料一覧）","インターネット、電話","市の公式サイトで確認",""],
+  saitama:["さいたま市",10,true,"品目ごと（市の手数料一覧）","インターネット（24時間）、電話","市の3施設へ持込（予約制）","https://www.city.saitama.lg.jp/001/006/010/003/p072165.html"],
   chiba:["千葉市",10,true,"¥390〜¥1,560","インターネット・LINE、電話（一部品目は電話のみ）","清掃施設へ自己搬入","https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html"],
-  sakura:["佐倉市",14,false,"市の公式サイトで確認","電話","酒々井リサイクル文化センター（予約不要・10kgで約¥350）",""],
+  sakura:["佐倉市",14,false,"市の公式サイトで確認","電話（地区ごとの収集業者）","酒々井リサイクル文化センター（予約不要・10kgで約¥350）","https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html"],
   other:["その他の地域",14,false,"自治体ごと","自治体ごと","自治体ごと",""]
 };
+// 窓口の連絡先（2026-10-30 に各自治体の公式ページで確認）。tel:[表示名,番号]、links:[表示名,URL]
+const INFO={
+  yokohama:{pref:14,desk:"横浜市 粗大ごみ受付センター",tel:[["電話","0570-200-530"],["携帯・IP電話","045-330-3953"]],hours:"電話は月〜土 8:30〜17:00（祝日も受付・日曜と年末年始は休み）",links:[["インターネットで申し込む（24時間）","https://www.sodai.city.yokohama.lg.jp/eco/view/yokohama/top.html"],["LINEでの申し込み（取扱いの変更あり）","https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/chuui/linehenkou.html"]],
+    drop:[{name:"自己搬入ヤード（市内4か所）",note:"粗大ごみ受付センターに申し込んでから持ち込みます（インターネットは搬入日当日15時まで）",url:"https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/mochikomi.html"}]},
+  kawasaki:{pref:14,desk:"川崎市 粗大ごみ受付センター",tel:[["電話","0570-044-530"],["携帯・IP電話","044-930-5300"]],hours:"インターネットは24時間受付",links:[["インターネットで申し込む（24時間）","https://www.sodai.city.kawasaki.jp/"]],
+    drop:[{name:"持ち込みは粗大ごみ受付センターに確認",note:"市の粗大ごみのページには持ち込みの案内がありません",url:"https://www.city.kawasaki.jp/300/page/0000012773.html"}]},
+  setagaya:{pref:13,desk:"世田谷区 粗大ごみ受付センター",tel:[["電話","03-5715-1133"]],hours:"電話は月〜土 8:00〜19:00（祝日も受付・日曜と年末年始は休み）",links:[["インターネットで申し込む","https://www.sodai-setagaya.jp/"]],
+    drop:[{name:"船橋粗大ごみ中継所（世田谷区船橋7-21-15）",note:"受付センターに申し込み、土日の指定日 9:00〜12:00・13:00〜15:30 に持ち込み。手数料は収集の半額程度",url:"https://www.city.setagaya.lg.jp/02241/online_tetsuzuki/381.html"}]},
+  suginami:{pref:13,desk:"杉並区 粗大ごみ受付センター",tel:[["電話","03-5296-5300"]],hours:"電話は 8:00〜19:00（年末年始は休み）・インターネットとチャットは24時間",links:[["インターネットで申し込む（24時間）","https://ecolife.e-tumo.jp/kankyo-suginami-tokyo-u/"]],
+    drop:[{name:"区の持ち込み場所（日曜のみ・1点¥400）",note:"粗大ごみ受付センターに電話かファクスで申し込みます",url:"https://www.city.suginami.tokyo.jp/documents/727/sodai_mochikomibasyo_annaizu.pdf",ul:"持ち込み場所の案内図（PDF）"}]},
+  saitama:{pref:11,desk:"さいたま市 粗大ごみ受付センター",tel:[["電話","048-878-0053"]],hours:"電話は月〜金 8:30〜17:00（祝日も受付・土日と1/1〜3は休み）",links:[["インターネットで申し込む（24時間）","https://www.sodai.city.saitama.jp/"]],
+    drop:[{name:"クリーンセンター大崎",tel:"048-878-0989"},{name:"桜環境センター",tel:"048-710-6010"},{name:"見沼環境センター",tel:"048-795-6350",note:"直接の持ち込みは予約制です",url:"https://www.city.saitama.lg.jp/001/006/010/003/p051434.html"}]},
+  chiba:{pref:12,desk:"千葉市 粗大ごみ受付センター",tel:[["電話（申込専用）","043-302-5374"]],hours:"電話は月〜金 9:00〜16:00・土 9:00〜11:30（日曜・祝日・年末年始は休み）",links:[["インターネットで申し込む","https://www.sodai-web.jp/chiba/index.html"],["LINEで申し込む","https://liff.line.me/1657017695-eNx9ljGp/index.html"]],
+    drop:[{name:"中央・美浜環境事業所",tel:"043-231-6342"},{name:"花見川・稲毛環境事業所",tel:"043-259-1145"},{name:"若葉・緑環境事業所",tel:"043-292-4930",note:"品目ごとの手数料（¥390〜¥1,560）・1日10個まで",url:"https://www.city.chiba.jp/kankyo/junkan/shushugyomu/jikohannyu.html"}]},
+  sakura:{pref:12,desk:"佐倉市役所 廃棄物対策課",tel:[["電話（問い合わせ）","043-484-6149"]],hours:"収集の予約は、地区ごとに決まった収集業者へ電話で申し込みます",links:[["地区ごとの申込先を見る（市の公式ページ）","https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html"]],
+    drop:[{name:"酒々井リサイクル文化センター（酒々井町墨1506）",note:"予約不要・10kgで約¥350（目安）"}]},
+  other:{pref:0,desk:"お住まいの自治体の粗大ごみ受付",tel:[],hours:"自治体の公式サイトで「粗大ごみ」のページを確認してください",links:[],drop:[{name:"自治体の受入施設",note:"持ち込めるかどうかは自治体で確認"}]}
+};
+// 買取チェーンの例（提携先ではありません）。口コミは Google マップで見られるようにする
+const SHOPS=["セカンドストリート","ハードオフ・オフハウス","トレジャーファクトリー"];
+const RKC="0120-319-640";
 const LEADTXT={yokohama:"1〜2週間ほど",kawasaki:"1〜2週間ほど",setagaya:"2週間ほど",suginami:"2〜3週間",saitama:"1〜2週間ほど",chiba:"1〜2週間",sakura:"1〜2週間前に電話",other:""};
+const ADDR=[[/佐倉/,"sakura"],[/横浜/,"yokohama"],[/川崎/,"kawasaki"],[/世田谷/,"setagaya"],[/杉並/,"suginami"],[/さいたま|埼玉市/,"saitama"],[/千葉市|千葉県千葉|美浜区|花見川区|稲毛区|若葉区/,"chiba"]];
 const Q=[
   {k:"city",t:"お住まい",one:true,o:Object.entries(CITIES).map(([k,v])=>[k,v[0]])},
   {k:"days",t:"出したい日(引越し日)まで",one:true,o:[["7","1週間以内"],["14","2週間以内"],["30","1ヶ月以内"],["60","1ヶ月以上"]]},
@@ -352,10 +343,13 @@ function drawQs(){
   $("qs").innerHTML=Q.map(q=>{
     let body=`<div class="chips">${chipsHTML(q)}</div>`;
     if(q.k==="days") body=`<input type="date" id="move" class="inp" value="${A.move}" min="${iso(today)}" aria-label="引越し日">
-      <div class="sub">まだ決まっていない場合はだいたいで</div><div class="chips">${chipsHTML(q)}</div>`;
+      ${A.move?`<div class="sub"><button type="button" class="lnk" id="nodate">日付がまだ決まっていない場合はこちら</button></div>`:`<div class="sub">日付が決まっていない場合は、だいたいで選んでください</div><div class="chips">${chipsHTML(q)}</div>`}`;
+    if(q.k==="city") body=`<div class="addrow"><input type="text" id="addr" class="inp" placeholder="住所や市区名でもOK（例:佐倉市ユーカリが丘）" aria-label="住所や市区名"></div><div class="sub" id="addrmsg">${A.addrmsg||"または選ぶ"}</div><div class="chips">${chipsHTML(q)}</div>`;
     if(q.k==="items") body=`<div class="addrow"><input type="text" id="free" class="inp" placeholder="例:食器棚、電子レンジ" aria-label="出したい物を入力"><button type="button" class="chip" id="addfree">追加</button>
       <label class="chip photo">写真で追加<input type="file" accept="image/*" id="photo" aria-label="写真で追加"></label></div>
-      ${A.custom.length?`<div class="tags">${A.custom.map((c,i)=>`<span class="tag">${c.photo?`<img src="${c.photo}" alt="">`:""}${esc(c.label)}<small>${CATNAME[c.cat]}</small><button type="button" data-rmc="${i}" aria-label="${esc(c.label)}を外す">×</button></span>`).join("")}</div>`:""}
+      <div class="sub">写真は、この端末の中だけで判定します（どこにも送りません）</div>
+      ${A.custom.length?`<div class="tags">${A.custom.map((c,i)=>`<span class="tag">${c.photo?`<img src="${c.photo}" alt="">`:""}${esc(c.label)}<small>${c.busy?"判定中…":CATNAME[c.cat]}</small><button type="button" data-rmc="${i}" aria-label="${esc(c.label)}を外す">×</button></span>`).join("")}</div>`:""}
+      ${A.custom.map((c,i)=>c.photo&&!c.busy&&c.ask?`<div class="pick"><span>${c.cat==="unk"?"写真から物の名前を判定できませんでした。近いものを選んでください":`写真の物は「${esc(c.label)}」と判定しました。ちがう場合は選び直してください`}</span><div class="chips">${[...new Set([...(c.alts||[]),...PICKS])].filter(x=>x!==c.label).slice(0,9).map(x=>`<button type="button" class="chip" data-fix="${i}" data-name="${esc(x)}">${esc(x)}</button>`).join("")}<button type="button" class="chip" data-fixok="${i}">${c.cat==="unk"?"あとで名前を入れる":"これで合っている"}</button></div></div>`:"").join("")}
       <div class="sub">よくある物から選ぶ</div><div class="chips">${chipsHTML(q)}</div>`;
     return `<div class="q" role="group" aria-label="${q.t}"><b>${q.k==="days"?"引越し日(出したい日)":q.t}${q.sub?`<small>${q.sub}</small>`:""}</b>${body}</div>`;
   }).join("");
@@ -378,19 +372,24 @@ function routeKey(it,j){
   return "buy";
 }
 const HNAME={city:"市区の粗大ごみ受付",post:"家電リサイクル",buy:"買取店",drop:"持込施設"};
+const telA=n=>`<a href="tel:${n.replace(/-/g,"")}">${n}</a>`;
+const extA=(t,u)=>`<a class="wa" href="${u}" target="_blank" rel="noopener">${t}</a>`;
+const mapQ=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 function handlers(j,rs){
-  const s=j.key==="sakura";
+  const I=INFO[j.key],area=j.key==="other"?"":j.cname;
+  const pref=I.pref?`https://www.aeha-kadenrecycle.com/rkcmap/search.php?sort=address&prefecture_id=${I.pref}`:"https://www.aeha-kadenrecycle.com/";
   const rows=[
-    ["city",`${j.cname}の粗大ごみ受付(${j.web?"Web・電話":"電話"})`,"家具、布団、自転車など","冷蔵庫・洗濯機・テレビ・エアコン",j.fee],
-    ["post","お店の引取り / 郵便局でリサイクル券","冷蔵庫・洗濯機・テレビ・エアコン","家具など家電4品目以外","メーカー・大きさで違います"],
-    ["buy","出張・キャンセル無料のチェーン店(セカンドストリート、ハードオフなど)","まだ使える家具・家電","壊れた物、汚れの強い物","受取 ¥0〜"],
-    ["drop",s?"酒々井リサイクル文化センター(酒々井町墨1506)予約不要":`${j.cname}：${j.drop}`,"家具・自転車など(自家用車で運べる物)","家電4品目",s?"10kgで約¥350（目安）":"自治体で確認"]
+    ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
+    ["post","家電リサイクル券センター（家電4品目）",`電話 ${telA(RKC)}<br>買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます`,extA("近くの指定引取場所を探す",pref),"対応:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:メーカー・大きさで違います"],
+    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"出張査定・キャンセル無料かどうかを確認してから頼みます。提携しているお店ではありません",SHOPS.map(n=>extA(`${n}の口コミを見る`,mapQ(`${n} ${area}`))).join(""),"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
+    ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
-  return `<div class="where"><h3>${j.cname}で粗大ごみを出せるところ</h3><p class="wsub">あなたの品目を出せる所だけ色がつきます${j.url?`・<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>`:""}</p><div class="wl">${rows.map(([k,name,ok,ng,fee])=>{
+  return `<div class="where"><h3>${j.cname}で粗大ごみを出せるところ</h3><p class="wsub">あなたの品目を出せる所に色がつきます。連絡先は2026年10月30日に各公式ページで確認しました${j.url?`・<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>`:""}</p><div class="wl">${rows.map(([k,name,info,links,spec])=>{
     const mine=rs.filter(r=>itemOptions(r,j).some(o=>o.ok&&o.h===k));
     return `<div class="w ${mine.length?"on":"off"}"><span class="wk">${HNAME[k]}</span><span class="wn">${name}</span>
-      <span class="wd num">対応:${ok}<br>対応しない:${ng}<br>料金:${fee}</span>
-      ${mine.length?`<span class="wmine">あなたの ${mine.map(r=>esc(r.label)).join("、")} を出せます</span>`:`<span class="wnone">今回は使いません</span>`}</div>`}).join("")}</div></div>`;
+      <span class="wd">${info}</span>${links?`<span class="wls">${links}</span>`:""}
+      <span class="wd num">${spec}</span>
+      ${mine.length?`<span class="wmine">あなたの ${mine.map(r=>esc(r.label)).join("、")} を出せます</span>`:`<span class="wnone">今回の品目では使いません</span>`}</div>`}).join("")}</div></div>`;
 }
 // 品目ごとの全選択肢。ok=使える / rec=おすすめ
 function itemOptions(it,j){
@@ -443,19 +442,53 @@ document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
   if(b.id==="addfree"){addFree();return}
   if(b.dataset.rmc!==undefined){A.custom.splice(+b.dataset.rmc,1);drawQs();draw();return}
+  if(b.id==="nodate"){A.move="";drawQs();draw();return}
+  if(b.dataset.fix!==undefined){const c=A.custom[+b.dataset.fix];c.label=b.dataset.name;c.cat=classify(c.label);c.ask=false;drawQs();draw();return}
+  if(b.dataset.fixok!==undefined){A.custom[+b.dataset.fixok].ask=false;drawQs();return}
   const k=b.dataset.k,v=b.dataset.v;if(!k)return;
   const q=Q.find(x=>x.k===k);
+  if(k==="city")A.addrmsg="";
   if(k==="days"){A.days=v;A.move=""}
   else if(q.one)A[k]=v;else{const a=A[k];const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)}
   drawQs();draw();
 });
+// 写真の判定：画像認識のモデル（MobileNet）をブラウザに読み込み、この端末の中だけで判定する。写真はどこにも送らない
+const IMNET=[[/studio couch/,"ソファ"],[/four-poster/,"ベッド"],[/crib|cradle|bassinet/,"ベビーベッド"],[/bookcase/,"本棚"],[/china cabinet/,"食器棚"],[/chiffonier|wardrobe|^chest$/,"タンス"],[/medicine chest|file cabinet/,"棚"],[/entertainment center/,"テレビ台"],[/^desk$/,"机"],[/dining table/,"テーブル"],[/folding chair|rocking chair|barber chair|throne/,"椅子"],[/park bench/,"ベンチ"],[/quilt/,"布団"],[/prayer rug/,"カーペット"],[/refrigerator/,"冷蔵庫"],[/washer, automatic/,"洗濯機"],[/television/,"テレビ"],[/microwave/,"電子レンジ"],[/electric fan/,"扇風機"],[/space heater|radiator$/,"ストーブ"],[/vacuum/,"掃除機"],[/mountain bike|bicycle-built|tricycle/,"自転車"],[/^ski$/,"スキー板"],[/lawn mower/,"芝刈り機"],[/sewing machine/,"ミシン"],[/dishwasher/,"食器洗い機"]];
+const PICKS=["ソファ","ベッド","タンス","本棚","机","椅子","冷蔵庫","洗濯機","テレビ","エアコン","自転車"];
+let MODEL=null;
+const loadJS=src=>new Promise((ok,ng)=>{const e=document.createElement("script");e.src=src;e.onload=ok;e.onerror=ng;document.head.appendChild(e)});
+async function getModel(){
+  if(MODEL) return MODEL;
+  MODEL=(async()=>{
+    await loadJS("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js");
+    await loadJS("https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js");
+    return window.mobilenet.load({version:2,alpha:1,modelUrl:"https://storage.googleapis.com/tfjs-models/savedmodel/mobilenet_v2_1.0_224/model.json",inputRange:[0,1]});
+  })();
+  MODEL.catch(()=>{MODEL=null});
+  return MODEL;
+}
+async function recog(c){
+  let names=[];
+  try{
+    const m=await getModel();const im=new Image();im.src=c.photo;await im.decode();
+    const r=await m.classify(im,6);
+    r.forEach(x=>{const cls=x.className.split(",")[0].trim(),full=x.className;const hit=IMNET.find(([re])=>re.test(cls)||re.test(full));if(hit&&x.probability>=.05&&!names.includes(hit[1]))names.push(hit[1])});
+  }catch(e){}
+  c.busy=false;c.ask=true;
+  if(names.length){c.label=names[0];c.cat=classify(names[0]);c.alts=names.slice(1)}
+  if(A.custom.includes(c)){drawQs();draw()}
+}
 function addFree(){const el=$("free");const v=(el&&el.value||"").trim();if(!v)return;
   v.split(/[、,，\s]+/).filter(Boolean).forEach(x=>A.custom.push({label:x,cat:classify(x)}));drawQs();draw();const f=$("free");if(f)f.focus()}
-document.addEventListener("keydown",e=>{if(e.target.id==="free"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();addFree()}});
+document.addEventListener("keydown",e=>{if(e.target.id==="free"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();addFree()}if(e.target.id==="addr"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setAddr(e.target.value)}});
+function setAddr(v){v=(v||"").trim();if(!v)return;const hit=ADDR.find(([re])=>re.test(v));
+  if(hit){A.city=hit[1];A.addrmsg=`「${esc(v)}」→ ${CITIES[hit[1]][0]}で診断しています`}else{A.city="other";A.addrmsg=`「${esc(v)}」は対応している市区にないため、その他の地域で診断しています`}
+  drawQs();draw()}
 document.addEventListener("change",e=>{
   const t=e.target;
   if(t.id==="move"){A.move=t.value;drawQs();draw();return}
-  if(t.id==="photo"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{A.custom.push({label:"写真の物",cat:"unk",photo:rd.result});drawQs();draw()};rd.readAsDataURL(t.files[0])}
+  if(t.id==="addr"){setAddr(t.value);return}
+  if(t.id==="photo"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{const c={label:"写真の物",cat:"unk",photo:rd.result,busy:true};A.custom.push(c);drawQs();draw();recog(c)};rd.readAsDataURL(t.files[0])}
 });
 drawQs();draw();cityTable();
 })();
