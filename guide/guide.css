@@ -75,3 +75,4 @@ td:first-child{font-weight:700}
 article .route h3{margin:0;font-size:16px}
 article .route p{margin:0;font-size:14px;color:var(--muted)}
 td a[href^="tel:"]{white-space:nowrap}
+.cmp th[scope=row],.cmp3 td:nth-child(2){white-space:nowrap}
