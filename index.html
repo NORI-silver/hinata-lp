@@ -71,7 +71,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .brand svg{width:28px;height:28px;flex:none}
 .top small{font-size:12px;color:var(--muted)}
 /* ヒーロー */
-header{padding-block:40px 28px;display:flex;flex-direction:column;gap:14px;max-width:760px}
+header{padding-block:36px 32px}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:36px;align-items:center}
+.hero-txt{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hero-img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:22px;display:block}
+@media (max-width:820px){.hero{grid-template-columns:minmax(0,1fr);gap:22px}.hero-img{aspect-ratio:16/10}}
 header h1{font-size:clamp(26px,4.2vw,40px);line-height:1.35}
 header h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
 header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
@@ -166,6 +170,13 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .guide ul,.guide ol{margin:0 0 .9em;padding-left:1.4em}
 .guide li{margin-bottom:6px}
 .guide li::marker{color:var(--accent);font-weight:700}
+.gimg{width:100%;height:auto;border-radius:16px;display:block;margin:6px 0 16px}
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 20px;margin-top:8px}
+@media (max-width:560px){.routes{grid-template-columns:minmax(0,1fr)}}
+.route{display:flex;flex-direction:column;gap:6px;min-width:0}
+.route img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px;display:block;margin-bottom:6px}
+.route h3{margin:0;font-size:16px}
+.route p{margin:0;font-size:14px;color:var(--muted)}
 .tbl{width:100%;border-collapse:collapse;font-size:14px}
 .tbl th,.tbl td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 .tbl th{font-size:12px;color:var(--muted);font-weight:700;border-bottom-color:var(--ink)}
@@ -196,10 +207,13 @@ details p{margin:8px 0 0;color:var(--muted)}
     <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0A74B8"/><g fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"><path d="M7 13h18v12H7z"/><path d="M5 9h22v4H5z"/><path d="M13 9V7h6v2"/></g></svg>粗大ごみ手配ナビ</a>
     <small>無料・登録なし</small>
   </div>
-  <header>
+  <header class="hero">
+    <div class="hero-txt">
     <h1>その粗大ごみ、<em class="nb">引越しまでにどう出す？</em></h1>
     <p>引越し日と出したい物を入れると、品目ごとに使える出し方（市の回収・買取・持込・家電リサイクル）と料金の目安がわかります。</p>
     <ul class="facts"><li>診断は無料</li><li>入力や写真はどこにも送られません</li><li>横浜・川崎・世田谷・杉並・さいたま・千葉・佐倉</li></ul>
+    </div>
+    <img class="hero-img" src="/img/hero.webp" width="1200" height="900" alt="引越し前の明るい部屋。段ボール箱と、出す予定のソファと本棚" fetchpriority="high">
   </header>
 
   <div class="tool">
@@ -214,19 +228,18 @@ details p{margin:8px 0 0;color:var(--muted)}
     <section>
       <h2>引越しで粗大ごみが間に合わないときの出し方</h2>
       <p>市区町村の粗大ごみ回収は、申し込みから収集まで1〜3週間ほどかかることがあります。引越しシーズン（3〜4月）はさらに混みます。予約が間に合わないときは、次の方法を組み合わせます。</p>
-      <h3>1. 市区町村の粗大ごみ回収（いちばん安い）</h3>
-      <p>Webか電話で申し込み、コンビニなどで処理券を買って貼り、決められた日の朝に出します。予約ページはキャンセルで空きが出ることもあるので、こまめに確認すると早い日が取れる場合があります。</p>
-      <h3>2. 買取に出す（まだ使える物）</h3>
-      <p>出張査定・キャンセル無料をはっきり書いているチェーン店を選ぶと安心です。値段がつかなければ断って、ほかの方法に切り替えます。</p>
-      <h3>3. 受入施設へ自分で持ち込む（自家用車がある人）</h3>
-      <p>自治体によっては、収集より安い料金で持ち込めます。予約が必要なところと不要なところがあります。</p>
-      <h3>4. 新居で出す</h3>
-      <p>どうしても間に合わない物は、引越し荷物に入れて運び、新しい自治体で出します。運ぶ量が増えるので引越し料金が上がることがあります。</p>
+      <div class="routes">
+        <div class="route"><img src="/img/route-city.webp" width="640" height="640" alt="処理券を貼って、ごみ置き場の前に出した椅子" loading="lazy"><h3>1. 市区町村の粗大ごみ回収（いちばん安い）</h3><p>Webか電話で申し込み、コンビニなどで処理券を買って貼り、決められた日の朝に出します。予約ページはキャンセルで空きが出ることもあるので、こまめに確認すると早い日が取れる場合があります。</p></div>
+        <div class="route"><img src="/img/route-buy.webp" width="640" height="640" alt="玄関先で、まだきれいなチェストを引き取りに来た作業着の人" loading="lazy"><h3>2. 買取に出す（まだ使える物）</h3><p>出張査定・キャンセル無料をはっきり書いているチェーン店を選ぶと安心です。値段がつかなければ断って、ほかの方法に切り替えます。</p></div>
+        <div class="route"><img src="/img/route-drop.webp" width="640" height="640" alt="車のトランクに積んだ自転車と小さな棚" loading="lazy"><h3>3. 受入施設へ自分で持ち込む（自家用車がある人）</h3><p>自治体によっては、収集より安い料金で持ち込めます。予約が必要なところと不要なところがあります。</p></div>
+        <div class="route"><img src="/img/route-move.webp" width="640" height="640" alt="ソファと段ボール箱を積んだ引越しトラック" loading="lazy"><h3>4. 新居で出す</h3><p>どうしても間に合わない物は、引越し荷物に入れて運び、新しい自治体で出します。運ぶ量が増えるので引越し料金が上がることがあります。</p></div>
+      </div>
     </section>
 
     <section>
       <h2>粗大ごみの出し方（基本の流れ）</h2>
       <p>多くの自治体では、次の順番で出します。細かい決まりは自治体ごとに違うので、お住まいの市区の公式ページもあわせて確認してください。</p>
+      <img class="gimg" src="/img/sticker.webp" width="1200" height="800" alt="本棚の側面に処理券（シール）を貼っているところ" loading="lazy">
       <ol>
         <li><b>申し込む</b>：インターネットか電話で、出したい物と収集日を申し込みます。品目ごとの手数料もここでわかります。</li>
         <li><b>処理券（シール）を買う</b>：コンビニやスーパーなどで、手数料分の処理券を買います。</li>
@@ -238,6 +251,7 @@ details p{margin:8px 0 0;color:var(--muted)}
 
     <section>
       <h2>冷蔵庫・洗濯機・テレビ・エアコンは粗大ごみに出せません</h2>
+      <img class="gimg" src="/img/appliances.webp" width="1200" height="600" alt="冷蔵庫・洗濯機・テレビ・エアコンの4つ" loading="lazy">
       <p>この4品目は家電リサイクル法の対象で、市区町村の粗大ごみでは回収していません。買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込み、指定引取場所に運びます（引越し会社が引き取ってくれる場合もあります）。料金はメーカーと大きさで決まります。</p>
       <p>製造から年数の浅い物は、買取で値段がつくこともあります。</p>
     </section>
