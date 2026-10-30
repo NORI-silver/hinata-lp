@@ -129,6 +129,9 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .ich h3{font-size:20px}
 .icat{font-size:12px;color:var(--muted)}
 .irec{display:none}
+.rwhy{color:var(--good);font-weight:700}
+.oh{font-size:13px;font-weight:700;color:var(--muted);margin:0 0 -6px;letter-spacing:.04em}
+h1 .eyebrow{display:block;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-bottom:8px;font-family:inherit}
 .iol{padding:0 10px 10px;display:flex;flex-direction:column;gap:2px}
 .io{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border-radius:12px}
 .io .mk{font-weight:700;color:var(--accent);font-size:15px;text-align:center}
@@ -216,7 +219,7 @@ details p{margin:8px 0 0;color:var(--muted)}
   </div>
   <header class="hero">
     <div class="hero-txt">
-    <h1>その粗大ごみ、<em class="nb">引越しまでにどう出す？</em></h1>
+    <h1><span class="eyebrow">粗大ごみの出し方を無料診断</span>その粗大ごみ、<em class="nb">引越しまでにどう出す？</em></h1>
     <p>引越し日と出したい物を入れると、品目ごとに使える出し方（市の回収・買取・持込・家電リサイクル）と料金の目安がわかります。</p>
     <ul class="facts"><li>診断は無料</li><li>入力や写真はどこにも送られません</li><li>横浜・川崎・世田谷・杉並・さいたま・千葉・佐倉</li></ul>
     </div>
@@ -238,13 +241,13 @@ details p{margin:8px 0 0;color:var(--muted)}
       <div class="tblw"><table class="tbl" id="citytbl">
         <thead><tr><th>市区</th><th>申し込み</th><th>料金</th><th>収集までの目安</th><th>持ち込み</th></tr></thead>
         <tbody>
-<tr><td><a href="https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/sodaigomi.html" target="_blank" rel="noopener">横浜市</a></td><td data-h="申し込み">インターネット・チャット・LINE（24時間）、電話</td><td data-h="料金" class="num">品目ごと（市の手数料一覧）</td><td data-h="収集まで">1〜2週間ほど</td><td data-h="持ち込み">市内4か所の自己搬入ヤード</td></tr>
-<tr><td><a href="https://www.city.kawasaki.jp/300/page/0000012773.html" target="_blank" rel="noopener">川崎市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">¥300・¥600・¥1,200の3区分</td><td data-h="収集まで">1〜2週間ほど</td><td data-h="持ち込み">受付センターに確認</td></tr>
-<tr><td><a href="https://www.city.setagaya.lg.jp/02239/382.html" target="_blank" rel="noopener">世田谷区</a></td><td data-h="申し込み">インターネット、電話</td><td data-h="料金" class="num">品目ごと（区の手数料一覧）</td><td data-h="収集まで">2週間ほど</td><td data-h="持ち込み">船橋粗大ごみ中継所（収集の半額程度）</td></tr>
-<tr><td><a href="https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html" target="_blank" rel="noopener">杉並区</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">処理券A¥200・B¥300の組み合わせ</td><td data-h="収集まで">2〜3週間</td><td data-h="持ち込み">日曜のみ・1点¥400（要申込）</td></tr>
-<tr><td><a href="https://www.city.saitama.lg.jp/001/006/010/003/p072165.html" target="_blank" rel="noopener">さいたま市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">品目ごと（市の手数料一覧）</td><td data-h="収集まで">1〜2週間ほど</td><td data-h="持ち込み">市の3施設へ持込（予約制）</td></tr>
-<tr><td><a href="https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html" target="_blank" rel="noopener">千葉市</a></td><td data-h="申し込み">インターネット・LINE、電話（一部品目は電話のみ）</td><td data-h="料金" class="num">¥390〜¥1,560</td><td data-h="収集まで">1〜2週間</td><td data-h="持ち込み">清掃施設へ自己搬入</td></tr>
-<tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">1〜2週間前に電話</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・10kgで約¥350）</td></tr>
+<tr><td><a href="https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/sodaigomi.html" target="_blank" rel="noopener">横浜市</a></td><td data-h="申し込み">インターネット・チャット・LINE（24時間）、電話</td><td data-h="料金" class="num">品目ごと（市の手数料一覧）</td><td data-h="収集まで">2週間程度（締め切りは収集日の7日前）</td><td data-h="持ち込み">市内4か所の自己搬入ヤード</td></tr>
+<tr><td><a href="https://www.city.kawasaki.jp/300/page/0000012773.html" target="_blank" rel="noopener">川崎市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">¥300・¥600・¥1,200の3区分</td><td data-h="収集まで">2週間ほど（収集は月2回）（推定）</td><td data-h="持ち込み">受付センターに確認</td></tr>
+<tr><td><a href="https://www.city.setagaya.lg.jp/02239/382.html" target="_blank" rel="noopener">世田谷区</a></td><td data-h="申し込み">インターネット、電話</td><td data-h="料金" class="num">品目ごと（区の手数料一覧）</td><td data-h="収集まで">2週間ほど（収集日は申込時に案内）（推定）</td><td data-h="持ち込み">船橋粗大ごみ中継所（収集の半額程度）</td></tr>
+<tr><td><a href="https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html" target="_blank" rel="noopener">杉並区</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">処理券A¥200・B¥300の組み合わせ</td><td data-h="収集まで">2〜3週間程度</td><td data-h="持ち込み">日曜のみ・1点¥400（要申込）</td></tr>
+<tr><td><a href="https://www.city.saitama.lg.jp/001/006/010/003/p072165.html" target="_blank" rel="noopener">さいたま市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">1品¥550（スプリング入りマットレス等は¥1,100〜¥2,200）</td><td data-h="収集まで">混雑時は1か月ほど（締め切りは収集日の3営業日前）</td><td data-h="持ち込み">市の3施設へ持込（予約制）</td></tr>
+<tr><td><a href="https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html" target="_blank" rel="noopener">千葉市</a></td><td data-h="申し込み">インターネット・LINE、電話（一部品目は電話のみ）</td><td data-h="料金" class="num">¥390〜¥1,560</td><td data-h="収集まで">受付完了から1〜2週間（受付完了まで平日5日ほど）</td><td data-h="持ち込み">清掃施設へ自己搬入</td></tr>
+<tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">2週間ほど（地区の収集業者に電話で申込）（推定）</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・10kgで約¥350）</td></tr>
 </tbody>
       </table></div>
       <p>市区ごとの申し込み方・料金・持ち込み先・近くの買取店は、<a href="/guide/#area">地域ごとの記事</a>にまとめています。</p>
@@ -289,12 +292,12 @@ details p{margin:8px 0 0;color:var(--muted)}
 const DAY=864e5;
 // [名前, 収集までの目安日数, Web申込あり, 料金, 申し込み, 持ち込み, 公式ページ]
 const CITIES={
-  yokohama:["横浜市",10,true,"品目ごと（市の手数料一覧）","インターネット・チャット・LINE（24時間）、電話","市内4か所の自己搬入ヤード","https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/sodaigomi.html"],
-  kawasaki:["川崎市",10,true,"¥300・¥600・¥1,200の3区分","インターネット（24時間）、電話","受付センターに確認","https://www.city.kawasaki.jp/300/page/0000012773.html"],
+  yokohama:["横浜市",14,true,"品目ごと（市の手数料一覧）","インターネット・チャット・LINE（24時間）、電話","市内4か所の自己搬入ヤード","https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/sodaigomi.html"],
+  kawasaki:["川崎市",14,true,"¥300・¥600・¥1,200の3区分","インターネット（24時間）、電話","受付センターに確認","https://www.city.kawasaki.jp/300/page/0000012773.html"],
   setagaya:["世田谷区",14,true,"品目ごと（区の手数料一覧）","インターネット、電話","船橋粗大ごみ中継所（収集の半額程度）","https://www.city.setagaya.lg.jp/02239/382.html"],
   suginami:["杉並区",14,true,"処理券A¥200・B¥300の組み合わせ","インターネット（24時間）、電話","日曜のみ・1点¥400（要申込）","https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html"],
-  saitama:["さいたま市",10,true,"品目ごと（市の手数料一覧）","インターネット（24時間）、電話","市の3施設へ持込（予約制）","https://www.city.saitama.lg.jp/001/006/010/003/p072165.html"],
-  chiba:["千葉市",10,true,"¥390〜¥1,560","インターネット・LINE、電話（一部品目は電話のみ）","清掃施設へ自己搬入","https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html"],
+  saitama:["さいたま市",14,true,"1品¥550（スプリング入りマットレス等は¥1,100〜¥2,200）","インターネット（24時間）、電話","市の3施設へ持込（予約制）","https://www.city.saitama.lg.jp/001/006/010/003/p072165.html"],
+  chiba:["千葉市",14,true,"¥390〜¥1,560","インターネット・LINE、電話（一部品目は電話のみ）","清掃施設へ自己搬入","https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html"],
   sakura:["佐倉市",14,false,"市の公式サイトで確認","電話（地区ごとの収集業者）","酒々井リサイクル文化センター（予約不要・10kgで約¥350）","https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html"],
   other:["その他の地域",14,false,"自治体ごと","自治体ごと","自治体ごと",""]
 };
@@ -319,7 +322,9 @@ const INFO={
 // 買取チェーンの例（提携先ではありません）。口コミは Google マップで見られるようにする
 const SHOPS=["セカンドストリート","ハードオフ・オフハウス","トレジャーファクトリー"];
 const RKC="0120-319-640";
-const LEADTXT={yokohama:"1〜2週間ほど",kawasaki:"1〜2週間ほど",setagaya:"2週間ほど",suginami:"2〜3週間",saitama:"1〜2週間ほど",chiba:"1〜2週間",sakura:"1〜2週間前に電話",other:""};
+// 収集までの日数の目安。official=公式ページの案内（2026-10-30確認） / estimate=公式に日数の記載がなく、このサイトの推定
+const LEADTXT={yokohama:"2週間程度（締め切りは収集日の7日前）",kawasaki:"2週間ほど（収集は月2回）",setagaya:"2週間ほど（収集日は申込時に案内）",suginami:"2〜3週間程度",saitama:"混雑時は1か月ほどかかる場合あり（締め切りは収集日の3営業日前）",chiba:"受付完了から1〜2週間（受付完了まで平日5日ほど）",sakura:"2週間ほど（地区の収集業者に電話で申込）",other:""};
+const LEADSRC={yokohama:"official",kawasaki:"estimate",setagaya:"estimate",suginami:"official",saitama:"official",chiba:"official",sakura:"estimate",other:"estimate"};
 const ADDR=[[/佐倉/,"sakura"],[/横浜/,"yokohama"],[/川崎/,"kawasaki"],[/世田谷/,"setagaya"],[/杉並/,"suginami"],[/さいたま|埼玉市/,"saitama"],[/千葉市|千葉県千葉|美浜区|花見川区|稲毛区|若葉区/,"chiba"]];
 const Q=[
   {k:"city",t:"お住まい",one:true,o:Object.entries(CITIES).map(([k,v])=>[k,v[0]])},
@@ -361,7 +366,7 @@ function judge(){const c=CITIES[A.city];return {key:A.city,cname:c[0],lead:c[1],
 const CHIPNAME={furn:"家具",app:"家電(冷蔵庫など)",etc:"自転車・その他",unk:"何ごみかわからない物"};
 function itemList(){return [...A.custom.map(c=>({label:c.label,cat:c.cat})),...A.items.map(c=>({label:CHIPNAME[c],cat:c}))]}
 const APPCOST="数千円〜（目安）";
-const CITYCOST=j=>j.fee.startsWith("¥")?j.fee+"（目安）":"数百円〜（目安）";
+const CITYCOST=j=>j.fee.includes("¥")?j.fee.split("（")[0]+"（目安）":"数百円〜（目安）";
 // 品目ごとの一番おすすめの出し先。h=受け皿のキー
 function routeKey(it,j){
   const car=A.car==="yes",sell=A.worry.includes("sell");
@@ -398,34 +403,36 @@ function itemOptions(it,j){
   const car=A.car==="yes",late=j.d<j.lead,k=routeKey(it,j);
   if(it.cat==="unk") return [{h:"",name:"品目名を入れて判定",desc:"「食器棚」「電子レンジ」のように名前を入れると、出し先がわかります",cost:"",ok:true,rec:true}];
   if(it.cat==="app") return [
-    {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:"リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります",cost:APPCOST,when:"即日〜",ok:true,k:"post"},
-    {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"2〜5日",ok:true,k:"buy"},
+    {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:"リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります",cost:APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
+    {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true,k:"buy"},
     {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
     {h:"city",name:"市区の粗大ごみ回収",ok:false,why:"家電4品目は市区町村では回収しません"}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   return [
-    {h:"city",k:"city",name:"市区の粗大ごみ回収",desc:"予約して処理券を貼り、収集日の朝に出す",cost:CITYCOST(j),when:`${md(add(j.lead))}頃(目安)`,ok:!late,why:`いま申し込むと収集は${md(add(j.lead))}頃(目安)で、引越しに間に合わない可能性があります`},
-    {h:"city",k:"wait",name:"市区の予約のキャンセル待ち",desc:"予約ページはキャンセルで空きが出ることがあります。こまめに確認して、空いた日に申し込む",cost:CITYCOST(j),when:`${md(add(Math.max(0,j.d-1)))}までの空き`,ok:late&&j.web,why:late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
-    {h:"buy",k:"buy",name:"買取に出す",desc:"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"2〜5日",ok:true},
-    {h:"drop",k:"drop",name:"受入施設へ自分で持込",desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${j.drop}`,cost:j.key==="sakura"?"10kgで約¥350":"自治体で確認",when:"最短翌日",ok:car,why:"自家用車が必要"},
+    {h:"city",k:"city",name:`${j.key==="other"?"市区町村":j.cname}の粗大ごみ回収`,desc:"予約して処理券を貼り、収集日の朝に出す",cost:CITYCOST(j),when:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
+    {h:"city",k:"wait",name:`${j.key==="other"?"市区町村":j.cname}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む`,cost:CITYCOST(j),when:"空きは公式ページで確認",ok:late&&j.web,why:late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
+    {h:"buy",k:"buy",name:"買取に出す",desc:"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
+    {h:"drop",k:"drop",name:"受入施設へ自分で持込",desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${j.drop}`,cost:j.key==="sakura"?"10kgで約¥350":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
     {h:"",k:"move",name:"新居の自治体で出す",desc:"引越し荷物に入れて運び、落ち着いてから出す",cost:"運ぶ費用が増える",when:"引越し後",ok:true}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
 }
+// 「おすすめ」を選んだ理由（routeKey と同じ順で判定している）
+function recWhy(k){return {post:"家電4品目は市区では回収しないため",city:"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.worry.includes("sell")?"「売れるか知りたい」を選んだため":"収集が間に合わない見込みで、車がないため"}[k]||""}
 function itemCards(rs,j){
   if(!rs.length) return `<div class="free"><h3>出したい物を入れると、品目ごとの選択肢が出ます</h3></div>`;
   return `<div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
     return `<div class="icard"><div class="ich"><h3>${esc(it.label)}</h3><span class="icat">${CATNAME[it.cat]}</span>${rec&&it.cat!=="unk"?`<span class="irec">おすすめ:${rec.name}</span>`:""}</div>
       <div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
-        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}</small></span>
+        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k)}</span>`:""}</small></span>
         <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
 }
 function draw(){
   const j=judge();const rs=itemList();
   const tight=rs.some(it=>it.cat!=="app"&&it.cat!=="unk")&&j.d<j.lead;
   const late=j.d<j.lead;
-  const leadTxt=j.key==="sakura"?"電話で申し込み、収集は1〜2週間先":j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算）。収集まで":`申し込みから収集まで${LEADTXT[j.key]}`;
-  let h=`<div class="status ${late?"late":"ok"}"><div class="cd"><small>引越しまで</small><b class="num"><span>あと</span>${j.d}<span>日</span></b></div>
-    <p><span class="pill">${late?"普通の予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br>${j.cname}の粗大ごみは、${leadTxt}が目安です。</p></div>`;
+  const leadTxt=j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算しています）":`収集までの目安は「${LEADTXT[j.key]}」です（${LEADSRC[j.key]==="official"?"公式ページの案内":"公式に日数の記載がないため、このサイトの推定"}）`;
+  let h=`<h2 class="oh">診断結果</h2><div class="status ${late?"late":"ok"}"><div class="cd"><small>引越しまで</small><b class="num"><span>あと</span>${j.d}<span>日</span></b></div>
+    <p><span class="pill">${late?"普通の予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br>${j.cname}の粗大ごみの${leadTxt}。実際の予約の空きは確認していません。</p></div>`;
   if(rs.length&&!tight&&!rs.some(it=>it.cat==="app")){
     h+=`<div class="free"><h3>このまま自分で予約すれば間に合いそうです</h3><ol>
       <li>今日、${j.cname}の粗大ごみ受付で収集日を予約する${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">公式ページ</a>）`:""}</li><li>コンビニなどで処理券を買い、受付番号を書いて貼る</li><li>収集日の朝、指定の場所へ出す</li></ol>
@@ -439,7 +446,7 @@ function draw(){
 }
 function cityTable(){
   const tb=document.querySelector("#citytbl tbody");if(!tb)return;
-  tb.innerHTML=Object.entries(CITIES).filter(([k])=>k!=="other").map(([k,c])=>`<tr><td>${c[6]?`<a href="${c[6]}" target="_blank" rel="noopener">${c[0]}</a>`:c[0]}</td><td data-h="申し込み">${c[4]}</td><td data-h="料金" class="num">${c[3]}</td><td data-h="収集まで">${LEADTXT[k]}</td><td data-h="持ち込み">${c[5]}</td></tr>`).join("");
+  tb.innerHTML=Object.entries(CITIES).filter(([k])=>k!=="other").map(([k,c])=>`<tr><td>${c[6]?`<a href="${c[6]}" target="_blank" rel="noopener">${c[0]}</a>`:c[0]}</td><td data-h="申し込み">${c[4]}</td><td data-h="料金" class="num">${c[3]}</td><td data-h="収集まで">${LEADTXT[k]}${LEADSRC[k]==="estimate"?"（推定）":""}</td><td data-h="持ち込み">${c[5]}</td></tr>`).join("");
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
@@ -518,6 +525,18 @@ document.addEventListener("change",e=>{
   if(t.id==="addr"){setAddr(t.value);return}
   if(t.id==="photo"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{const c={label:"写真の物",cat:"unk",photo:rd.result,busy:true};A.custom.push(c);drawQs();draw();recog(c)};rd.readAsDataURL(t.files[0])}
 });
+// 記事からの引き継ぎ：/?city=yokohama で市区を選んだ状態にする（canonical は / のまま）
+try{const qc=new URLSearchParams(location.search).get("city");if(qc&&CITIES[qc])A.city=qc}catch(e){}
+// 計測：使われたかどうかだけを数える（入力した内容・市区・写真は送らない）
+const ev=(()=>{const done={};return n=>{if(done[n])return;done[n]=1;try{if(window.gtag)gtag("event",n)}catch(e){}}})();
+document.addEventListener("click",e=>{
+  if(e.target.closest("#qs button,#qs .photo"))ev("use_tool");
+  const a=e.target.closest("#out a");if(!a)return;
+  const h=a.getAttribute("href")||"";
+  if(h.startsWith("tel:"))gtag&&gtag("event","tel_click");
+  else if(a.target==="_blank")gtag&&gtag("event","outbound_click",{link_domain:a.hostname});
+});
+document.addEventListener("change",e=>{if(e.target.closest("#qs"))ev("use_tool");if(e.target.id==="photo")ev("photo_used")});
 drawQs();draw();cityTable();
 })();
 </script>
