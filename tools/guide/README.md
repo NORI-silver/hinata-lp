@@ -10,6 +10,7 @@
 ```
 python3 tools/guide/gencity.py .
 python3 tools/guide/hub.py .
+python3 tools/guide/areas.py .   # 診断ページ用の data/areas.js
 python3 tools/seo_check.py .
 ```
 

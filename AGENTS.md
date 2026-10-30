@@ -35,6 +35,7 @@
 | `404.html` `robots.txt` `sitemap.xml` | 手書き |
 | `favicon.svg` `apple-touch-icon.png` `og.png` | アイコン・OGP画像 |
 | `docs/ai-backup.md` `.github/workflows/ai-backup.yml` | Issue にラベル「ai」で動く予備のAI |
+| `data/areas.js` `tools/guide/areas.py` | 診断で使う地域データ（品目ごとの料金・新居の自治体の情報）。地域記事の元データから自動生成。記事を直したら `python3 tools/guide/areas.py .` を実行し直す |
 | `reviews.js` `backend/reviews.gs` | 買取チェーンの近くの店と Google マップの口コミ（GAS_URL が空のあいだは地図へのリンクだけ） |
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
