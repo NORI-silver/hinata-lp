@@ -1,5 +1,6 @@
 /* 買取チェーンの近くのお店と口コミ（Google マップ）を、このサイトの中で見せる部品。
  * 置き方：<div class="shops" data-city="yokohama"></div> を置いて、このファイルを defer で読み込む。
+ * 口コミに対応していない市区は data-name="大阪市" のように市の名前を添えると、地図へのリンクだけを出す。
  * 中身を後から差し替えたときは window.hinataShops.scan() を呼ぶ。
  * 点数・口コミは backend/reviews.gs が毎回取り寄せる（規約で保存しない）。出どころの「Google Maps」は訳さずそのまま出す。 */
 (function(){
@@ -36,11 +37,12 @@ function get(params){
 }
 function track(name){ try { if (window.gtag) window.gtag("event", name); } catch (e) {} }
 
-function fallback(box, city){
+function fallback(box, city, area){
+  area = area || AREAS[city];
   box.replaceChildren();
   CHAINS.forEach(function(c){
-    var s = el("div", "shop"); s.appendChild(el("h4", "", c + "（" + AREAS[city] + "周辺）"));
-    var a = el("a", "ext", "地図でお店を見る（Google マップ）"); a.href = mapUrl(c + " " + AREAS[city]); a.target = "_blank"; a.rel = "noopener";
+    var s = el("div", "shop"); s.appendChild(el("h4", "", c + "（" + area + "周辺）"));
+    var a = el("a", "ext", "地図でお店を見る（Google マップ）"); a.href = mapUrl(c + " " + area); a.target = "_blank"; a.rel = "noopener";
     s.appendChild(a); box.appendChild(s);
   });
   box.appendChild(el("p", "note", "買取チェーンの例です。提携しているお店ではありません。出張査定・キャンセル無料かどうかを確認してから頼みます。"));
@@ -72,7 +74,8 @@ function openReviews(city, chain, panel, btn){
 
 function render(box){
   var city = box.getAttribute("data-city");
-  if (!AREAS[city]) { box.replaceChildren(); return; }
+  // 口コミを取り寄せていない市区（全国の記事など）は、data-name の市の名前で地図へのリンクだけを出す
+  if (!AREAS[city]) { var nm = (box.getAttribute("data-name") || "").trim(); if (nm) fallback(box, city, nm); else box.replaceChildren(); return; }
   if (box.dataset.shown === city && box.childNodes.length) return;
   box.dataset.shown = city;
   if (!GAS_URL) { fallback(box, city); return; }
@@ -103,7 +106,7 @@ function render(box){
 
 // 画面に入ったときだけ読み込む（地図サービスへの問い合わせ回数を抑える）
 var io = "IntersectionObserver" in window ? new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { io.unobserve(e.target); render(e.target); } }); }, {rootMargin:"200px"}) : null;
-function scan(){ document.querySelectorAll(".shops[data-city]").forEach(function(b){ if (io && GAS_URL && !memo[JSON.stringify({kind:"shops", city:b.getAttribute("data-city")})]) io.observe(b); else render(b); }); }
+function scan(){ document.querySelectorAll(".shops[data-city]").forEach(function(b){ if (io && GAS_URL && AREAS[b.getAttribute("data-city")] && !memo[JSON.stringify({kind:"shops", city:b.getAttribute("data-city")})]) io.observe(b); else render(b); }); }
 window.hinataShops = {scan:scan, render:render};
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", scan); else scan();
 })();
