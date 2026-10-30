@@ -346,7 +346,7 @@ function drawQs(){
     let body=`<div class="chips">${chipsHTML(q)}</div>`;
     if(q.k==="days") body=`<input type="date" id="move" class="inp" value="${A.move}" min="${iso(today)}" aria-label="引越し日">
       ${A.move?`<div class="sub"><button type="button" class="lnk" id="nodate">日付がまだ決まっていない場合はこちら</button></div>`:`<div class="sub">日付が決まっていない場合は、だいたいで選んでください</div><div class="chips">${chipsHTML(q)}</div>`}`;
-    if(q.k==="city") body=`<div class="addrow"><input type="text" id="addr" class="inp" placeholder="住所や市区名でもOK（例:佐倉市ユーカリが丘）" aria-label="住所や市区名"></div><div class="sub" id="addrmsg">${A.addrmsg||"または選ぶ"}</div><div class="chips">${chipsHTML(q)}</div>`;
+    if(q.k==="city") body=`<div class="addrow"><input type="text" id="addr" class="inp" value="${esc(A.addr||"")}" placeholder="住所や市区名でもOK（例:佐倉市ユーカリが丘）" aria-label="住所や市区名">${"geolocation" in navigator?`<button type="button" class="chip" id="geo"${A.geobusy?" disabled":""}>${A.geobusy?"調べています…":"現在地から入れる"}</button>`:""}</div><div class="sub" id="addrmsg">${A.addrmsg||"または選ぶ"}</div><div class="sub">現在地は、使ってよいかをブラウザが確認してから調べます。市区町村名を知るために緯度・経度だけを国土地理院（国の機関）に送り、ほかには送らず保存もしません</div><div class="chips">${chipsHTML(q)}</div>`;
     if(q.k==="items") body=`<div class="addrow"><input type="text" id="free" class="inp" placeholder="例:食器棚、電子レンジ" aria-label="出したい物を入力"><button type="button" class="chip" id="addfree">追加</button>
       <label class="chip photo">写真で追加<input type="file" accept="image/*" id="photo" aria-label="写真で追加"></label></div>
       <div class="sub">写真は、この端末の中だけで判定します（どこにも送りません）</div>
@@ -444,13 +444,14 @@ function cityTable(){
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
   if(b.id==="addfree"){addFree();return}
+  if(b.id==="geo"){geoAddr();return}
   if(b.dataset.rmc!==undefined){A.custom.splice(+b.dataset.rmc,1);drawQs();draw();return}
   if(b.id==="nodate"){A.move="";drawQs();draw();return}
   if(b.dataset.fix!==undefined){const c=A.custom[+b.dataset.fix];c.label=b.dataset.name;c.cat=classify(c.label);c.ask=false;drawQs();draw();return}
   if(b.dataset.fixok!==undefined){A.custom[+b.dataset.fixok].ask=false;drawQs();return}
   const k=b.dataset.k,v=b.dataset.v;if(!k)return;
   const q=Q.find(x=>x.k===k);
-  if(k==="city")A.addrmsg="";
+  if(k==="city"){A.addrmsg="";A.addr=""}
   if(k==="days"){A.days=v;A.move=""}
   else if(q.one)A[k]=v;else{const a=A[k];const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)}
   drawQs();draw();
@@ -484,9 +485,33 @@ async function recog(c){
 function addFree(){const el=$("free");const v=(el&&el.value||"").trim();if(!v)return;
   v.split(/[、,，\s]+/).filter(Boolean).forEach(x=>A.custom.push({label:x,cat:classify(x)}));drawQs();draw();const f=$("free");if(f)f.focus()}
 document.addEventListener("keydown",e=>{if(e.target.id==="free"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();addFree()}if(e.target.id==="addr"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setAddr(e.target.value)}});
-function setAddr(v){v=(v||"").trim();if(!v)return;const hit=ADDR.find(([re])=>re.test(v));
+function setAddr(v){v=(v||"").trim();if(!v)return;A.addr=v;const hit=ADDR.find(([re])=>re.test(v));
   if(hit){A.city=hit[1];A.addrmsg=`「${esc(v)}」→ ${CITIES[hit[1]][0]}で診断しています`}else{A.city="other";A.addrmsg=`「${esc(v)}」は対応している市区にないため、その他の地域で診断しています`}
   drawQs();draw()}
+// 現在地：ブラウザの許可をとってから緯度・経度を取り、国土地理院の逆ジオコーダーで市区町村コードに変える（送るのは緯度・経度だけ）
+const GEOCODE=[[14101,14118,"yokohama"],[14131,14137,"kawasaki"],[13112,13112,"setagaya"],[13115,13115,"suginami"],[11101,11110,"saitama"],[12101,12106,"chiba"],[12212,12212,"sakura"]];
+async function muniName(cd){
+  try{const t=await (await fetch("https://maps.gsi.go.jp/js/muni.js")).text();
+    const m=t.match(new RegExp('\\["0?'+(+cd)+'"\\]\\s*=\\s*\'[^,]*,([^,]+),[^,]*,([^\']+)\''));
+    return m?m[1]+m[2].replace(/[\s　]/g,""):""}catch(e){return ""}
+}
+function geoAddr(){
+  const fail=msg=>{A.geobusy=false;A.addrmsg=msg;drawQs()};
+  A.geobusy=true;A.addrmsg="現在地を調べています…";drawQs();
+  navigator.geolocation.getCurrentPosition(async p=>{
+    try{
+      const lat=p.coords.latitude.toFixed(5),lon=p.coords.longitude.toFixed(5);
+      const r=await (await fetch(`https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${lat}&lon=${lon}`)).json();
+      const cd=r&&r.results&&r.results.muniCd;if(!cd) return fail("現在地の市区町村がわかりませんでした（日本の外かもしれません）。住所を入力するか、下から選んでください");
+      const n=+cd,hit=GEOCODE.find(([a,b])=>n>=a&&n<=b),town=(r.results.lv01Nm||"").replace(/^－$/,"");
+      A.geobusy=false;
+      if(hit){A.city=hit[2];A.addr=CITIES[hit[2]][0]+town;A.addrmsg=`現在地 → ${CITIES[hit[2]][0]}で診断しています。ちがう場合は選び直してください`}
+      else{const nm=await muniName(cd);A.city="other";A.addr=nm?nm+town:"";A.addrmsg=`現在地${nm?`（${esc(nm)}）`:""}は対応している市区にないため、その他の地域で診断しています`}
+      drawQs();draw();
+    }catch(e){fail("現在地から市区町村を調べられませんでした。住所を入力するか、下から選んでください")}
+  },e=>fail(e.code===1?"位置情報の利用が許可されませんでした。住所を入力するか、下から選んでください":"現在地を取得できませんでした。住所を入力するか、下から選んでください"),
+  {enableHighAccuracy:false,timeout:15000,maximumAge:600000});
+}
 document.addEventListener("change",e=>{
   const t=e.target;
   if(t.id==="move"){A.move=t.value;drawQs();draw();return}
