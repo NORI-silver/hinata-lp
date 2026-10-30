@@ -12,22 +12,22 @@ GitHub の Issue（やることメモ）に頼みごとを書いて、ラベル�
 
 1. **OpenRouter の鍵を作る**
    1. https://openrouter.ai にログインし、「Credits」でお金を入れる（まずは $10 くらいで十分です）。
-   2. 「Keys」→「Create Key」。名前は `sodai-lp` など。**「Credit limit」に上限（例：$10）を入れておく**と使いすぎを防げます。
+   2. 「Keys」→「Create Key」。名前は `hinata-lp` など。**「Credit limit」に上限（例：$10）を入れておく**と使いすぎを防げます。
    3. 表示された鍵（`sk-or-` で始まる文字）をコピーする。鍵は他の人やチャットに貼らないでください。
 2. **鍵を GitHub に登録する**
-   - https://github.com/NORI-silver/sodai-lp/settings/secrets/actions を開き、「New repository secret」。
+   - https://github.com/NORI-silver/hinata-lp/settings/secrets/actions を開き、「New repository secret」。
    - Name に `OPENROUTER_API_KEY`、Secret に鍵を貼って「Add secret」。
 3. **AIがPRを作れるようにする**
-   - https://github.com/NORI-silver/sodai-lp/settings/actions を開き、下の「Workflow permissions」で
+   - https://github.com/NORI-silver/hinata-lp/settings/actions を開き、下の「Workflow permissions」で
      「**Allow GitHub Actions to create and approve pull requests**」にチェックを入れて「Save」。
 4. **ラベル「ai」を作る**
-   - https://github.com/NORI-silver/sodai-lp/labels で「New label」、名前 `ai` で作成。
+   - https://github.com/NORI-silver/hinata-lp/labels で「New label」、名前 `ai` で作成。
 
-（モデルを替えたいときは https://github.com/NORI-silver/sodai-lp/settings/variables/actions で変数 `AI_MODEL` を作り、`openrouter/` + OpenRouter のモデル名 を入れます。）
+（モデルを替えたいときは https://github.com/NORI-silver/hinata-lp/settings/variables/actions で変数 `AI_MODEL` を作り、`openrouter/` + OpenRouter のモデル名 を入れます。）
 
 ## 頼むとき（毎回）
 
-1. GitHub アプリで sodai-lp を開き、「Issues」→「＋」（新しいIssue）。
+1. GitHub アプリで hinata-lp を開き、「Issues」→「＋」（新しいIssue）。
 2. タイトルに一言、本文にやってほしいことを具体的に書く。例：
    - タイトル「よくある質問にキャンセルの質問を足す」
    - 本文「トップのよくある質問に『キャンセルはできますか？』を足して。答えは、当サイトへのキャンセル料はなし、決定後は引き受けた会社の規定、という内容で。」
