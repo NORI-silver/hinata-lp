@@ -17,6 +17,7 @@
 - 提携していない個人店の名前・電話番号は載せない（チェーン名の例示はOK）。
 - 実績件数など根拠のない数字は書かない。実態と違うことは書かない。
 - 家電4品目（冷蔵庫・冷凍庫／洗濯機・衣類乾燥機／テレビ／エアコン）は市区では回収しない、を崩さない。
+- 買取チェーンの口コミ（星・件数・本文）は `reviews.js` が `backend/reviews.gs`（Google Apps Script）経由で毎回取り寄せて、サイトの中で見せる（2026-10-30 Nori「サイトの外には飛ばさない」）。点数や本文を書き写したり保存したりしない（地図サービスの規約）。出どころは「Google Maps」と訳さずに出し、書いた人と元の口コミへのリンクも出す。キー（PLACES_API_KEY）は Apps Script のプロパティにだけ置く。記事に載せるときは `<div class="shops" data-city="yokohama"></div>` と `/reviews.js` の読み込みだけでよい。
 
 ## SEO
 
@@ -34,6 +35,7 @@
 | `404.html` `robots.txt` `sitemap.xml` | 手書き |
 | `favicon.svg` `apple-touch-icon.png` `og.png` | アイコン・OGP画像 |
 | `docs/ai-backup.md` `.github/workflows/ai-backup.yml` | Issue にラベル「ai」で動く予備のAI |
+| `reviews.js` `backend/reviews.gs` | 買取チェーンの近くの店と Google マップの口コミ（GAS_URL が空のあいだは地図へのリンクだけ） |
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
 
