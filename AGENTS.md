@@ -23,6 +23,8 @@
 - メインキーワード：「粗大ごみ 引越し 間に合わない」「粗大ごみ 出し方」＋市区名。タイトル28〜35字目安、description 80〜120字。
 - 構造化データ：WebApplication と FAQPage（`index.html` の `ld+json`。FAQ本文と同じ内容にそろえる）。
 - ページを足したら `sitemap.xml` に追加し lastmod を更新する。
+- 変更したら `python3 tools/seo_check.py .` を実行し、NG を0にしてから PR を出す（PR ごとに GitHub Actions でも自動で走る）。
+- 定期のSEO作業（週2回、Claude）の手順は `docs/seo-playbook.md`、記録は `docs/seo-log.md`。
 
 ## ファイル構成
 
@@ -32,6 +34,8 @@
 | `404.html` `robots.txt` `sitemap.xml` | 手書き |
 | `favicon.svg` `apple-touch-icon.png` `og.png` | アイコン・OGP画像 |
 | `docs/ai-backup.md` `.github/workflows/ai-backup.yml` | Issue にラベル「ai」で動く予備のAI |
+| `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
+| `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
 
 `CNAME`・`.nojekyll` は GitHub Pages 用なので消さない。
 
