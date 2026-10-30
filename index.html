@@ -252,7 +252,7 @@ details p{margin:8px 0 0;color:var(--muted)}
 <tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">2週間ほど（地区の収集業者に電話で申込）（推定）</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・10kgで約¥350）</td></tr>
 </tbody>
       </table></div>
-      <p>市区ごとの申し込み方・料金・持ち込み先・近くの買取店は、<a href="/guide/#area">地域ごとの記事</a>にまとめています。</p>
+      <p>市区ごとの申し込み方・料金・持ち込み先・近くの買取店は、<a href="/guide/#area">地域ごとの記事</a>にまとめています。記事のある市区は、診断の「お住まい」に市区名を入れると、その市区のインターネット予約・電話の窓口つきで診断できます。</p>
       <p>出し方の流れや、間に合わないときの方法は<a href="/guide/late/">こちらの記事</a>にまとめています。上記以外の地域は、お住まいの自治体の公式サイトで「粗大ごみ」のページを確認してください。</p>
     </section>
 
@@ -393,7 +393,7 @@ function itemFees(ar,label){
 const yen=a=>{const ns=a.flatMap(x=>(x.match(/[\d,]+(?=円)/g)||[]).map(n=>+n.replace(/,/g,"")));if(!ns.length)return a.includes("無料")?"無料":"";const lo=Math.min(...ns),hi=Math.max(...ns);return (a.includes("無料")?"無料":"¥"+lo.toLocaleString())+(hi>lo||a.includes("無料")?"〜¥"+hi.toLocaleString():"")};
 const feeList=fs=>fs.map(([t,f])=>`${esc(t)} ${esc(f)}`).join("、");
 function judge(){const c=CITIES[A.city],ar=AREAS[A.city]||(A.city==="other"&&AREAS[A.area])||null,j={key:A.city,cname:c[0],lead:c[1],web:c[2],fee:c[3],drop:c[5],url:c[6],d:days(),ar};
-  if(A.city==="other"&&ar){j.cname=ar.n;j.url=ar.url||"";j.fee=ptOf(ar,"料金","支払い")||"品目ごと（公式ページで確認）";j.drop=ptOf(ar,"持ち込み")||"持ち込めるかは公式ページで確認";j.web=/インターネット|LINE/.test(ptOf(ar,"申し込み"))}
+  if(A.city==="other"&&ar){j.cname=ar.n;j.url=ar.url||"";j.fee=ptOf(ar,"料金","支払い")||"品目ごと（公式ページで確認）";j.drop=ptOf(ar,"持ち込み")||"持ち込めるかは公式ページで確認";j.web=ar.bk?ar.bk.web==="open"||ar.bk.web==="cond":/インターネット|LINE/.test(ptOf(ar,"申し込み"))}
   // 表示に使う名前。地域がわからないときは「お住まいの市区町村」
   j.nm=A.city==="other"&&!ar?"お住まいの市区町村":j.cname;
   return j}
@@ -417,8 +417,12 @@ const HNAME=j=>({city:`${j.nm}の粗大ごみ受付`,post:"家電リサイクル
 const telA=n=>`<a href="tel:${n.replace(/-/g,"")}">${n}</a>`;
 const extA=(t,u)=>`<a class="wa" href="${u}" target="_blank" rel="noopener">${t}</a>`;
 const mapQ=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+// 記事から取った申し込みの案内（予約サイトの状態・電話）。電話の行は記事の tel リンクをそのまま使う
+const WEBTXT={open:"インターネットで予約できます",cond:"インターネット予約は条件つきです",stop:"インターネット受付は一時停止中です",none:"インターネットでは収集の予約ができません"};
+function bkHours(ar){const b=ar.bk;if(!b)return esc(ptOf(ar,"申し込み")||"公式ページで確認");
+  return [`<b>${WEBTXT[b.web]}</b>${b.note?`：${esc(b.note)}`:""}`,...(b.mail?["インターネットは、先にメールアドレスを登録して申し込みます"]:[]),...(b.t||[esc(ptOf(ar,"申し込み")||"")])].filter(Boolean).join("<br>")}
 function handlers(j,rs){
-  const ar=j.ar,I=j.key==="other"&&ar?{pref:0,desk:"申し込み方法",tel:[],hours:ptOf(ar,"申し込み")||"公式ページで確認",links:[[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key],area=j.key==="other"&&!ar?"":j.cname;
+  const ar=j.ar,bk=ar&&ar.bk||{},I=j.key==="other"&&ar?{pref:0,desk:`申し込みの窓口（${ar.og?"大型":"粗大"}ごみ）`,tel:[],hours:bkHours(ar),links:[...(bk.w||[]).map(([t,u])=>[/インターネット|申し?込|LINE|予約|フォーム|チャット/.test(t)?t:`${t}（インターネット受付）`,u]),[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key],area=j.key==="other"&&!ar?"":j.cname;
   const pref=I.pref?`https://www.aeha-kadenrecycle.com/rkcmap/search.php?sort=address&prefecture_id=${I.pref}`:"https://www.aeha-kadenrecycle.com/";
   const rows=[
     ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
@@ -487,10 +491,11 @@ function draw(){
   if(window.hinataShops)window.hinataShops.scan();
 }
 // 新居の自治体：記事の元データから、その場で出す（ページは移動しない）
-function toMsg(){const to=AREAS[A.to];if(to)return `→ ${esc(to.n)}の情報を診断結果に出しています`;if(A.toq)return `「${esc(A.toq)}」の情報はまだありません。政令市と東京23区・佐倉市に対応しています`;return "入れると、新居で出すときの料金・申し込み・注意点がこの下に出ます"}
+const AREACOUNT=()=>`政令市・東京23区など${Object.keys(AREAS).length}の市区`;
+function toMsg(){const to=AREAS[A.to];if(to)return `→ ${esc(to.n)}の情報を診断結果に出しています`;if(A.toq)return `「${esc(A.toq)}」の情報はまだありません。${AREACOUNT()}に対応しています`;return "入れると、新居で出すときの料金・申し込み・注意点がこの下に出ます"}
 function newHome(rs){
   const to=AREAS[A.to];
-  if(!to){return A.toq?`<div class="free nh"><h3>新居の「${esc(A.toq)}」の情報はまだありません</h3><p>このサイトは政令市・東京23区・佐倉市に対応しています。お住まいになる自治体の公式サイトで「粗大ごみ」のページを確認してください。<a href="https://www.google.com/search?q=${encodeURIComponent(A.toq+" 粗大ごみ")}" target="_blank" rel="noopener">「${esc(A.toq)} 粗大ごみ」を検索</a></p></div>`:""}
+  if(!to){return A.toq?`<div class="free nh"><h3>新居の「${esc(A.toq)}」の情報はまだありません</h3><p>このサイトは${AREACOUNT()}に対応しています。お住まいになる自治体の公式サイトで「粗大ごみ」のページを確認してください。<a href="https://www.google.com/search?q=${encodeURIComponent(A.toq+" 粗大ごみ")}" target="_blank" rel="noopener">「${esc(A.toq)} 粗大ごみ」を検索</a></p></div>`:""}
   const mine=rs.filter(it=>it.cat!=="unk").map(it=>{if(it.cat==="app")return `<li><b>${esc(it.label)}</b>：${to.kaden?`家電4品目は粗大ごみとは手続きが別です（お店か家電リサイクル券が基本）。${esc(to.kaden)}`:`家電4品目は${to.n}でも粗大ごみでは出せません。お店か家電リサイクル券で`}</li>`;
     const fs=itemFees(to,it.label);return `<li><b>${esc(it.label)}</b>：${fs.length?`${feeList(fs)}（目安）`:"料金は品目ごと。下の記事か公式ページで確認"}</li>`}).join("");
   const mv=[...(to.mv0===1?[`前の家から持ってきた物を出すときの決まりは、${to.n}の公式ページには特に書かれていませんでした。${to.n}の家庭のごみとして、新しい住所で申し込みます（申し込むときに「引越しで持ってきた物」と伝えると安心です）`]:to.mv0?[to.mv0]:[]),...(to.mv||[]),"申し込みは、住み始めてから新しい住所で。住む前に申し込めるかは受付で確かめてください","処理券やシールは自治体ごとに別の物です。前の自治体で買った券は使えません"];
