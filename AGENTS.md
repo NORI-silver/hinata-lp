@@ -1,4 +1,4 @@
-# AGENTS.md — 粗大ごみ手配ナビ（sodai.shiokonbu.com）
+# AGENTS.md — 粗大ごみ手配ナビ（sodaigomi.shiokonbu.com）
 
 このリポジトリで作業するすべてのAI（Claude・Codex・ほかのモデル）と人のための共通ルールです。`CLAUDE.md` はこのファイルを読み込むだけです。
 
