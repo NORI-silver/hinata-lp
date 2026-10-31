@@ -44,6 +44,7 @@
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
 | `tools/article_review/` `.claude/agents/article-*.md` `.github/workflows/article-review.yml` | 記事チェックエージェント（7つの観点：正確さ・リンク・SEO・ありきたり・困ったときの情報・画像・最新か）。手順は `tools/article_review/AGENT.md`、サイト別の設定は `sites/*.json`（shiokonbu.com・pet.shiokonbu.com でも使える）。結果は `docs/article-review/`。記事をまとめて直すときはこれを使う |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
+| `tools/area_agents/` `.claude/agents/area-*.md` `docs/area-agents/` | エリア担当Agent（7担当）。地域記事を検索の見込み（キーワードプランナー＋GSC）が大きい順に担当ごとに育てる。手順は `tools/area_agents/AGENT.md`、割り振りは `docs/area-agents/assignments.md`、だれがいつ見たかは `docs/area-agents/ledger.json`。地域記事を照合・手直ししたら ledger の `fact`/`seo` を書く。新しい地域記事を足したら `python3 tools/area_agents/allocate.py .` |
 
 `CNAME`・`.nojekyll` は GitHub Pages 用なので消さない。
 

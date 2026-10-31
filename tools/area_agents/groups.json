@@ -1,0 +1,26 @@
+{
+ "note": "エリア担当Agentの割り振り。keys に無い地域（新しく記事ができた市）は、公式URLの都道府県 → fallback_pref、それも無ければ地方（meta の region）→ fallback_region で自動で決まる。数字の意味は tools/area_agents/AGENT.md。",
+ "agents": [
+  {"id": "tokyo-west", "label": "東京23区・西（練馬・世田谷・杉並・板橋ほか）",
+   "keys": ["nerima", "setagaya", "suginami", "nakano", "itabashi", "toshima", "kita"]},
+  {"id": "tokyo-central", "label": "東京23区・都心と南（大田・品川・江東・新宿・港ほか）",
+   "keys": ["ota", "shinagawa", "koto", "shinjuku", "minato", "chuo", "meguro", "shibuya", "chiyoda"]},
+  {"id": "tokyo-east", "label": "東京23区・東（江戸川・足立・葛飾・墨田・台東・文京・荒川）",
+   "keys": ["edogawa", "adachi", "katsushika", "sumida", "taito", "bunkyo", "arakawa"]},
+  {"id": "kanagawa", "label": "神奈川（横浜・川崎・相模原ほか）",
+   "keys": ["yokohama", "kawasaki", "sagamihara", "yamato"], "prefs": ["kanagawa"]},
+  {"id": "shutoken", "label": "埼玉・千葉・東京多摩・北関東",
+   "keys": ["saitama", "chiba", "sakura"], "prefs": ["saitama", "chiba", "tokyo", "ibaraki", "tochigi", "gunma"]},
+  {"id": "kansai", "label": "関西（大阪・堺・神戸・京都ほか）",
+   "keys": ["osaka", "kobe", "kyoto"], "prefs": ["osaka", "hyogo", "kyoto", "nara", "shiga", "wakayama"]},
+  {"id": "chiho", "label": "名古屋・福岡・仙台ほか地方（北海道・東北・中部・中国・四国・九州・沖縄）",
+   "keys": ["nagoya", "fukuoka", "sapporo"]}
+ ],
+ "fallback_region": {"首都圏": "shutoken", "関西": "kansai", "*": "chiho"},
+ "tiers": {"A": 8000, "B": 2000},
+ "revisit_days": {"A": 14, "B": 30, "C": 90},
+ "cost": {"A": 1.0, "B": 0.5, "C": 0.1},
+ "budget_per_run": 3.0,
+ "no_data_volume": 500,
+ "no_data_note": "キーワードプランナーで取っていない市（人口10〜20万人）は、同じくらいの人口でデータのある市（平塚590・茅ヶ崎480・立川1,300・草加1,900）から月500と仮に置く"
+}
