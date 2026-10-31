@@ -64,8 +64,8 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi"}
-NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki"}
+NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe"}
 NOFEE={"shizuoka"}
 def _title(k):
     n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
@@ -156,6 +156,33 @@ LATE1={
  "hino":"一度に多いときは、市内の許可業者に有料で頼む（市の案内）",
  "ebina":"受付に電話して、早い収集日がないか聞く",
  "kusatsu":"受付に電話して、早い収集日がないか聞く",
+ "fukaya":"清掃センターへ直接持ち込む",
+ "kazo":"クリーンセンターへ自分で持ち込む",
+ "noda":"受付に電話して、早い収集日がないか聞く",
+ "abiko":"クリーンセンターへ自分で持ち込む（予約不要）",
+ "kamagaya":"クリーンセンターしらさぎへ自分で持ち込む",
+ "inzai":"一度に多いときは、市の許可業者に有料で頼む（粗大ごみは持ち込めません）",
+ "narita":"受付に電話して、早い収集日がないか聞く",
+ "kisarazu":"2営業日前までにLINEかウェブで予約して、自分で持ち込む",
+ "tsuchiura":"清掃センターへ自分で持ち込む",
+ "toride":"市役所の窓口で許可をとってから、常総環境センターへ持ち込む（平日のみ）",
+ "hitachinaka":"クリーンセンター・資源リサイクルセンターへ自分で持ち込む",
+ "kariya":"クリーンセンターへ自分で持ち込む（家庭のごみは無料）",
+ "komaki":"小牧岩倉エコルセンターへ自分で持ち込む（平日・予約不要）",
+ "seto":"晴丘センターへ自分で持ち込む（平日・予約不要）",
+ "fujimino":"ふじみ野市・三芳町環境センターへ自分で持ち込む",
+ "konosu":"受付に電話して、早い収集日がないか聞く",
+ "ikeda":"クリーンセンターへ電話で予約して持ち込む（多いときは業務センターの有料臨時収集）",
+ "sanda":"クリーンセンターへ前日までに予約して持ち込む",
+ "kyotanabe":"受付に電話して、早い収集日がないか聞く",
+ "kameoka":"エコトピア亀岡へ前日までに予約して持ち込む",
+ "fujieda":"クリーンセンター志太へ予約して自分で持ち込む",
+ "yaizu":"クリーンセンター志太へ自分で持ち込む",
+ "higashihiroshima":"市の処理施設へ自分で持ち込む（多いときは先に市へ申請）",
+ "koga":"クリーンセンターへ自分で持ち込む",
+ "daito":"7点以上は環境室に電話して、有料の臨時（引越）ごみを頼む",
+ "kadoma":"6点以上は受付センターに電話して、有料の臨時ごみを頼む",
+ "matsubara":"8点を超える分は市が集めないので、持ち込み先を市のページで確かめる",
 }
 LATE3={
  "kishiwada":"可燃ごみ・金属ごみが多いときは岸和田貝塚クリーンセンターへ（粗大ごみを持ち込めるかは組合に確認）",
@@ -170,6 +197,27 @@ LATE3={
  "kamakura":"",
  "soka":"少しなら環境業務センターへ持ち込む（引越しで一度にたくさん出る分は持ち込めません）",
  "hiratsuka":"自家用車があれば、上の持ち込み先へ（引越しの多量ごみを持ち込めるかは施設に確認）",
+ "fukaya":"",
+ "kazo":"",
+ "abiko":"",
+ "kamagaya":"",
+ "inzai":"",
+ "kisarazu":"",
+ "tsuchiura":"",
+ "toride":"",
+ "hitachinaka":"",
+ "kariya":"",
+ "komaki":"",
+ "seto":"",
+ "fujimino":"",
+ "ikeda":"",
+ "sanda":"",
+ "kameoka":"",
+ "fujieda":"",
+ "yaizu":"",
+ "higashihiroshima":"",
+ "koga":"",
+ "matsubara":"",
 }
 _top=open(os.path.join(ROOT,"index.html"),encoding="utf-8").read()
 DIAG=set(re.findall(r"^  (\w+):\[",_top.split("const CITIES={",1)[1].split("\n};",1)[0],re.M))
