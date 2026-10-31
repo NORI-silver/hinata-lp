@@ -1,0 +1,28 @@
+# 記事チェックの機械の下調べ（tools/article_review/）。週1回（月曜 9:30 JST）と手動で走る。
+# 外部リンク（自治体の公式ページなど）が開けるかも確かめ、結果は実行ページの Summary と
+# 成果物（article-review）に出す。赤くはしない（直すのは AI が tools/article_review/AGENT.md の手順で）。
+name: Article review
+
+on:
+  schedule:
+    - cron: '30 0 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Review articles
+        run: |
+          python3 tools/article_review/review.py tools/article_review/sites/hinata.json --external --out review-out
+          cat review-out/*.md >> "$GITHUB_STEP_SUMMARY"
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: article-review
+          path: review-out/

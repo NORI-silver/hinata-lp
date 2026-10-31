@@ -1,0 +1,45 @@
+{
+ "name": "shiokonbu",
+ "site_label": "SHIOKONBU（shiokonbu.com・大型犬の実体験ブログ／WordPress）",
+ "base_url": "https://shiokonbu.com/",
+ "report_dir": "docs/article-review",
+ "source": {"type": "wordpress", "dump_dir": "work/shiokonbu-posts", "include": ["*.html"],
+            "how": "SHIOKONBU_SEO の wp_list_posts（per_page 100・status publish）で一覧 → wp_get_post で本文を取り、<link rel=\"canonical\" href=\"記事のURL\"><title>タイトル</title><meta name=\"description\" content=\"…\"><article><h1>タイトル</h1>本文</article> の形で dump_dir/<slug>.html に保存"},
+ "edit_where": "記事の変更は SHIOKONBU_SEO の wp_update_post だけ（1回1記事・reason を書く）。前後に seo_audit、公開後に critic_review（must_fix は必ず直す・最大2往復）、最後に handoff_note",
+ "rules_tool": ["get_playbook", "change_log"],
+ "rules": [],
+ "keywords": "SHIOKONBU_SEO の keywords_search / keyword_coverage / gsc_opportunities",
+ "log": "SHIOKONBU_SEO の handoff_note",
+ "critic_required_for": ["seo", "originality", "needs", "visual"],
+ "critic_tool": "critic_review",
+ "body_tags": ["article"],
+ "official_hosts": [".jp", ".com"],
+ "stale_days": 365,
+ "soon_days": 90,
+ "old_source_years": 3,
+ "title_range": [28, 35],
+ "desc_range": [80, 120],
+ "common_share": 0.3,
+ "boilerplate_warn": 0.5,
+ "must_text": [],
+ "ng_text": ["寿命", "練馬", "幕張", "※この記事にはアフィリエイト広告が含まれます。"],
+ "types": [
+  {"name": "guide", "match": "(guide|ranking|matome)", "min_h2": 3, "min_unique_chars": 800,
+   "visual_when": ["写真", "様子", "景色", "駐車場"],
+   "needs": [
+    {"label": "料金（有料／無料）", "any": ["円", "無料", "💰", "🆓"], "sev": "high"},
+    {"label": "大型犬の条件（体重・頭数・犬種の制限）", "any": ["kg", "大型犬", "超大型犬", "頭まで", "制限"], "sev": "high"},
+    {"label": "駐車場", "any": ["駐車場", "駐車"]},
+    {"label": "営業時間・定休日", "any": ["時間", "定休", "営業"]},
+    {"label": "公式サイトへのリンク", "any": ["公式"]},
+    {"label": "体験した日・季節", "any": ["年", "月", "季節"], "hint": "いつの情報かがわかると古さが判断できる"}
+   ]},
+  {"name": "post", "match": ".*", "min_h2": 3,
+   "visual_when": ["写真", "様子"],
+   "needs": [
+    {"label": "犬の名前（こんぶ・なむる・ちゃーはん）＝実体験の記事であること", "any": ["こんぶ", "なむる", "ちゃーはん"]},
+    {"label": "性格ハブ記事などへの内部リンク", "any": ["shiokonbu.com/"]}
+   ]}
+ ],
+ "todo": "記事の URL の形でガイドと日記を分ける match は、実際の slug を見て直す（2026-10-31 時点では未確認）"
+}

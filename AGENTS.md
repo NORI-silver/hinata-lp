@@ -42,6 +42,7 @@
 | `reviews.js` `backend/reviews.gs` `tools/guide/reviews_areas.py` | 買取チェーンの近くの店と Google マップの口コミ。対象の市区（AREAS）は地域記事の市区から reviews_areas.py で作る。地域を足したら実行し、backend/reviews.gs を Apps Script「hinata 口コミ」に貼り直して同じデプロイの新しいバージョンを出す（月300回の上限に達するとその月は地図へのリンクだけ） |
 | `tools/form_check.js` `docs/form-review.md` `.claude/agents/form-reviewer.md` | 診断フォームの点検（判定・使いやすさ・競合比較）。フォームや判定を直したら `node tools/form_check.js .` で NG 0 にする |
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
+| `tools/article_review/` `.claude/agents/article-*.md` `.github/workflows/article-review.yml` | 記事チェックエージェント（7つの観点：正確さ・リンク・SEO・ありきたり・困ったときの情報・画像・最新か）。手順は `tools/article_review/AGENT.md`、サイト別の設定は `sites/*.json`（shiokonbu.com・pet.shiokonbu.com でも使える）。結果は `docs/article-review/`。記事をまとめて直すときはこれを使う |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
 
 `CNAME`・`.nojekyll` は GitHub Pages 用なので消さない。
