@@ -8,7 +8,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write, WebFetch, WebSearch, Agent
 手順の正本は `tools/area_agents/AGENT.md`。最初に読み、そのとおりに1回ぶん進めてください。文言のルールは `AGENTS.md`、照合の仕方は `tools/article_review/AGENT.md`。
 
 - 今回見る地域: `python3 tools/area_agents/allocate.py . --agent tokyo-east` が出したものだけ。
-- 受け持ち: 7地域・検索の見込み 月85,120（全体の12%）。
+- 受け持ち: 7地域・検索の見込み 月85,120（全体の11%）。
 - A（深く・14日ごと）: 江戸川区・足立区・葛飾区・文京区・墨田区・台東区
 - B（30日ごと）: 荒川区
 - C（機械チェックだけ・90日ごと）: なし

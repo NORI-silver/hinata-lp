@@ -8,7 +8,7 @@ tools: Read, Grep, Glob, Bash, Edit, Write, WebFetch, WebSearch, Agent
 手順の正本は `tools/area_agents/AGENT.md`。最初に読み、そのとおりに1回ぶん進めてください。文言のルールは `AGENTS.md`、照合の仕方は `tools/article_review/AGENT.md`。
 
 - 今回見る地域: `python3 tools/area_agents/allocate.py . --agent kanagawa` が出したものだけ。
-- 受け持ち: 14地域・検索の見込み 月114,680（全体の16%）。
+- 受け持ち: 14地域・検索の見込み 月114,680（全体の15%）。
 - A（深く・14日ごと）: 横浜市・川崎市
 - B（30日ごと）: 相模原市・藤沢市
 - C（機械チェックだけ・90日ごと）: 大和市・厚木市・横須賀市・平塚市・海老名市・秦野市・鎌倉市・小田原市・座間市・茅ヶ崎市

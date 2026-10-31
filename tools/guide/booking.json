@@ -478,5 +478,132 @@
   },
   "soka": {
     "web": "open"
+  },
+  "kuki": {
+    "web": "open"
+  },
+  "higashikurume": {
+    "web": "open"
+  },
+  "inagi": {
+    "web": "open"
+  },
+  "akishima": {
+    "web": "open"
+  },
+  "fujimino": {
+    "web": "none",
+    "note": "申し込み不要（シール券を貼って集積所へ）"
+  },
+  "fujimi": {
+    "web": "open"
+  },
+  "sakado": {
+    "web": "cond",
+    "note": "アプリを入れて申し込む"
+  },
+  "konosu": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "fukaya": {
+    "web": "none",
+    "note": "申し込みの記載なし（毎週火曜の収集日に出す）"
+  },
+  "kazo": {
+    "web": "cond",
+    "note": "ネット申込のあと確認の電話あり"
+  },
+  "noda": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "abiko": {
+    "web": "open"
+  },
+  "kamagaya": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "inzai": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "narita": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "kisarazu": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "tsuchiura": {
+    "web": "cond",
+    "note": "本人が申し込み、住所と出す場所が同じときだけ。1回5個まで"
+  },
+  "toride": {
+    "web": "open",
+    "note": "取手市LINE（友だち登録が必要）"
+  },
+  "hitachinaka": {
+    "web": "cond",
+    "note": "自分で運ぶのがむずかしい人向け"
+  },
+  "oyama": {
+    "web": "open"
+  },
+  "daito": {
+    "web": "cond",
+    "note": "前に電話で申し込んだ人だけ"
+  },
+  "kadoma": {
+    "web": "open"
+  },
+  "matsubara": {
+    "web": "open"
+  },
+  "ikeda": {
+    "web": "none",
+    "note": "申し込みが要るかは業務センターに確認"
+  },
+  "sanda": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "kyotanabe": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "kameoka": {
+    "web": "open"
+  },
+  "kariya": {
+    "web": "open",
+    "note": "LINEアカウントが必要"
+  },
+  "komaki": {
+    "web": "open"
+  },
+  "seto": {
+    "web": "open"
+  },
+  "ogaki": {
+    "web": "open"
+  },
+  "fujieda": {
+    "web": "none",
+    "note": "市が申し込みで集める収集はなし（持ち込み）"
+  },
+  "yaizu": {
+    "web": "none",
+    "note": "市が申し込みで集める収集はなし（持ち込み）"
+  },
+  "higashihiroshima": {
+    "web": "none",
+    "note": "申し込み制度なし（地域の粗大ごみの日か持ち込み）"
+  },
+  "koga": {
+    "web": "none",
+    "note": "有料の戸別収集は窓口で申し込む"
   }
 }
