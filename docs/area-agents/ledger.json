@@ -47,6 +47,11 @@
    "by": "article-review",
    "note": "記事チェック1回目"
   },
+  "chigasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "chiyoda": {
    "fact": "2026-10-31",
    "by": "article-review",
@@ -87,6 +92,11 @@
    "by": "article-review",
    "note": "記事チェック6回目"
   },
+  "fukuyama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "funabashi": {
    "fact": "2026-10-31",
    "by": "article-review",
@@ -122,6 +132,11 @@
    "by": "article-review",
    "note": "記事チェック4回目"
   },
+  "hiratsuka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "hiroshima": {
    "fact": "2026-10-31",
    "by": "article-review",
@@ -151,6 +166,11 @@
    "fact": "2026-10-31",
    "by": "article-review",
    "note": "記事チェック6回目"
+  },
+  "kasukabe": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
   },
   "katsushika": {
    "fact": "2026-10-31",
@@ -187,6 +207,11 @@
    "by": "article-review",
    "note": "記事チェック2回目"
   },
+  "kochi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "koriyama": {
    "fact": "2026-10-31",
    "by": "article-review",
@@ -206,6 +231,16 @@
    "fact": "2026-10-31",
    "by": "article-review",
    "note": "記事チェック3回目"
+  },
+  "kurashiki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "kurume": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
   },
   "kyoto": {
    "fact": "2026-10-31",
@@ -241,6 +276,16 @@
    "fact": "2026-10-31",
    "by": "article-review",
    "note": "記事チェック4回目"
+  },
+  "mito": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "miyazaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
   },
   "musashino": {
    "fact": "2026-10-31",
@@ -292,10 +337,20 @@
    "by": "article-review",
    "note": "記事チェック4回目"
   },
+  "oita": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "okayama": {
    "fact": "2026-10-31",
    "by": "article-review",
    "note": "記事チェック3回目"
+  },
+  "okazaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
   },
   "osaka": {
    "fact": "2026-10-31",
@@ -402,6 +457,11 @@
    "by": "article-review",
    "note": "記事チェック5回目"
   },
+  "takasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "tokorozawa": {
    "fact": "2026-10-31",
    "by": "article-review",
@@ -417,6 +477,11 @@
    "by": "article-review",
    "note": "記事チェック2回目"
   },
+  "toyohashi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
   "toyonaka": {
    "fact": "2026-10-31",
    "by": "article-review",
@@ -431,6 +496,11 @@
    "fact": "2026-10-31",
    "by": "article-review",
    "note": "記事チェック6回目"
+  },
+  "utsunomiya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
   },
   "wakayama": {
    "fact": "2026-10-31",
