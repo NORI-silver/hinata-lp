@@ -1,0 +1,28 @@
+{
+ "name": "pet",
+ "site_label": "pet.shiokonbu.com",
+ "base_url": "https://pet.shiokonbu.com/",
+ "report_dir": "docs/article-review",
+ "source": {"type": "sitemap", "url": "https://pet.shiokonbu.com/sitemap.xml", "include": [".*"],
+            "local_alternative": "pet-lp リポジトリで動かすときは type を local にし、include に記事のHTMLの場所を書く"},
+ "edit_where": "pet-lp リポジトリ（AGENTS.md / CLAUDE.md のルールに従う）",
+ "rules": ["AGENTS.md", "CLAUDE.md"],
+ "keywords": "pet-lp の docs/（キーワード表があれば priority_table にも書く）",
+ "critic_required_for": ["seo"],
+ "body_tags": ["main", "article"],
+ "official_hosts": ["go.jp", "lg.jp"],
+ "stale_days": 180,
+ "title_range": [28, 35],
+ "desc_range": [80, 120],
+ "must_text": [],
+ "ng_text": ["No.1", "業界最安", "件の実績"],
+ "types": [
+  {"name": "article", "match": ".*", "min_h2": 3, "min_unique_chars": 600,
+   "visual_when": ["手順", "やり方", "サイズ", "測"],
+   "needs": [
+    {"label": "料金・費用", "any": ["円", "無料"]},
+    {"label": "問い合わせ先・次の一歩", "any": ["問い合わせ", "予約", "相談", "tel:"]}
+   ]}
+ ],
+ "todo": "pet.shiokonbu.com の中身（記事の場所・読者が困ること）を pet-lp で見て needs と match を直す（2026-10-31 時点では未確認。このリポジトリからは見えない）"
+}
