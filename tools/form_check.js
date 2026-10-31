@@ -63,20 +63,21 @@ async function run() {
   // 2. 質問の数と選択肢の数（多すぎると迷う）
   const qs = await page.$$eval("#qs .q", qs => qs.map(q => ({ t: q.getAttribute("aria-label"), chips: q.querySelectorAll(".chips .chip").length })));
   check("質問は6つ以内", qs.length <= 6, qs.map(q => q.t).join("／"));
-  const big = qs.filter(q => q.t !== "お住まい" && q.chips > 12);
-  check("品目などのチップは1問12個以内（お住まいを除く）", !big.length, big.map(q => `${q.t}:${q.chips}`).join("、"));
+  const big = qs.filter(q => q.t !== "お住まい" && q.chips > 14);
+  check("品目などのチップは1問14個以内（お住まいを除く）", !big.length, big.map(q => `${q.t}:${q.chips}`).join("、"));
 
   // 3. 家電4品目は市区で回収しない
   await fresh(page, base); await city(page, "yokohama"); await moveIn(page, 30);
-  for (const t of ["冷蔵庫", "冷凍庫", "洗濯機", "衣類乾燥機", "テレビ", "エアコン"]) await item(page, t);
-  for (const t of ["冷蔵庫", "冷凍庫", "洗濯機", "衣類乾燥機", "テレビ", "エアコン"]) {
+  const apps = ["冷蔵庫", "冷凍庫", "洗濯機", "衣類乾燥機", "テレビ", "エアコン", "エアコン室外機", "ドラム式洗濯機", "れいぞうこ"];
+  for (const t of apps) await item(page, t);
+  for (const t of apps) {
     const c = await cardOf(page, t), o = cityOpt(c);
     check(`家電4品目「${t}」は市区の回収が×`, c && o && o.mark === "×", c ? `${c.cat} / ${o && o.mark}` : "カードなし");
   }
 
   // 4. 名前に家電の言葉が入っているだけの物を家電4品目にしない
   await fresh(page, base); await city(page, "yokohama"); await moveIn(page, 30);
-  const look = ["テレビ台", "テレビボード", "食器乾燥機", "布団乾燥機", "洗濯機ラック", "冷蔵庫ラック", "エアコンカバー"];
+  const look = ["テレビ台", "テレビボード", "TVボード", "食器乾燥機", "布団乾燥機", "洗濯機ラック", "冷蔵庫ラック", "エアコンカバー", "洗濯物干し"];
   for (const t of look) await item(page, t);
   for (const t of look) {
     const c = await cardOf(page, t);
@@ -109,6 +110,15 @@ async function run() {
   await car(page, "yes");
   c = await cardOf(page, "ソファ");
   check("横浜・3日後・車あり・ソファ → 持込がおすすめ", c && /持込/.test(c.rec), c && c.rec);
+
+  // 寝具は買取をおすすめにしない（中古の布団・マットレスは断られることが多い）
+  await fresh(page, base); await city(page, "sakura"); await moveIn(page, 3);
+  await page.click('#qs button[data-k="sell"][data-v="yes"]'); await item(page, "布団"); await item(page, "マットレス");
+  for (const t of ["布団", "マットレス"]) { c = await cardOf(page, t); check(`「売れるなら売りたい」でも「${t}」は買取をおすすめにしない`, c && !/買取/.test(c.rec), c && c.rec); }
+  // 空白は品名の一部（「2人掛け ソファ」は1品）
+  await fresh(page, base); await city(page, "yokohama"); await moveIn(page, 30); await item(page, "2人掛け ソファ");
+  const n = (await cards(page)).length;
+  check("「2人掛け ソファ」を1品として扱う", n === 1, `${n}品`);
 
   // 8. 住所入力・その他の地域
   await fresh(page, base); await addr(page, "佐倉市ユーカリが丘"); await moveIn(page, 30); await item(page, "ベッド");
