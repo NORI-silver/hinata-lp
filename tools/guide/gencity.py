@@ -158,7 +158,7 @@ for k,(name,title,desc) in C.items():
       <li>それでも無理なら新居へ運ぶ（<a href="/guide/new-home/">損しやすい理由</a>も読んでください）</li>
     </ol>
     <p>品目ごとの出し方と、ほかの市区との料金の比べ方：<a href="/guide/item/futon/">布団</a>・<a href="/guide/item/sofa/">ソファ</a>・<a href="/guide/item/bed/">マットレス・ベッド</a>・<a href="/guide/item/bicycle/">自転車</a></p>
-    <p>「無料で回収します」という巡回・チラシの業者に頼むのはやめましょう。家庭のごみを運べるのは市区と市区の許可業者だけです（<a href="/guide/scam/">ぼったくりの実例と見分け方</a>）。</p>
+    <p>「無料で回収します」という巡回・チラシの業者に頼むのはやめましょう。お金を払ってごみの回収を頼めるのは、市区か、市区の許可業者だけです（家電4品目は買ったお店・買い替えるお店でも引き取れます）（<a href="/guide/scam/">ぼったくりの実例と見分け方</a>）。</p>
 
     <h2>{name}の近くのリサイクルショップ（買取）</h2>
     <p>まだ使える家具や家電は、出張査定・キャンセル無料をはっきり書いているチェーンの買取店に見てもらうと、処分代がかからず、値段がつくこともあります。値段がつかなければ断って、{name}の粗大ごみに切り替えます。セカンドストリート、ハードオフ・オフハウス、トレジャーファクトリーなどのチェーンが出張買取をしています（どのお店とも提携していません）。</p>
@@ -174,7 +174,8 @@ for k,(name,title,desc) in C.items():
     i=pref.index(k); pref=pref[i+1:]+pref[:i]
     order=pref+[x for x in same if kind(x)!=kind(k)]
     # 同じ都道府県を先に（23区は区どうし、市は市どうしの順はそのまま）
-    pk=PREF.get(k); order=[x for x in order if PREF.get(x)==pk]+[x for x in order if PREF.get(x)!=pk]
+    pk=PREF.get(k)
+    if pk: order=[x for x in order if PREF.get(x)==pk]+[x for x in order if PREF.get(x)!=pk]
     others=order[:6]
     tail=f'''  </article>
   <a class="cta" href="{cta_href}">
@@ -183,7 +184,7 @@ for k,(name,title,desc) in C.items():
     <span class="go">{cta_go}</span>
   </a>
   <section class="related" aria-label="ほかの地域">
-    <h2>近くの地域の粗大ごみ</h2>
+    <h2>同じ県・地方の粗大ごみ</h2>
     <div class="cards">{cards(others)}</div>
     <p style="margin-top:12px;font-size:14px"><a href="/guide/#area">ほかの地域の記事を見る</a>・<a href="/guide/how-to-check/">記事のない市町村の調べ方</a></p>
   </section>
