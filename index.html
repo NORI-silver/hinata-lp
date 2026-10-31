@@ -115,62 +115,74 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .tag button{border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:50%;width:22px;height:22px;padding:0;font-size:13px;line-height:22px}
 /* 結果 */
 .out{display:flex;flex-direction:column;gap:16px;min-width:0}
-.status{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 20px;align-items:center;background:var(--bg);border-radius:18px;padding:20px 22px}
-.status .cd{display:flex;flex-direction:column;line-height:1.2}
-.status .cd small{font-size:12px;color:var(--muted)}
-.status .cd b{font-family:var(--f-display);font-size:44px;font-weight:700;letter-spacing:.01em}
-.status .cd b span{font-size:18px;margin:0 2px}
-.status p{margin:0;font-size:14px}
-.status .pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;margin-bottom:4px}
+.out{font-size:17px}
+.next{background:var(--bg);border:3px solid var(--good);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.next .nl{font-size:15px;font-weight:700;color:var(--good)}
+.next .nt{margin:0;font-size:24px;font-weight:700;line-height:1.45}
+.next .nd{margin:0;font-size:16px;color:var(--ink)}
+.next .nd a{font-weight:700}
+.nbtn{display:block;text-align:center;font-size:18px;font-weight:700;color:#fff;background:var(--good);border-radius:12px;padding:14px 16px;text-decoration:none}
+.nbtn:hover{filter:brightness(1.08)}
+.nsteps{margin:0;padding-left:24px;font-size:16px}
+.status{margin:0;background:var(--bg);border-radius:18px;padding:16px 20px;font-size:18px;line-height:1.6}
+.status .num{font-size:28px;margin:0 2px}
+.status small{display:block;margin-top:4px;font-size:15px;color:var(--muted)}
+.status .pill{display:inline-block;font-size:15px;font-weight:700;border-radius:999px;padding:2px 12px}
 .status.ok .pill{background:var(--good-soft);color:var(--good)}
 .status.late .pill{background:var(--warn-soft);color:var(--warn)}
-.status.late .cd b{color:var(--warn)}
-@media (max-width:420px){.status{grid-template-columns:minmax(0,1fr)}}
+.status.late .num{color:var(--warn)}
+.sh{font-size:19px;font-weight:700;margin:6px 0 0}
+.ibest{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin:0 14px 10px;padding:12px 14px;background:var(--good-soft);border-radius:12px;font-size:18px}
+.ibest b{color:var(--good)}
+.ibest .num{font-size:16px;font-weight:700}
+.more{padding:0 10px 12px}
+.more summary{cursor:pointer;font-size:15px;color:var(--accent);font-weight:700;padding:6px 6px}
 .cards{display:flex;flex-direction:column;gap:12px}
 .icard{background:var(--bg);border-radius:18px;overflow:hidden}
 .ich{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:16px 20px 10px}
-.ich h3{font-size:20px}
-.icat{font-size:12px;color:var(--muted)}
+.ich h3{font-size:22px}
+.icat{font-size:14px;color:var(--muted)}
 .irec{display:none}
 .rwhy{color:var(--good);font-weight:700}
-.nhl{margin:2px 0 6px;padding-left:18px;font-size:13px;display:flex;flex-direction:column;gap:3px}
-.nhd{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:4px 0 8px;font-size:13px}.nhd dt{font-weight:700;white-space:nowrap}.nhd dd{margin:0}
-.oh{font-size:13px;font-weight:700;color:var(--muted);margin:0 0 -6px;letter-spacing:.04em}
+.nhl{margin:2px 0 6px;padding-left:18px;font-size:15px;display:flex;flex-direction:column;gap:3px}
+.nhd{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:4px 0 8px;font-size:15px}.nhd dt{font-weight:700;white-space:nowrap}.nhd dd{margin:0}
+.oh{font-size:15px;font-weight:700;color:var(--muted);margin:0 0 -6px;letter-spacing:.04em}
 h1 .eyebrow{display:block;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-bottom:8px;font-family:inherit}
 .iol{padding:0 10px 10px;display:flex;flex-direction:column;gap:2px}
 .io{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border-radius:12px}
-.io .mk{font-weight:700;color:var(--accent);font-size:15px;text-align:center}
-.io .ion b{display:block;font-size:15px;font-weight:700}
-.io small{display:block;font-size:12px;color:var(--muted);line-height:1.6}
-.io .ioc{text-align:right;font-size:14px;font-weight:700;white-space:nowrap}
+.io .mk{font-weight:700;color:var(--accent);font-size:17px;text-align:center}
+.io .ion b{display:block;font-size:17px;font-weight:700}
+.io small{display:block;font-size:15px;color:var(--muted);line-height:1.6}
+.io .ioc{text-align:right;font-size:16px;font-weight:700;white-space:nowrap}
 .io.rec{background:var(--good-soft)}
 .io.rec .mk{color:var(--good)}
-.io.rec .ion b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:11px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
+.io.rec .ion b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:13px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
 .io.ng{opacity:.45}
 .io.ng .mk{color:var(--muted)}
 @media (max-width:520px){.io{grid-template-columns:22px minmax(0,1fr)}.io .ioc{grid-column:2;text-align:left}}
 .free{background:var(--bg);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
-.free h3{font-size:17px}
+.free h3{font-size:19px}
 .free ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
-.free p{margin:0;font-size:13px;color:var(--muted)}
+.free p{margin:0;font-size:15px;color:var(--muted)}
+.where summary{cursor:pointer}
 .where{display:flex;flex-direction:column;gap:10px;padding:4px 2px 0}
-.where h3{font-size:15px}
-.wl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.where h3{font-size:19px}
+.wl{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
 @media (max-width:520px){.wl{grid-template-columns:minmax(0,1fr)}}
 .w{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.w .wk{font-size:12px;font-weight:700;color:var(--accent)}
-.w .wn{font-size:13px;font-weight:700}
-.w .wd{font-size:12px;color:var(--muted);line-height:1.6}
+.w .wk{font-size:15px;font-weight:700;color:var(--accent)}
+.w .wn{font-size:17px;font-weight:700}
+.w .wd{font-size:15px;color:var(--muted);line-height:1.6}
 .w.off{opacity:.72;background:transparent}
 .w .wd a{color:var(--accent);font-weight:700}
 .wls{display:flex;flex-direction:column;gap:4px;margin:4px 0}
-.wa{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:8px;padding:5px 9px;background:var(--bg)}
+.wa{font-size:15px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:8px;padding:5px 9px;background:var(--bg)}
 .wa::after{content:" ↗";font-weight:400}
 .wa:hover{background:var(--accent-soft)}
 .lnk{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;font-size:12px;cursor:pointer}
 .pick{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);font-size:13px;display:flex;flex-direction:column;gap:8px}
 .w.on{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
-.wsub{margin:-6px 0 0;font-size:12px;color:var(--muted)}
+.wsub{margin:0;font-size:14px;color:var(--muted)}
 .wmine{font-size:12px;font-weight:700;color:var(--good);margin-top:4px}
 .wnone{font-size:12px;color:var(--muted);margin-top:4px}
 .soon{border:1px dashed var(--faint);border-radius:14px;padding:14px 18px;font-size:13px;color:var(--muted);background:var(--bg)}
@@ -466,8 +478,10 @@ const mapQ=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURICompon
 const WEBTXT={open:"インターネットで予約できます",cond:"インターネット予約は条件つきです",stop:"インターネット受付は一時停止中です",none:"インターネットでは収集の予約ができません"};
 function bkHours(ar){const b=ar.bk;if(!b)return esc(ptOf(ar,"申し込み")||"公式ページで確認");
   return [`<b>${WEBTXT[b.web]}</b>${b.note?`：${esc(b.note)}`:""}`,...(b.mail?["インターネットは、先にメールアドレスを登録して申し込みます"]:[]),...(b.t||[esc(ptOf(ar,"申し込み")||"")])].filter(Boolean).join("<br>")}
+// 窓口の情報（7市区は INFO、それ以外は記事の元データから）
+function infoOf(j){const ar=j.ar,bk=ar&&ar.bk||{};return j.key==="other"&&ar?{pref:0,desk:`申し込みの窓口（${ar.og?"大型":"粗大"}ごみ）`,tel:[],hours:bkHours(ar),links:[...(bk.w||[]).map(([t,u])=>[/インターネット|申し?込|LINE|予約|フォーム|チャット/.test(t)?t:`${t}（インターネット受付）`,u]),[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key]}
 function handlers(j,rs){
-  const ar=j.ar,bk=ar&&ar.bk||{},I=j.key==="other"&&ar?{pref:0,desk:`申し込みの窓口（${ar.og?"大型":"粗大"}ごみ）`,tel:[],hours:bkHours(ar),links:[...(bk.w||[]).map(([t,u])=>[/インターネット|申し?込|LINE|予約|フォーム|チャット/.test(t)?t:`${t}（インターネット受付）`,u]),[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key],area=j.key==="other"&&!ar?"":j.cname;
+  const ar=j.ar,I=infoOf(j),area=j.key==="other"&&!ar?"":j.cname;
   const pref=I.pref?`https://www.aeha-kadenrecycle.com/rkcmap/search.php?sort=address&prefecture_id=${I.pref}`:"https://www.aeha-kadenrecycle.com/";
   const rows=[
     ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
@@ -475,16 +489,17 @@ function handlers(j,rs){
     ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
     ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
-  return `<div class="where"><h3>${j.cname}で粗大ごみを出せるところ</h3><p class="wsub">あなたの品目を出せる所に色がつきます。連絡先は2026年10月30日に各公式ページで確認しました${j.url?`・<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>`:""}</p><div class="wl">${rows.map(([k,name,info,links,spec])=>{
-    const mine=rs.filter(r=>itemOptions(r,j).some(o=>o.ok&&o.h===k));
-    return `<div class="w ${mine.length?"on":"off"}"><span class="wk">${HNAME(j)[k]}</span><span class="wn">${name}</span>
-      <span class="wd">${info}</span>${links?`<div class="wls">${links}</div>`:""}
-      <span class="wd num">${spec}</span>
-      ${mine.length?`<span class="wmine">あなたの ${mine.map(r=>esc(r.label)).join("、")} を出せます</span>`:`<span class="wnone">今回の品目では使いません</span>`}</div>`}).join("")}</div></div>`;
+  const used=rows.map(r=>[r,rs.filter(it=>itemOptions(it,j).some(o=>o.rec&&o.h===r[0]))]).filter(([,m])=>m.length);
+  if(!used.length) return "";
+  return `<div class="where"><h3 class="sh">連絡先</h3><div class="wl">${used.map(([[k,name,info,links],mine])=>
+    `<div class="w on" id="to-${k}"><span class="wk">${esc(mine.map(r=>r.label).join("・"))}</span><span class="wn">${name}</span>
+      <span class="wd">${info}</span>${links?`<div class="wls">${links}</div>`:""}</div>`).join("")}</div>
+    <p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p></div>`;
 }
 // 空きを見られる予約ページ（市区の予約サイト・チャット）。空き日そのものは出さず、見に行く場所へつなぐ
+const bookList=j=>j.key==="other"?(j.ar&&j.ar.bk&&j.ar.bk.w||[]):(INFO[j.key]&&INFO[j.key].links||[]).filter(([t])=>/インターネット|最短|チャット/.test(t));
 function bookLinks(j){
-  const ls=j.key==="other"?(j.ar&&j.ar.bk&&j.ar.bk.w||[]):(INFO[j.key]&&INFO[j.key].links||[]).filter(([t])=>/インターネット|最短|チャット/.test(t));
+  const ls=bookList(j);
   return ls.length?`<br>空きを見る：${ls.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("・")}`:"";
 }
 // ジモティーなどで譲る。引き取り手が見つかるとは限らないので、おすすめにはせず、日に余裕があるとき（通常の予約で間に合うとき）だけ出す
@@ -530,34 +545,50 @@ function itemOptions(it,j){
 function recWhy(k,j){return {post:j.ar&&j.ar.kaden?"家電4品目は家電リサイクルで出すのが基本のため":`家電4品目は${j.nm}では回収しないため`,city:"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.sell==="yes"?"「売れるなら売りたい」を選んだため":"収集が間に合わない見込みで、車がないため",pc:"家庭のパソコンはメーカー回収が基本のため",move:"通常の予約では間に合わない見込みで、車がなく、寝具は買取で断られることが多いため",hard:"多くの自治体で粗大ごみとして収集しないため"}[k]||""}
 function itemCards(rs,j){
   if(!rs.length) return `<div class="free"><h3>出したい物を入れると、品目ごとの選択肢が出ます</h3></div>`;
-  return `<div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
+  return `<h3 class="sh">品目ごとの出し方</h3><div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
     return `<div class="icard"><div class="ich"><h3>${esc(it.label)}</h3><span class="icat">${CATNAME[it.cat]}</span>${rec&&it.cat!=="unk"?`<span class="irec">おすすめ:${rec.name}</span>`:""}</div>
-      <div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
+      ${rec?`<div class="ibest"><b>${rec.name}</b>${rec.cost?`<span class="num">${rec.cost}</span>`:""}</div>`:""}
+      <details class="more"><summary>くわしく・ほかの出し方</summary><div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
         <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small></span>
-        <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
+        <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></details></div>`}).join("")}</div>`;
 }
 const BULKY=c=>["furn","etc","gen"].includes(c);
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
   if(need.some(x=>!x[1])){$("out").innerHTML=`<h2 class="oh">診断結果</h2><div class="free"><h3>${need.filter(x=>!x[1]).map(x=>x[0]).join("・")}を入れると、品目ごとの出し方が出ます</h3><ul class="need">${need.map(([t,ok])=>`<li class="${ok?"ok":""}">${ok?"✓":"○"} ${t}</li>`).join("")}</ul><p>料金・日数は目安です。入力した内容はどこにも送られません。</p></div>`;return}
   const j=judge();
-  const tight=rs.some(it=>BULKY(it.cat))&&j.d<j.lead;
   const late=j.d<j.lead;
   const al=j.key==="other"&&AREALEAD[A.area];
-  const leadTxt=al?`収集までの目安は「${al[1]}」です（公式ページの案内。${al[2]==="min"?"最短の案内で、混み具合で延びるため、ここでは2週間ほど":`ここでは${al[0]}日`}で計算しています）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`収集までの目安は「${esc(ptOf(j.ar,"収集まで"))}」です（公式ページの案内。ここでは2週間ほどで計算しています）`:j.key==="other"?(j.ar?"収集までの日数は、公式ページで確かめた案内がまだありません（ここでは2週間ほどで計算する推定です）":"自治体によって違います（ここでは2週間ほどで計算しています）"):`収集までの目安は「${LEADTXT[j.key]}」です（${LEADSRC[j.key]==="official"?"公式ページの案内":"公式に日数の記載がないため、このサイトの推定"}）`;
-  let h=`<h2 class="oh">診断結果</h2><div class="status ${late?"late":"ok"}"><div class="cd"><small>引越しまで</small><b class="num"><span>あと</span>${j.d}<span>日</span></b></div>
-    <p><span class="pill">${late?"普通の予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br>${j.nm}の粗大ごみの${leadTxt}。実際の予約の空きは確認していません。</p></div>`;
-  if(rs.length&&!tight&&rs.every(it=>BULKY(it.cat))){
-    h+=`<div class="free"><h3>このまま自分で予約すれば間に合いそうです</h3><ol>
-      <li>今日、${j.nm}の粗大ごみ受付で収集日を予約する${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">公式ページ</a>）`:""}</li><li>コンビニなどで処理券を買い、受付番号を書いて貼る</li><li>収集日の朝、指定の場所へ出す</li></ol>
-      <p>予定が変わったら、もう一度診断してください。</p></div>`;
-  }
+  const leadTxt=al?`「${al[1]}」（公式ページの案内）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`「${esc(ptOf(j.ar,"収集まで"))}」（公式ページの案内）`:j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算）":`「${LEADTXT[j.key]}」（${LEADSRC[j.key]==="official"?"公式ページの案内":"このサイトの推定"}）`;
+  let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j);
+  h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。</small></p>`;
   h+=itemCards(rs,j);
-  if(tight&&j.web) h+=`<div class="soon"><b>空き枠のお知らせ（準備中）</b><br>${j.cname}の予約ページを見張って、空きが出たらお知らせするしくみを準備しています。</div>`;
-  h+=newHome(rs);
   h+=handlers(j,rs);
+  h+=newHome(rs);
   $("out").innerHTML=h;
   if(window.hinataShops)window.hinataShops.scan();
+  cityTable();
+}
+// いちばん上に出す「次にやること」。品目ごとのおすすめから、急ぐものを1つ選ぶ
+const NEXTPRI=["wait","city","drop","buy","post","pc","hard","move"];
+function nextStep(rs,j){
+  const ks=rs.map(it=>({it,k:routeKey(it,j)})),k=NEXTPRI.find(p=>ks.some(x=>x.k===p));
+  if(!k) return `<div class="next"><span class="nl">次にやること</span><p class="nt">出したい物の名前を入れてください</p><p class="nd">「食器棚」「電子レンジ」のように名前を入れると、出し方がわかります</p></div>`;
+  const who=ks.filter(x=>x.k===k).map(x=>esc(x.it.label)).join("・"),I=infoOf(j),bl=bookList(j);
+  const btn=(t,u,ext=true)=>`<a class="nbtn" href="${u}"${ext?' target="_blank" rel="noopener"':""}>${esc(t)}</a>`;
+  const book=(bl.length?bl.slice(0,2).map(([t,u])=>btn(t.replace(/（[^）]*）/g,""),u)):j.url?[btn(`${j.nm}の公式ページを開く`,j.url)]:[]).join("")+(I.tel&&I.tel[0]?`<p class="nd">電話：${telA(I.tel[0][1])}</p>`:"");
+  const S={
+    city:[`今日、${j.nm}の粗大ごみを予約する`,book+`<ol class="nsteps"><li>予約する（品目と数を伝える）</li><li>処理券（シール）を買って貼る</li><li>収集日の朝に出す</li></ol>`],
+    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の「ほかの出し方」へ。</p>`],
+    drop:[`車で${j.nm}の持込施設へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
+    buy:[`買取店に出張買取を頼む`,btn("近くの買取店を見る","#to-buy",false)+`<p class="nd">値段が合わなければ断っても無料のお店を選びます。</p>`],
+    post:[`買い替えのお店か引越し会社に引き取りを頼む`,`<p class="nd">家電4品目は${j.nm}では回収しません。リサイクル料金と運搬料がかかります（数千円〜・目安）。</p>`],
+    pc:[`メーカーに回収を申し込む`,`<p class="nd">PCリサイクルマークがあれば無料です。先にデータを消しておきます。</p>`],
+    hard:[`買ったお店かメーカーに引き取りを相談する`,`<p class="nd">多くの自治体で粗大ごみとして収集しない物です。</p>`],
+    move:[`新居に運んで、引越し後に出す`,`<p class="nd">引越しの荷物に入れて運び、新しい住所で申し込みます。</p>`]
+  }[k];
+  const rest=rs.length>ks.filter(x=>x.k===k).length?`<p class="nd">ほかの物の出し方は、下の「品目ごとの出し方」を見てください。</p>`:"";
+  return `<div class="next"><span class="nl">次にやること（${who}）</span><p class="nt">${S[0]}</p>${S[1]}${rest}</div>`;
 }
 // 新居の自治体：記事の元データから、その場で出す（ページは移動しない）
 const AREACOUNT=()=>`政令市・東京23区など${Object.keys(AREAS).length}の市区`;
@@ -568,16 +599,18 @@ function newHome(rs){
   const mine=rs.filter(it=>it.cat!=="unk").map(it=>{if(it.cat==="pc")return `<li><b>${esc(it.label)}</b>：パソコンはメーカー回収が基本です（PCリサイクルマークがあれば無料）</li>`;if(it.cat==="hard")return `<li><b>${esc(it.label)}</b>：多くの自治体で粗大ごみとして収集しない物です。${to.n}の公式ページで確認</li>`;if(it.cat==="app")return `<li><b>${esc(it.label)}</b>：${to.kaden?`家電4品目は粗大ごみとは手続きが別です（お店か家電リサイクル券が基本）。${esc(to.kaden)}`:`家電4品目は${to.n}でも粗大ごみでは出せません。お店か家電リサイクル券で`}</li>`;
     const fs=itemFees(to,it.label);return `<li><b>${esc(it.label)}</b>：${fs.length?`${feeList(fs)}（目安）`:"料金は品目ごと。下の記事か公式ページで確認"}</li>`}).join("");
   const mv=[...(to.mv0===1?[`前の家から持ってきた物を出すときの決まりは、${to.n}の公式ページには特に書かれていませんでした。${to.n}の家庭のごみとして、新しい住所で申し込みます（申し込むときに「引越しで持ってきた物」と伝えると安心です）`]:to.mv0?[to.mv0]:[]),...(to.mv||[]),"申し込みは、住み始めてから新しい住所で。住む前に申し込めるかは受付で確かめてください","処理券やシールは自治体ごとに別の物です。前の自治体で買った券は使えません"];
-  return `<div class="where nh"><h3>新居の${to.n}で粗大ごみを出すとき</h3><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>
+  return `<details class="where nh"><summary class="sh">新居の${to.n}で出すとき</summary><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>
     <div class="w on">${mine?`<span class="wk">あなたの品目を${to.n}で出すと</span><ul class="nhl">${mine}</ul>`:""}
       <dl class="nhd">${(to.pt||[]).map(([l,t])=>`<dt>${esc(l)}</dt><dd>${esc(t)}</dd>`).join("")}</dl>
       <span class="wk">${to.n}に引っ越してきた人へ</span><ul class="nhl">${mv.map(x=>`<li>${x}</li>`).join("")}</ul>
-      <div class="wls"><a class="wa" href="${to.g}">${to.n}の粗大ごみの出し方をくわしく見る</a></div></div></div>`;
+      <div class="wls"><a class="wa" href="${to.g}">${to.n}の粗大ごみの出し方をくわしく見る</a></div></div></details>`;
 }
 function setTo(v){A.toq=(v||"").trim();A.to=findArea(A.toq);const m=$("tomsg");if(m)m.innerHTML=toMsg();draw()}
 function cityTable(){
   const tb=document.querySelector("#citytbl tbody");if(!tb)return;
-  tb.innerHTML=Object.entries(CITIES).filter(([k])=>k!=="other").map(([k,c])=>`<tr><td>${c[6]?`<a href="${c[6]}" target="_blank" rel="noopener">${c[0]}</a>`:c[0]}</td><td data-h="申し込み">${c[4]}</td><td data-h="料金" class="num">${c[3]}</td><td data-h="収集まで">${LEADTXT[k]}${LEADSRC[k]==="estimate"?"（推定）":""}</td><td data-h="持ち込み">${c[5]}</td></tr>`).join("");
+  // 診断中は、選んだ市区の行だけ出す（ほかの市区の情報で迷わせない）
+  const sel=A.city&&A.city!=="other"?A.city:"",w=tb.closest(".tblw");if(w)w.hidden=A.city==="other";
+  tb.innerHTML=Object.entries(CITIES).filter(([k])=>k!=="other"&&(!sel||k===sel)).map(([k,c])=>`<tr><td>${c[6]?`<a href="${c[6]}" target="_blank" rel="noopener">${c[0]}</a>`:c[0]}</td><td data-h="申し込み">${c[4]}</td><td data-h="料金" class="num">${c[3]}</td><td data-h="収集まで">${LEADTXT[k]}${LEADSRC[k]==="estimate"?"（推定）":""}</td><td data-h="持ち込み">${c[5]}</td></tr>`).join("");
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
