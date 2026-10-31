@@ -64,10 +64,10 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta"}
 # 申し込み制の収集がない市（「収集の予約が」と書かない）
-NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga"}
-NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe"}
+NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara"}
+NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe"}
 NOFEE={"shizuoka"}
 def _title(k):
     n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
@@ -186,6 +186,33 @@ LATE1={
  "kadoma":"6点以上は受付センターに電話して、有料の臨時ごみを頼む",
  "matsubara":"8点を超える分は市が集めないので、許可業者に頼めるか市に確かめる",
  "kuki":"受付に電話して、早い収集日がないか聞く",
+ "okinawashi":"市役所で搬入許可証をもらい、倉浜衛生施設組合へ自分で持ち込む",
+ "uruma":"市役所で許可証をもらい、処分場へ自分で持ち込む",
+ "kasuga":"地区の担当業者に、有料の臨時収集を頼めるか聞く",
+ "joetsu":"燃やせる物はクリーンセンターへ自分で持ち込む（運べないときは市の許可業者に頼む）",
+ "tomakomai":"受付に電話して、早い収集日がないか聞く",
+ "hirosaki":"弘前地区環境整備センターへ自分で持ち込む",
+ "omuta":"受付センターに、有料の臨時収集を頼む",
+ "beppu":"清掃事務所に、有料の一時多量ごみ収集を頼む",
+ "matsusaka":"松阪市クリーンセンターへ自分で持ち込む",
+ "iwata":"クリーンセンター・中遠広域粗大ごみ処理施設へ自分で持ち込む",
+ "kakegawa":"環境資源ギャラリーへ自分で持ち込む",
+ "mishima":"清掃センターへ自分で持ち込む（予約不要）",
+ "fujinomiya":"清掃センターに連絡してから、自分で運ぶ",
+ "hitachi":"清掃センターへ自分で持ち込む（土日・祝日も受付）",
+ "ashikaga":"南部クリーンセンターへ自分で持ち込む",
+ "tochigi":"とちぎクリーンプラザへ自分で持ち込む",
+ "kiryu":"清掃センターへ自分で持ち込む",
+ "ube":"環境保全センターへ自分で持ち込む",
+ "izumo":"受付に電話して、早い収集日がないか聞く",
+ "imabari":"バリクリーンへ自分で持ち込む",
+ "isahaya":"次の地域の粗大ごみの日を待つか、市の許可業者に頼む",
+ "kirishima":"クリーンセンターへ自分で持ち込む",
+ "miyakonojo":"クリーンセンター・リサイクルプラザへ持ち込む（先に電話で確かめる）",
+ "ashiya":"収集事業課に、有料の一時多量ごみ収集を頼む",
+ "hikone":"清掃センターへ自分で持ち込む",
+ "nagahama":"住む地域のクリーンプラント・クリーンプラザへ自分で持ち込む",
+ "kashihara":"資源循環課に、有料の一時多量ごみ収集を電話で頼む",
 }
 LATE3={
  "kishiwada":"可燃ごみ・金属ごみが多いときは岸和田貝塚クリーンセンターへ（粗大ごみを持ち込めるかは組合に確認）",
@@ -221,6 +248,27 @@ LATE3={
  "higashihiroshima":"",
  "koga":"",
  "matsubara":"",
+ "okinawashi":"",
+ "uruma":"",
+ "joetsu":"",
+ "hirosaki":"",
+ "matsusaka":"",
+ "iwata":"",
+ "kakegawa":"",
+ "mishima":"",
+ "fujinomiya":"",
+ "hitachi":"",
+ "ashikaga":"",
+ "tochigi":"",
+ "kiryu":"",
+ "ube":"",
+ "imabari":"",
+ "kirishima":"",
+ "miyakonojo":"",
+ "hikone":"",
+ "nagahama":"",
+ "kasuga":"燃える物はクリーン・エネ・パーク南部（予約制）、燃えない物は春日大野城リサイクルプラザへ持ち込む",
+ "isahaya":"持ち込むなら、粗大ごみを受け付けるか先に施設に確かめる",
 }
 _top=open(os.path.join(ROOT,"index.html"),encoding="utf-8").read()
 DIAG=set(re.findall(r"^  (\w+):\[",_top.split("const CITIES={",1)[1].split("\n};",1)[0],re.M))

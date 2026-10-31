@@ -605,5 +605,124 @@
   "koga": {
     "web": "none",
     "note": "有料の戸別収集は窓口で申し込む"
+  },
+  "okinawashi": {
+    "web": "open"
+  },
+  "urasoe": {
+    "web": "open"
+  },
+  "uruma": {
+    "web": "open"
+  },
+  "kasuga": {
+    "web": "none",
+    "note": "申し込みは地区の担当業者へ電話"
+  },
+  "joetsu": {
+    "web": "none",
+    "note": "市の粗大ごみ収集なし（持ち込みか許可業者）"
+  },
+  "tomakomai": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "hirosaki": {
+    "web": "none",
+    "note": "申し込み不要（月1回の収集日に出す）"
+  },
+  "kushiro": {
+    "web": "cond",
+    "note": "釧路地域・申込可能リストの品物だけ。1回8点まで"
+  },
+  "obihiro": {
+    "web": "open"
+  },
+  "yamaguchi": {
+    "web": "cond",
+    "note": "ネットはカードかPayPay払いのみ"
+  },
+  "ube": {
+    "web": "cond",
+    "note": "LINEに載っていない品目は電話"
+  },
+  "izumo": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "imabari": {
+    "web": "none",
+    "note": "申し込みは電話のみ（地区ごとの申込期間）"
+  },
+  "isahaya": {
+    "web": "none",
+    "note": "申し込み不要（月1回の粗大ごみの日に出す）"
+  },
+  "kirishima": {
+    "web": "none",
+    "note": "申し込みの案内なし（地区の収集日に出す）"
+  },
+  "miyakonojo": {
+    "web": "none",
+    "note": "申し込みは電話のみ（運ぶのがむずかしい人向け）"
+  },
+  "omuta": {
+    "web": "none",
+    "note": "申し込みは電話かファクス"
+  },
+  "beppu": {
+    "web": "cond",
+    "note": "電子申請（フォームは市のページから）"
+  },
+  "matsusaka": {
+    "web": "none",
+    "note": "市の申し込み収集なし（持ち込み）"
+  },
+  "iwata": {
+    "web": "open",
+    "note": "市公式LINE（仮受付のあと本受付）"
+  },
+  "kakegawa": {
+    "web": "none",
+    "note": "市の戸別収集なし（持ち込みか許可業者）"
+  },
+  "mishima": {
+    "web": "open"
+  },
+  "fujinomiya": {
+    "web": "none",
+    "note": "申し込み不要（年4回の粗大ごみの日）"
+  },
+  "hitachi": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "ashikaga": {
+    "web": "cond",
+    "note": "オンライン申請システムの利用者登録が必要"
+  },
+  "tochigi": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "kiryu": {
+    "web": "none",
+    "note": "申し込みは電話のみ"
+  },
+  "ashiya": {
+    "web": "none",
+    "note": "申し込みは電話のみ（ファクスで仮申し込み）"
+  },
+  "hikone": {
+    "web": "open",
+    "note": "市のLINE公式アカウント"
+  },
+  "nagahama": {
+    "web": "none",
+    "note": "年2回の集積所収集は申し込み不要。戸別収集は電話"
+  },
+  "kashihara": {
+    "web": "none",
+    "note": "申し込みの案内なし（月1回の粗大ごみの日）"
   }
 }
