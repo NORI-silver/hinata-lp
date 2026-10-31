@@ -29,8 +29,10 @@
   },
   "arakawa": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック3回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（受付センターの排出品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "atsugi": {
    "fact": "2026-10-31",
@@ -64,8 +66,10 @@
   },
   "chuo": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック2回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表22行（区の品目・手数料一覧PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "edogawa": {
    "fact": "2026-10-31",
@@ -84,8 +88,10 @@
   },
   "fukuoka": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック1回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表18行（市の収集品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "fukushima": {
    "fact": "2026-10-31",
@@ -373,8 +379,10 @@
   },
   "sagamihara": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック3回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表18行（市の排出品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "saitama": {
    "fact": "2026-10-31",
@@ -393,8 +401,10 @@
   },
   "sapporo": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック3回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（大型ごみ受付の品目検索）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "sendai": {
    "fact": "2026-10-31",
@@ -437,8 +447,10 @@
   },
   "suginami": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック1回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表20行（区の品目一覧表PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "suita": {
    "fact": "2026-10-31",
