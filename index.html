@@ -360,9 +360,13 @@ const LEADSRC={yokohama:"official",kawasaki:"estimate",setagaya:"estimate",sugin
 // 7市区以外の収集までの日数（地域記事の元データ＝2026-10-30に各公式ページで確認した文から）。[計算に使う日数, 公式の書き方, "min"=最短の案内なので2週間で計算]
 // 幅があるときは長いほうで計算する。月1回の市は締め切り分を足す（「間に合う」と誤って出さないため）
 const AREALEAD={adachi:[14,"約1週間先になることがある（週末・引越しシーズンは混む）","min"],bunkyo:[28,"繁忙期は2〜3週間以上かかることがある"],chofu:[30,"申し込みから1か月以上かかることがある"],fujisawa:[14,"最大2週間程度（締め切りは収集日の7日前）"],funabashi:[10,"約10日かかることがある"],hamamatsu:[14,"2週間程度かかることがある"],hirakata:[12,"申し込んだ週の翌週の水曜日（年末などは翌々週以降）"],kagoshima:[21,"約2〜3週間"],kitakyushu:[33,"地区ごとに月1回の収集"],kumamoto:[21,"約1週間。転居が多い時期は約3週間"],matsuyama:[45,"申込期間の終わりから約1か月後（1か月以上のことも）"],meguro:[14,"2週間程度かかることがある（3・4月は混む）"],minato:[14,"約2週間"],nagoya:[37,"地域ごとに月1回の収集"],niigata:[14,"ふつう3日〜1週間以降（土日・祝日は収集なし）","min"],nishinomiya:[21,"いまは約2〜3週間先"],okayama:[12,"10日前後"],ota:[14,"約2週間（3・4月は特に混む）"],sagamihara:[30,"受付順で、混むと1か月以上先"],sakai:[13,"申し込んだ日の翌週"],shizuoka:[37,"地域ごとに月1回の収集（締め切りは収集日の1週間前）"],tokushima:[60,"地区ごとに2か月に1回の収集（偶数月に申し込むと奇数月）"],yamato:[4,"電話で申し込んだ場合、受付の翌日から日曜を除く3日以内"],
-  fukuoka:[14,"最短1週間ほど","min"],kawaguchi:[14,"最短で3営業日後の案内","min"],tachikawa:[14,"申込日の7日後（混み具合で変わる）から選べる","min"]};
-const leadDays=k=>AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]:14;
-const leadNote=k=>`（収集までの日数は${AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]+"日":"2週間ほど"}で計算）`;
+  fukuoka:[14,"最短1週間ほど","min"],kawaguchi:[14,"最短で3営業日後の案内","min"],tachikawa:[14,"申込日の7日後（混み具合で変わる）から選べる","min"],
+  // 申し込みで集める市の収集がない市（"none"）：市の回収はすすめない
+  joetsu:[0,"市の戸別収集はありません（持ち込みか許可業者）","none"],kakegawa:[0,"市の戸別収集はありません（持ち込みか許可業者）","none"],matsusaka:[0,"市の戸別収集はありません（持ち込みか許可業者）","none"],yaizu:[0,"市の戸別収集はありません（持ち込み）","none"],fujieda:[0,"市の戸別収集はありません（持ち込み）","none"],
+  // 収集が月1回より少ない・長くかかる市
+  fujinomiya:[100,"年4回（6・9・12・3月）の粗大ごみの日"],nagahama:[190,"集積所の収集は年2回（有料の戸別収集は電話で確認）"],tochigi:[45,"ふだんでも約1か月〜1か月半"],hirosaki:[37,"月1回の収集日"],isahaya:[37,"地域ごとに月1回の粗大ごみの日"],kashihara:[37,"地区ごとに月1回の粗大ごみの日"],kirishima:[30,"地区の収集日（日程は市のカレンダーで確認）"],ashikaga:[21,"申し込みからおおむね3週間以内"],iwata:[21,"原則2週間前までの申し込み。混むと3週間〜1か月先"]};
+const leadDays=k=>AREALEAD[k]&&AREALEAD[k][2]==="none"?Infinity:AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]:14;
+const leadNote=k=>AREALEAD[k]&&AREALEAD[k][2]==="none"?"（市の戸別収集がないので、持ち込み・買取などで判定）":`（収集までの日数は${AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]+"日":"2週間ほど"}で計算）`;
 // よく出す物（1タップで選べる）。一覧にない物は名前を入れるか写真で足す
 const ITEMCHIPS=["ソファ","ベッド","マットレス","布団","タンス","棚・本棚","机・テーブル","椅子","自転車","冷蔵庫","洗濯機","テレビ","エアコン","電子レンジ"];
 const Q=[
@@ -510,7 +514,8 @@ function routeKey(it,j){
   if(j.unk&&j.d>=7) return "city";
   if(j.d>=j.lead) return "city";
   // 持ち込める施設がわからない地域では、持込をおすすめにしない
-  if(car&&!(j.key==="other"&&!(j.ar&&ptOf(j.ar,"持ち込み")))) return "drop";
+  const dp=j.ar&&ptOf(j.ar,"持ち込み");
+  if(car&&!(j.key==="other"&&(!dp||/できない|できません/.test(dp)))) return "drop";
   if(j.web) return "wait";
   return bed?"move":"buy";
 }
@@ -575,7 +580,7 @@ function itemOptions(it,j){
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   return [
-    {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:j.unk?`申し込むときに収集日を確かめ、引越し（${md(add(j.d))}）に間に合わなければ、ほかの出し方を選びます。`+cityDesc:cityDesc,cost:cityCost,when:j.unk?"収集日は申し込みで決まります（公式サイトで確認）":j.live?`今の最短は${md(add(j.lead))}（${hm(j.live.checkedAt)}時点）`:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:j.live?`今の最短収集日は${md(add(j.lead))}で、引越しに間に合いません（${hm(j.live.checkedAt)}時点）`:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
+    {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:j.unk?`申し込むときに収集日を確かめ、引越し（${md(add(j.d))}）に間に合わなければ、ほかの出し方を選びます。`+cityDesc:cityDesc,cost:cityCost,when:j.unk?"収集日は申し込みで決まります（公式サイトで確認）":j.live?`今の最短は${md(add(j.lead))}（${hm(j.live.checkedAt)}時点）`:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:!isFinite(j.lead)?`${j.nm}には、申し込みで集める市の戸別収集がありません（持ち込みか許可業者に頼みます）`:j.live?`今の最短収集日は${md(add(j.lead))}で、引越しに間に合いません（${hm(j.live.checkedAt)}時点）`:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
     {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:j.unk?"まず通常の申し込みで、いつ収集できるかを確かめます":late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
     {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
     {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
@@ -608,7 +613,7 @@ function costBox(rs,j){
   const rows=[];
   if(bulky.length){
     const c=sum(bulky,j.ar,1);
-    rows.push([`${j.nm}の粗大ごみ収集`,show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
+    if(isFinite(j.lead))rows.push([`${j.nm}の粗大ごみ収集`,show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
     if(car){const d=sum(bulky,j.ar,2);rows.push([`${j.nm}の持込施設へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
     rows.push(["買取に出す（まだ使える物）","¥0（値段がつけば受け取る）","日時はお店に確認",false]);
     const t=to?sum(bulky,to,1):null;
@@ -629,7 +634,7 @@ function draw(){
   if(j.key==="chiba"&&A.ward&&!SLOT[A.ward])getSlot(A.ward,true);
   let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j)+slotBox(j);
   if(j.unk)h+=`<p class="status"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">収集までの日数は公式サイトで確認</span><br><small>${esc(j.nm)}の粗大ごみは、このサイトではまだ確かめていません。申し込むときに収集日を聞き、引越しに間に合わなければ、下の買取・持ち込み・新居で出す方法を選んでください。</small></p>`;
-  else h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
+  else h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${al&&al[2]==="none"?"市の戸別収集はありません":late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
   h+=costBox(rs,j);
   h+=itemCards(rs,j);
   h+=j.unk?`<p class="wsub">${esc(j.nm)}の受付・料金は、このサイトではまだ確かめていません。${j.url?`<a href="${j.url}" target="_blank" rel="noopener">${esc(j.nm)}の公式サイト</a>か、`:""}<a href="${j.q}" target="_blank" rel="noopener">検索</a>で「粗大ごみ」のページを確認してください</p>`:`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;

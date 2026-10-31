@@ -639,7 +639,7 @@
     "web": "open"
   },
   "yamaguchi": {
-    "web": "cond",
+    "web": "open",
     "note": "ネットはカードかPayPay払いのみ"
   },
   "ube": {
@@ -671,8 +671,8 @@
     "note": "申し込みは電話かファクス"
   },
   "beppu": {
-    "web": "cond",
-    "note": "電子申請（フォームは市のページから）"
+    "web": "open",
+    "note": "電子申請（申込フォームは市の粗大ごみのページから）"
   },
   "matsusaka": {
     "web": "none",

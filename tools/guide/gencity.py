@@ -71,7 +71,7 @@ NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama",
 NOFEE={"shizuoka"}
 def _title(k):
     n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
-    has_c="受付センター" in body
+    has_c="受付センター" in body and k not in {"joetsu"}
     if k in OOGATA: return f"{n}の大型ごみ（粗大ごみ）の出し方｜料金・持ち込み・申込"
     if k in NOMOCHI: return f"{n}の粗大ごみの出し方｜料金・申込・受付センター・買取"
     if k in NOFEE: return f"{n}の粗大ごみの出し方｜持ち込み・申込・受付センター・家電"
@@ -206,12 +206,13 @@ LATE1={
  "ube":"環境保全センターへ自分で持ち込む",
  "izumo":"受付に電話して、早い収集日がないか聞く",
  "imabari":"バリクリーンへ自分で持ち込む",
- "isahaya":"次の地域の粗大ごみの日を待つか、市の許可業者に頼む",
+ "isahaya":"自分の地域の次の粗大ごみの日を待つか、市の許可業者に頼む",
  "kirishima":"クリーンセンターへ自分で持ち込む",
  "miyakonojo":"クリーンセンター・リサイクルプラザへ持ち込む（先に電話で確かめる）",
  "ashiya":"収集事業課に、有料の一時多量ごみ収集を頼む",
  "hikone":"清掃センターへ自分で持ち込む",
  "nagahama":"住む地域のクリーンプラント・クリーンプラザへ自分で持ち込む",
+  "urasoe":"受付センターに電話して、早い収集日がないか聞く",
  "kashihara":"資源循環課に、有料の一時多量ごみ収集を電話で頼む",
 }
 LATE3={
@@ -322,7 +323,7 @@ for k,(name,title,desc) in C.items():
     if MOVER.get(k): mv_intro=f"<p>{name}の公式ページでは、引越しや転入について次のように案内しています（{CK}確認）。最後の3つは、どの市区でも気をつけたいことです。</p>"
     else: mv_intro=f"<p>前の家から持ってきた家具などを{name}で粗大ごみに出すときの決まりは、{name}の公式ページには特に書かれていませんでした（{CK}確認）。{name}の家庭のごみとして申し込むので、申し込むときに「引越しで持ってきた物」と伝えて確かめると安心です。</p>"
     late1=LATE1.get(k,"予約ページをこまめに見る（キャンセルで早い日が空くことがあります）")
-    lateh="市の収集日が引越しに間に合わないときは" if k in NOYOYAKU else "収集の予約が引越しに間に合わないときは"
+    lateh="市の収集では引越しに間に合わないときは" if k in NOYOYAKU else "収集の予約が引越しに間に合わないときは"
     _l3=LATE3.get(k,"自家用車があれば、上の持ち込み先へ")  # "" は持ち込みできない市
     late3="" if k in NOMOCHI or not _l3 else "<li>"+_l3+"</li>"
     extra="".join(f"<li>{x}</li>" for x in MOVER.get(k,[]))
