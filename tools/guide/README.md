@@ -11,6 +11,7 @@
 python3 tools/guide/gencity.py .
 python3 tools/guide/hub.py .
 python3 tools/guide/areas.py .   # 診断ページ用の data/areas.js
+python3 tools/guide/reviews_areas.py .  # 口コミの対象市区（reviews.js・backend/reviews.gs。gs は Apps Script に貼り直す）
 python3 tools/guide/topics.py .  # 持ち込み・処理券・品目別のまとめページ（地域記事の元データから）
 python3 tools/seo_check.py .
 ```
