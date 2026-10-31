@@ -132,11 +132,6 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .status.late .pill{background:var(--warn-soft);color:var(--warn)}
 .status.late .num{color:var(--warn)}
 .sh{font-size:19px;font-weight:700;margin:6px 0 0}
-.ibest{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin:0 14px 10px;padding:12px 14px;background:var(--good-soft);border-radius:12px;font-size:18px}
-.ibest b{color:var(--good)}
-.ibest .num{font-size:16px;font-weight:700}
-.more{padding:0 10px 12px}
-.more summary{cursor:pointer;font-size:15px;color:var(--accent);font-weight:700;padding:6px 6px}
 .cards{display:flex;flex-direction:column;gap:12px}
 .icard{background:var(--bg);border-radius:18px;overflow:hidden}
 .ich{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:16px 20px 10px}
@@ -164,7 +159,7 @@ h1 .eyebrow{display:block;font-size:14px;font-weight:700;color:var(--accent);let
 .free h3{font-size:19px}
 .free ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
 .free p{margin:0;font-size:15px;color:var(--muted)}
-.where summary{cursor:pointer}
+
 .where{display:flex;flex-direction:column;gap:10px;padding:4px 2px 0}
 .where h3{font-size:19px}
 .wl{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
@@ -547,10 +542,9 @@ function itemCards(rs,j){
   if(!rs.length) return `<div class="free"><h3>出したい物を入れると、品目ごとの選択肢が出ます</h3></div>`;
   return `<h3 class="sh">品目ごとの出し方</h3><div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
     return `<div class="icard"><div class="ich"><h3>${esc(it.label)}</h3><span class="icat">${CATNAME[it.cat]}</span>${rec&&it.cat!=="unk"?`<span class="irec">おすすめ:${rec.name}</span>`:""}</div>
-      ${rec?`<div class="ibest"><b>${rec.name}</b>${rec.cost?`<span class="num">${rec.cost}</span>`:""}</div>`:""}
-      <details class="more"><summary>くわしく・ほかの出し方</summary><div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
+      <div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
         <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small></span>
-        <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></details></div>`}).join("")}</div>`;
+        <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
 }
 const BULKY=c=>["furn","etc","gen"].includes(c);
 function draw(){
@@ -579,7 +573,7 @@ function nextStep(rs,j){
   const book=(bl.length?bl.slice(0,2).map(([t,u])=>btn(t.replace(/（[^）]*）/g,""),u)):j.url?[btn(`${j.nm}の公式ページを開く`,j.url)]:[]).join("")+(I.tel&&I.tel[0]?`<p class="nd">電話：${telA(I.tel[0][1])}</p>`:"");
   const S={
     city:[`今日、${j.nm}の粗大ごみを予約する`,book+`<ol class="nsteps"><li>予約する（品目と数を伝える）</li><li>処理券（シール）を買って貼る</li><li>収集日の朝に出す</li></ol>`],
-    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の「ほかの出し方」へ。</p>`],
+    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p>`],
     drop:[`車で${j.nm}の持込施設へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
     buy:[`買取店に出張買取を頼む`,btn("近くの買取店を見る","#to-buy",false)+`<p class="nd">値段が合わなければ断っても無料のお店を選びます。</p>`],
     post:[`買い替えのお店か引越し会社に引き取りを頼む`,`<p class="nd">家電4品目は${j.nm}では回収しません。リサイクル料金と運搬料がかかります（数千円〜・目安）。</p>`],
@@ -599,11 +593,11 @@ function newHome(rs){
   const mine=rs.filter(it=>it.cat!=="unk").map(it=>{if(it.cat==="pc")return `<li><b>${esc(it.label)}</b>：パソコンはメーカー回収が基本です（PCリサイクルマークがあれば無料）</li>`;if(it.cat==="hard")return `<li><b>${esc(it.label)}</b>：多くの自治体で粗大ごみとして収集しない物です。${to.n}の公式ページで確認</li>`;if(it.cat==="app")return `<li><b>${esc(it.label)}</b>：${to.kaden?`家電4品目は粗大ごみとは手続きが別です（お店か家電リサイクル券が基本）。${esc(to.kaden)}`:`家電4品目は${to.n}でも粗大ごみでは出せません。お店か家電リサイクル券で`}</li>`;
     const fs=itemFees(to,it.label);return `<li><b>${esc(it.label)}</b>：${fs.length?`${feeList(fs)}（目安）`:"料金は品目ごと。下の記事か公式ページで確認"}</li>`}).join("");
   const mv=[...(to.mv0===1?[`前の家から持ってきた物を出すときの決まりは、${to.n}の公式ページには特に書かれていませんでした。${to.n}の家庭のごみとして、新しい住所で申し込みます（申し込むときに「引越しで持ってきた物」と伝えると安心です）`]:to.mv0?[to.mv0]:[]),...(to.mv||[]),"申し込みは、住み始めてから新しい住所で。住む前に申し込めるかは受付で確かめてください","処理券やシールは自治体ごとに別の物です。前の自治体で買った券は使えません"];
-  return `<details class="where nh"><summary class="sh">新居の${to.n}で出すとき</summary><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>
+  return `<div class="where nh"><h3 class="sh">新居の${to.n}で出すとき</h3><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>
     <div class="w on">${mine?`<span class="wk">あなたの品目を${to.n}で出すと</span><ul class="nhl">${mine}</ul>`:""}
       <dl class="nhd">${(to.pt||[]).map(([l,t])=>`<dt>${esc(l)}</dt><dd>${esc(t)}</dd>`).join("")}</dl>
       <span class="wk">${to.n}に引っ越してきた人へ</span><ul class="nhl">${mv.map(x=>`<li>${x}</li>`).join("")}</ul>
-      <div class="wls"><a class="wa" href="${to.g}">${to.n}の粗大ごみの出し方をくわしく見る</a></div></div></details>`;
+      <div class="wls"><a class="wa" href="${to.g}">${to.n}の粗大ごみの出し方をくわしく見る</a></div></div></div>`;
 }
 function setTo(v){A.toq=(v||"").trim();A.to=findArea(A.toq);const m=$("tomsg");if(m)m.innerHTML=toMsg();draw()}
 function cityTable(){
