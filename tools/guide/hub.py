@@ -26,10 +26,12 @@ d["itemListElement"]=items
 s=s[:m.start(2)]+json.dumps(d,ensure_ascii=False)+s[m.end(2):]
 open(p,"w",encoding="utf-8").write(s)
 # sitemap
+_LED=json.load(open(os.path.join(ROOT,"docs","area-agents","ledger.json"),encoding="utf-8")).get("areas",{})
 p=os.path.join(ROOT,"sitemap.xml"); s=open(p,encoding="utf-8").read()
 for k in C:
     u=f"{SITE}/guide/{k}/"
     lm=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta",k+".json"),encoding="utf-8")).get("checked","2026-10-30") if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta",k+".json")) else "2026-10-30"
+    lm=max(lm,_LED.get(k,{}).get("seo") or "")  # 記事を厚くした日（ledger の seo）が新しければそちら
     if u not in s: s=s.replace("</urlset>",f"  <url><loc>{u}</loc><lastmod>{lm}</lastmod></url>\n</urlset>")
     else: s=re.sub(r"(<loc>"+re.escape(u)+r"</loc><lastmod>)[^<]*",lambda m:m.group(1)+lm,s)
 open(p,"w",encoding="utf-8").write(s)
