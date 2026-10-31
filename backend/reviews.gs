@@ -15,6 +15,8 @@ var TZ = 'Asia/Tokyo';
 // 問い合わせてよい市区と買取チェーン（これ以外は受け付けない。reviews.js と同じ並び）
 var AREAS = {yokohama:'横浜市', kawasaki:'川崎市', setagaya:'東京都世田谷区', suginami:'東京都杉並区', saitama:'さいたま市', chiba:'千葉市', sakura:'佐倉市', adachi:'東京都足立区', arakawa:'東京都荒川区', atsugi:'厚木市', bunkyo:'東京都文京区', chiyoda:'東京都千代田区', chofu:'調布市', chuo:'東京都中央区', edogawa:'東京都江戸川区', fuchu:'東京都府中市', fujisawa:'藤沢市', fukuoka:'福岡市', funabashi:'船橋市', gifu:'岐阜市', hachioji:'八王子市', hamamatsu:'浜松市', higashiosaka:'東大阪市', hirakata:'枚方市', hiroshima:'広島市', ichikawa:'市川市', itabashi:'東京都板橋区', kagoshima:'鹿児島市', kashiwa:'柏市', katsushika:'東京都葛飾区', kawaguchi:'川口市', kita:'東京都北区', kitakyushu:'北九州市', kobe:'神戸市', koshigaya:'越谷市', koto:'東京都江東区', kumamoto:'熊本市', kyoto:'京都市', machida:'町田市', matsudo:'松戸市', matsuyama:'松山市', meguro:'東京都目黒区', minato:'東京都港区', mitaka:'三鷹市', musashino:'武蔵野市', nagoya:'名古屋市', naha:'那覇市', nakano:'東京都中野区', nerima:'東京都練馬区', niigata:'新潟市', nishinomiya:'西宮市', nishitokyo:'西東京市', okayama:'岡山市', osaka:'大阪市', ota:'東京都大田区', sagamihara:'相模原市', sakai:'堺市', sapporo:'札幌市', sendai:'仙台市', shibuya:'東京都渋谷区', shinagawa:'東京都品川区', shinjuku:'東京都新宿区', shizuoka:'静岡市', soka:'草加市', sumida:'東京都墨田区', tachikawa:'立川市', taito:'東京都台東区', tokushima:'徳島市', toshima:'東京都豊島区', toyonaka:'豊中市', wakayama:'和歌山市', yamato:'大和市'};
 var CHAINS = ['セカンドストリート', 'ハードオフ', 'トレジャーファクトリー'];
+// 検索で出た店がそのチェーンかを店名で確かめる（別の店・個人店を出さないため。AGENTS.md）
+var CHAIN_RE = [/セカンドストリート|2nd ?STREET|セカスト/i, /ハードオフ|HARD ?OFF/i, /トレジャー ?ファクトリー|トレファク|TREASURE ?FACTORY/i];
 
 function doGet(e) {
   var p = (e && e.parameter) || {};
@@ -57,18 +59,21 @@ function reviews_(city, chain) {
 function place_(city, chain, fields) {
   var props = PropertiesService.getScriptProperties(), apiKey = props.getProperty('PLACES_API_KEY');
   if (!apiKey) return null;
-  var query = CHAINS[chain] + ' ' + AREAS[city], idKey = 'PLACE_ID_' + city + '_' + chain;
+  var query = CHAINS[chain] + ' ' + AREAS[city], idKey = 'PID2_' + city + '_' + chain;
   var placeId = props.getProperty(idKey);
+  if (placeId === 'none') return null;
   if (!placeId) {
-    // IDだけの検索は無料
+    // 店名も取り寄せて、チェーン名に合う最初の店だけを使う（市区とチェーンごとに1回だけ）
     var found = JSON.parse(UrlFetchApp.fetch('https://places.googleapis.com/v1/places:searchText', {
       method:'post', contentType:'application/json', muteHttpExceptions:true,
-      headers:{'X-Goog-Api-Key':apiKey, 'X-Goog-FieldMask':'places.id'},
-      payload:JSON.stringify({textQuery:query, languageCode:'ja', regionCode:'JP'})
+      headers:{'X-Goog-Api-Key':apiKey, 'X-Goog-FieldMask':'places.id,places.displayName'},
+      payload:JSON.stringify({textQuery:query, languageCode:'ja', regionCode:'JP', pageSize:5})
     }).getContentText());
-    placeId = found.places && found.places[0] && found.places[0].id;
-    if (!placeId) return null;
+    if (found.error) return null; // 検索の失敗は記録しない（次にもう一度試す）
+    var hit = (found.places || []).filter(function(x) { return CHAIN_RE[chain].test((x.displayName || {}).text || ''); })[0];
+    placeId = hit ? hit.id : 'none';
     props.setProperty(idKey, placeId);
+    if (placeId === 'none') return null;
   }
   var month = 'COUNT_' + Utilities.formatDate(new Date(), TZ, 'yyyyMM'), used = Number(props.getProperty(month)) || 0;
   if (used >= MONTHLY_LIMIT) return null;
