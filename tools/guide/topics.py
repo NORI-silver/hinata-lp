@@ -80,7 +80,7 @@ def regtables(cell,head,pre):
     # 地方ごとに h3 と表を分け、表の上に地方へ飛ぶリンクを置く
     rs=[r for r in RORDER if any(REGION[k]==r for k in ORDER)]
     nav='<p>'+"・".join(f'<a href="#{pre}{i}">{r}</a>' for i,r in enumerate(rs))+'</p>\n'
-    return nav+"".join(f'    <h3 id="{pre}{i}">{r}</h3>\n    <table class="cmp"><thead><tr><th scope="col">市区</th><th scope="col">{head}</th></tr></thead><tbody>'+"".join(cityrow(k,cell(k)) for k in ORDER if REGION[k]==r)+'</tbody></table>\n' for i,r in enumerate(rs))
+    return nav+"".join(f'    <h3 id="{pre}{i}">{r}</h3>\n    <table class="cmp"><thead><tr><th scope="col">市区</th><th scope="col">{head}</th></tr></thead><tbody>'+"".join(cityrow(k,cell(k)) for k in ORDER if REGION[k]==r)+'</tbody></table>\n' for i,r in enumerate(rs))+'    <p>お住まいの市町村が表にないときは、<a href="/guide/how-to-check/">記事のない市町村の粗大ごみの調べ方</a>を見てください。</p>\n'
 def cityrow(k,cell):
     n=C[k][0]
     return f'<tr><th scope="row"><a href="/guide/{k}/">{n}</a></th><td>{cell}</td></tr>'
@@ -288,6 +288,7 @@ size_body=f'''    <h2>粗大ごみとは</h2>
     <h2>市区ごとの粗大ごみの大きさの基準</h2>
     <p>市区名を押すと、その市区の記事（申し込み・料金・持ち込み）が開きます。「おおむね」「超える」「以上」などの細かい書き方は市区で違うので、迷う物は申し込みのときに確かめてください。</p>
     <p>{"・".join(f'<a href="#{g}">{h}</a>' for g,h in SG if groups[g])}</p>
+    <p>お住まいの市町村が表にないときは、<a href="/guide/how-to-check/">記事のない市町村の粗大ごみの調べ方</a>を見てください。</p>
 '''+"".join(f'    <h3 id="{g}">{h}（{len(groups[g])}）</h3>\n    {sizetable(g)}\n' for g,h in SG if groups[g])+f'''
     <h2>大きさの基準のよくある質問</h2>
     <h3>粗大ごみは何cmから？</h3>
