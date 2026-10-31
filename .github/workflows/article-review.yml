@@ -21,6 +21,8 @@ jobs:
         run: |
           python3 tools/article_review/review.py tools/article_review/sites/hinata.json --external --out review-out
           cat review-out/*.md >> "$GITHUB_STEP_SUMMARY"
+          echo "--- 開けない外部リンク ---"
+          grep -h '外部リンクが開けない' review-out/*.md || echo "なし"
         shell: bash
       - uses: actions/upload-artifact@v4
         with:
