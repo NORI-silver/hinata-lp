@@ -25,6 +25,7 @@
 - 構造化データ：WebApplication と FAQPage（`index.html` の `ld+json`。FAQ本文と同じ内容にそろえる）。
 - ページを足したら `sitemap.xml` に追加し lastmod を更新する。
 - 変更したら `python3 tools/seo_check.py .` を実行し、NG を0にしてから PR を出す（PR ごとに GitHub Actions でも自動で走る）。
+- SEOの改善は **批判役を立てて** 進める（2026-10-31 Nori）。案を別のエージェントに批判させ、残った案だけ実装し、実装後の差分ももう一度批判させてから PR。手順は `docs/seo-playbook.md`。
 - 定期のSEO作業（週2回、Claude）の手順は `docs/seo-playbook.md`、記録は `docs/seo-log.md`。
 
 ## ファイル構成
