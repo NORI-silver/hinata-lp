@@ -401,8 +401,10 @@
   },
   "sapporo": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック3回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（大型ごみ受付の品目検索）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "sendai": {
    "fact": "2026-10-31",
