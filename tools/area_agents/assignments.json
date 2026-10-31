@@ -1,0 +1,3608 @@
+{
+ "generated": "2026-10-31",
+ "total": 749710,
+ "gsc": false,
+ "agents": [
+  {
+   "id": "tokyo-west",
+   "label": "東京23区・西（練馬・世田谷・杉並・板橋ほか）",
+   "score": 117670,
+   "share": 0.157,
+   "areas": 7,
+   "tiers": {
+    "A": [
+     "nerima",
+     "setagaya",
+     "suginami",
+     "itabashi",
+     "nakano",
+     "kita",
+     "toshima"
+    ],
+    "B": [],
+    "C": []
+   }
+  },
+  {
+   "id": "tokyo-central",
+   "label": "東京23区・都心と南（大田・品川・江東・新宿・港ほか）",
+   "score": 105730,
+   "share": 0.141,
+   "areas": 9,
+   "tiers": {
+    "A": [
+     "ota",
+     "shinagawa",
+     "koto",
+     "shinjuku",
+     "minato",
+     "chuo"
+    ],
+    "B": [
+     "meguro",
+     "shibuya",
+     "chiyoda"
+    ],
+    "C": []
+   }
+  },
+  {
+   "id": "tokyo-east",
+   "label": "東京23区・東（江戸川・足立・葛飾・墨田・台東・文京・荒川）",
+   "score": 85120,
+   "share": 0.1135,
+   "areas": 7,
+   "tiers": {
+    "A": [
+     "edogawa",
+     "adachi",
+     "katsushika",
+     "bunkyo",
+     "sumida",
+     "taito"
+    ],
+    "B": [
+     "arakawa"
+    ],
+    "C": []
+   }
+  },
+  {
+   "id": "kanagawa",
+   "label": "神奈川（横浜・川崎・相模原ほか）",
+   "score": 114680,
+   "share": 0.153,
+   "areas": 14,
+   "tiers": {
+    "A": [
+     "yokohama",
+     "kawasaki"
+    ],
+    "B": [
+     "sagamihara",
+     "fujisawa"
+    ],
+    "C": [
+     "yamato",
+     "atsugi",
+     "yokosuka",
+     "hiratsuka",
+     "ebina",
+     "hadano",
+     "kamakura",
+     "odawara",
+     "zama",
+     "chigasaki"
+    ]
+   }
+  },
+  {
+   "id": "shutoken",
+   "label": "埼玉・千葉・東京多摩・北関東",
+   "score": 107920,
+   "share": 0.1439,
+   "areas": 69,
+   "tiers": {
+    "A": [
+     "chiba",
+     "kawaguchi",
+     "saitama"
+    ],
+    "B": [
+     "funabashi",
+     "fuchu",
+     "ichikawa",
+     "matsudo",
+     "machida",
+     "hachioji",
+     "mitaka",
+     "chofu",
+     "musashino",
+     "nishitokyo"
+    ],
+    "C": [
+     "kashiwa",
+     "soka",
+     "koshigaya",
+     "tachikawa",
+     "sakura",
+     "tsukuba",
+     "kawagoe",
+     "tokorozawa",
+     "abiko",
+     "ageo",
+     "akishima",
+     "asaka",
+     "fujimi",
+     "fujimino",
+     "fukaya",
+     "higashikurume",
+     "higashimurayama",
+     "hino",
+     "hitachinaka",
+     "ichihara",
+     "inagi",
+     "inzai",
+     "iruma",
+     "isesaki",
+     "kamagaya",
+     "kazo",
+     "kisarazu",
+     "kodaira",
+     "koga",
+     "koganei",
+     "kokubunji",
+     "konosu",
+     "kuki",
+     "kumagaya",
+     "misato",
+     "nagareyama",
+     "narashino",
+     "narita",
+     "niiza",
+     "noda",
+     "ome",
+     "otagunma",
+     "oyama",
+     "sakado",
+     "sayama",
+     "tama",
+     "toda",
+     "toride",
+     "tsuchiura",
+     "urayasu",
+     "yachiyo",
+     "kasukabe",
+     "mito",
+     "takasaki",
+     "utsunomiya",
+     "maebashi"
+    ]
+   }
+  },
+  {
+   "id": "kansai",
+   "label": "関西（大阪・堺・神戸・京都ほか）",
+   "score": 98890,
+   "share": 0.1319,
+   "areas": 36,
+   "tiers": {
+    "A": [
+     "osaka",
+     "sakai",
+     "kobe"
+    ],
+    "B": [
+     "kyoto",
+     "hirakata",
+     "toyonaka"
+    ],
+    "C": [
+     "higashiosaka",
+     "nishinomiya",
+     "wakayama",
+     "akashi",
+     "himeji",
+     "amagasaki",
+     "nara",
+     "otsu",
+     "suita",
+     "daito",
+     "ibaraki",
+     "ikeda",
+     "itami",
+     "izumi",
+     "kadoma",
+     "kakogawa",
+     "kameoka",
+     "kawanishi",
+     "kishiwada",
+     "kusatsu",
+     "kyotanabe",
+     "matsubara",
+     "minoh",
+     "moriguchi",
+     "neyagawa",
+     "sanda",
+     "takarazuka",
+     "uji",
+     "yao",
+     "takatsuki"
+    ]
+   }
+  },
+  {
+   "id": "chiho",
+   "label": "名古屋・福岡・仙台ほか地方（北海道・東北・中部・中国・四国・九州・沖縄）",
+   "score": 119700,
+   "share": 0.1597,
+   "areas": 67,
+   "tiers": {
+    "A": [
+     "nagoya",
+     "fukuoka",
+     "sendai"
+    ],
+    "B": [
+     "gifu",
+     "kitakyushu",
+     "okayama",
+     "niigata",
+     "shizuoka",
+     "hiroshima",
+     "naha",
+     "tokushima",
+     "sapporo"
+    ],
+    "C": [
+     "kagoshima",
+     "matsuyama",
+     "akita",
+     "nagasaki",
+     "takamatsu",
+     "toyota",
+     "hamamatsu",
+     "kumamoto",
+     "fukushima",
+     "koriyama",
+     "aomori",
+     "ichinomiya",
+     "okazaki",
+     "anjo",
+     "fuji",
+     "fujieda",
+     "fukui",
+     "hachinohe",
+     "higashihiroshima",
+     "kariya",
+     "kasugai",
+     "kofu",
+     "komaki",
+     "kure",
+     "matsue",
+     "matsumoto",
+     "nagaoka",
+     "nishio",
+     "numazu",
+     "ogaki",
+     "saga",
+     "sasebo",
+     "seto",
+     "shimonoseki",
+     "suzuka",
+     "tottori",
+     "toyokawa",
+     "tsu",
+     "yaizu",
+     "fukuyama",
+     "kanazawa",
+     "kurume",
+     "miyazaki",
+     "yamagata",
+     "asahikawa",
+     "kurashiki",
+     "nagano",
+     "hakodate",
+     "oita",
+     "toyama",
+     "kochi",
+     "morioka",
+     "iwaki",
+     "toyohashi",
+     "yokkaichi"
+    ]
+   }
+  }
+ ],
+ "areas": [
+  {
+   "key": "yokohama",
+   "name": "横浜市",
+   "agent": "kanagawa",
+   "kw_volume": 69010,
+   "gsc_impressions": null,
+   "score": 69010,
+   "tier": "A",
+   "top": [
+    [
+     "横浜市粗大ごみ",
+     60500
+    ],
+    [
+     "横浜市粗大ごみ持ち込み",
+     5400
+    ],
+    [
+     "横浜市粗大ごみ料金",
+     2900
+    ],
+    [
+     "横浜市粗大ごみ予約",
+     210
+    ]
+   ]
+  },
+  {
+   "key": "osaka",
+   "name": "大阪市",
+   "agent": "kansai",
+   "kw_volume": 44970,
+   "gsc_impressions": null,
+   "score": 44970,
+   "tier": "A",
+   "top": [
+    [
+     "大阪市粗大ごみ",
+     40500
+    ],
+    [
+     "大阪市粗大ごみ持ち込み",
+     2400
+    ],
+    [
+     "大阪市粗大ごみ料金",
+     1900
+    ],
+    [
+     "大阪市粗大ごみ予約",
+     170
+    ]
+   ]
+  },
+  {
+   "key": "kawasaki",
+   "name": "川崎市",
+   "agent": "kanagawa",
+   "kw_volume": 29050,
+   "gsc_impressions": null,
+   "score": 29050,
+   "tier": "A",
+   "top": [
+    [
+     "川崎市粗大ごみ",
+     27100
+    ],
+    [
+     "川崎市粗大ごみ持ち込み",
+     1000
+    ],
+    [
+     "川崎市粗大ごみ料金",
+     880
+    ],
+    [
+     "川崎市粗大ごみ予約",
+     70
+    ]
+   ]
+  },
+  {
+   "key": "nagoya",
+   "name": "名古屋市",
+   "agent": "chiho",
+   "kw_volume": 28840,
+   "gsc_impressions": null,
+   "score": 28840,
+   "tier": "A",
+   "top": [
+    [
+     "名古屋市粗大ごみ",
+     22200
+    ],
+    [
+     "名古屋市粗大ごみ持ち込み",
+     3600
+    ],
+    [
+     "名古屋市粗大ごみ料金",
+     2900
+    ],
+    [
+     "名古屋市粗大ごみ予約",
+     140
+    ]
+   ]
+  },
+  {
+   "key": "nerima",
+   "name": "練馬区",
+   "agent": "tokyo-west",
+   "kw_volume": 24780,
+   "gsc_impressions": null,
+   "score": 24780,
+   "tier": "A",
+   "top": [
+    [
+     "練馬区粗大ごみ",
+     22200
+    ],
+    [
+     "練馬区粗大ごみ持ち込み",
+     1600
+    ],
+    [
+     "練馬区粗大ごみ料金",
+     720
+    ],
+    [
+     "練馬区粗大ごみ予約",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "setagaya",
+   "name": "世田谷区",
+   "agent": "tokyo-west",
+   "kw_volume": 24490,
+   "gsc_impressions": null,
+   "score": 24490,
+   "tier": "A",
+   "top": [
+    [
+     "世田谷区粗大ごみ",
+     22200
+    ],
+    [
+     "世田谷区粗大ごみ持ち込み",
+     1300
+    ],
+    [
+     "世田谷区粗大ごみ料金",
+     880
+    ],
+    [
+     "世田谷区粗大ごみ予約",
+     110
+    ]
+   ]
+  },
+  {
+   "key": "ota",
+   "name": "大田区",
+   "agent": "tokyo-central",
+   "kw_volume": 21890,
+   "gsc_impressions": null,
+   "score": 21890,
+   "tier": "A",
+   "top": [
+    [
+     "大田区粗大ごみ",
+     18100
+    ],
+    [
+     "大田区粗大ごみ持ち込み",
+     1900
+    ],
+    [
+     "大田区粗大ごみ料金",
+     1300
+    ],
+    [
+     "大田区粗大ごみ予約",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "edogawa",
+   "name": "江戸川区",
+   "agent": "tokyo-east",
+   "kw_volume": 21600,
+   "gsc_impressions": null,
+   "score": 21600,
+   "tier": "A",
+   "top": [
+    [
+     "江戸川区粗大ごみ",
+     18100
+    ],
+    [
+     "江戸川区粗大ごみ持ち込み",
+     2900
+    ],
+    [
+     "江戸川区粗大ごみ料金",
+     390
+    ],
+    [
+     "江戸川区粗大ごみ予約",
+     210
+    ]
+   ]
+  },
+  {
+   "key": "suginami",
+   "name": "杉並区",
+   "agent": "tokyo-west",
+   "kw_volume": 19680,
+   "gsc_impressions": null,
+   "score": 19680,
+   "tier": "A",
+   "top": [
+    [
+     "杉並区粗大ごみ",
+     18100
+    ],
+    [
+     "杉並区粗大ごみ持ち込み",
+     1000
+    ],
+    [
+     "杉並区粗大ごみ予約",
+     320
+    ],
+    [
+     "杉並区粗大ごみ料金",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "shinagawa",
+   "name": "品川区",
+   "agent": "tokyo-central",
+   "kw_volume": 19050,
+   "gsc_impressions": null,
+   "score": 19050,
+   "tier": "A",
+   "top": [
+    [
+     "品川区粗大ごみ",
+     18100
+    ],
+    [
+     "品川区粗大ごみ持ち込み",
+     590
+    ],
+    [
+     "品川区粗大ごみ料金",
+     320
+    ],
+    [
+     "品川区粗大ごみ予約",
+     40
+    ]
+   ]
+  },
+  {
+   "key": "adachi",
+   "name": "足立区",
+   "agent": "tokyo-east",
+   "kw_volume": 17400,
+   "gsc_impressions": null,
+   "score": 17400,
+   "tier": "A",
+   "top": [
+    [
+     "足立区粗大ごみ",
+     14800
+    ],
+    [
+     "足立区粗大ごみ持ち込み",
+     1900
+    ],
+    [
+     "足立区粗大ごみ料金",
+     590
+    ],
+    [
+     "足立区粗大ごみ予約",
+     110
+    ]
+   ]
+  },
+  {
+   "key": "itabashi",
+   "name": "板橋区",
+   "agent": "tokyo-west",
+   "kw_volume": 16250,
+   "gsc_impressions": null,
+   "score": 16250,
+   "tier": "A",
+   "top": [
+    [
+     "板橋区粗大ごみ",
+     14800
+    ],
+    [
+     "板橋区粗大ごみ持ち込み",
+     880
+    ],
+    [
+     "板橋区粗大ごみ料金",
+     480
+    ],
+    [
+     "板橋区粗大ごみ予約",
+     90
+    ]
+   ]
+  },
+  {
+   "key": "koto",
+   "name": "江東区",
+   "agent": "tokyo-central",
+   "kw_volume": 16230,
+   "gsc_impressions": null,
+   "score": 16230,
+   "tier": "A",
+   "top": [
+    [
+     "江東区粗大ごみ",
+     14800
+    ],
+    [
+     "江東区粗大ごみ料金",
+     880
+    ],
+    [
+     "江東区粗大ごみ持ち込み",
+     480
+    ],
+    [
+     "江東区粗大ごみ予約",
+     70
+    ]
+   ]
+  },
+  {
+   "key": "fukuoka",
+   "name": "福岡市",
+   "agent": "chiho",
+   "kw_volume": 14470,
+   "gsc_impressions": null,
+   "score": 14470,
+   "tier": "A",
+   "top": [
+    [
+     "福岡市粗大ごみ",
+     12100
+    ],
+    [
+     "福岡市粗大ごみ持ち込み",
+     1600
+    ],
+    [
+     "福岡市粗大ごみ料金",
+     720
+    ],
+    [
+     "福岡市粗大ごみ予約",
+     50
+    ]
+   ]
+  },
+  {
+   "key": "chiba",
+   "name": "千葉市",
+   "agent": "shutoken",
+   "kw_volume": 13840,
+   "gsc_impressions": null,
+   "score": 13840,
+   "tier": "A",
+   "top": [
+    [
+     "千葉市粗大ごみ",
+     9900
+    ],
+    [
+     "千葉市粗大ごみ持ち込み",
+     2900
+    ],
+    [
+     "千葉市粗大ごみ料金",
+     1000
+    ],
+    [
+     "千葉市粗大ごみ予約",
+     40
+    ]
+   ]
+  },
+  {
+   "key": "katsushika",
+   "name": "葛飾区",
+   "agent": "tokyo-east",
+   "kw_volume": 12480,
+   "gsc_impressions": null,
+   "score": 12480,
+   "tier": "A",
+   "top": [
+    [
+     "葛飾区粗大ごみ",
+     9900
+    ],
+    [
+     "葛飾区粗大ごみ持ち込み",
+     1600
+    ],
+    [
+     "葛飾区粗大ごみ料金",
+     720
+    ],
+    [
+     "葛飾区粗大ごみ予約",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "nakano",
+   "name": "中野区",
+   "agent": "tokyo-west",
+   "kw_volume": 11140,
+   "gsc_impressions": null,
+   "score": 11140,
+   "tier": "A",
+   "top": [
+    [
+     "中野区粗大ごみ",
+     9900
+    ],
+    [
+     "中野区粗大ごみ予約",
+     720
+    ],
+    [
+     "中野区粗大ごみ持ち込み",
+     260
+    ],
+    [
+     "中野区粗大ごみ料金",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "sakai",
+   "name": "堺市",
+   "agent": "kansai",
+   "kw_volume": 11020,
+   "gsc_impressions": null,
+   "score": 11020,
+   "tier": "A",
+   "top": [
+    [
+     "堺市粗大ごみ",
+     8100
+    ],
+    [
+     "堺市粗大ごみ持ち込み",
+     1900
+    ],
+    [
+     "堺市粗大ごみ料金",
+     880
+    ],
+    [
+     "堺市粗大ごみ予約",
+     140
+    ]
+   ]
+  },
+  {
+   "key": "kita",
+   "name": "北区",
+   "agent": "tokyo-west",
+   "kw_volume": 11000,
+   "gsc_impressions": null,
+   "score": 11000,
+   "tier": "A",
+   "top": [
+    [
+     "北区粗大ごみ",
+     9900
+    ],
+    [
+     "北区粗大ごみ予約",
+     390
+    ],
+    [
+     "北区粗大ごみ料金",
+     390
+    ],
+    [
+     "北区粗大ごみ持ち込み",
+     320
+    ]
+   ]
+  },
+  {
+   "key": "shinjuku",
+   "name": "新宿区",
+   "agent": "tokyo-central",
+   "kw_volume": 10810,
+   "gsc_impressions": null,
+   "score": 10810,
+   "tier": "A",
+   "top": [
+    [
+     "新宿区粗大ごみ",
+     9900
+    ],
+    [
+     "新宿区粗大ごみ料金",
+     720
+    ],
+    [
+     "新宿区粗大ごみ持ち込み",
+     140
+    ],
+    [
+     "新宿区粗大ごみ予約",
+     50
+    ]
+   ]
+  },
+  {
+   "key": "minato",
+   "name": "港区",
+   "agent": "tokyo-central",
+   "kw_volume": 10600,
+   "gsc_impressions": null,
+   "score": 10600,
+   "tier": "A",
+   "top": [
+    [
+     "港区粗大ごみ",
+     9900
+    ],
+    [
+     "港区粗大ごみ持ち込み",
+     390
+    ],
+    [
+     "港区粗大ごみ料金",
+     170
+    ],
+    [
+     "港区粗大ごみ予約",
+     140
+    ]
+   ]
+  },
+  {
+   "key": "toshima",
+   "name": "豊島区",
+   "agent": "tokyo-west",
+   "kw_volume": 10330,
+   "gsc_impressions": null,
+   "score": 10330,
+   "tier": "A",
+   "top": [
+    [
+     "豊島区粗大ごみ",
+     9900
+    ],
+    [
+     "豊島区粗大ごみ持ち込み",
+     170
+    ],
+    [
+     "豊島区粗大ごみ料金",
+     170
+    ],
+    [
+     "豊島区粗大ごみ予約",
+     90
+    ]
+   ]
+  },
+  {
+   "key": "chuo",
+   "name": "中央区",
+   "agent": "tokyo-central",
+   "kw_volume": 10230,
+   "gsc_impressions": null,
+   "score": 10230,
+   "tier": "A",
+   "top": [
+    [
+     "中央区粗大ごみ",
+     9900
+    ],
+    [
+     "中央区粗大ごみ料金",
+     170
+    ],
+    [
+     "中央区粗大ごみ予約",
+     90
+    ],
+    [
+     "中央区粗大ごみ持ち込み",
+     70
+    ]
+   ]
+  },
+  {
+   "key": "bunkyo",
+   "name": "文京区",
+   "agent": "tokyo-east",
+   "kw_volume": 10150,
+   "gsc_impressions": null,
+   "score": 10150,
+   "tier": "A",
+   "top": [
+    [
+     "文京区粗大ごみ",
+     9900
+    ],
+    [
+     "文京区粗大ごみ持ち込み",
+     110
+    ],
+    [
+     "文京区粗大ごみ料金",
+     110
+    ],
+    [
+     "文京区粗大ごみ予約",
+     30
+    ]
+   ]
+  },
+  {
+   "key": "kawaguchi",
+   "name": "川口市",
+   "agent": "shutoken",
+   "kw_volume": 9050,
+   "gsc_impressions": null,
+   "score": 9050,
+   "tier": "A",
+   "top": [
+    [
+     "川口市粗大ごみ",
+     6600
+    ],
+    [
+     "川口市粗大ごみ持ち込み",
+     1600
+    ],
+    [
+     "川口市粗大ごみ予約",
+     590
+    ],
+    [
+     "川口市粗大ごみ料金",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "sumida",
+   "name": "墨田区",
+   "agent": "tokyo-east",
+   "kw_volume": 8890,
+   "gsc_impressions": null,
+   "score": 8890,
+   "tier": "A",
+   "top": [
+    [
+     "墨田区粗大ごみ",
+     8100
+    ],
+    [
+     "墨田区粗大ごみ持ち込み",
+     320
+    ],
+    [
+     "墨田区粗大ごみ料金",
+     260
+    ],
+    [
+     "墨田区粗大ごみ予約",
+     210
+    ]
+   ]
+  },
+  {
+   "key": "saitama",
+   "name": "さいたま市",
+   "agent": "shutoken",
+   "kw_volume": 8880,
+   "gsc_impressions": null,
+   "score": 8880,
+   "tier": "A",
+   "top": [
+    [
+     "さいたま市粗大ごみ",
+     6600
+    ],
+    [
+     "さいたま市粗大ごみ持ち込み",
+     1300
+    ],
+    [
+     "さいたま市粗大ごみ予約",
+     720
+    ],
+    [
+     "さいたま市粗大ごみ料金",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "taito",
+   "name": "台東区",
+   "agent": "tokyo-east",
+   "kw_volume": 8810,
+   "gsc_impressions": null,
+   "score": 8810,
+   "tier": "A",
+   "top": [
+    [
+     "台東区粗大ごみ",
+     8100
+    ],
+    [
+     "台東区粗大ごみ予約",
+     320
+    ],
+    [
+     "台東区粗大ごみ持ち込み",
+     320
+    ],
+    [
+     "台東区粗大ごみ料金",
+     70
+    ]
+   ]
+  },
+  {
+   "key": "sendai",
+   "name": "仙台市",
+   "agent": "chiho",
+   "kw_volume": 8370,
+   "gsc_impressions": null,
+   "score": 8370,
+   "tier": "A",
+   "top": [
+    [
+     "仙台市粗大ごみ",
+     6600
+    ],
+    [
+     "仙台市粗大ごみ持ち込み",
+     1600
+    ],
+    [
+     "仙台市粗大ごみ料金",
+     140
+    ],
+    [
+     "仙台市粗大ごみ予約",
+     30
+    ]
+   ]
+  },
+  {
+   "key": "kobe",
+   "name": "神戸市",
+   "agent": "kansai",
+   "kw_volume": 8310,
+   "gsc_impressions": null,
+   "score": 8310,
+   "tier": "A",
+   "top": [
+    [
+     "神戸市粗大ごみ",
+     6600
+    ],
+    [
+     "神戸市粗大ごみ持ち込み",
+     1000
+    ],
+    [
+     "神戸市粗大ごみ料金",
+     390
+    ],
+    [
+     "神戸市粗大ごみ予約",
+     320
+    ]
+   ]
+  },
+  {
+   "key": "funabashi",
+   "name": "船橋市",
+   "agent": "shutoken",
+   "kw_volume": 7620,
+   "gsc_impressions": null,
+   "score": 7620,
+   "tier": "B",
+   "top": [
+    [
+     "船橋市粗大ごみ",
+     5400
+    ],
+    [
+     "船橋市粗大ごみ持ち込み",
+     1900
+    ],
+    [
+     "船橋市粗大ごみ料金",
+     320
+    ],
+    [
+     "船橋市粗大ごみ予約",
+     0
+    ]
+   ]
+  },
+  {
+   "key": "meguro",
+   "name": "目黒区",
+   "agent": "tokyo-central",
+   "kw_volume": 7150,
+   "gsc_impressions": null,
+   "score": 7150,
+   "tier": "B",
+   "top": [
+    [
+     "目黒区粗大ごみ",
+     6600
+    ],
+    [
+     "目黒区粗大ごみ料金",
+     320
+    ],
+    [
+     "目黒区粗大ごみ持ち込み",
+     140
+    ],
+    [
+     "目黒区粗大ごみ予約",
+     90
+    ]
+   ]
+  },
+  {
+   "key": "sagamihara",
+   "name": "相模原市",
+   "agent": "kanagawa",
+   "kw_volume": 6130,
+   "gsc_impressions": null,
+   "score": 6130,
+   "tier": "B",
+   "top": [
+    [
+     "相模原市粗大ごみ",
+     3600
+    ],
+    [
+     "相模原市粗大ごみ持ち込み",
+     1900
+    ],
+    [
+     "相模原市粗大ごみ料金",
+     590
+    ],
+    [
+     "相模原市粗大ごみ予約",
+     40
+    ]
+   ]
+  },
+  {
+   "key": "kyoto",
+   "name": "京都市",
+   "agent": "kansai",
+   "kw_volume": 6040,
+   "gsc_impressions": null,
+   "score": 6040,
+   "tier": "B",
+   "top": [
+    [
+     "京都市粗大ごみ",
+     3600
+    ],
+    [
+     "京都市粗大ごみ料金",
+     1300
+    ],
+    [
+     "京都市粗大ごみ持ち込み",
+     880
+    ],
+    [
+     "京都市粗大ごみ予約",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "shibuya",
+   "name": "渋谷区",
+   "agent": "tokyo-central",
+   "kw_volume": 5980,
+   "gsc_impressions": null,
+   "score": 5980,
+   "tier": "B",
+   "top": [
+    [
+     "渋谷区粗大ごみ",
+     5400
+    ],
+    [
+     "渋谷区粗大ごみ料金",
+     390
+    ],
+    [
+     "渋谷区粗大ごみ持ち込み",
+     140
+    ],
+    [
+     "渋谷区粗大ごみ予約",
+     50
+    ]
+   ]
+  },
+  {
+   "key": "arakawa",
+   "name": "荒川区",
+   "agent": "tokyo-east",
+   "kw_volume": 5790,
+   "gsc_impressions": null,
+   "score": 5790,
+   "tier": "B",
+   "top": [
+    [
+     "荒川区粗大ごみ",
+     5400
+    ],
+    [
+     "荒川区粗大ごみ持ち込み",
+     260
+    ],
+    [
+     "荒川区粗大ごみ料金",
+     90
+    ],
+    [
+     "荒川区粗大ごみ予約",
+     40
+    ]
+   ]
+  },
+  {
+   "key": "fuchu",
+   "name": "府中市",
+   "agent": "shutoken",
+   "kw_volume": 5400,
+   "gsc_impressions": null,
+   "score": 5400,
+   "tier": "B",
+   "top": [
+    [
+     "府中市粗大ごみ",
+     5400
+    ]
+   ]
+  },
+  {
+   "key": "gifu",
+   "name": "岐阜市",
+   "agent": "chiho",
+   "kw_volume": 5400,
+   "gsc_impressions": null,
+   "score": 5400,
+   "tier": "B",
+   "top": [
+    [
+     "岐阜市粗大ごみ",
+     5400
+    ]
+   ]
+  },
+  {
+   "key": "kitakyushu",
+   "name": "北九州市",
+   "agent": "chiho",
+   "kw_volume": 5270,
+   "gsc_impressions": null,
+   "score": 5270,
+   "tier": "B",
+   "top": [
+    [
+     "北九州市粗大ごみ",
+     4400
+    ],
+    [
+     "北九州市粗大ごみ持ち込み",
+     590
+    ],
+    [
+     "北九州市粗大ごみ予約",
+     170
+    ],
+    [
+     "北九州市粗大ごみ料金",
+     110
+    ]
+   ]
+  },
+  {
+   "key": "okayama",
+   "name": "岡山市",
+   "agent": "chiho",
+   "kw_volume": 5160,
+   "gsc_impressions": null,
+   "score": 5160,
+   "tier": "B",
+   "top": [
+    [
+     "岡山市粗大ごみ",
+     3600
+    ],
+    [
+     "岡山市粗大ごみ持ち込み",
+     1300
+    ],
+    [
+     "岡山市粗大ごみ予約",
+     170
+    ],
+    [
+     "岡山市粗大ごみ料金",
+     90
+    ]
+   ]
+  },
+  {
+   "key": "niigata",
+   "name": "新潟市",
+   "agent": "chiho",
+   "kw_volume": 5130,
+   "gsc_impressions": null,
+   "score": 5130,
+   "tier": "B",
+   "top": [
+    [
+     "新潟市粗大ごみ",
+     3600
+    ],
+    [
+     "新潟市粗大ごみ持ち込み",
+     1000
+    ],
+    [
+     "新潟市粗大ごみ料金",
+     480
+    ],
+    [
+     "新潟市粗大ごみ予約",
+     50
+    ]
+   ]
+  },
+  {
+   "key": "ichikawa",
+   "name": "市川市",
+   "agent": "shutoken",
+   "kw_volume": 4880,
+   "gsc_impressions": null,
+   "score": 4880,
+   "tier": "B",
+   "top": [
+    [
+     "市川市粗大ごみ",
+     3600
+    ],
+    [
+     "市川市粗大ごみ持ち込み",
+     880
+    ],
+    [
+     "市川市粗大ごみ予約",
+     260
+    ],
+    [
+     "市川市粗大ごみ料金",
+     140
+    ]
+   ]
+  },
+  {
+   "key": "matsudo",
+   "name": "松戸市",
+   "agent": "shutoken",
+   "kw_volume": 4670,
+   "gsc_impressions": null,
+   "score": 4670,
+   "tier": "B",
+   "top": [
+    [
+     "松戸市粗大ごみ",
+     2900
+    ],
+    [
+     "松戸市粗大ごみ持ち込み",
+     1300
+    ],
+    [
+     "松戸市粗大ごみ予約",
+     260
+    ],
+    [
+     "松戸市粗大ごみ料金",
+     210
+    ]
+   ]
+  },
+  {
+   "key": "hirakata",
+   "name": "枚方市",
+   "agent": "kansai",
+   "kw_volume": 4400,
+   "gsc_impressions": null,
+   "score": 4400,
+   "tier": "B",
+   "top": [
+    [
+     "枚方市粗大ごみ",
+     4400
+    ]
+   ]
+  },
+  {
+   "key": "machida",
+   "name": "町田市",
+   "agent": "shutoken",
+   "kw_volume": 4400,
+   "gsc_impressions": null,
+   "score": 4400,
+   "tier": "B",
+   "top": [
+    [
+     "町田市粗大ごみ",
+     2400
+    ],
+    [
+     "町田市粗大ごみ持ち込み",
+     1300
+    ],
+    [
+     "町田市粗大ごみ予約",
+     590
+    ],
+    [
+     "町田市粗大ごみ料金",
+     110
+    ]
+   ]
+  },
+  {
+   "key": "chiyoda",
+   "name": "千代田区",
+   "agent": "tokyo-central",
+   "kw_volume": 3790,
+   "gsc_impressions": null,
+   "score": 3790,
+   "tier": "B",
+   "top": [
+    [
+     "千代田区粗大ごみ",
+     3600
+    ],
+    [
+     "千代田区粗大ごみ料金",
+     90
+    ],
+    [
+     "千代田区粗大ごみ予約",
+     50
+    ],
+    [
+     "千代田区粗大ごみ持ち込み",
+     50
+    ]
+   ]
+  },
+  {
+   "key": "hachioji",
+   "name": "八王子市",
+   "agent": "shutoken",
+   "kw_volume": 3680,
+   "gsc_impressions": null,
+   "score": 3680,
+   "tier": "B",
+   "top": [
+    [
+     "八王子市粗大ごみ",
+     2900
+    ],
+    [
+     "八王子市粗大ごみ予約",
+     320
+    ],
+    [
+     "八王子市粗大ごみ持ち込み",
+     320
+    ],
+    [
+     "八王子市粗大ごみ料金",
+     140
+    ]
+   ]
+  },
+  {
+   "key": "mitaka",
+   "name": "三鷹市",
+   "agent": "shutoken",
+   "kw_volume": 3600,
+   "gsc_impressions": null,
+   "score": 3600,
+   "tier": "B",
+   "top": [
+    [
+     "三鷹市粗大ごみ",
+     3600
+    ]
+   ]
+  },
+  {
+   "key": "toyonaka",
+   "name": "豊中市",
+   "agent": "kansai",
+   "kw_volume": 3600,
+   "gsc_impressions": null,
+   "score": 3600,
+   "tier": "B",
+   "top": [
+    [
+     "豊中市粗大ごみ",
+     3600
+    ]
+   ]
+  },
+  {
+   "key": "shizuoka",
+   "name": "静岡市",
+   "agent": "chiho",
+   "kw_volume": 3200,
+   "gsc_impressions": null,
+   "score": 3200,
+   "tier": "B",
+   "top": [
+    [
+     "静岡市粗大ごみ",
+     2400
+    ],
+    [
+     "静岡市粗大ごみ持ち込み",
+     720
+    ],
+    [
+     "静岡市粗大ごみ予約",
+     70
+    ],
+    [
+     "静岡市粗大ごみ料金",
+     10
+    ]
+   ]
+  },
+  {
+   "key": "chofu",
+   "name": "調布市",
+   "agent": "shutoken",
+   "kw_volume": 2900,
+   "gsc_impressions": null,
+   "score": 2900,
+   "tier": "B",
+   "top": [
+    [
+     "調布市粗大ごみ",
+     2900
+    ]
+   ]
+  },
+  {
+   "key": "hiroshima",
+   "name": "広島市",
+   "agent": "chiho",
+   "kw_volume": 2900,
+   "gsc_impressions": null,
+   "score": 2900,
+   "tier": "B",
+   "top": [
+    [
+     "広島市粗大ごみ",
+     1300
+    ],
+    [
+     "広島市粗大ごみ持ち込み",
+     1300
+    ],
+    [
+     "広島市粗大ごみ予約",
+     210
+    ],
+    [
+     "広島市粗大ごみ料金",
+     90
+    ]
+   ]
+  },
+  {
+   "key": "musashino",
+   "name": "武蔵野市",
+   "agent": "shutoken",
+   "kw_volume": 2900,
+   "gsc_impressions": null,
+   "score": 2900,
+   "tier": "B",
+   "top": [
+    [
+     "武蔵野市粗大ごみ",
+     2900
+    ]
+   ]
+  },
+  {
+   "key": "fujisawa",
+   "name": "藤沢市",
+   "agent": "kanagawa",
+   "kw_volume": 2540,
+   "gsc_impressions": null,
+   "score": 2540,
+   "tier": "B",
+   "top": [
+    [
+     "藤沢市粗大ごみ",
+     1600
+    ],
+    [
+     "藤沢市粗大ごみ予約",
+     480
+    ],
+    [
+     "藤沢市粗大ごみ持ち込み",
+     390
+    ],
+    [
+     "藤沢市粗大ごみ料金",
+     70
+    ]
+   ]
+  },
+  {
+   "key": "naha",
+   "name": "那覇市",
+   "agent": "chiho",
+   "kw_volume": 2400,
+   "gsc_impressions": null,
+   "score": 2400,
+   "tier": "B",
+   "top": [
+    [
+     "那覇市粗大ごみ",
+     2400
+    ]
+   ]
+  },
+  {
+   "key": "nishitokyo",
+   "name": "西東京市",
+   "agent": "shutoken",
+   "kw_volume": 2400,
+   "gsc_impressions": null,
+   "score": 2400,
+   "tier": "B",
+   "top": [
+    [
+     "西東京市粗大ごみ",
+     2400
+    ]
+   ]
+  },
+  {
+   "key": "tokushima",
+   "name": "徳島市",
+   "agent": "chiho",
+   "kw_volume": 2400,
+   "gsc_impressions": null,
+   "score": 2400,
+   "tier": "B",
+   "top": [
+    [
+     "徳島市粗大ごみ",
+     2400
+    ]
+   ]
+  },
+  {
+   "key": "sapporo",
+   "name": "札幌市",
+   "agent": "chiho",
+   "kw_volume": 2310,
+   "gsc_impressions": null,
+   "score": 2310,
+   "tier": "B",
+   "top": [
+    [
+     "札幌市粗大ごみ",
+     1900
+    ],
+    [
+     "札幌市粗大ごみ持ち込み",
+     260
+    ],
+    [
+     "札幌市粗大ごみ料金",
+     140
+    ],
+    [
+     "札幌市粗大ごみ予約",
+     10
+    ]
+   ]
+  },
+  {
+   "key": "kashiwa",
+   "name": "柏市",
+   "agent": "shutoken",
+   "kw_volume": 1940,
+   "gsc_impressions": null,
+   "score": 1940,
+   "tier": "C",
+   "top": [
+    [
+     "柏市粗大ごみ",
+     1300
+    ],
+    [
+     "柏市粗大ごみ持ち込み",
+     480
+    ],
+    [
+     "柏市粗大ごみ予約",
+     90
+    ],
+    [
+     "柏市粗大ごみ料金",
+     70
+    ]
+   ]
+  },
+  {
+   "key": "higashiosaka",
+   "name": "東大阪市",
+   "agent": "kansai",
+   "kw_volume": 1900,
+   "gsc_impressions": null,
+   "score": 1900,
+   "tier": "C",
+   "top": [
+    [
+     "東大阪市粗大ごみ",
+     1900
+    ]
+   ]
+  },
+  {
+   "key": "kagoshima",
+   "name": "鹿児島市",
+   "agent": "chiho",
+   "kw_volume": 1900,
+   "gsc_impressions": null,
+   "score": 1900,
+   "tier": "C",
+   "top": [
+    [
+     "鹿児島市粗大ごみ",
+     1900
+    ]
+   ]
+  },
+  {
+   "key": "matsuyama",
+   "name": "松山市",
+   "agent": "chiho",
+   "kw_volume": 1900,
+   "gsc_impressions": null,
+   "score": 1900,
+   "tier": "C",
+   "top": [
+    [
+     "松山市粗大ごみ",
+     1900
+    ]
+   ]
+  },
+  {
+   "key": "soka",
+   "name": "草加市",
+   "agent": "shutoken",
+   "kw_volume": 1900,
+   "gsc_impressions": null,
+   "score": 1900,
+   "tier": "C",
+   "top": [
+    [
+     "草加市粗大ごみ",
+     1900
+    ]
+   ]
+  },
+  {
+   "key": "yamato",
+   "name": "大和市",
+   "agent": "kanagawa",
+   "kw_volume": 1900,
+   "gsc_impressions": null,
+   "score": 1900,
+   "tier": "C",
+   "top": [
+    [
+     "大和市粗大ごみ",
+     1900
+    ]
+   ]
+  },
+  {
+   "key": "atsugi",
+   "name": "厚木市",
+   "agent": "kanagawa",
+   "kw_volume": 1600,
+   "gsc_impressions": null,
+   "score": 1600,
+   "tier": "C",
+   "top": [
+    [
+     "厚木市粗大ごみ",
+     1600
+    ]
+   ]
+  },
+  {
+   "key": "koshigaya",
+   "name": "越谷市",
+   "agent": "shutoken",
+   "kw_volume": 1600,
+   "gsc_impressions": null,
+   "score": 1600,
+   "tier": "C",
+   "top": [
+    [
+     "越谷市粗大ごみ",
+     1600
+    ]
+   ]
+  },
+  {
+   "key": "nishinomiya",
+   "name": "西宮市",
+   "agent": "kansai",
+   "kw_volume": 1600,
+   "gsc_impressions": null,
+   "score": 1600,
+   "tier": "C",
+   "top": [
+    [
+     "西宮市粗大ごみ",
+     1600
+    ]
+   ]
+  },
+  {
+   "key": "wakayama",
+   "name": "和歌山市",
+   "agent": "kansai",
+   "kw_volume": 1600,
+   "gsc_impressions": null,
+   "score": 1600,
+   "tier": "C",
+   "top": [
+    [
+     "和歌山市粗大ごみ",
+     1600
+    ]
+   ]
+  },
+  {
+   "key": "akashi",
+   "name": "明石市",
+   "agent": "kansai",
+   "kw_volume": 1300,
+   "gsc_impressions": null,
+   "score": 1300,
+   "tier": "C",
+   "top": [
+    [
+     "明石市粗大ごみ",
+     1300
+    ]
+   ]
+  },
+  {
+   "key": "akita",
+   "name": "秋田市",
+   "agent": "chiho",
+   "kw_volume": 1300,
+   "gsc_impressions": null,
+   "score": 1300,
+   "tier": "C",
+   "top": [
+    [
+     "秋田市粗大ごみ",
+     1300
+    ]
+   ]
+  },
+  {
+   "key": "nagasaki",
+   "name": "長崎市",
+   "agent": "chiho",
+   "kw_volume": 1300,
+   "gsc_impressions": null,
+   "score": 1300,
+   "tier": "C",
+   "top": [
+    [
+     "長崎市粗大ごみ",
+     1300
+    ]
+   ]
+  },
+  {
+   "key": "tachikawa",
+   "name": "立川市",
+   "agent": "shutoken",
+   "kw_volume": 1300,
+   "gsc_impressions": null,
+   "score": 1300,
+   "tier": "C",
+   "top": [
+    [
+     "立川市粗大ごみ",
+     1300
+    ]
+   ]
+  },
+  {
+   "key": "takamatsu",
+   "name": "高松市",
+   "agent": "chiho",
+   "kw_volume": 1300,
+   "gsc_impressions": null,
+   "score": 1300,
+   "tier": "C",
+   "top": [
+    [
+     "高松市粗大ごみ",
+     1300
+    ]
+   ]
+  },
+  {
+   "key": "toyota",
+   "name": "豊田市",
+   "agent": "chiho",
+   "kw_volume": 1300,
+   "gsc_impressions": null,
+   "score": 1300,
+   "tier": "C",
+   "top": [
+    [
+     "豊田市粗大ごみ",
+     1300
+    ]
+   ]
+  },
+  {
+   "key": "hamamatsu",
+   "name": "浜松市",
+   "agent": "chiho",
+   "kw_volume": 1240,
+   "gsc_impressions": null,
+   "score": 1240,
+   "tier": "C",
+   "top": [
+    [
+     "浜松市粗大ごみ",
+     590
+    ],
+    [
+     "浜松市粗大ごみ持ち込み",
+     480
+    ],
+    [
+     "浜松市粗大ごみ料金",
+     170
+    ],
+    [
+     "浜松市粗大ごみ予約",
+     0
+    ]
+   ]
+  },
+  {
+   "key": "kumamoto",
+   "name": "熊本市",
+   "agent": "chiho",
+   "kw_volume": 1210,
+   "gsc_impressions": null,
+   "score": 1210,
+   "tier": "C",
+   "top": [
+    [
+     "熊本市粗大ごみ",
+     590
+    ],
+    [
+     "熊本市粗大ごみ持ち込み",
+     590
+    ],
+    [
+     "熊本市粗大ごみ料金",
+     30
+    ],
+    [
+     "熊本市粗大ごみ予約",
+     0
+    ]
+   ]
+  },
+  {
+   "key": "sakura",
+   "name": "佐倉市",
+   "agent": "shutoken",
+   "kw_volume": 1130,
+   "gsc_impressions": null,
+   "score": 1130,
+   "tier": "C",
+   "top": [
+    [
+     "佐倉市粗大ごみ",
+     720
+    ],
+    [
+     "佐倉市粗大ごみ持ち込み",
+     390
+    ],
+    [
+     "佐倉市粗大ごみ料金",
+     20
+    ],
+    [
+     "佐倉市粗大ごみ予約",
+     0
+    ]
+   ]
+  },
+  {
+   "key": "fukushima",
+   "name": "福島市",
+   "agent": "chiho",
+   "kw_volume": 1000,
+   "gsc_impressions": null,
+   "score": 1000,
+   "tier": "C",
+   "top": [
+    [
+     "福島市粗大ごみ",
+     1000
+    ]
+   ]
+  },
+  {
+   "key": "himeji",
+   "name": "姫路市",
+   "agent": "kansai",
+   "kw_volume": 1000,
+   "gsc_impressions": null,
+   "score": 1000,
+   "tier": "C",
+   "top": [
+    [
+     "姫路市粗大ごみ",
+     1000
+    ]
+   ]
+  },
+  {
+   "key": "tsukuba",
+   "name": "つくば市",
+   "agent": "shutoken",
+   "kw_volume": 1000,
+   "gsc_impressions": null,
+   "score": 1000,
+   "tier": "C",
+   "top": [
+    [
+     "つくば市粗大ごみ",
+     1000
+    ]
+   ]
+  },
+  {
+   "key": "amagasaki",
+   "name": "尼崎市",
+   "agent": "kansai",
+   "kw_volume": 880,
+   "gsc_impressions": null,
+   "score": 880,
+   "tier": "C",
+   "top": [
+    [
+     "尼崎市粗大ごみ",
+     880
+    ]
+   ]
+  },
+  {
+   "key": "koriyama",
+   "name": "郡山市",
+   "agent": "chiho",
+   "kw_volume": 880,
+   "gsc_impressions": null,
+   "score": 880,
+   "tier": "C",
+   "top": [
+    [
+     "郡山市粗大ごみ",
+     880
+    ]
+   ]
+  },
+  {
+   "key": "nara",
+   "name": "奈良市",
+   "agent": "kansai",
+   "kw_volume": 880,
+   "gsc_impressions": null,
+   "score": 880,
+   "tier": "C",
+   "top": [
+    [
+     "奈良市粗大ごみ",
+     880
+    ]
+   ]
+  },
+  {
+   "key": "yokosuka",
+   "name": "横須賀市",
+   "agent": "kanagawa",
+   "kw_volume": 880,
+   "gsc_impressions": null,
+   "score": 880,
+   "tier": "C",
+   "top": [
+    [
+     "横須賀市粗大ごみ",
+     880
+    ]
+   ]
+  },
+  {
+   "key": "aomori",
+   "name": "青森市",
+   "agent": "chiho",
+   "kw_volume": 720,
+   "gsc_impressions": null,
+   "score": 720,
+   "tier": "C",
+   "top": [
+    [
+     "青森市粗大ごみ",
+     720
+    ]
+   ]
+  },
+  {
+   "key": "ichinomiya",
+   "name": "一宮市",
+   "agent": "chiho",
+   "kw_volume": 720,
+   "gsc_impressions": null,
+   "score": 720,
+   "tier": "C",
+   "top": [
+    [
+     "一宮市粗大ごみ",
+     720
+    ]
+   ]
+  },
+  {
+   "key": "hiratsuka",
+   "name": "平塚市",
+   "agent": "kanagawa",
+   "kw_volume": 590,
+   "gsc_impressions": null,
+   "score": 590,
+   "tier": "C",
+   "top": [
+    [
+     "平塚市粗大ごみ",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "kawagoe",
+   "name": "川越市",
+   "agent": "shutoken",
+   "kw_volume": 590,
+   "gsc_impressions": null,
+   "score": 590,
+   "tier": "C",
+   "top": [
+    [
+     "川越市粗大ごみ",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "okazaki",
+   "name": "岡崎市",
+   "agent": "chiho",
+   "kw_volume": 590,
+   "gsc_impressions": null,
+   "score": 590,
+   "tier": "C",
+   "top": [
+    [
+     "岡崎市粗大ごみ",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "otsu",
+   "name": "大津市",
+   "agent": "kansai",
+   "kw_volume": 590,
+   "gsc_impressions": null,
+   "score": 590,
+   "tier": "C",
+   "top": [
+    [
+     "大津市粗大ごみ",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "suita",
+   "name": "吹田市",
+   "agent": "kansai",
+   "kw_volume": 590,
+   "gsc_impressions": null,
+   "score": 590,
+   "tier": "C",
+   "top": [
+    [
+     "吹田市粗大ごみ",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "tokorozawa",
+   "name": "所沢市",
+   "agent": "shutoken",
+   "kw_volume": 590,
+   "gsc_impressions": null,
+   "score": 590,
+   "tier": "C",
+   "top": [
+    [
+     "所沢市粗大ごみ",
+     590
+    ]
+   ]
+  },
+  {
+   "key": "abiko",
+   "name": "我孫子市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ageo",
+   "name": "上尾市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "akishima",
+   "name": "昭島市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "anjo",
+   "name": "安城市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "asaka",
+   "name": "朝霞市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "daito",
+   "name": "大東市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ebina",
+   "name": "海老名市",
+   "agent": "kanagawa",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "fuji",
+   "name": "富士市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "fujieda",
+   "name": "藤枝市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "fujimi",
+   "name": "富士見市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "fujimino",
+   "name": "ふじみ野市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "fukaya",
+   "name": "深谷市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "fukui",
+   "name": "福井市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "hachinohe",
+   "name": "八戸市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "hadano",
+   "name": "秦野市",
+   "agent": "kanagawa",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "higashihiroshima",
+   "name": "東広島市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "higashikurume",
+   "name": "東久留米市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "higashimurayama",
+   "name": "東村山市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "hino",
+   "name": "日野市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "hitachinaka",
+   "name": "ひたちなか市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ibaraki",
+   "name": "茨木市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ichihara",
+   "name": "市原市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ikeda",
+   "name": "池田市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "inagi",
+   "name": "稲城市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "inzai",
+   "name": "印西市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "iruma",
+   "name": "入間市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "isesaki",
+   "name": "伊勢崎市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "itami",
+   "name": "伊丹市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "izumi",
+   "name": "和泉市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kadoma",
+   "name": "門真市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kakogawa",
+   "name": "加古川市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kamagaya",
+   "name": "鎌ケ谷市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kamakura",
+   "name": "鎌倉市",
+   "agent": "kanagawa",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kameoka",
+   "name": "亀岡市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kariya",
+   "name": "刈谷市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kasugai",
+   "name": "春日井市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kawanishi",
+   "name": "川西市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kazo",
+   "name": "加須市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kisarazu",
+   "name": "木更津市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kishiwada",
+   "name": "岸和田市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kodaira",
+   "name": "小平市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kofu",
+   "name": "甲府市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "koga",
+   "name": "古河市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "koganei",
+   "name": "小金井市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kokubunji",
+   "name": "国分寺市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "komaki",
+   "name": "小牧市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "konosu",
+   "name": "鴻巣市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kuki",
+   "name": "久喜市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kumagaya",
+   "name": "熊谷市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kure",
+   "name": "呉市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kusatsu",
+   "name": "草津市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kyotanabe",
+   "name": "京田辺市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "matsubara",
+   "name": "松原市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "matsue",
+   "name": "松江市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "matsumoto",
+   "name": "松本市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "minoh",
+   "name": "箕面市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "misato",
+   "name": "三郷市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "moriguchi",
+   "name": "守口市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "nagaoka",
+   "name": "長岡市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "nagareyama",
+   "name": "流山市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "narashino",
+   "name": "習志野市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "narita",
+   "name": "成田市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "neyagawa",
+   "name": "寝屋川市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "niiza",
+   "name": "新座市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "nishio",
+   "name": "西尾市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "noda",
+   "name": "野田市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "numazu",
+   "name": "沼津市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "odawara",
+   "name": "小田原市",
+   "agent": "kanagawa",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ogaki",
+   "name": "大垣市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ome",
+   "name": "青梅市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "otagunma",
+   "name": "太田市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "oyama",
+   "name": "小山市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "saga",
+   "name": "佐賀市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "sakado",
+   "name": "坂戸市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "sanda",
+   "name": "三田市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "sasebo",
+   "name": "佐世保市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "sayama",
+   "name": "狭山市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "seto",
+   "name": "瀬戸市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "shimonoseki",
+   "name": "下関市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "suzuka",
+   "name": "鈴鹿市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "takarazuka",
+   "name": "宝塚市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "tama",
+   "name": "多摩市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "toda",
+   "name": "戸田市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "toride",
+   "name": "取手市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "tottori",
+   "name": "鳥取市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "toyokawa",
+   "name": "豊川市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "tsu",
+   "name": "津市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "tsuchiura",
+   "name": "土浦市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "uji",
+   "name": "宇治市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "urayasu",
+   "name": "浦安市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "yachiyo",
+   "name": "八千代市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "yaizu",
+   "name": "焼津市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "yao",
+   "name": "八尾市",
+   "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "zama",
+   "name": "座間市",
+   "agent": "kanagawa",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "chigasaki",
+   "name": "茅ヶ崎市",
+   "agent": "kanagawa",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "茅ヶ崎市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "fukuyama",
+   "name": "福山市",
+   "agent": "chiho",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "福山市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "kanazawa",
+   "name": "金沢市",
+   "agent": "chiho",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "金沢市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "kasukabe",
+   "name": "春日部市",
+   "agent": "shutoken",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "春日部市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "kurume",
+   "name": "久留米市",
+   "agent": "chiho",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "久留米市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "mito",
+   "name": "水戸市",
+   "agent": "shutoken",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "水戸市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "miyazaki",
+   "name": "宮崎市",
+   "agent": "chiho",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "宮崎市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "takasaki",
+   "name": "高崎市",
+   "agent": "shutoken",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "高崎市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "yamagata",
+   "name": "山形市",
+   "agent": "chiho",
+   "kw_volume": 480,
+   "gsc_impressions": null,
+   "score": 480,
+   "tier": "C",
+   "top": [
+    [
+     "山形市粗大ごみ",
+     480
+    ]
+   ]
+  },
+  {
+   "key": "asahikawa",
+   "name": "旭川市",
+   "agent": "chiho",
+   "kw_volume": 390,
+   "gsc_impressions": null,
+   "score": 390,
+   "tier": "C",
+   "top": [
+    [
+     "旭川市粗大ごみ",
+     390
+    ]
+   ]
+  },
+  {
+   "key": "kurashiki",
+   "name": "倉敷市",
+   "agent": "chiho",
+   "kw_volume": 390,
+   "gsc_impressions": null,
+   "score": 390,
+   "tier": "C",
+   "top": [
+    [
+     "倉敷市粗大ごみ",
+     390
+    ]
+   ]
+  },
+  {
+   "key": "nagano",
+   "name": "長野市",
+   "agent": "chiho",
+   "kw_volume": 390,
+   "gsc_impressions": null,
+   "score": 390,
+   "tier": "C",
+   "top": [
+    [
+     "長野市粗大ごみ",
+     390
+    ]
+   ]
+  },
+  {
+   "key": "utsunomiya",
+   "name": "宇都宮市",
+   "agent": "shutoken",
+   "kw_volume": 390,
+   "gsc_impressions": null,
+   "score": 390,
+   "tier": "C",
+   "top": [
+    [
+     "宇都宮市粗大ごみ",
+     390
+    ]
+   ]
+  },
+  {
+   "key": "hakodate",
+   "name": "函館市",
+   "agent": "chiho",
+   "kw_volume": 320,
+   "gsc_impressions": null,
+   "score": 320,
+   "tier": "C",
+   "top": [
+    [
+     "函館市粗大ごみ",
+     320
+    ]
+   ]
+  },
+  {
+   "key": "maebashi",
+   "name": "前橋市",
+   "agent": "shutoken",
+   "kw_volume": 320,
+   "gsc_impressions": null,
+   "score": 320,
+   "tier": "C",
+   "top": [
+    [
+     "前橋市粗大ごみ",
+     320
+    ]
+   ]
+  },
+  {
+   "key": "oita",
+   "name": "大分市",
+   "agent": "chiho",
+   "kw_volume": 320,
+   "gsc_impressions": null,
+   "score": 320,
+   "tier": "C",
+   "top": [
+    [
+     "大分市粗大ごみ",
+     320
+    ]
+   ]
+  },
+  {
+   "key": "toyama",
+   "name": "富山市",
+   "agent": "chiho",
+   "kw_volume": 320,
+   "gsc_impressions": null,
+   "score": 320,
+   "tier": "C",
+   "top": [
+    [
+     "富山市粗大ごみ",
+     320
+    ]
+   ]
+  },
+  {
+   "key": "kochi",
+   "name": "高知市",
+   "agent": "chiho",
+   "kw_volume": 260,
+   "gsc_impressions": null,
+   "score": 260,
+   "tier": "C",
+   "top": [
+    [
+     "高知市粗大ごみ",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "morioka",
+   "name": "盛岡市",
+   "agent": "chiho",
+   "kw_volume": 260,
+   "gsc_impressions": null,
+   "score": 260,
+   "tier": "C",
+   "top": [
+    [
+     "盛岡市粗大ごみ",
+     260
+    ]
+   ]
+  },
+  {
+   "key": "iwaki",
+   "name": "いわき市",
+   "agent": "chiho",
+   "kw_volume": 210,
+   "gsc_impressions": null,
+   "score": 210,
+   "tier": "C",
+   "top": [
+    [
+     "いわき市粗大ごみ",
+     210
+    ]
+   ]
+  },
+  {
+   "key": "takatsuki",
+   "name": "高槻市",
+   "agent": "kansai",
+   "kw_volume": 210,
+   "gsc_impressions": null,
+   "score": 210,
+   "tier": "C",
+   "top": [
+    [
+     "高槻市粗大ごみ",
+     210
+    ]
+   ]
+  },
+  {
+   "key": "toyohashi",
+   "name": "豊橋市",
+   "agent": "chiho",
+   "kw_volume": 140,
+   "gsc_impressions": null,
+   "score": 140,
+   "tier": "C",
+   "top": [
+    [
+     "豊橋市粗大ごみ",
+     140
+    ]
+   ]
+  },
+  {
+   "key": "yokkaichi",
+   "name": "四日市市",
+   "agent": "chiho",
+   "kw_volume": 90,
+   "gsc_impressions": null,
+   "score": 90,
+   "tier": "C",
+   "top": [
+    [
+     "四日市市粗大ごみ",
+     90
+    ]
+   ]
+  }
+ ]
+}

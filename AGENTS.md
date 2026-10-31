@@ -7,14 +7,16 @@
 ## サービスの説明
 
 - 引越し日・お住まい・出したい物から、粗大ごみを品目ごとに「市区の回収／キャンセル待ち／買取／持込／家電リサイクル／新居で出す」のどれで出せるか診断する **無料** のツール（1枚の `index.html`、ブラウザ内だけで動く。入力や写真はどこにも送らない）。
-- 対象：横浜市・川崎市・世田谷区・杉並区・さいたま市・千葉市・佐倉市（＋その他の地域）。
-- 課金は未実装。方針案（2026-10-30・検討中）：診断は無料、空き枠の見張り（市の予約ページの空きを通知）を選んだ人だけ ¥500。決まるまで、決済ボタン・申し込みボタン・「通知します」と言い切る文言は出さない（いまは「準備中」表示のみ）。
+- 対象：**全国の市区町村**（2026-11-01 Nori「全国版にして、横浜とか川崎とかじゃなくて」）。トップ・見出し・診断の初期表示で特定の市を前に出さない。診断の「お住まい」は全国の市区町村（`data/munis.js`）から入力で選ぶ。くわしさは3段階：7市区（横浜・川崎・世田谷・杉並・さいたま・千葉・佐倉）は `CITIES`/`INFO` の窓口つき、地域記事のある市区は記事のデータ（`data/areas.js`）、それ以外は出し方の選び方＋公式サイトと検索のリンクまで。
+- 記事のない市区町村では、収集までの日数・料金を推定しない（「間に合う／間に合わない」を出さず、公式サイトで確かめてもらう）。同じ名前の市町村（府中市など）は勝手に決めず、県を選んでもらう。「全国に対応」とだけ書かず、記事のない地域は調べ方までと分かる書き方にする。
+- 課金は未実装。方針案（2026-10-30・検討中）：診断は無料、空き枠の見張り（市の予約ページの空きを通知）を選んだ人だけ ¥500。決まるまで、決済・申し込みはできないままにし、「通知します」と言い切る文言は出さない。診断の「次にやること」（予約が間に合わないとき）には「空き枠の見張りを頼む（¥500・準備中）」ボタンを置き、押されたら準備中と伝えて回数だけ数える（GA4 イベント watch_interest、2026-11-01 Nori「課金ポイントのボタンいるんじゃない？」）。
 
 ## 文言・表示のルール（必ず守る）
 
 - **料金・日数は目安**。目立つ形で「目安」と書き、自治体の公式ページへのリンクを添える。
 - 自治体の数字は **公式サイトで確かめたものだけ** 書き、確認日をページに残す（今は 2026-10-30）。確かめていないものは「市の公式サイトで確認」とする。
 - 提携していない個人店の名前・電話番号は載せない（チェーン名の例示はOK）。
+- 診断の「費用をくらべる」の相場（軽トラック1台分＝ミツモア成約データ、家電リサイクル料金＝名古屋市のページ）は出どころのリンクを必ず添える。引越し代の増額は信頼できる相場がないので金額を出さない。
 - 実績件数など根拠のない数字は書かない。実態と違うことは書かない。
 - 家電4品目（冷蔵庫・冷凍庫／洗濯機・衣類乾燥機／テレビ／エアコン）は市区では回収しない、を崩さない。
 - 買取チェーンの口コミ（星・件数・本文）は `reviews.js` が `backend/reviews.gs`（Google Apps Script）経由で毎回取り寄せて、サイトの中で見せる（2026-10-30 Nori「サイトの外には飛ばさない」）。点数や本文を書き写したり保存したりしない（地図サービスの規約）。出どころは「Google Maps」と訳さずに出し、書いた人と元の口コミへのリンクも出す。キー（PLACES_API_KEY）は Apps Script のプロパティにだけ置く。記事に載せるときは `<div class="shops" data-city="yokohama"></div>` と `/reviews.js` の読み込みだけでよい。
@@ -36,14 +38,17 @@
 | `404.html` `robots.txt` `sitemap.xml` | 手書き |
 | `favicon.svg` `apple-touch-icon.png` `og.png` | アイコン・OGP画像 |
 | `docs/ai-backup.md` `.github/workflows/ai-backup.yml` | Issue にラベル「ai」で動く予備のAI |
+| `data/munis.js` `tools/guide/munis.py` | 全国の市区町村の一覧（国土地理院の市区町村コード＋Wikidata の公式サイトのうち自治体のドメインで開けたもの＋地域記事のキー）。診断の入力候補。地域記事を足したら areas.py のあとに実行（記事のキーが付く） |
 | `data/areas.js` `tools/guide/areas.py` | 診断で使う地域データ（品目ごとの料金・新居の自治体の情報）。地域記事の元データから自動生成。記事を直したら `python3 tools/guide/areas.py .` を実行し直す |
 | `tools/guide/booking.json` `docs/web-booking.md` | 地域ごとのウェブ予約の状態（だれでも／条件つき／停止中／電話など）。予約サイトのリンクと電話は記事の「申し込み方法」から areas.py が取り出し、診断の受付欄に出す。一覧は areas.py が docs/web-booking.md に書き出す |
 | `tools/guide/topics.py` | 持ち込み・処理券・大きさの基準（/guide/size/）・品目別（布団・ソファ・自転車・マットレス・ベッド）のまとめページを地域記事の元データから作る。地域記事を直したら areas.py のあとに実行 |
 | `reviews.js` `backend/reviews.gs` `tools/guide/reviews_areas.py` | 買取チェーンの近くの店と Google マップの口コミ。対象の市区（AREAS）は地域記事の市区から reviews_areas.py で作る。地域を足したら実行し、backend/reviews.gs を Apps Script「hinata 口コミ」に貼り直して同じデプロイの新しいバージョンを出す（月300回の上限に達するとその月は地図へのリンクだけ） |
+| `backend/reviews.gs` の `slot_` | 千葉市だけ、診断で区を選ぶとその時点の最短収集日を千葉市の予約サイト（sodai-web.jp の公開ページ）から取って出す（2026-10-31 Nori「千葉市で入れる」）。区ごとに30分キャッシュ・1日300回まで。ほかの市（e-tumo は規約で禁止、横浜などは申込途中でしか見えない）には広げない。reviews.gs を直したら Apps Script に貼り直して新しいバージョンを出す |
 | `tools/form_check.js` `docs/form-review.md` `.claude/agents/form-reviewer.md` | 診断フォームの点検（判定・使いやすさ・競合比較）。フォームや判定を直したら `node tools/form_check.js .` で NG 0 にする |
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
 | `tools/article_review/` `.claude/agents/article-*.md` `.github/workflows/article-review.yml` | 記事チェックエージェント（7つの観点：正確さ・リンク・SEO・ありきたり・困ったときの情報・画像・最新か）。手順は `tools/article_review/AGENT.md`、サイト別の設定は `sites/*.json`（shiokonbu.com・pet.shiokonbu.com でも使える）。結果は `docs/article-review/`。記事をまとめて直すときはこれを使う |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
+| `tools/area_agents/` `.claude/agents/area-*.md` `docs/area-agents/` | エリア担当Agent（7担当）。地域記事を検索の見込み（キーワードプランナー＋GSC）が大きい順に担当ごとに育てる。手順は `tools/area_agents/AGENT.md`、割り振りは `docs/area-agents/assignments.md`、だれがいつ見たかは `docs/area-agents/ledger.json`。地域記事を照合・手直ししたら ledger の `fact`/`seo` を書く。新しい地域記事を足したら `python3 tools/area_agents/allocate.py .` |
 
 `CNAME`・`.nojekyll` は GitHub Pages 用なので消さない。
 

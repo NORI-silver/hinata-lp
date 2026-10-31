@@ -30,16 +30,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"粗大ごみ手配ナビ","url":"https://hinata.shiokonbu.com/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"description":"引越し日と出したい物から、粗大ごみの出し方（市の回収・買取・持込・家電リサイクル）と料金の目安を品目ごとに診断する無料ツール。"}
+{"@context":"https://schema.org","@type":"WebApplication","name":"粗大ごみ手配ナビ","url":"https://hinata.shiokonbu.com/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"description":"引越し日と出したい物から、粗大ごみの出し方（市の回収・買取・持込・家電リサイクル）と料金の目安を品目ごとに診断する無料ツール。全国の市区町村で使え、地域記事のある市区は料金・申し込み先の目安も出ます。"}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"引越しまでに粗大ごみの予約が間に合わないときは？","acceptedAnswer":{"@type":"Answer","text":"まだ使える物は出張買取（断っても無料のお店）、自家用車がある場合は受入施設への持込、それも難しい場合は新居に運んで新しい自治体で出す方法があります。市の予約ページはキャンセルで空きが出ることもあるので、こまめに確認するのも手です。"}},
 {"@type":"Question","name":"冷蔵庫や洗濯機は粗大ごみに出せますか？","acceptedAnswer":{"@type":"Answer","text":"冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコンの家電4品目は家電リサイクル法の対象で、市区町村の粗大ごみには出せません。買い替えるお店か買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます。"}},
 {"@type":"Question","name":"粗大ごみは引越しの何日前に申し込めばいいですか？","acceptedAnswer":{"@type":"Answer","text":"自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。"}},
-{"@type":"Question","name":"粗大ごみの料金はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"自治体と品目の大きさで決まります。たとえば千葉市は390円から1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日に各市の公式サイトで確認）。正確な金額は各自治体の手数料一覧で確認してください。ほかの市区の料金と払い方は、粗大ごみ処理券（シール）の記事に一覧があります。"}},
+{"@type":"Question","name":"粗大ごみの料金はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"自治体と品目の大きさで決まります。1点ごとに数百円からで、大きい物ほど高くなる段階制の市区町村が多くあります。正確な金額は、お住まいの自治体の手数料一覧で確認してください。市区ごとの料金は、このサイトの処理券の記事にまとめています。"}},
 {"@type":"Question","name":"この診断にお金はかかりますか？","acceptedAnswer":{"@type":"Answer","text":"かかりません。診断は無料です。市や郵便局、買取店への支払いは、それぞれに直接行います。"}},
-{"@type":"Question","name":"入力した内容や写真はどこかに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。"}}
+{"@type":"Question","name":"入力した内容や写真はどこかに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。千葉市の今の最短収集日を調べるときは、選んだ区だけを使って千葉市の予約サイトに問い合わせます。"}}
 ]}
 </script>
 <style>
@@ -115,62 +115,86 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .tag button{border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:50%;width:22px;height:22px;padding:0;font-size:13px;line-height:22px}
 /* 結果 */
 .out{display:flex;flex-direction:column;gap:16px;min-width:0}
-.status{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 20px;align-items:center;background:var(--bg);border-radius:18px;padding:20px 22px}
-.status .cd{display:flex;flex-direction:column;line-height:1.2}
-.status .cd small{font-size:12px;color:var(--muted)}
-.status .cd b{font-family:var(--f-display);font-size:44px;font-weight:700;letter-spacing:.01em}
-.status .cd b span{font-size:18px;margin:0 2px}
-.status p{margin:0;font-size:14px}
-.status .pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;margin-bottom:4px}
+.out{font-size:17px}
+.next{background:var(--bg);border:3px solid var(--good);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.next .nl{font-size:15px;font-weight:700;color:var(--good)}
+.next .nt{margin:0;font-size:24px;font-weight:700;line-height:1.45}
+.next .nd{margin:0;font-size:16px;color:var(--ink)}
+.next .nd a{font-weight:700}
+.nbtn{display:block;text-align:center;font-size:18px;font-weight:700;color:#fff;background:var(--good);border-radius:12px;padding:14px 16px;text-decoration:none}
+.nbtn:hover{filter:brightness(1.08)}
+.nsteps{margin:0;padding-left:24px;font-size:16px}
+.cost{display:flex;flex-direction:column;gap:8px}
+.cost h3 small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
+.ctbl{width:100%;border-collapse:collapse;background:var(--bg);border-radius:14px;overflow:hidden;font-size:16px}
+.ctbl th,.ctbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.ctbl th{font-weight:700}.ctbl td{text-align:right;font-weight:700;white-space:nowrap}
+.ctbl small{display:block;font-size:13px;font-weight:400;color:var(--muted);white-space:normal}
+.ctbl tr.bad th,.ctbl tr.bad td{color:var(--muted)}
+@media (max-width:520px){.ctbl td{white-space:normal}}
+.wbtn{display:block;width:100%;font-size:17px;font-weight:700;color:var(--accent);background:var(--accent-soft);border:2px solid var(--accent);border-radius:12px;padding:12px 14px;cursor:pointer}
+.ct{display:flex;flex-direction:column;gap:2px;margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:15px;color:var(--ink)}
+.ct b{font-size:15px}.ct span{color:var(--muted);font-size:14px;line-height:1.6}.ct a{font-weight:700}
+.slot{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px 20px;display:flex;flex-direction:column;gap:8px;font-size:16px}
+.slot .nl{font-size:15px;font-weight:700;color:var(--accent)}
+.slot p{margin:0}
+.slot .sd{font-size:18px}.slot .sd b{font-size:26px}
+.slot .sv{font-weight:700}.slot .sv.ok{color:var(--good)}.slot .sv.late{color:var(--warn)}
+.slot small{font-size:14px;color:var(--muted)}
+.status{margin:0;background:var(--bg);border-radius:18px;padding:16px 20px;font-size:18px;line-height:1.6}
+.status .num{font-size:28px;margin:0 2px}
+.status small{display:block;margin-top:4px;font-size:15px;color:var(--muted)}
+.status .pill{display:inline-block;font-size:15px;font-weight:700;border-radius:999px;padding:2px 12px}
 .status.ok .pill{background:var(--good-soft);color:var(--good)}
 .status.late .pill{background:var(--warn-soft);color:var(--warn)}
-.status.late .cd b{color:var(--warn)}
-@media (max-width:420px){.status{grid-template-columns:minmax(0,1fr)}}
+.status.late .num{color:var(--warn)}
+.sh{font-size:19px;font-weight:700;margin:6px 0 0}
 .cards{display:flex;flex-direction:column;gap:12px}
 .icard{background:var(--bg);border-radius:18px;overflow:hidden}
 .ich{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:16px 20px 10px}
-.ich h3{font-size:20px}
-.icat{font-size:12px;color:var(--muted)}
+.ich h3{font-size:22px}
+.icat{font-size:14px;color:var(--muted)}
 .irec{display:none}
 .rwhy{color:var(--good);font-weight:700}
-.nhl{margin:2px 0 6px;padding-left:18px;font-size:13px;display:flex;flex-direction:column;gap:3px}
-.nhd{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:4px 0 8px;font-size:13px}.nhd dt{font-weight:700;white-space:nowrap}.nhd dd{margin:0}
-.oh{font-size:13px;font-weight:700;color:var(--muted);margin:0 0 -6px;letter-spacing:.04em}
+.nhl{margin:2px 0 6px;padding-left:18px;font-size:15px;display:flex;flex-direction:column;gap:3px}
+.nhd{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:4px 0 8px;font-size:15px}.nhd dt{font-weight:700;white-space:nowrap}.nhd dd{margin:0}
+.oh{font-size:15px;font-weight:700;color:var(--muted);margin:0 0 -6px;letter-spacing:.04em}
 h1 .eyebrow{display:block;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-bottom:8px;font-family:inherit}
 .iol{padding:0 10px 10px;display:flex;flex-direction:column;gap:2px}
 .io{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border-radius:12px}
-.io .mk{font-weight:700;color:var(--accent);font-size:15px;text-align:center}
-.io .ion b{display:block;font-size:15px;font-weight:700}
-.io small{display:block;font-size:12px;color:var(--muted);line-height:1.6}
-.io .ioc{text-align:right;font-size:14px;font-weight:700;white-space:nowrap}
+.io .mk{font-weight:700;color:var(--accent);font-size:17px;text-align:center}
+.io .ion b{display:block;font-size:17px;font-weight:700}
+.io small{display:block;font-size:15px;color:var(--muted);line-height:1.6}
+.io .ioc{text-align:right;font-size:16px;font-weight:700;white-space:nowrap}
 .io.rec{background:var(--good-soft)}
 .io.rec .mk{color:var(--good)}
-.io.rec .ion b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:11px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
+.io.rec .ion>b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:13px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
 .io.ng{opacity:.45}
 .io.ng .mk{color:var(--muted)}
 @media (max-width:520px){.io{grid-template-columns:22px minmax(0,1fr)}.io .ioc{grid-column:2;text-align:left}}
 .free{background:var(--bg);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
-.free h3{font-size:17px}
+.free h3{font-size:19px}
 .free ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
-.free p{margin:0;font-size:13px;color:var(--muted)}
+.free p{margin:0;font-size:15px;color:var(--muted)}
+
 .where{display:flex;flex-direction:column;gap:10px;padding:4px 2px 0}
-.where h3{font-size:15px}
-.wl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.where h3{font-size:19px}
+.wl{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
 @media (max-width:520px){.wl{grid-template-columns:minmax(0,1fr)}}
 .w{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.w .wk{font-size:12px;font-weight:700;color:var(--accent)}
-.w .wn{font-size:13px;font-weight:700}
-.w .wd{font-size:12px;color:var(--muted);line-height:1.6}
+.w .wk{font-size:15px;font-weight:700;color:var(--accent)}
+.w .wn{font-size:17px;font-weight:700}
+.w .wd{font-size:15px;color:var(--muted);line-height:1.6}
 .w.off{opacity:.72;background:transparent}
 .w .wd a{color:var(--accent);font-weight:700}
 .wls{display:flex;flex-direction:column;gap:4px;margin:4px 0}
-.wa{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:8px;padding:5px 9px;background:var(--bg)}
+.wa{font-size:15px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:8px;padding:5px 9px;background:var(--bg)}
 .wa::after{content:" ↗";font-weight:400}
 .wa:hover{background:var(--accent-soft)}
 .lnk{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;font-size:12px;cursor:pointer}
 .pick{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);font-size:13px;display:flex;flex-direction:column;gap:8px}
 .w.on{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
-.wsub{margin:-6px 0 0;font-size:12px;color:var(--muted)}
+.wsub{margin:0;font-size:14px;color:var(--muted)}
 .wmine{font-size:12px;font-weight:700;color:var(--good);margin-top:4px}
 .wnone{font-size:12px;color:var(--muted);margin-top:4px}
 .soon{border:1px dashed var(--faint);border-radius:14px;padding:14px 18px;font-size:13px;color:var(--muted);background:var(--bg)}
@@ -226,7 +250,7 @@ details p{margin:8px 0 0;color:var(--muted)}
     <div class="hero-txt">
     <h1><span class="eyebrow">粗大ごみの出し方を無料診断</span>その粗大ごみ、<em class="nb">引越しまでにどう出す？</em></h1>
     <p>引越し日と出したい物を入れると、品目ごとに使える出し方（市の回収・買取・持込・家電リサイクル）と料金の目安がわかります。</p>
-    <ul class="facts"><li>診断は無料</li><li>入力や写真はどこにも送られません</li><li>横浜・川崎・世田谷・杉並・さいたま・千葉・佐倉</li></ul>
+    <ul class="facts"><li>診断は無料</li><li>入力や写真はどこにも送られません</li><li>全国の市区町村で使えます（記事のある市区は料金・窓口つき）</li></ul>
     </div>
     <img class="hero-img" src="/img/hero.webp" width="1200" height="900" alt="引越し前の明るい部屋。段ボール箱と、出す予定のソファと本棚" fetchpriority="high">
   </header>
@@ -241,23 +265,10 @@ details p{margin:8px 0 0;color:var(--muted)}
 
   <main class="guide">
     <section>
-      <h2>対応している市区の粗大ごみ受付と料金の目安</h2>
-      <p>2026年10月30日に各自治体の公式サイトで確認した内容です。変わることがあるので、申し込む前に公式サイトをご確認ください。</p>
-      <div class="tblw"><table class="tbl" id="citytbl">
-        <thead><tr><th>市区</th><th>申し込み</th><th>料金</th><th>収集までの目安</th><th>持ち込み</th></tr></thead>
-        <tbody>
-<tr><td><a href="https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/shushu/sodaigomi/dashikata/sodaigomi.html" target="_blank" rel="noopener">横浜市</a></td><td data-h="申し込み">インターネット・チャット・LINE（24時間）、電話</td><td data-h="料金" class="num">品目ごと（市の手数料一覧）</td><td data-h="収集まで">2週間程度（締め切りは収集日の7日前）</td><td data-h="持ち込み">市内4か所の自己搬入ヤード</td></tr>
-<tr><td><a href="https://www.city.kawasaki.jp/300/page/0000012773.html" target="_blank" rel="noopener">川崎市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">¥300・¥600・¥1,200の3区分</td><td data-h="収集まで">2週間ほど（収集は月2回）（推定）</td><td data-h="持ち込み">受付センターに確認</td></tr>
-<tr><td><a href="https://www.city.setagaya.lg.jp/02239/382.html" target="_blank" rel="noopener">世田谷区</a></td><td data-h="申し込み">インターネット、電話</td><td data-h="料金" class="num">品目ごと（区の手数料一覧）</td><td data-h="収集まで">2週間ほど（収集日は申込時に案内）（推定）</td><td data-h="持ち込み">船橋粗大ごみ中継所（収集の半額程度）</td></tr>
-<tr><td><a href="https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html" target="_blank" rel="noopener">杉並区</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">処理券A¥200・B¥300の組み合わせ</td><td data-h="収集まで">2〜3週間程度</td><td data-h="持ち込み">日曜のみ・1点¥400（要申込）</td></tr>
-<tr><td><a href="https://www.city.saitama.lg.jp/001/006/010/003/p072165.html" target="_blank" rel="noopener">さいたま市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">1品¥550（スプリング入りマットレス等は¥1,100〜¥2,200）</td><td data-h="収集まで">混雑時は1か月ほど（締め切りは収集日の3営業日前）</td><td data-h="持ち込み">市の3施設へ持込（予約制）</td></tr>
-<tr><td><a href="https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html" target="_blank" rel="noopener">千葉市</a></td><td data-h="申し込み">インターネット・LINE、電話（一部品目は電話のみ）</td><td data-h="料金" class="num">¥390〜¥1,560</td><td data-h="収集まで">受付完了から1〜2週間（受付完了まで平日5日ほど）</td><td data-h="持ち込み">清掃施設へ自己搬入</td></tr>
-<tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">2週間ほど（地区の収集業者に電話で申込）（推定）</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・料金は市に確認）</td></tr>
-</tbody>
-      </table></div>
-      <p>市区ごとの申し込み方・料金・持ち込み先・近くの買取店は、地域ごとの記事にまとめています。記事のある市区は、診断の「お住まい」に市区名を入れると、その市区のインターネット予約・電話の窓口つきで診断できます。</p>
+      <h2>地域別の粗大ごみの出し方</h2>
+      <p>診断は全国の市区町村で使えます。地域の記事がある市区（政令市・東京23区・中核市など）は、申し込み先・料金・持ち込み先・近くの買取店まで出ます。記事のない市区町村は、出し方の選び方と公式サイトへの案内までで、料金や収集までの日数は公式サイトで確かめる形になります。</p>
       <div class="arealinks"><!-- arealinks:start --><p><b>首都圏</b>：<a href="/guide/yokohama/">横浜市</a>・<a href="/guide/kawasaki/">川崎市</a>・<a href="/guide/setagaya/">世田谷区</a>・<a href="/guide/suginami/">杉並区</a>・<a href="/guide/saitama/">さいたま市</a>・<a href="/guide/chiba/">千葉市</a>・<a href="/guide/sakura/">佐倉市</a>・<a href="/guide/abiko/">我孫子市</a>・<a href="/guide/adachi/">足立区</a>・<a href="/guide/ageo/">上尾市</a>・<a href="/guide/akishima/">昭島市</a>・<a href="/guide/arakawa/">荒川区</a>・<a href="/guide/asaka/">朝霞市</a>・<a href="/guide/atsugi/">厚木市</a>・<a href="/guide/bunkyo/">文京区</a>・<a href="/guide/chigasaki/">茅ヶ崎市</a>・<a href="/guide/chiyoda/">千代田区</a>・<a href="/guide/chofu/">調布市</a>・<a href="/guide/chuo/">中央区</a>・<a href="/guide/ebina/">海老名市</a>・<a href="/guide/edogawa/">江戸川区</a>・<a href="/guide/fuchu/">府中市</a>・<a href="/guide/fujimi/">富士見市</a>・<a href="/guide/fujimino/">ふじみ野市</a>・<a href="/guide/fujisawa/">藤沢市</a>・<a href="/guide/fukaya/">深谷市</a>・<a href="/guide/funabashi/">船橋市</a>・<a href="/guide/hachioji/">八王子市</a>・<a href="/guide/hadano/">秦野市</a>・<a href="/guide/higashikurume/">東久留米市</a>・<a href="/guide/higashimurayama/">東村山市</a>・<a href="/guide/hino/">日野市</a>・<a href="/guide/hiratsuka/">平塚市</a>・<a href="/guide/hitachinaka/">ひたちなか市</a>・<a href="/guide/ichihara/">市原市</a>・<a href="/guide/ichikawa/">市川市</a>・<a href="/guide/inagi/">稲城市</a>・<a href="/guide/inzai/">印西市</a>・<a href="/guide/iruma/">入間市</a>・<a href="/guide/isesaki/">伊勢崎市</a>・<a href="/guide/itabashi/">板橋区</a>・<a href="/guide/kamagaya/">鎌ケ谷市</a>・<a href="/guide/kamakura/">鎌倉市</a>・<a href="/guide/kashiwa/">柏市</a>・<a href="/guide/kasukabe/">春日部市</a>・<a href="/guide/katsushika/">葛飾区</a>・<a href="/guide/kawagoe/">川越市</a>・<a href="/guide/kawaguchi/">川口市</a>・<a href="/guide/kazo/">加須市</a>・<a href="/guide/kisarazu/">木更津市</a>・<a href="/guide/kita/">北区</a>・<a href="/guide/kodaira/">小平市</a>・<a href="/guide/koga/">古河市</a>・<a href="/guide/koganei/">小金井市</a>・<a href="/guide/kokubunji/">国分寺市</a>・<a href="/guide/konosu/">鴻巣市</a>・<a href="/guide/koshigaya/">越谷市</a>・<a href="/guide/koto/">江東区</a>・<a href="/guide/kuki/">久喜市</a>・<a href="/guide/kumagaya/">熊谷市</a>・<a href="/guide/machida/">町田市</a>・<a href="/guide/maebashi/">前橋市</a>・<a href="/guide/matsudo/">松戸市</a>・<a href="/guide/meguro/">目黒区</a>・<a href="/guide/minato/">港区</a>・<a href="/guide/misato/">三郷市</a>・<a href="/guide/mitaka/">三鷹市</a>・<a href="/guide/mito/">水戸市</a>・<a href="/guide/musashino/">武蔵野市</a>・<a href="/guide/nagareyama/">流山市</a>・<a href="/guide/nakano/">中野区</a>・<a href="/guide/narashino/">習志野市</a>・<a href="/guide/narita/">成田市</a>・<a href="/guide/nerima/">練馬区</a>・<a href="/guide/niiza/">新座市</a>・<a href="/guide/nishitokyo/">西東京市</a>・<a href="/guide/noda/">野田市</a>・<a href="/guide/odawara/">小田原市</a>・<a href="/guide/ome/">青梅市</a>・<a href="/guide/ota/">大田区</a>・<a href="/guide/otagunma/">太田市</a>・<a href="/guide/oyama/">小山市</a>・<a href="/guide/sagamihara/">相模原市</a>・<a href="/guide/sakado/">坂戸市</a>・<a href="/guide/sayama/">狭山市</a>・<a href="/guide/shibuya/">渋谷区</a>・<a href="/guide/shinagawa/">品川区</a>・<a href="/guide/shinjuku/">新宿区</a>・<a href="/guide/soka/">草加市</a>・<a href="/guide/sumida/">墨田区</a>・<a href="/guide/tachikawa/">立川市</a>・<a href="/guide/taito/">台東区</a>・<a href="/guide/takasaki/">高崎市</a>・<a href="/guide/tama/">多摩市</a>・<a href="/guide/toda/">戸田市</a>・<a href="/guide/tokorozawa/">所沢市</a>・<a href="/guide/toride/">取手市</a>・<a href="/guide/toshima/">豊島区</a>・<a href="/guide/tsuchiura/">土浦市</a>・<a href="/guide/tsukuba/">つくば市</a>・<a href="/guide/urayasu/">浦安市</a>・<a href="/guide/utsunomiya/">宇都宮市</a>・<a href="/guide/yachiyo/">八千代市</a>・<a href="/guide/yamato/">大和市</a>・<a href="/guide/yokosuka/">横須賀市</a>・<a href="/guide/zama/">座間市</a></p><p><b>関西</b>：<a href="/guide/osaka/">大阪市</a>・<a href="/guide/kobe/">神戸市</a>・<a href="/guide/kyoto/">京都市</a>・<a href="/guide/akashi/">明石市</a>・<a href="/guide/amagasaki/">尼崎市</a>・<a href="/guide/daito/">大東市</a>・<a href="/guide/higashiosaka/">東大阪市</a>・<a href="/guide/himeji/">姫路市</a>・<a href="/guide/hirakata/">枚方市</a>・<a href="/guide/ibaraki/">茨木市</a>・<a href="/guide/ikeda/">池田市</a>・<a href="/guide/itami/">伊丹市</a>・<a href="/guide/izumi/">和泉市</a>・<a href="/guide/kadoma/">門真市</a>・<a href="/guide/kakogawa/">加古川市</a>・<a href="/guide/kameoka/">亀岡市</a>・<a href="/guide/kawanishi/">川西市</a>・<a href="/guide/kishiwada/">岸和田市</a>・<a href="/guide/kusatsu/">草津市</a>・<a href="/guide/kyotanabe/">京田辺市</a>・<a href="/guide/matsubara/">松原市</a>・<a href="/guide/minoh/">箕面市</a>・<a href="/guide/moriguchi/">守口市</a>・<a href="/guide/nara/">奈良市</a>・<a href="/guide/neyagawa/">寝屋川市</a>・<a href="/guide/nishinomiya/">西宮市</a>・<a href="/guide/otsu/">大津市</a>・<a href="/guide/sakai/">堺市</a>・<a href="/guide/sanda/">三田市</a>・<a href="/guide/suita/">吹田市</a>・<a href="/guide/takarazuka/">宝塚市</a>・<a href="/guide/takatsuki/">高槻市</a>・<a href="/guide/toyonaka/">豊中市</a>・<a href="/guide/uji/">宇治市</a>・<a href="/guide/wakayama/">和歌山市</a>・<a href="/guide/yao/">八尾市</a></p><p><b>東海</b>：<a href="/guide/nagoya/">名古屋市</a>・<a href="/guide/anjo/">安城市</a>・<a href="/guide/fuji/">富士市</a>・<a href="/guide/fujieda/">藤枝市</a>・<a href="/guide/gifu/">岐阜市</a>・<a href="/guide/hamamatsu/">浜松市</a>・<a href="/guide/ichinomiya/">一宮市</a>・<a href="/guide/kariya/">刈谷市</a>・<a href="/guide/kasugai/">春日井市</a>・<a href="/guide/komaki/">小牧市</a>・<a href="/guide/nishio/">西尾市</a>・<a href="/guide/numazu/">沼津市</a>・<a href="/guide/ogaki/">大垣市</a>・<a href="/guide/okazaki/">岡崎市</a>・<a href="/guide/seto/">瀬戸市</a>・<a href="/guide/shizuoka/">静岡市</a>・<a href="/guide/suzuka/">鈴鹿市</a>・<a href="/guide/toyohashi/">豊橋市</a>・<a href="/guide/toyokawa/">豊川市</a>・<a href="/guide/toyota/">豊田市</a>・<a href="/guide/tsu/">津市</a>・<a href="/guide/yaizu/">焼津市</a>・<a href="/guide/yokkaichi/">四日市市</a></p><p><b>北海道・東北</b>：<a href="/guide/sapporo/">札幌市</a>・<a href="/guide/akita/">秋田市</a>・<a href="/guide/aomori/">青森市</a>・<a href="/guide/asahikawa/">旭川市</a>・<a href="/guide/fukushima/">福島市</a>・<a href="/guide/hachinohe/">八戸市</a>・<a href="/guide/hakodate/">函館市</a>・<a href="/guide/iwaki/">いわき市</a>・<a href="/guide/koriyama/">郡山市</a>・<a href="/guide/morioka/">盛岡市</a>・<a href="/guide/sendai/">仙台市</a>・<a href="/guide/yamagata/">山形市</a></p><p><b>甲信越・北陸</b>：<a href="/guide/fukui/">福井市</a>・<a href="/guide/kanazawa/">金沢市</a>・<a href="/guide/kofu/">甲府市</a>・<a href="/guide/matsumoto/">松本市</a>・<a href="/guide/nagano/">長野市</a>・<a href="/guide/nagaoka/">長岡市</a>・<a href="/guide/niigata/">新潟市</a>・<a href="/guide/toyama/">富山市</a></p><p><b>中国・四国</b>：<a href="/guide/fukuyama/">福山市</a>・<a href="/guide/higashihiroshima/">東広島市</a>・<a href="/guide/hiroshima/">広島市</a>・<a href="/guide/kochi/">高知市</a>・<a href="/guide/kurashiki/">倉敷市</a>・<a href="/guide/kure/">呉市</a>・<a href="/guide/matsue/">松江市</a>・<a href="/guide/matsuyama/">松山市</a>・<a href="/guide/okayama/">岡山市</a>・<a href="/guide/shimonoseki/">下関市</a>・<a href="/guide/takamatsu/">高松市</a>・<a href="/guide/tokushima/">徳島市</a>・<a href="/guide/tottori/">鳥取市</a></p><p><b>九州</b>：<a href="/guide/fukuoka/">福岡市</a>・<a href="/guide/kagoshima/">鹿児島市</a>・<a href="/guide/kitakyushu/">北九州市</a>・<a href="/guide/kumamoto/">熊本市</a>・<a href="/guide/kurume/">久留米市</a>・<a href="/guide/miyazaki/">宮崎市</a>・<a href="/guide/nagasaki/">長崎市</a>・<a href="/guide/naha/">那覇市</a>・<a href="/guide/oita/">大分市</a>・<a href="/guide/saga/">佐賀市</a>・<a href="/guide/sasebo/">佐世保市</a></p><!-- arealinks:end --></div>
-      <p>出し方の流れや、間に合わないときの方法は<a href="/guide/late/">こちらの記事</a>にまとめています。上記以外の地域は、お住まいの自治体の公式サイトで「粗大ごみ」のページを確認してください。</p>
+      <p>出し方の流れや、間に合わないときの方法は<a href="/guide/late/">こちらの記事</a>にまとめています。</p>
     </section>
 
     <section>
@@ -275,9 +286,9 @@ details p{margin:8px 0 0;color:var(--muted)}
       <details><summary>引越しまでに粗大ごみの予約が間に合わないときは？</summary><p>まだ使える物は出張買取（断っても無料のお店）、自家用車がある場合は<a href="/guide/mochikomi/">受入施設への持込</a>、それも難しい場合は新居に運んで新しい自治体で出す方法があります。市の予約ページはキャンセルで空きが出ることもあるので、こまめに確認するのも手です。</p></details>
       <details><summary>冷蔵庫や洗濯機は粗大ごみに出せますか？</summary><p>冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコンの家電4品目は家電リサイクル法の対象で、市区町村の粗大ごみには出せません。買い替えるお店か買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます。</p></details>
       <details><summary>粗大ごみは引越しの何日前に申し込めばいいですか？</summary><p>自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。</p></details>
-      <details><summary>粗大ごみの料金はいくらですか？</summary><p>自治体と品目の大きさで決まります。たとえば千葉市は390円〜1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日確認）。正確な金額は各自治体の手数料一覧で確認してください。ほかの市区の料金と払い方は、<a href="/guide/shoriken/#ryokin">粗大ごみ処理券（シール）の記事</a>に一覧があります。</p></details>
+      <details><summary>粗大ごみの料金はいくらですか？</summary><p>自治体と品目の大きさで決まります。1点ごとに数百円からで、大きい物ほど高くなる段階制の市区町村が多くあります。正確な金額は、お住まいの自治体の手数料一覧で確認してください。市区ごとの料金は、<a href="/guide/shoriken/#ryokin">処理券の記事</a>にまとめています。</p></details>
       <details><summary>この診断にお金はかかりますか？</summary><p>かかりません。市や郵便局、買取店への支払いは、それぞれに直接行います。</p></details>
-      <details><summary>入力した内容や写真はどこかに送られますか？</summary><p>送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。</p></details>
+      <details><summary>入力した内容や写真はどこかに送られますか？</summary><p>送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。千葉市の今の最短収集日を調べるときは、選んだ区だけを使って千葉市の予約サイトに問い合わせます。</p></details>
     </section>
   </main>
 
@@ -293,7 +304,7 @@ details p{margin:8px 0 0;color:var(--muted)}
         <li>品目別の捨て方：<a href="/guide/item/bed/">マットレス・ベッド</a>・<a href="/guide/item/sofa/">ソファ</a>・<a href="/guide/item/futon/">布団</a>・<a href="/guide/item/bicycle/">自転車</a></li>
         <li><a href="/guide/scam/">不用品回収のぼったくりに注意（実例と見分け方）</a></li>
         <li><a href="/guide/new-home/">粗大ごみを新居に持っていくと損する理由</a></li>
-        <li><a href="/guide/#area">地域ごとの粗大ごみの出し方（横浜・大阪・名古屋・札幌・福岡など）</a></li>
+        <li><a href="/guide/#area">地域ごとの粗大ごみの出し方（政令市・東京23区など）</a></li>
       </ul>
       <p><a href="/guide/">記事の一覧を見る</a></p>
     </section>
@@ -352,11 +363,10 @@ const AREALEAD={adachi:[14,"約1週間先になることがある（週末・引
   fukuoka:[14,"最短1週間ほど","min"],kawaguchi:[14,"最短で3営業日後の案内","min"],tachikawa:[14,"申込日の7日後（混み具合で変わる）から選べる","min"]};
 const leadDays=k=>AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]:14;
 const leadNote=k=>`（収集までの日数は${AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]+"日":"2週間ほど"}で計算）`;
-const ADDR=[[/佐倉/,"sakura"],[/横浜/,"yokohama"],[/川崎/,"kawasaki"],[/世田谷/,"setagaya"],[/杉並/,"suginami"],[/さいたま|埼玉市/,"saitama"],[/千葉市|千葉県千葉|美浜区|花見川区|稲毛区|若葉区/,"chiba"]];
 // よく出す物（1タップで選べる）。一覧にない物は名前を入れるか写真で足す
 const ITEMCHIPS=["ソファ","ベッド","マットレス","布団","タンス","棚・本棚","机・テーブル","椅子","自転車","冷蔵庫","洗濯機","テレビ","エアコン","電子レンジ"];
 const Q=[
-  {k:"city",t:"お住まい",one:true,o:Object.entries(CITIES).map(([k,v])=>[k,v[0]])},
+  {k:"city",t:"お住まい",one:true,o:[]},
   {k:"days",t:"出したい日(引越し日)まで",one:true,o:[["3","数日後"],["7","1週間後"],["14","2週間後"],["30","1か月後"],["60","2か月以上先"]]},
   {k:"items",t:"出したい物",sub:"複数OK",o:ITEMCHIPS.map(x=>[x,x])},
   {k:"car",t:"自家用車",sub:"間に合わないときの持込に使います",one:true,o:[["no","持っていない"],["yes","持っている"]]},
@@ -394,7 +404,7 @@ function drawQs(){
     let body=`<div class="chips">${chipsHTML(q)}</div>`;
     if(q.k==="days") body=`<input type="date" id="move" class="inp" value="${A.move}" min="${iso(today)}" aria-label="引越し日">
       ${A.move?`<div class="sub"><button type="button" class="lnk" id="nodate">日付がまだ決まっていない場合はこちら</button></div>`:`<div class="sub">日付が決まっていない場合は、だいたいで選んでください</div><div class="chips">${chipsHTML(q)}</div>`}`;
-    if(q.k==="city") body=`<div class="addrow"><input type="text" id="addr" class="inp" value="${esc(A.addr||"")}" placeholder="住所や市区名でもOK（例:佐倉市ユーカリが丘）" aria-label="住所や市区名">${"geolocation" in navigator?`<button type="button" class="chip" id="geo"${A.geobusy?" disabled":""}>${A.geobusy?"調べています…":"現在地から入れる"}</button>`:""}</div><div class="sub" id="addrmsg">${A.addrmsg||"または選ぶ"}</div><div class="sub">現在地は、使ってよいかをブラウザが確認してから調べます。市区町村名を知るために緯度・経度だけを国土地理院（国の機関）に送り、ほかには送らず保存もしません</div><div class="chips">${chipsHTML(q)}</div>`;
+    if(q.k==="city") body=`<div class="addrow"><input type="text" id="addr" class="inp" value="${esc(A.addr||"")}" placeholder="市区町村名か住所（例:〇〇市〇〇町）" aria-label="市区町村名か住所" list="munilist" autocomplete="off">${"geolocation" in navigator?`<button type="button" class="chip" id="geo"${A.geobusy?" disabled":""}>${A.geobusy?"調べています…":"現在地から入れる"}</button>`:""}</div><div class="sub" id="addrmsg">${A.addrmsg||"全国の市区町村から選べます"}</div>${A.amb&&A.amb.length?`<div class="chips">${A.amb.slice(0,12).map(r=>`<button type="button" class="chip" data-muni="${r[0]}">${esc(r[2])}（${esc(r[1])}）</button>`).join("")}</div>`:""}<div class="sub">現在地は、使ってよいかをブラウザが確認してから調べます。市区町村名を知るために緯度・経度だけを国土地理院（国の機関）に送り、ほかには送らず保存もしません</div>`;
     if(q.k==="to") body=`<input type="text" id="to" class="inp" value="${esc(A.toq||"")}" placeholder="例:港区、大阪市北区" aria-label="新居の自治体" autocomplete="off"><div class="sub" id="tomsg">${toMsg()}</div>`;
     if(q.k==="items") body=`<div class="chips">${chipsHTML(q)}</div>
       <div class="sub">一覧にない物は、名前を入れるか写真で追加</div>
@@ -417,31 +427,75 @@ function findArea(v){
   return ks.find(k=>v.includes(AREAS[k].n))||ks.find(k=>v===AREAS[k].n.slice(0,-1))||"";
 }
 // 品目の名前から、料金表の行を探すための言葉
-const FEEKW=[[/ソファ/,/ソファ/],[/マットレス|ベッドマット/,/マット/],[/ベッド/,/ベッド(?!マット)/],[/タンス|箪笥|たんす/,/タンス|たんす|箪笥/],[/布団|ふとん/,/布団|ふとん/],[/食器棚/,/食器棚/],[/本棚/,/本棚/],[/机|デスク/,/机/],[/テーブル/,/テーブル/],[/椅子|いす|イス|チェア/,/いす|椅子|チェア/],[/自転車/,/自転車/],[/電子レンジ|レンジ/,/電子レンジ/],[/掃除機/,/掃除機/],[/扇風機/,/扇風機/],[/ストーブ/,/ストーブ/],[/こたつ|コタツ/,/こたつ/],[/畳|たたみ/,/畳|たたみ/],[/カーペット|じゅうたん|絨毯|ラグ/,/カーペット|じゅうたん/],[/ミシン/,/ミシン/],[/鏡台|ドレッサー/,/鏡台/]];
+const FEEKW=[[/ソファ/,/ソファ/],[/マットレス|ベッドマット/,/マット/],[/ベッド/,/^(?!.*ソファ).*ベッド(?!マット)/],[/タンス|箪笥|たんす/,/タンス|たんす|箪笥/],[/布団|ふとん/,/布団|ふとん/],[/食器棚/,/食器棚/],[/本棚|^棚$/,/本棚|書棚|棚/],[/机|デスク/,/机/],[/テーブル/,/テーブル/],[/椅子|いす|イス|チェア/,/いす|椅子|チェア/],[/自転車/,/自転車/],[/電子レンジ|レンジ/,/電子レンジ/],[/掃除機/,/掃除機/],[/扇風機/,/扇風機/],[/ストーブ/,/ストーブ/],[/こたつ|コタツ/,/こたつ/],[/畳|たたみ/,/畳|たたみ/],[/カーペット|じゅうたん|絨毯|ラグ/,/カーペット|じゅうたん/],[/ミシン/,/ミシン/],[/鏡台|ドレッサー/,/鏡台/]];
 // 「、」で分ける（かっこの中は分けない）
 const segs=t=>{const o=[];let d=0,b="";for(const ch of t){if(ch==="（")d++;if(ch==="）")d--;if(ch==="、"&&!d){o.push(b);b=""}else b+=ch}o.push(b);return o};
 // その地域の料金表から、品目に合う行を返す。[[表示, 収集の料金, 持ち込みの料金],...]
+// 横浜市は記事に料金表がないので、市の「粗大ごみ処理手数料（インターネット品目一覧）」から主な品目を載せる（2026-11-01確認）
+const FEEX={"横浜市":{src:"https://www.sodai.city.yokohama.lg.jp/eco/view/yokohama/dustlistSearch.html",items:[["いす", "200円"], ["応接用いす（1人用）", "500円"], ["応接用いす（2人以上用）", "1,000円"], ["学習机（両袖机以外）", "1,000円"], ["学習机（両袖有り）", "1,500円"], ["カラーボックス（長辺1m未満）", "200円"], ["座いす", "200円"], ["座卓（長辺1m未満）", "500円"], ["座卓（長辺1m以上）", "1,000円"], ["自転車（子供用自転車を含む）", "500円"], ["書棚（長辺1m未満）", "1,000円"], ["書棚（長辺1m以上）", "1,500円"], ["食器棚（長辺1m未満）", "1,000円"], ["食器棚（長辺1m以上）", "1,500円"], ["ソファーベッド", "1,000円"], ["ソファー（1人用）", "500円"], ["ソファー（2人以上用）", "1,000円"], ["たんす（長辺1m未満）", "1,000円"], ["たんす（長辺1m以上）", "1,500円"], ["机（両袖机以外）", "1,000円"], ["机（両袖有り）", "1,500円"], ["電子レンジ", "500円"], ["電動自転車", "500円"], ["テーブル（長辺1m未満）", "500円"], ["テーブル（長辺1m以上）", "1,000円"], ["戸棚・棚（長辺1m未満）", "200円"], ["戸棚・棚（長辺1m以上）", "500円"], ["布団&マットレス（2枚まで1組に）", "200円"], ["ベッド（枠のみ）", "1,000円"], ["ベッドマットレス（スプリング無し）", "1,000円"], ["ベッドマットレス（スプリング付き）", "2,200円"]]}};
 function itemFees(ar,label){
-  if(!ar||!ar.items)return [];
-  const kw=FEEKW.find(([re])=>re.test(label));if(!kw)return [];
+  const items=ar?[...(ar.items||[]),...((FEEX[ar.n]||{}).items||[])]:[];
+  if(!items.length)return [];
+  // 「机・テーブル」のようなチップは、それぞれの言葉で探す
+  const kws=[...new Set([label,...String(label).split("・")].map(x=>FEEKW.find(([re])=>re.test(x))).filter(Boolean))];
+  if(!kws.length)return [];
   const out=[];
-  ar.items.forEach(([t,fee,drop])=>{
-    if(/^粗大ごみ（/.test(t)){out.push([t,fee,drop]);return}
-    segs(t).forEach(x=>{if(kw[1].test(x.replace(/（[^）]*(以外|除|別)[^）]*）/g,"")))out.push([x,fee,drop])});
+  items.forEach(([t,fee,drop])=>{
+    if(/^(粗大ごみ|収集)（/.test(t)){out.push([t,fee,drop]);return}
+    segs(t).forEach(x=>{const y=x.replace(/（[^）]*(以外|除|別)[^）]*）/g,"");if(kws.some(kw=>kw[1].test(y))&&!out.some(o=>o[0]===x&&o[1]===fee))out.push([x,fee,drop])});
   });
   return out;
 }
+// 料金の幅（数値）。[最小, 最大] か null
+const yenNum=a=>{const ns=a.flatMap(x=>(x.match(/[\d,]+(?=円)/g)||[]).map(n=>+n.replace(/,/g,"")));return ns.length?[Math.min(...ns),Math.max(...ns)]:null};
+const yr=([lo,hi])=>"¥"+lo.toLocaleString()+(hi>lo?"〜¥"+hi.toLocaleString():"");
+// 家電4品目のリサイクル料金（主なメーカーの例・税込。名古屋市「家電リサイクル法対象品目の出し方」2026-08-27更新）。このほかにお店の収集運搬料がかかる
+const APPFEE=[[/冷蔵|冷凍/,3740,4730],[/洗濯|乾燥機/,2530,2530],[/テレビ|ＴＶ|TV/i,1870,2970],[/エアコン|室外機/,550,990]];
+const APPSRC="https://www.city.nagoya.jp/kurashi/gomi/1012183/1035059/1012216/1012222.html";
+const appFee=l=>{const x=APPFEE.find(([re])=>re.test(l));return x?[x[1],x[2]]:null};
+// 軽トラック1台分の不用品回収の相場（ミツモア 2026年5月の成約1,467件の中央50%。2026-08-25更新の記事）
+const TRUCK=[9000,14000],TRUCKSRC="https://meetsmore.com/services/unwanted-item-pick-up/media/272763";
 const yen=a=>{const ns=a.flatMap(x=>(x.match(/[\d,]+(?=円)/g)||[]).map(n=>+n.replace(/,/g,"")));if(!ns.length)return a.includes("無料")?"無料":"";const lo=Math.min(...ns),hi=Math.max(...ns);return (a.includes("無料")?"無料":"¥"+lo.toLocaleString())+(hi>lo||a.includes("無料")?"〜¥"+hi.toLocaleString():"")};
 const feeList=fs=>fs.map(([t,f])=>`${esc(t)} ${esc(f)}`).join("、");
 function judge(){const c=CITIES[A.city],ar=AREAS[A.city]||(A.city==="other"&&AREAS[A.area])||null,j={key:A.city,cname:c[0],lead:A.city==="other"&&A.area?leadDays(A.area):c[1],web:c[2],fee:c[3],drop:c[5],url:c[6],d:days(),ar};
   if(A.city==="other"&&ar){j.cname=ar.n;j.url=ar.url||"";j.fee=ptOf(ar,"料金","支払い")||"品目ごと（公式ページで確認）";j.drop=ptOf(ar,"持ち込み")||"持ち込めるかは公式ページで確認";j.web=ar.bk?ar.bk.web==="open"||ar.bk.web==="cond":/インターネット|LINE/.test(ptOf(ar,"申し込み"))}
   // 表示に使う名前。地域がわからないときは「お住まいの市区町村」
-  j.nm=A.city==="other"&&!ar?"お住まいの市区町村":j.cname;
+  j.nm=A.city==="other"&&!ar?(A.muni?A.muni[2]:"お住まいの市区町村"):j.cname;
+  // 記事のない市区町村：収集までの日数・料金はわからないので、間に合うかは判定しない（公式サイトで確かめてもらう）
+  if(A.city==="other"&&!ar){j.unk=true;j.lead=0;j.cname=j.nm;j.url=A.muni&&A.muni[3]?(/^https?:\/\//.test(A.muni[3])?A.muni[3]:"https://"+A.muni[3]+"/"):"";j.q=SEARCH((A.muni?A.muni[1]+A.muni[2]:"市区町村")+" 粗大ごみ");j.fee="公式サイトで確認";j.drop="持ち込めるかは公式サイトで確認"}
+  // 千葉市は、予約サイトで調べた今の最短収集日があれば、それで間に合うかを判定する
+  const sl=A.city==="chiba"&&A.ward&&SLOT[A.ward];
+  if(sl&&sl.ok){const dd=new Date(sl.date+"T00:00:00");j.lead=Math.max(0,Math.round((dd-today)/DAY));j.live=sl}
   return j}
+// ── 千葉市の今の最短収集日（backend/reviews.gs の kind=slot が千葉市の予約サイトの公開ページを読む） ──
+// reviews.js と同じ Apps Script のウェブアプリ
+const GAS_URL="https://script.google.com/macros/s/AKfycbw36d8YjMsAUqsVjVIU8u7ORWclYjX0kyid2XcGlljrHyJIjPJGmp3jEADxTr56UskjvA/exec";
+const WARDS={chiba:[["12101","中央区"],["12102","花見川区"],["12103","稲毛区"],["12104","若葉区"],["12105","緑区"],["12106","美浜区"]]};
+const SLOT={};
+const hm=t=>t.slice(5,10).replace("-","/").replace(/^0/,"")+" "+t.slice(11,16);
+function wardOf(city,t){const w=(WARDS[city]||[]).find(([,n])=>(t||"").includes(n));return w?w[0]:""}
+function getSlot(w,quiet){
+  if(SLOT[w]&&!SLOT[w].err)return quiet||draw();
+  SLOT[w]={busy:true};if(!quiet)draw();
+  fetch(GAS_URL+"?"+new URLSearchParams({kind:"slot",city:"chiba",ward:w})).then(r=>r.json()).then(x=>{SLOT[w]=x&&x.ok?x:{err:true}}).catch(()=>{SLOT[w]={err:true}}).then(draw);
+}
+function slotBox(j){
+  if(j.key!=="chiba")return "";
+  const ws=WARDS.chiba,w=A.ward,x=w&&SLOT[w],wn=w?ws.find(a=>a[0]===w)[1]:"";
+  const pick=`<div class="chips">${ws.map(([c,n])=>`<button type="button" class="chip" data-ward="${c}" aria-pressed="${c===w}">${n}</button>`).join("")}</div>`;
+  let body;
+  if(!w) body=`<p>区を選ぶと、千葉市の予約サイトで<b>今の最短収集日</b>を調べます（15秒ほどかかります）。</p>${pick}`;
+  else if(x&&x.busy) body=`<p>${wn}の最短収集日を、千葉市の予約サイトで調べています…（15秒ほど）</p>`;
+  else if(x&&x.ok){const dd=new Date(x.date+"T00:00:00"),ok=Math.round((dd-today)/DAY)<=j.d;
+    body=`<p class="sd">${wn}の今の最短収集日は <b>${md(dd)}</b></p><p class="sv ${ok?"ok":"late"}">${ok?"引越し日までに収集できます。早めに申し込みましょう":"引越し日には間に合いません。取り消しで早い日が空くこともあります"}</p>
+      <small>${hm(x.checkedAt)}に<a href="${x.source}" target="_blank" rel="noopener">千葉市の予約サイト</a>で確認。品物の数や申し込むタイミングで変わる目安です</small>${pick}`}
+  else body=`<p>今の最短収集日を調べられませんでした。<a href="https://www.sodai-web.jp/sodai/shortest_calendar.na?id=09" target="_blank" rel="noopener">千葉市の予約サイト</a>で確かめてください。</p>${pick}`;
+  return `<div class="slot"><span class="nl">千葉市の今の最短収集日</span>${body}</div>`;
+}
 
 function itemList(){return A.custom.map(c=>({label:c.label,cat:c.cat}))}
 const APPCOST="数千円〜（目安）";
-const CITYCOST=j=>j.fee.includes("¥")?j.fee.split("（")[0]+"（目安）":"数百円〜（目安）";
+const CITYCOST=j=>j.unk?"公式サイトで確認":j.fee.includes("¥")?j.fee.split("（")[0]+"（目安）":"数百円〜（目安）";
 // 中古の寝具・敷物は買取で断られることが多いので、買取をおすすめにしない
 const BEDRE=/布団|ふとん|マットレス|ベッドマット|カーペット|じゅうたん|絨毯|ラグ|毛布|まくら|枕/;
 // 品目ごとの一番おすすめの出し先。h=受け皿のキー
@@ -452,6 +506,8 @@ function routeKey(it,j){
   if(sell) return "buy";
   if(it.cat==="pc") return "pc";
   if(it.cat==="hard") return "hard";
+  // 記事のない市区町村：日数はわからないので、1週間以上あれば市区町村の回収をすすめる（収集日は申し込みで確かめてもらう）
+  if(j.unk&&j.d>=7) return "city";
   if(j.d>=j.lead) return "city";
   // 持ち込める施設がわからない地域では、持込をおすすめにしない
   if(car&&!(j.key==="other"&&!(j.ar&&ptOf(j.ar,"持ち込み")))) return "drop";
@@ -466,25 +522,26 @@ const mapQ=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURICompon
 const WEBTXT={open:"インターネットで予約できます",cond:"インターネット予約は条件つきです",stop:"インターネット受付は一時停止中です",none:"インターネットでは収集の予約ができません"};
 function bkHours(ar){const b=ar.bk;if(!b)return esc(ptOf(ar,"申し込み")||"公式ページで確認");
   return [`<b>${WEBTXT[b.web]}</b>${b.note?`：${esc(b.note)}`:""}`,...(b.mail?["インターネットは、先にメールアドレスを登録して申し込みます"]:[]),...(b.t||[esc(ptOf(ar,"申し込み")||"")])].filter(Boolean).join("<br>")}
-function handlers(j,rs){
-  const ar=j.ar,bk=ar&&ar.bk||{},I=j.key==="other"&&ar?{pref:0,desk:`申し込みの窓口（${ar.og?"大型":"粗大"}ごみ）`,tel:[],hours:bkHours(ar),links:[...(bk.w||[]).map(([t,u])=>[/インターネット|申し?込|LINE|予約|フォーム|チャット/.test(t)?t:`${t}（インターネット受付）`,u]),[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key],area=j.key==="other"&&!ar?"":j.cname;
+// 窓口の情報（7市区は INFO、それ以外は記事の元データから）
+function infoOf(j){const ar=j.ar,bk=ar&&ar.bk||{};
+  if(j.unk)return {pref:A.muni?Math.floor(A.muni[0]/1000):0,desk:`${j.nm}の粗大ごみの受付`,tel:[],hours:"申し込み方・料金・収集までの日数は、市区町村の公式サイトの「粗大ごみ」のページで確かめてください（このサイトではまだ確かめていません）",links:[...(j.url?[[`${j.nm}の公式サイト`,j.url]]:[]),[`「${A.muni?A.muni[1]+A.muni[2]:"市区町村名"} 粗大ごみ」を検索`,j.q]],drop:[{name:"持ち込めるかは公式サイトで確認"}]};
+  return j.key==="other"&&ar?{pref:areaPref(A.area),desk:`申し込みの窓口（${ar.og?"大型":"粗大"}ごみ）`,tel:[],hours:bkHours(ar),links:[...(bk.w||[]).map(([t,u])=>[/インターネット|申し?込|LINE|予約|フォーム|チャット/.test(t)?t:`${t}（インターネット受付）`,u]),[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key]}
+// 出し方ごとの窓口（電話・予約ページ・お店）。品目カードの行の中に出す
+function contacts(j){
+  const ar=j.ar,I=infoOf(j),area=j.key==="other"&&!ar&&!A.muni?"":j.cname;
   const pref=I.pref?`https://www.aeha-kadenrecycle.com/rkcmap/search.php?sort=address&prefecture_id=${I.pref}`:"https://www.aeha-kadenrecycle.com/";
   const rows=[
     ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
     ["post","家電リサイクル券センター（家電4品目）",`電話 ${telA(RKC)}<br>買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます`,extA("近くの指定引取場所を探す",pref),"対応:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:メーカー・大きさで違います"],
-    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
+    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(A.muni?`${n} ${A.muni[1]}${A.muni[2]}`:n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
     ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
-  return `<div class="where"><h3>${j.cname}で粗大ごみを出せるところ</h3><p class="wsub">あなたの品目を出せる所に色がつきます。連絡先は2026年10月30日に各公式ページで確認しました${j.url?`・<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>`:""}</p><div class="wl">${rows.map(([k,name,info,links,spec])=>{
-    const mine=rs.filter(r=>itemOptions(r,j).some(o=>o.ok&&o.h===k));
-    return `<div class="w ${mine.length?"on":"off"}"><span class="wk">${HNAME(j)[k]}</span><span class="wn">${name}</span>
-      <span class="wd">${info}</span>${links?`<div class="wls">${links}</div>`:""}
-      <span class="wd num">${spec}</span>
-      ${mine.length?`<span class="wmine">あなたの ${mine.map(r=>esc(r.label)).join("、")} を出せます</span>`:`<span class="wnone">今回の品目では使いません</span>`}</div>`}).join("")}</div></div>`;
+  return Object.fromEntries(rows.map(([k,name,info,links])=>[k,{name,info,links}]));
 }
 // 空きを見られる予約ページ（市区の予約サイト・チャット）。空き日そのものは出さず、見に行く場所へつなぐ
+const bookList=j=>j.key==="other"?(j.ar&&j.ar.bk&&j.ar.bk.w||[]):(INFO[j.key]&&INFO[j.key].links||[]).filter(([t])=>/インターネット|最短|チャット/.test(t));
 function bookLinks(j){
-  const ls=j.key==="other"?(j.ar&&j.ar.bk&&j.ar.bk.w||[]):(INFO[j.key]&&INFO[j.key].links||[]).filter(([t])=>/インターネット|最短|チャット/.test(t));
+  const ls=bookList(j);
   return ls.length?`<br>空きを見る：${ls.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("・")}`:"";
 }
 // ジモティーなどで譲る。引き取り手が見つかるとは限らないので、おすすめにはせず、日に余裕があるとき（通常の予約で間に合うとき）だけ出す
@@ -493,9 +550,9 @@ const GIVE={h:"",k:"give",name:"譲る（ジモティーなど）",desc:`まだ�
 function itemOptions(it,j){
   const car=A.car==="yes",late=j.d<j.lead,k=routeKey(it,j);
   const fs=itemFees(j.ar,it.label),to=AREAS[A.to],tfs=to?itemFees(to,it.label):[];
-  const off=j.url?`<a href="${j.url}" target="_blank" rel="noopener">${j.nm}の公式ページ</a>`:"";
+  const off=j.url?`<a href="${j.url}" target="_blank" rel="noopener">${j.nm}の公式${j.unk?"サイト":"ページ"}</a>`:j.unk?`<a href="${j.q}" target="_blank" rel="noopener">${j.nm}の公式サイト（検索）</a>`:"";
   const feeLine=`${fs.length?`<br>${j.nm}の料金表では ${feeList(fs)}（目安）`:j.ar&&!j.fee.startsWith("¥")&&ptOf(j.ar,"料金")?`<br>料金：${esc(ptOf(j.ar,"料金"))}`:""}${off?`<br>品目ごとの料金は${off}で確認`:""}`;
-  const cityDesc="予約して処理券を貼り、収集日の朝に出す"+(it.cat==="gen"?"。小さい物は粗大ごみではなく、ふつうのごみで出せることがあります（大きさの基準は自治体ごと）":"")+feeLine+bookLinks(j);
+  const cityDesc=(j.unk?"申し込んで、案内どおりに手数料を払い、収集日の朝に出す":"予約して処理券を貼り、収集日の朝に出す")+(it.cat==="gen"?"。小さい物は粗大ごみではなく、ふつうのごみで出せることがあります（大きさの基準は自治体ごと）":"")+feeLine+bookLinks(j);
   const cityCost=fs.length&&yen(fs.map(x=>x[1]))?yen(fs.map(x=>x[1]))+"（目安）":CITYCOST(j);
   const dropFs=fs.filter(x=>x[2]);
   if(it.cat==="unk") return [{h:"",name:"品目名を入れて判定",desc:"「食器棚」「電子レンジ」のように名前を入れると、出し先がわかります",cost:"",ok:true,rec:true}];
@@ -511,15 +568,15 @@ function itemOptions(it,j){
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:"多くの自治体で粗大ごみとして収集しない物です。公式ページで確認"}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   if(it.cat==="app") return [
-    {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:"リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります",cost:APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
+    {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:`リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります。リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>で、メーカー・大きさで変わります`,cost:appFee(it.label)?yr(appFee(it.label))+"＋運搬料（目安）":APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
     {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true,k:"buy"},
     ...(late?[]:[{...GIVE,desc:GIVE.desc.replace("まだ使える物は","製造から年数の浅い物は")}]),
-    {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
+    {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:appFee(it.label)?yr(appFee(it.label))+"（目安）":APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   return [
-    {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:cityDesc,cost:cityCost,when:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
-    {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
+    {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:j.unk?`申し込むときに収集日を確かめ、引越し（${md(add(j.d))}）に間に合わなければ、ほかの出し方を選びます。`+cityDesc:cityDesc,cost:cityCost,when:j.unk?"収集日は申し込みで決まります（公式サイトで確認）":j.live?`今の最短は${md(add(j.lead))}（${hm(j.live.checkedAt)}時点）`:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:j.live?`今の最短収集日は${md(add(j.lead))}で、引越しに間に合いません（${hm(j.live.checkedAt)}時点）`:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
+    {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:j.unk?"まず通常の申し込みで、いつ収集できるかを確かめます":late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
     {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
     {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
     ...(late||BEDRE.test(it.label)?[]:[GIVE]),
@@ -527,37 +584,80 @@ function itemOptions(it,j){
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
 }
 // 「おすすめ」を選んだ理由（routeKey と同じ順で判定している）
-function recWhy(k,j){return {post:j.ar&&j.ar.kaden?"家電4品目は家電リサイクルで出すのが基本のため":`家電4品目は${j.nm}では回収しないため`,city:"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.sell==="yes"?"「売れるなら売りたい」を選んだため":"収集が間に合わない見込みで、車がないため",pc:"家庭のパソコンはメーカー回収が基本のため",move:"通常の予約では間に合わない見込みで、車がなく、寝具は買取で断られることが多いため",hard:"多くの自治体で粗大ごみとして収集しないため"}[k]||""}
+function recWhy(k,j){return {post:j.ar&&j.ar.kaden?"家電4品目は家電リサイクルで出すのが基本のため":`家電4品目は${j.nm}では回収しないため`,city:j.unk?"費用がいちばん安い出し方です。収集日が引越しに間に合うかは、申し込むときに確かめてください":"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.sell==="yes"?"「売れるなら売りたい」を選んだため":"収集が間に合わない見込みで、車がないため",pc:"家庭のパソコンはメーカー回収が基本のため",move:"通常の予約では間に合わない見込みで、車がなく、寝具は買取で断られることが多いため",hard:"多くの自治体で粗大ごみとして収集しないため"}[k]||""}
 function itemCards(rs,j){
   if(!rs.length) return `<div class="free"><h3>出したい物を入れると、品目ごとの選択肢が出ます</h3></div>`;
-  return `<div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
+  const C=contacts(j);let shop=false;
+  const ct=o=>{const c=o.ok&&C[o.h];if(!c)return "";let links=c.links;
+    if(o.h==="buy"){if(shop)links=`<a href="#to-buy">近くの買取店と口コミは上の行を見てください</a>`;else shop=true}
+    return `<div class="ct"${o.h==="buy"&&links===c.links?' id="to-buy"':""}><b>${c.name}</b><span>${c.info}</span>${links?`<div class="wls">${links}</div>`:""}</div>`};
+  return `<h3 class="sh">品目ごとの出し方</h3><div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
     return `<div class="icard"><div class="ich"><h3>${esc(it.label)}</h3><span class="icat">${CATNAME[it.cat]}</span>${rec&&it.cat!=="unk"?`<span class="irec">おすすめ:${rec.name}</span>`:""}</div>
       <div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
-        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small></span>
+        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small>${ct(o)}</span>
         <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
 }
 const BULKY=c=>["furn","etc","gen"].includes(c);
+// 費用をくらべる：出し方ごとに、出したい物ぜんぶを合わせた目安
+function costBox(rs,j){
+  const bulky=rs.filter(it=>BULKY(it.cat)),apps=rs.filter(it=>it.cat==="app");
+  if(!bulky.length&&!apps.length)return "";
+  const late=j.d<j.lead,car=A.car==="yes",to=AREAS[A.to];
+  const sum=(list,ar,col)=>{let lo=0,hi=0,miss=0;list.forEach(it=>{const r=yenNum(itemFees(ar,it.label).map(x=>x[col]).filter(Boolean));if(r){lo+=r[0];hi+=r[1]}else miss++});return {lo,hi,miss,n:list.length}};
+  const show=(t,unit)=>t.n&&t.miss<t.n?yr([t.lo,t.hi])+(t.miss?`＋ほか${t.miss}点`:"")+"（目安）":unit;
+  const rows=[];
+  if(bulky.length){
+    const c=sum(bulky,j.ar,1);
+    rows.push([`${j.nm}の粗大ごみ収集`,show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
+    if(car){const d=sum(bulky,j.ar,2);rows.push([`${j.nm}の持込施設へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
+    rows.push(["買取に出す（まだ使える物）","¥0（値段がつけば受け取る）","日時はお店に確認",false]);
+    const t=to?sum(bulky,to,1):null;
+    rows.push([to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,"引越し後",false]);
+    rows.push(["不用品回収業者（軽トラック1台分）",`${yr(TRUCK)}（相場・目安）`,"日時は業者と相談",false,`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`]);
+  }
+  if(apps.length){const ts=apps.map(it=>appFee(it.label)).filter(Boolean);
+    rows.push([`家電4品目（${apps.map(it=>esc(it.label)).join("・")}）`,ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,"お店か指定引取場所へ",false,`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`]);}
+  return `<div class="cost"><h3 class="sh">費用をくらべる<small>出したい物を全部合わせた目安</small></h3><table class="ctbl"><tbody>${rows.map(([n,c,w,bad,note])=>`<tr class="${bad?"bad":""}"><th>${n}${note?`<small>${note}</small>`:""}</th><td class="num">${c}<small>${w}</small></td></tr>`).join("")}</tbody></table></div>`;
+}
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
   if(need.some(x=>!x[1])){$("out").innerHTML=`<h2 class="oh">診断結果</h2><div class="free"><h3>${need.filter(x=>!x[1]).map(x=>x[0]).join("・")}を入れると、品目ごとの出し方が出ます</h3><ul class="need">${need.map(([t,ok])=>`<li class="${ok?"ok":""}">${ok?"✓":"○"} ${t}</li>`).join("")}</ul><p>料金・日数は目安です。入力した内容はどこにも送られません。</p></div>`;return}
   const j=judge();
-  const tight=rs.some(it=>BULKY(it.cat))&&j.d<j.lead;
   const late=j.d<j.lead;
   const al=j.key==="other"&&AREALEAD[A.area];
-  const leadTxt=al?`収集までの目安は「${al[1]}」です（公式ページの案内。${al[2]==="min"?"最短の案内で、混み具合で延びるため、ここでは2週間ほど":`ここでは${al[0]}日`}で計算しています）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`収集までの目安は「${esc(ptOf(j.ar,"収集まで"))}」です（公式ページの案内。ここでは2週間ほどで計算しています）`:j.key==="other"?(j.ar?"収集までの日数は、公式ページで確かめた案内がまだありません（ここでは2週間ほどで計算する推定です）":"自治体によって違います（ここでは2週間ほどで計算しています）"):`収集までの目安は「${LEADTXT[j.key]}」です（${LEADSRC[j.key]==="official"?"公式ページの案内":"公式に日数の記載がないため、このサイトの推定"}）`;
-  let h=`<h2 class="oh">診断結果</h2><div class="status ${late?"late":"ok"}"><div class="cd"><small>引越しまで</small><b class="num"><span>あと</span>${j.d}<span>日</span></b></div>
-    <p><span class="pill">${late?"普通の予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br>${j.nm}の粗大ごみの${leadTxt}。実際の予約の空きは確認していません。</p></div>`;
-  if(rs.length&&!tight&&rs.every(it=>BULKY(it.cat))){
-    h+=`<div class="free"><h3>このまま自分で予約すれば間に合いそうです</h3><ol>
-      <li>今日、${j.nm}の粗大ごみ受付で収集日を予約する${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">公式ページ</a>）`:""}</li><li>コンビニなどで処理券を買い、受付番号を書いて貼る</li><li>収集日の朝、指定の場所へ出す</li></ol>
-      <p>予定が変わったら、もう一度診断してください。</p></div>`;
-  }
+  const leadTxt=al?`「${al[1]}」（公式ページの案内）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`「${esc(ptOf(j.ar,"収集まで"))}」（公式ページの案内）`:j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算）":`「${LEADTXT[j.key]}」（${LEADSRC[j.key]==="official"?"公式ページの案内":"このサイトの推定"}）`;
+  if(j.key==="chiba"&&A.ward&&!SLOT[A.ward])getSlot(A.ward,true);
+  let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j)+slotBox(j);
+  if(j.unk)h+=`<p class="status"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">収集までの日数は公式サイトで確認</span><br><small>${esc(j.nm)}の粗大ごみは、このサイトではまだ確かめていません。申し込むときに収集日を聞き、引越しに間に合わなければ、下の買取・持ち込み・新居で出す方法を選んでください。</small></p>`;
+  else h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
+  h+=costBox(rs,j);
   h+=itemCards(rs,j);
-  if(tight&&j.web) h+=`<div class="soon"><b>空き枠のお知らせ（準備中）</b><br>${j.cname}の予約ページを見張って、空きが出たらお知らせするしくみを準備しています。</div>`;
+  h+=j.unk?`<p class="wsub">${esc(j.nm)}の受付・料金は、このサイトではまだ確かめていません。${j.url?`<a href="${j.url}" target="_blank" rel="noopener">${esc(j.nm)}の公式サイト</a>か、`:""}<a href="${j.q}" target="_blank" rel="noopener">検索</a>で「粗大ごみ」のページを確認してください</p>`:`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;
   h+=newHome(rs);
-  h+=handlers(j,rs);
   $("out").innerHTML=h;
   if(window.hinataShops)window.hinataShops.scan();
+}
+const WATCHMSG="ありがとうございます。空き枠の見張りはまだ準備中で、申し込みや支払いはできません。それまでは上の予約ページで空きを確かめてください";
+// いちばん上に出す「次にやること」。品目ごとのおすすめから、急ぐものを1つ選ぶ
+const NEXTPRI=["wait","city","drop","buy","post","pc","hard","move"];
+function nextStep(rs,j){
+  const ks=rs.map(it=>({it,k:routeKey(it,j)})),k=NEXTPRI.find(p=>ks.some(x=>x.k===p));
+  if(!k) return `<div class="next"><span class="nl">次にやること</span><p class="nt">出したい物の名前を入れてください</p><p class="nd">「食器棚」「電子レンジ」のように名前を入れると、出し方がわかります</p></div>`;
+  const who=ks.filter(x=>x.k===k).map(x=>esc(x.it.label)).join("・"),I=infoOf(j),bl=bookList(j);
+  const btn=(t,u,ext=true)=>`<a class="nbtn" href="${u}"${ext?' target="_blank" rel="noopener"':""}>${esc(t)}</a>`;
+  const book=(bl.length?bl.slice(0,2).map(([t,u])=>btn(t.replace(/（[^）]*）/g,""),u)):j.url?[btn(`${j.nm}の公式${j.unk?"サイト":"ページ"}を開く`,j.url)]:[]).concat(j.unk?[btn(`「${j.nm} 粗大ごみ」を検索`,j.q)]:[]).join("")+(I.tel&&I.tel[0]?`<p class="nd">電話：${telA(I.tel[0][1])}</p>`:"");
+  const S={
+    city:[j.unk?`今日、${j.nm}の粗大ごみの申し込み方と収集日を確かめる`:`今日、${j.nm}の粗大ごみを予約する`,book+`<ol class="nsteps"><li>${j.unk?"申し込む（品目と数を伝え、収集日を確かめる）":"予約する（品目と数を伝える）"}</li><li>${j.unk?"案内どおりに手数料を払う":"処理券（シール）を買って貼る"}</li><li>収集日の朝に出す</li></ol>`],
+    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p><button type="button" class="wbtn" id="watch">空き枠の見張りを頼む（¥500・準備中）</button><p class="nd" id="watchmsg">${A.watch?WATCHMSG:"予約ページの空きをこちらで見張るサービスを準備しています"}</p>`],
+    drop:[`車で${j.nm}の持込施設へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
+    buy:[`買取店に出張買取を頼む`,btn("近くの買取店を見る","#to-buy",false)+`<p class="nd">値段が合わなければ断っても無料のお店を選びます。</p>`],
+    post:[`買い替えのお店か引越し会社に引き取りを頼む`,`<p class="nd">家電4品目は${j.nm}では回収しません。リサイクル料金と運搬料がかかります（数千円〜・目安）。</p>`],
+    pc:[`メーカーに回収を申し込む`,`<p class="nd">PCリサイクルマークがあれば無料です。先にデータを消しておきます。</p>`],
+    hard:[`買ったお店かメーカーに引き取りを相談する`,`<p class="nd">多くの自治体で粗大ごみとして収集しない物です。</p>`],
+    move:[`新居に運んで、引越し後に出す`,`<p class="nd">引越しの荷物に入れて運び、新しい住所で申し込みます。</p>`]
+  }[k];
+  const rest=rs.length>ks.filter(x=>x.k===k).length?`<p class="nd">ほかの物の出し方は、下の「品目ごとの出し方」を見てください。</p>`:"";
+  return `<div class="next"><span class="nl">次にやること（${who}）</span><p class="nt">${S[0]}</p>${S[1]}${rest}</div>`;
 }
 // 新居の自治体：記事の元データから、その場で出す（ページは移動しない）
 const AREACOUNT=()=>`政令市・東京23区など${Object.keys(AREAS).length}の市区`;
@@ -568,21 +668,20 @@ function newHome(rs){
   const mine=rs.filter(it=>it.cat!=="unk").map(it=>{if(it.cat==="pc")return `<li><b>${esc(it.label)}</b>：パソコンはメーカー回収が基本です（PCリサイクルマークがあれば無料）</li>`;if(it.cat==="hard")return `<li><b>${esc(it.label)}</b>：多くの自治体で粗大ごみとして収集しない物です。${to.n}の公式ページで確認</li>`;if(it.cat==="app")return `<li><b>${esc(it.label)}</b>：${to.kaden?`家電4品目は粗大ごみとは手続きが別です（お店か家電リサイクル券が基本）。${esc(to.kaden)}`:`家電4品目は${to.n}でも粗大ごみでは出せません。お店か家電リサイクル券で`}</li>`;
     const fs=itemFees(to,it.label);return `<li><b>${esc(it.label)}</b>：${fs.length?`${feeList(fs)}（目安）`:"料金は品目ごと。下の記事か公式ページで確認"}</li>`}).join("");
   const mv=[...(to.mv0===1?[`前の家から持ってきた物を出すときの決まりは、${to.n}の公式ページには特に書かれていませんでした。${to.n}の家庭のごみとして、新しい住所で申し込みます（申し込むときに「引越しで持ってきた物」と伝えると安心です）`]:to.mv0?[to.mv0]:[]),...(to.mv||[]),"申し込みは、住み始めてから新しい住所で。住む前に申し込めるかは受付で確かめてください","処理券やシールは自治体ごとに別の物です。前の自治体で買った券は使えません"];
-  return `<div class="where nh"><h3>新居の${to.n}で粗大ごみを出すとき</h3><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>
+  return `<div class="where nh"><h3 class="sh">新居の${to.n}で出すとき</h3><p class="wsub">2026年10月30日に${to.url?`<a href="${to.url}" target="_blank" rel="noopener">${to.n}の公式ページ</a>`:"公式ページ"}などで確認した内容です。料金は目安です</p>
     <div class="w on">${mine?`<span class="wk">あなたの品目を${to.n}で出すと</span><ul class="nhl">${mine}</ul>`:""}
       <dl class="nhd">${(to.pt||[]).map(([l,t])=>`<dt>${esc(l)}</dt><dd>${esc(t)}</dd>`).join("")}</dl>
       <span class="wk">${to.n}に引っ越してきた人へ</span><ul class="nhl">${mv.map(x=>`<li>${x}</li>`).join("")}</ul>
       <div class="wls"><a class="wa" href="${to.g}">${to.n}の粗大ごみの出し方をくわしく見る</a></div></div></div>`;
 }
 function setTo(v){A.toq=(v||"").trim();A.to=findArea(A.toq);const m=$("tomsg");if(m)m.innerHTML=toMsg();draw()}
-function cityTable(){
-  const tb=document.querySelector("#citytbl tbody");if(!tb)return;
-  tb.innerHTML=Object.entries(CITIES).filter(([k])=>k!=="other").map(([k,c])=>`<tr><td>${c[6]?`<a href="${c[6]}" target="_blank" rel="noopener">${c[0]}</a>`:c[0]}</td><td data-h="申し込み">${c[4]}</td><td data-h="料金" class="num">${c[3]}</td><td data-h="収集まで">${LEADTXT[k]}${LEADSRC[k]==="estimate"?"（推定）":""}</td><td data-h="持ち込み">${c[5]}</td></tr>`).join("");
-}
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
+  if(b.id==="watch"){A.watch=true;try{if(window.gtag)gtag("event","watch_interest")}catch(e){}const m=$("watchmsg");if(m)m.textContent=WATCHMSG;return}
+  if(b.dataset.ward){A.ward=b.dataset.ward;getSlot(A.ward);return}
   if(b.id==="addfree"){addFree();return}
   if(b.id==="geo"){geoAddr();return}
+  if(b.dataset.muni){const r=MUNI().find(r=>r[0]===+b.dataset.muni);if(r){A.amb=null;pickMuni(r,`${r[1]}${r[2]}で診断しています`)}return}
   if(b.dataset.rmc!==undefined){A.custom.splice(+b.dataset.rmc,1);drawQs();draw();return}
   if(b.id==="nodate"){A.move="";drawQs();draw();return}
   if(b.dataset.fix!==undefined){const c=A.custom[+b.dataset.fix];c.label=b.dataset.name;c.cat=classify(c.label);c.ask=false;drawQs();draw();return}
@@ -590,7 +689,7 @@ document.addEventListener("click",e=>{
   const k=b.dataset.k,v=b.dataset.v;if(!k)return;
   const q=Q.find(x=>x.k===k);
   if(k==="items"){const i=A.custom.findIndex(c=>!c.photo&&c.label===v);i<0?A.custom.push({label:v,cat:classify(v)}):A.custom.splice(i,1);drawQs();draw();return}
-  if(k==="city"){A.addrmsg="";A.addr="";A.area=""}
+  if(k==="city"){A.addrmsg="";A.addr="";A.area="";A.ward=""}
   if(k==="days"){A.days=v;A.move=""}
   else A[k]=v;
   drawQs();draw();
@@ -625,34 +724,65 @@ function addFree(){const el=$("free");const v=(el&&el.value||"").trim();if(!v)re
   v.split(/[、,，\n]+/).map(x=>x.trim()).filter(Boolean).forEach(x=>A.custom.push({label:x,cat:classify(x)}));drawQs();draw();const f=$("free");if(f)f.focus()}
 document.addEventListener("input",e=>{if(e.target.id==="to")setTo(e.target.value)});
 document.addEventListener("keydown",e=>{if(e.target.id==="to"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setTo(e.target.value)}if(e.target.id==="free"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();addFree()}if(e.target.id==="addr"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setAddr(e.target.value)}});
-function setAddr(v){v=(v||"").trim();if(!v)return;A.addr=v;const hit=ADDR.find(([re])=>re.test(v));
-  const ak=hit?"":findArea(v);A.area=ak;
-  if(hit){A.city=hit[1];A.addrmsg=`「${esc(v)}」→ ${CITIES[hit[1]][0]}で診断しています`}else if(ak){A.city="other";A.addrmsg=`「${esc(v)}」→ ${AREAS[ak].n}で診断しています${leadNote(ak)}`}else{A.city="other";A.addrmsg=`「${esc(v)}」は対応している市区にないため、その他の地域で診断しています`}
+// 全国の市区町村（data/munis.js：国土地理院の一覧＋公式サイト）。入力欄に触ったときに読み込む
+const CITYCODE={14100:"yokohama",14130:"kawasaki",13112:"setagaya",13115:"suginami",11100:"saitama",12100:"chiba",12212:"sakura"};
+const MUNI=()=>window.HINATA_MUNIS||[];
+let munisP=null;
+function loadMunis(){if(window.HINATA_MUNIS)return Promise.resolve();if(!munisP)munisP=new Promise(ok=>{const sc=document.createElement("script");sc.src="/data/munis.js";sc.onload=sc.onerror=()=>{ok();const dl=document.createElement("datalist");dl.id="munilist";dl.innerHTML=MUNI().map(r=>`<option value="${r[1]}${r[2]}">`).join("");document.body.appendChild(dl)};document.head.appendChild(sc)});return munisP}
+const SEARCH=q=>"https://www.google.com/search?q="+encodeURIComponent(q);
+// 記事のキーから都道府県コード（家電リサイクルの指定引取場所を県で絞るため）
+const areaPref=k=>{const r=MUNI().find(r=>r[4]===k);return r?Math.floor(r[0]/1000):0};
+// 入力から市区町村を探す。先に出てくるもの→長いもの（「大阪市北区」を「北区」にしない）。同じ名前が複数あれば県名で絞り、それでも複数なら選んでもらう
+// 「ヶ・ケ・ヵ」「龍・竜」の書き方の違いはそろえてから比べる
+const nrm=x=>x.replace(/[ヶヵケ]/g,"ケ").replace(/龍/g,"竜");
+function findMunis(v){
+  const t=nrm(v.replace(/[\s　]/g,""));if(!t)return [];
+  const ms=MUNI();let best=[],bi=1e9,bl=0;
+  for(const r of ms){const i=t.indexOf(nrm(r[2]));if(i<0)continue;const l=r[2].length;if(i<bi||(i===bi&&l>bl)){best=[r];bi=i;bl=l}else if(i===bi&&l===bl)best.push(r)}
+  // 「中央区」「緑区」だけのときは、政令市の区も候補に入れる（東京の区に決めつけない）
+  if(/^[^市]{1,4}区$/.test(t))best=[...best,...ms.filter(r=>r[5]&&nrm(r[2]).endsWith(t)&&!best.includes(r))];
+  if(!best.length){best=ms.filter(r=>!r[5]&&r[2].length>2&&(t===nrm(r[2]).slice(0,-1)||t===nrm(r[1]+r[2]).slice(0,-1)));
+    // 「横浜」「川崎」：市がひとつだけなら町より市
+    const c=best.filter(r=>r[2].endsWith("市"));if(c.length===1)best=c}
+  if(best.length>1){const p=best.filter(r=>t.includes(r[1])||t.includes(r[1].replace(/[都府県]$/,"")));if(p.length)best=p}
+  return best;
+}
+function pickMuni(r,msg){
+  if(r[5]===12100)A.ward=String(r[0]);
+  if(r[5])r=MUNI().find(x=>x[0]===r[5])||r; // 政令市の区は市で診断（千葉市の区は A.ward に残る）
+  A.area="";A.muni=null;
+  const ck=CITYCODE[r[0]];
+  if(ck)A.city=ck;
+  else if(r[4]&&AREAS[r[4]]){A.city="other";A.area=r[4];msg+=leadNote(r[4])}
+  else{A.city="other";A.muni=r;msg+="（このサイトの記事はまだないので、料金と収集までの日数は公式サイトで確かめる形になります）"}
+  A.addrmsg=msg;drawQs();draw();
+}
+async function setAddr(v){v=(v||"").trim();if(!v)return;A.addr=v;A.ward=wardOf("chiba",v);A.amb=null;
+  await loadMunis();
+  const rs=findMunis(v);
+  if(rs.length===1){pickMuni(rs[0],`「${esc(v)}」→ ${rs[0][1]}${rs[0][2]}で診断しています`);return}
+  A.city="";A.muni=null;A.area="";
+  if(rs.length>1){A.amb=rs;A.addrmsg=`「${esc(v)}」は${rs.length}つあります。どれか選んでください`}
+  else A.addrmsg=`「${esc(v)}」から市区町村が見つかりませんでした。「〇〇市」「〇〇町」のように市区町村名から入れてください`;
   drawQs();draw()}
 // 現在地：ブラウザの許可をとってから緯度・経度を取り、国土地理院の逆ジオコーダーで市区町村コードに変える（送るのは緯度・経度だけ）
-const GEOCODE=[[14101,14118,"yokohama"],[14131,14137,"kawasaki"],[13112,13112,"setagaya"],[13115,13115,"suginami"],[11101,11110,"saitama"],[12101,12106,"chiba"],[12212,12212,"sakura"]];
-async function muniName(cd){
-  try{const t=await (await fetch("https://maps.gsi.go.jp/js/muni.js")).text();
-    const m=t.match(new RegExp('\\["0?'+(+cd)+'"\\]\\s*=\\s*\'[^,]*,([^,]+),[^,]*,([^\']+)\''));
-    return m?m[1]+m[2].replace(/[\s　]/g,""):""}catch(e){return ""}
-}
 function geoAddr(){
   const fail=msg=>{A.geobusy=false;A.addrmsg=msg;drawQs()};
   A.geobusy=true;A.addrmsg="現在地を調べています…";drawQs();
   navigator.geolocation.getCurrentPosition(async p=>{
     try{
       const lat=p.coords.latitude.toFixed(5),lon=p.coords.longitude.toFixed(5);
-      const r=await (await fetch(`https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${lat}&lon=${lon}`)).json();
-      const cd=r&&r.results&&r.results.muniCd;if(!cd) return fail("現在地の市区町村がわかりませんでした（日本の外かもしれません）。住所を入力するか、下から選んでください");
-      const n=+cd,hit=GEOCODE.find(([a,b])=>n>=a&&n<=b),town=(r.results.lv01Nm||"").replace(/^－$/,"");
-      A.geobusy=false;
-      if(hit){const nm=(await muniName(cd)).replace(/^(東京都|北海道|(?:京都|大阪)府|.{2,3}県)/,"");A.geobusy=false;A.city=hit[2];A.addr=(nm||CITIES[hit[2]][0])+town;A.addrmsg=`現在地 → ${CITIES[hit[2]][0]}で診断しています。ちがう場合は選び直してください`}
-      else{const nm=await muniName(cd),ak=findArea(nm);A.city="other";A.area=ak;A.addr=nm?nm+town:"";A.addrmsg=ak?`現在地 → ${AREAS[ak].n}で診断しています${leadNote(ak)}`:`現在地${nm?`（${esc(nm)}）`:""}は対応している市区にないため、その他の地域で診断しています`}
-      drawQs();draw();
-    }catch(e){fail("現在地から市区町村を調べられませんでした。住所を入力するか、下から選んでください")}
-  },e=>fail(e.code===1?"位置情報の利用が許可されませんでした。住所を入力するか、下から選んでください":"現在地を取得できませんでした。住所を入力するか、下から選んでください"),
+      const [res]=await Promise.all([fetch(`https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${lat}&lon=${lon}`).then(x=>x.json()),loadMunis()]);
+      const cd=res&&res.results&&res.results.muniCd;if(!cd) return fail("現在地の市区町村がわかりませんでした（日本の外かもしれません）。市区町村名を入れてください");
+      const n=+cd,r=MUNI().find(x=>x[0]===n),town=(res.results.lv01Nm||"").replace(/^－$/,"");A.ward=WARDS.chiba.some(w=>+w[0]===n)?String(n):"";
+      A.geobusy=false;A.amb=null;
+      if(!r) return fail("現在地から市区町村を調べられませんでした。市区町村名を入れてください");
+      A.addr=r[2]+town;pickMuni(r,`現在地 → ${r[1]}${r[2]}で診断しています。ちがう場合は入れ直してください`);
+    }catch(e){fail("現在地から市区町村を調べられませんでした。市区町村名を入れてください")}
+  },e=>fail(e.code===1?"位置情報の利用が許可されませんでした。市区町村名を入れてください":"現在地を取得できませんでした。市区町村名を入れてください"),
   {enableHighAccuracy:false,timeout:15000,maximumAge:600000});
 }
+document.addEventListener("focusin",e=>{if(e.target.id==="addr")loadMunis()});
 document.addEventListener("change",e=>{
   const t=e.target;
   if(t.id==="move"){A.move=t.value;drawQs();draw();return}
@@ -660,7 +790,9 @@ document.addEventListener("change",e=>{
   if(t.id==="photo"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{const c={label:"写真の物",cat:"unk",photo:rd.result,busy:true};A.custom.push(c);drawQs();draw();recog(c)};rd.readAsDataURL(t.files[0])}
 });
 // 記事からの引き継ぎ：/?city=yokohama で市区を選んだ状態にする（canonical は / のまま）
-try{const qc=new URLSearchParams(location.search).get("city");if(qc&&CITIES[qc])A.city=qc;else if(qc&&AREAS[qc]){A.city="other";A.area=qc;A.addr=AREAS[qc].n;A.addrmsg=`${AREAS[qc].n}で診断しています${leadNote(qc)}`}}catch(e){}
+try{const qc=new URLSearchParams(location.search).get("city");if(qc&&CITIES[qc]){A.city=qc;A.addr=CITIES[qc][0];A.addrmsg=`${CITIES[qc][0]}で診断しています`}else if(qc&&AREAS[qc]){A.city="other";A.area=qc;A.addr=AREAS[qc].n;A.addrmsg=`${AREAS[qc].n}で診断しています${leadNote(qc)}`}}catch(e){}
+// 記事の市区は、県コード（家電の指定引取場所の県）のために市区町村の一覧も読む
+if(A.area)loadMunis().then(()=>draw());
 // 計測：使われたかどうかだけを数える（入力した内容・市区・写真は送らない）
 const ev=(()=>{const done={};return n=>{if(done[n])return;done[n]=1;try{if(window.gtag)gtag("event",n)}catch(e){}}})();
 document.addEventListener("click",e=>{
@@ -671,7 +803,7 @@ document.addEventListener("click",e=>{
   else if(a.target==="_blank")gtag&&gtag("event","outbound_click",{link_domain:a.hostname});
 });
 document.addEventListener("change",e=>{if(e.target.closest("#qs"))ev("use_tool");if(e.target.id==="photo")ev("photo_used")});
-drawQs();draw();cityTable();
+drawQs();draw();
 })();
 </script>
 <script src="/reviews.js" defer></script>

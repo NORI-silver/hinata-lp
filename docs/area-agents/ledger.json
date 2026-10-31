@@ -1,0 +1,554 @@
+{
+ "note": "エリア担当Agentの台帳。runs=動いた記録（担当・日付・PR）。areas=地域ごとに checked（担当が最後に見た日）・fact（公式と照合した日）・seo（検索向けに直した日）。記事チェックなど別の作業で照合したときも fact を書く。",
+ "runs": [],
+ "areas": {
+  "adachi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "akashi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "akita": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "amagasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "aomori": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "arakawa": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（受付センターの排出品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "atsugi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "bunkyo": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "chiba": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "chigasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "chiyoda": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "chofu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "chuo": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表22行（区の品目・手数料一覧PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "edogawa": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "fuchu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "fujisawa": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "fukuoka": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表18行（市の収集品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "fukushima": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "fukuyama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "funabashi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "gifu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "hachioji": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表19行（市の品目一覧表）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "hamamatsu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "higashiosaka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "himeji": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "hirakata": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "hiratsuka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "hiroshima": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "ichikawa": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "ichinomiya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "itabashi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "kagoshima": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "kashiwa": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "kasukabe": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "katsushika": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "kawagoe": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "kawaguchi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "kawasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "kita": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "kitakyushu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "kobe": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（大型ごみ受付の品目一覧表）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "kochi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "koriyama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "koshigaya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "koto": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表19行（区の手数料一覧PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "kumamoto": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "kurashiki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "kurume": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "kyoto": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "machida": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（いまと2027年1月からの2列、市の料金表PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "matsudo": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "matsuyama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "meguro": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "minato": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "mitaka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "mito": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "miyazaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "musashino": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "nagasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "nagoya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "naha": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "nakano": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "nara": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "nerima": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表24行（収集・持ち込みの2列、区の受付サイトの品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "niigata": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "nishinomiya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "nishitokyo": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "oita": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "okayama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "okazaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "osaka": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表18行（市の手数料一覧表）、処理工場への持ち込み（組合・市のページ）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "ota": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "otsu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "sagamihara": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表18行（市の排出品目一覧）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "saitama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "sakai": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "sakura": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "sapporo": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（大型ごみ受付の品目検索）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "sendai": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "setagaya": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表19行（受付センターの品目一覧）・収集までの目安（最大1週間3日程度）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "shibuya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "shinagawa": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表20行（収集／日曜持ち込み）・持ち込みはおよそ半額",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "shinjuku": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "shizuoka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック3回目"
+  },
+  "soka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "suginami": {
+   "fact": "2026-10-31",
+   "by": "rich-articles",
+   "note": "主な品目の料金表20行（区の品目一覧表PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
+  },
+  "suita": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "sumida": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "tachikawa": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "taito": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "takamatsu": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "takasaki": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "tokorozawa": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "tokushima": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "toshima": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック2回目"
+  },
+  "toyohashi": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "toyonaka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック4回目"
+  },
+  "toyota": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "tsukuba": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  },
+  "utsunomiya": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック7回目"
+  },
+  "wakayama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "yamato": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック5回目"
+  },
+  "yokohama": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック1回目"
+  },
+  "yokosuka": {
+   "fact": "2026-10-31",
+   "by": "article-review",
+   "note": "記事チェック6回目"
+  }
+ }
+}
