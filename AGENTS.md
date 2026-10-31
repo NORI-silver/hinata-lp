@@ -38,7 +38,7 @@
 | `docs/ai-backup.md` `.github/workflows/ai-backup.yml` | Issue にラベル「ai」で動く予備のAI |
 | `data/areas.js` `tools/guide/areas.py` | 診断で使う地域データ（品目ごとの料金・新居の自治体の情報）。地域記事の元データから自動生成。記事を直したら `python3 tools/guide/areas.py .` を実行し直す |
 | `tools/guide/booking.json` `docs/web-booking.md` | 地域ごとのウェブ予約の状態（だれでも／条件つき／停止中／電話など）。予約サイトのリンクと電話は記事の「申し込み方法」から areas.py が取り出し、診断の受付欄に出す。一覧は areas.py が docs/web-booking.md に書き出す |
-| `tools/guide/topics.py` | 持ち込み・処理券・品目別（布団・ソファ・自転車・ベッド）のまとめページを地域記事の元データから作る。地域記事を直したら areas.py のあとに実行 |
+| `tools/guide/topics.py` | 持ち込み・処理券・大きさの基準（/guide/size/）・品目別（布団・ソファ・自転車・マットレス・ベッド）のまとめページを地域記事の元データから作る。地域記事を直したら areas.py のあとに実行 |
 | `reviews.js` `backend/reviews.gs` | 買取チェーンの近くの店と Google マップの口コミ（GAS_URL が空のあいだは地図へのリンクだけ） |
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
