@@ -49,6 +49,17 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
     C[_m["key"]]=(_m["name"],_m["title"],_m["desc"]); REGION[_m["key"]]=_m["region"]
     if _m.get("mover"): MOVER[_m["key"]]=_m["mover"]
 
+# 都道府県（「近くの地域」で同じ都道府県を先に出すため）。meta に pref があればそちらを使う
+_P={"東京都":"setagaya suginami adachi arakawa bunkyo chiyoda chuo edogawa itabashi katsushika kita koto meguro minato nakano nerima ota shibuya shinagawa shinjuku sumida taito toshima fuchu mitaka musashino chofu machida nishitokyo hachioji tachikawa",
+ "神奈川県":"yokohama kawasaki sagamihara yamato atsugi fujisawa","埼玉県":"saitama kawaguchi soka koshigaya","千葉県":"chiba sakura funabashi ichikawa matsudo kashiwa",
+ "大阪府":"osaka sakai hirakata toyonaka higashiosaka","兵庫県":"kobe nishinomiya","京都府":"kyoto","和歌山県":"wakayama","愛知県":"nagoya","静岡県":"shizuoka hamamatsu","岐阜県":"gifu",
+ "北海道":"sapporo","宮城県":"sendai","新潟県":"niigata","岡山県":"okayama","広島県":"hiroshima","徳島県":"tokushima","愛媛県":"matsuyama",
+ "福岡県":"fukuoka kitakyushu","熊本県":"kumamoto","鹿児島県":"kagoshima","沖縄県":"naha"}
+PREF={k:pf for pf,ks in _P.items() for k in ks.split()}
+for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta","*.json"))):
+    _m=json.load(open(_f,encoding="utf-8"))
+    if _m.get("pref"): PREF[_m["key"]]=_m["pref"]
+
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
 OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka"}
@@ -161,7 +172,10 @@ for k,(name,title,desc) in C.items():
     kind=lambda x:C[x][0][-1]
     pref=[x for x in same if kind(x)==kind(k)]
     i=pref.index(k); pref=pref[i+1:]+pref[:i]
-    others=(pref+[x for x in same if kind(x)!=kind(k)])[:6]
+    order=pref+[x for x in same if kind(x)!=kind(k)]
+    # 同じ都道府県を先に（23区は区どうし、市は市どうしの順はそのまま）
+    pk=PREF.get(k); order=[x for x in order if PREF.get(x)==pk]+[x for x in order if PREF.get(x)!=pk]
+    others=order[:6]
     tail=f'''  </article>
   <a class="cta" href="{cta_href}">
     <b>あなたの粗大ごみ、どう出すのがいい？</b>
@@ -171,7 +185,7 @@ for k,(name,title,desc) in C.items():
   <section class="related" aria-label="ほかの地域">
     <h2>近くの地域の粗大ごみ</h2>
     <div class="cards">{cards(others)}</div>
-    <p style="margin-top:12px;font-size:14px"><a href="/guide/#area">ほかの地域の記事を見る</a></p>
+    <p style="margin-top:12px;font-size:14px"><a href="/guide/#area">ほかの地域の記事を見る</a>・<a href="/guide/how-to-check/">記事のない市町村の調べ方</a></p>
   </section>
   <section class="related" aria-label="ほかの記事">
     <h2>あわせて読みたい</h2>

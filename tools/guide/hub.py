@@ -12,7 +12,7 @@ for r in RORDER:
     if not ks: continue
     cards="".join(f'<a class="card" href="/guide/{k}/"><b>{C[k][0]}の粗大ごみ</b><span>申し込み・料金・持ち込み・家電の出し方と近くの買取店。</span></a>' for k in ks)
     blocks.append(f'    <h3 style="font-size:16px;margin:24px 0 10px">{r}</h3>\n    <div class="cards">{cards}</div>\n')
-sec='    <!-- area:start -->\n    <h2 id="area" style="font-size:20px;margin:40px 0 12px">地域ごとの粗大ごみの出し方</h2>\n'+"".join(blocks)+'    <!-- area:end -->\n'
+sec='    <!-- area:start -->\n    <h2 id="area" style="font-size:20px;margin:40px 0 12px">地域ごとの粗大ごみの出し方</h2>\n    <p>お住まいの市町村の記事がないときは、<a href="/guide/how-to-check/">自分の市町村の調べ方</a>を見てください。</p>\n'+"".join(blocks)+'    <!-- area:end -->\n'
 if "<!-- area:start -->" in s:
     s=re.sub(r"    <!-- area:start -->.*?<!-- area:end -->\n",sec,s,flags=re.S)
 else:
