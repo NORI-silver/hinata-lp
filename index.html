@@ -437,7 +437,7 @@ function handlers(j,rs){
   const rows=[
     ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
     ["post","家電リサイクル券センター（家電4品目）",`電話 ${telA(RKC)}<br>買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます`,extA("近くの指定引取場所を探す",pref),"対応:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:メーカー・大きさで違います"],
-    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(n))).join(""):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
+    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
     ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
   return `<div class="where"><h3>${j.cname}で粗大ごみを出せるところ</h3><p class="wsub">あなたの品目を出せる所に色がつきます。連絡先は2026年10月30日に各公式ページで確認しました${j.url?`・<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>`:""}</p><div class="wl">${rows.map(([k,name,info,links,spec])=>{
