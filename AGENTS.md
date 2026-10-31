@@ -40,6 +40,7 @@
 | `tools/guide/booking.json` `docs/web-booking.md` | 地域ごとのウェブ予約の状態（だれでも／条件つき／停止中／電話など）。予約サイトのリンクと電話は記事の「申し込み方法」から areas.py が取り出し、診断の受付欄に出す。一覧は areas.py が docs/web-booking.md に書き出す |
 | `tools/guide/topics.py` | 持ち込み・処理券・大きさの基準（/guide/size/）・品目別（布団・ソファ・自転車・マットレス・ベッド）のまとめページを地域記事の元データから作る。地域記事を直したら areas.py のあとに実行 |
 | `reviews.js` `backend/reviews.gs` `tools/guide/reviews_areas.py` | 買取チェーンの近くの店と Google マップの口コミ。対象の市区（AREAS）は地域記事の市区から reviews_areas.py で作る。地域を足したら実行し、backend/reviews.gs を Apps Script「hinata 口コミ」に貼り直して同じデプロイの新しいバージョンを出す（月300回の上限に達するとその月は地図へのリンクだけ） |
+| `tools/form_check.js` `docs/form-review.md` `.claude/agents/form-reviewer.md` | 診断フォームの点検（判定・使いやすさ・競合比較）。フォームや判定を直したら `node tools/form_check.js .` で NG 0 にする |
 | `tools/seo_check.py` `.github/workflows/seo-check.yml` | SEOの自動チェック（PRごと＋週1回は外部リンクも） |
 | `docs/seo-playbook.md` `docs/seo-log.md` | 定期のSEO作業の手順と記録 |
 
