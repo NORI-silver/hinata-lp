@@ -23,6 +23,8 @@ jobs:
           cat review-out/*.md >> "$GITHUB_STEP_SUMMARY"
           echo "--- 開けない外部リンク ---"
           grep -h '外部リンクが開けない' review-out/*.md || echo "なし"
+          echo "--- 自動では開けない外部リンク（ブラウザで確認） ---"
+          grep -h '自動では開けない' review-out/*.md || echo "なし"
         shell: bash
       - uses: actions/upload-artifact@v4
         with:

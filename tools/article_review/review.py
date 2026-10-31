@@ -292,8 +292,10 @@ def review(cfg, root, today, external=False):
                 if href not in ext_cache:
                     ext_cache[href] = check_url(href)
                 st = ext_cache[href]
-                if st:
-                    add("links", "high" if st.startswith(("404", "410")) else "mid", f"外部リンクが開けない（{st}）: {txt} → {href}")
+                if st.startswith(("404", "410")):
+                    add("links", "high", f"外部リンクが開けない（{st}）: {txt} → {href}", "公式サイトで移転先を探す")
+                elif st:  # 403・302・接続できない は、海外のサーバーやボットを断っているだけのことが多い
+                    add("links", "low", f"外部リンクが自動では開けない（{st}）: {txt} → {href}", "ブラウザで開けるか確かめる（海外・ボットからの接続を断るサイトがある）")
         if tcfg.get("need_official_link") and not seen_off:
             add("links", "high", "公式サイトへのリンクが1つもない")
 
