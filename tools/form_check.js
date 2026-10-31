@@ -26,8 +26,13 @@ const iso = n => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.get
 
 // 入力のしかた（画面の操作と同じことをする）
 async function fresh(page, base, q = "") { await page.goto(base + "/" + q); await page.waitForSelector("#qs .q"); }
-async function city(page, v) { await page.click(`#qs button[data-k="city"][data-v="${v}"]`); }
-async function addr(page, t) { await page.fill("#addr", t); await page.press("#addr", "Enter"); }
+// お住まいは全国の市区町村から入力で選ぶ（市区のボタンはない）
+const CITYNAME = { yokohama: "横浜市", kawasaki: "川崎市", setagaya: "世田谷区", suginami: "杉並区", saitama: "さいたま市", chiba: "千葉市", sakura: "佐倉市" };
+async function addr(page, t) {
+  await page.fill("#addr", t); await page.press("#addr", "Enter");
+  await page.waitForFunction(() => /で診断|見つかりません|つあります/.test((document.getElementById("addrmsg") || {}).textContent || ""));
+}
+async function city(page, v) { await addr(page, CITYNAME[v]); }
 async function moveIn(page, n) { await page.fill("#move", iso(n)); await page.dispatchEvent("#move", "change"); }
 async function item(page, t) { await page.fill("#free", t); await page.click("#addfree"); }
 async function car(page, v) { await page.click(`#qs button[data-k="car"][data-v="${v}"]`); }
@@ -53,11 +58,11 @@ async function run() {
   const pre = await page.evaluate(() => ({
     tags: document.querySelectorAll("#qs .tag").length,
     items: document.querySelectorAll('#qs [data-k="items"][aria-pressed="true"]').length,
-    city: document.querySelectorAll('#qs [data-k="city"][aria-pressed="true"]').length,
+    city: document.getElementById("addr").value.length + (document.querySelector("#out .status") ? 1 : 0),
     cards: document.querySelectorAll("#out .icard").length,
   }));
   check("初期状態で品目が選ばれていない（ソファなどの見本が入っていない）", pre.tags === 0 && pre.items === 0, JSON.stringify(pre));
-  check("初期状態でお住まいが勝手に選ばれていない", pre.city === 0, `選択中 ${pre.city}`);
+  check("初期状態でお住まいが勝手に選ばれていない（入力欄が空）", pre.city === 0, `入力・結果 ${pre.city}`);
   check("入力前は品目カードを出さず、何を入れればよいかを案内する", pre.cards === 0, `カード ${pre.cards}`);
 
   // 2. 質問の数と選択肢の数（多すぎると迷う）
@@ -136,6 +141,28 @@ async function run() {
   await fresh(page, base); await addr(page, "大阪市北区"); await moveIn(page, 30); await item(page, "ベッド");
   const om = await page.textContent("#addrmsg");
   check("「大阪市北区」→ 大阪市で診断（東京の北区にしない）", /大阪市/.test(om), om);
+  // 記事のない市区町村：その名前で診断し、日数で「間に合う／間に合わない」を決めつけない
+  await fresh(page, base); await addr(page, "北海道ニセコ町"); await moveIn(page, 3); await item(page, "ベッド");
+  const nm = await page.textContent("#addrmsg"), st = await page.textContent("#out .status");
+  check("記事のない町（ニセコ町）→ その町で診断", /ニセコ町/.test(nm), nm);
+  check("記事のない町では収集までの日数で判定しない", /公式サイトで確認/.test(st) && !/間に合わないかも|間に合いそう/.test(st), st.slice(0, 80));
+  const lk = await page.$$eval("#out a", as => as.map(a => a.href));
+  check("記事のない町 → 粗大ごみの検索リンクが出る", lk.some(h => /google\.com\/search/.test(h)), "");
+  // 区の名前だけ（中央区）は東京に決めつけない
+  await fresh(page, base); await addr(page, "中央区");
+  const cw = await page.$$eval("#qs button[data-muni]", es => es.map(e => e.textContent));
+  check("「中央区」だけ → 東京都中央区と政令市の中央区から選ぶ", cw.length > 2 && cw.some(t => /千葉市中央区/.test(t)), cw.join("・"));
+  await fresh(page, base); await addr(page, "鎌ヶ谷市");
+  check("「鎌ヶ谷市」（ヶ）でも鎌ケ谷市が見つかる", /鎌ケ谷市/.test(await page.textContent("#addrmsg")), await page.textContent("#addrmsg"));
+  await fresh(page, base); await addr(page, "横浜");
+  check("「横浜」→ 横浜町ではなく横浜市", /神奈川県横浜市/.test(await page.textContent("#addrmsg")), await page.textContent("#addrmsg"));
+  // 同じ名前の市（府中市）は勝手に決めず、選んでもらう
+  await fresh(page, base); await addr(page, "府中市");
+  const amb = await page.$$eval("#qs button[data-muni]", es => es.map(e => e.textContent));
+  check("「府中市」→ 東京都と広島県から選ぶボタンが出る", amb.length === 2, amb.join("・"));
+  await page.click("#qs button[data-muni]:has-text('広島県')");
+  const fm = await page.textContent("#addrmsg");
+  check("広島県の府中市を選ぶと、東京の府中市の記事を使わない", /広島県府中市/.test(fm) && /記事はまだない/.test(fm), fm);
 
   // 9. 料金は「目安」と出る
   await fresh(page, base); await city(page, "kawasaki"); await moveIn(page, 30); await item(page, "タンス"); await item(page, "冷蔵庫");
@@ -151,8 +178,8 @@ async function run() {
 
   // 11. 記事からの引き継ぎ（/?city=）
   await fresh(page, base, "?city=setagaya");
-  const pc = await page.$$eval('#qs [data-k="city"][aria-pressed="true"]', es => es.map(e => e.dataset.v));
-  check("/?city=setagaya で世田谷区が選ばれた状態になる", pc[0] === "setagaya", pc.join(","));
+  const pc = await page.inputValue("#addr");
+  check("/?city=setagaya で世田谷区が選ばれた状態になる", /世田谷区/.test(pc) && /世田谷区/.test(await page.textContent("#addrmsg")), pc);
 
   check("ページのJavaScriptエラーがない", !errs.length, errs.join(" | "));
 
