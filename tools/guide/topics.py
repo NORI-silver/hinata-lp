@@ -76,6 +76,11 @@ def page(path,title,desc,crumb,h1,lead,body):
     open(p,"w",encoding="utf-8").write(out)
     print(path,len(title),len(desc))
 
+def regtables(cell,head,pre):
+    # 地方ごとに h3 と表を分け、表の上に地方へ飛ぶリンクを置く
+    rs=[r for r in RORDER if any(REGION[k]==r for k in ORDER)]
+    nav='<p>'+"・".join(f'<a href="#{pre}{i}">{r}</a>' for i,r in enumerate(rs))+'</p>\n'
+    return nav+"".join(f'    <h3 id="{pre}{i}">{r}</h3>\n    <table class="cmp"><thead><tr><th scope="col">市区</th><th scope="col">{head}</th></tr></thead><tbody>'+"".join(cityrow(k,cell(k)) for k in ORDER if REGION[k]==r)+'</tbody></table>\n' for i,r in enumerate(rs))
 def cityrow(k,cell):
     n=C[k][0]
     return f'<tr><th scope="row"><a href="/guide/{k}/">{n}</a></th><td>{cell}</td></tr>'
@@ -115,7 +120,7 @@ MOCHI={
 }
 # 要点も辞書もない市は、記事の出典で確かめてもらう（新しい市を足したときに止まらないように）
 FALLBACK="記事と市区の公式ページで確認"
-rows="".join(cityrow(k,pt(k).get("持ち込み") or MOCHI.get(k,FALLBACK)) for k in ORDER)
+rows=regtables(lambda k:pt(k).get("持ち込み") or MOCHI.get(k,FALLBACK),f"持ち込み（{CHECK}確認）","m")
 mochi_body=f'''    <h2>粗大ごみの持ち込みとは</h2>
     <p>粗大ごみを自分の車で市区の施設へ運んで出す方法です。収集の予約が先まで埋まっているときや、引越しまで日がないときに使えます。予約がいらない市（札幌市・相模原市・北九州市・広島市など）や、収集より安い区（板橋区・葛飾区は半額、江戸川区は自転車が収集900円に対し持ち込み400円）もあります。</p>
     <p>一方で、持ち込みを受け付けていない区（江東区・目黒区・中央区など）や、公式ページに案内が見当たらない市区もあります。まず下の一覧で、お住まいの市区を確かめてください。</p>
@@ -134,8 +139,7 @@ mochi_body=f'''    <h2>粗大ごみの持ち込みとは</h2>
 
     <h2>市区ごとの持ち込み先</h2>
     <p>市区名を押すと、その市区の記事（申し込み・料金・家電・買取店）が開きます。施設の住所・受付時間・最新の料金は、記事の出典から市区の公式ページで確かめてください。</p>
-    <table class="cmp"><thead><tr><th scope="col">市区</th><th scope="col">持ち込み（{CHECK}確認）</th></tr></thead><tbody>{rows}</tbody></table>
-
+    {rows}
     <h2>持ち込みのよくある質問</h2>
     <h3>ゴミ処理場（清掃工場）に持ち込むのに予約はいる？</h3>
     <p>予約がいる市区が多いです。札幌市・相模原市・北九州市・広島市などは予約なしで持ち込めます。日曜だけ・指定日だけの施設もあるので、上の一覧と市区の記事で確かめてください。</p>
@@ -158,7 +162,7 @@ PAY={
 def paycell(k):
     p=pt(k); xs=[x for x in (p.get("料金"),p.get("支払い")) if x]
     return "<br>".join(xs) if xs else PAY.get(k,FALLBACK)
-rows="".join(cityrow(k,paycell(k)) for k in ORDER)
+rows=regtables(paycell,f"料金と払い方（{CHECK}確認）","r")
 ken_body=f'''    <h2>粗大ごみ処理券（シール）とは</h2>
     <p>粗大ごみの手数料を前払いした印です。申し込みのときに言われた金額分を買い、出す物に貼っておきます。呼び方は市区で違い、東京23区の「有料粗大ごみ処理券」、横浜市の「粗大ごみ収集シール」、名古屋市や仙台市の「納付券」、神戸市の「大型ごみシール券」、浜松市の「納付済証」などがあります。</p>
 
@@ -179,8 +183,7 @@ ken_body=f'''    <h2>粗大ごみ処理券（シール）とは</h2>
     <p>書き方や貼る場所の細かい決まりは市区で違います。お住まいの市区の記事から公式ページを確かめてください。持ち込みのときも、処理券を先に買っておく市区（横浜市・浜松市など）と、施設で重さに応じて現金で払う市区があります（<a href="/guide/mochikomi/">粗大ごみの持ち込み</a>）。</p>
 
     <h2 id="ryokin">市区ごとの料金と払い方</h2>
-    <table class="cmp"><thead><tr><th scope="col">市区</th><th scope="col">料金と払い方（{CHECK}確認）</th></tr></thead><tbody>{rows}</tbody></table>
-
+    {rows}
     <h2>処理券のよくある質問</h2>
     <h3>処理券（シール）はコンビニで買える？</h3>
     <p>多くの市区で、目印のステッカーがあるコンビニ・スーパー・ドラッグストアで買えます。どのお店が取扱所かは市区のページで確かめられます。</p>
@@ -236,7 +239,7 @@ for key,short,name,words,excl,h1base,intro in ITEMS:
     n=len(cities)
     title=f"{h1base}｜粗大ごみの料金を{n}市区で比較"
     if len(title)<28: title=f"{name}の捨て方・処分方法｜粗大ごみの料金を{n}市区で比較"
-    desc=f"{name}を粗大ごみで出すときの料金を{n}市区の公式ページで調べて比べました。申し込みから収集までの流れ、持ち込み、まだ使えるときの買取、無料回収業者に頼まない理由もまとめています。"
+    desc=f"{name}の捨て方を、{n}市区の公式ページで調べた粗大ごみ料金の比較とあわせてまとめました。申し込みから収集までの流れ、持ち込み、まだ使えるときの買取、無料回収業者に頼まない理由も。"
     body=f'''    <h2>{name}は粗大ごみで出せる？</h2>
 {intro}
     <h2>{name}を手放す4つの方法</h2>
@@ -247,17 +250,60 @@ for key,short,name,words,excl,h1base,intro in ITEMS:
       <li><b>許可業者に頼む</b>：家のごみを運べるのは市区と市区の許可業者だけです。「無料で回収」の巡回業者には頼まないでください（<a href="/guide/scam/">ぼったくりの実例</a>）。</li>
     </ol>
 
-    <h2>市区ごとの{name}の粗大ごみ料金</h2>
+    <h2>{name}の粗大ごみ料金（市区別）</h2>
     <p>各市区の記事にある料金表から、{name}が出てくる行をそのまま抜き出しました。大きさや材質で区分が変わるので、正確な金額は申し込みのときに確かめてください。表にない市区は、市区名の記事から公式の品目一覧を開いて調べられます。</p>
     <table class="cmp cmp3"><thead><tr><th scope="col">市区</th><th scope="col">料金</th><th scope="col">市区の表での書き方</th></tr></thead><tbody>{"".join(rows)}</tbody></table>
 '''
     item_cards.append((f"/guide/item/{key}/",f"{name}の捨て方",f"{n}市区の粗大ごみ料金を比較。持ち込み・買取も。",title,desc,name,f"{h1base}（{n}市区の料金）",body))
+
+# ---------- 大きさの基準（粗大ごみとは） ----------
+def taisho(k):
+    p=pt(k); return p.get("対象") or p.get("対象の目安")
+SIZEFIX={"hamamatsu":"mixed","toyonaka":"mixed","funabashi":"mixed"}  # 物の種類・素材で基準が分かれる市
+def sizegroup(t,k=None):
+    if k in SIZEFIX: return SIZEFIX[k]
+    if not t or not re.search(r"cm|メートル|袋|ポリタンク|\dm",t): return "other"
+    if "ポリタンク" in t or ("袋" in t and "cm" not in t): return "bag"
+    cm={int(x) for x in re.findall(r"(\d+)cm",t)}&{30,40,50}
+    if len(cm)>1: return "mixed"
+    if cm: return f"c{cm.pop()}"
+    return "big"
+SG=[("c30","一辺30cmが目安の市区"),("c40","一辺40cmが目安の市区"),("c50","一辺50cmが目安の市区"),("mixed","物の種類や素材で基準が違う市区"),("big","90cm・1mなど、もっと大きい物が対象の市区"),("bag","指定袋やポリタンクなど、入れ物の大きさで決める市区"),("other","基準の書き方が違う・公式で確認する市区")]
+groups={g:[k for k in ORDER if sizegroup(taisho(k),k)==g] for g,_ in SG}
+nsize=sum(1 for k in ORDER if sizegroup(taisho(k),k)!="other")
+def sizetable(g):
+    return '<table class="cmp"><thead><tr><th scope="col">市区</th><th scope="col">粗大ごみの対象（公式ページの要点）</th></tr></thead><tbody>'+"".join(cityrow(k,taisho(k) or FALLBACK) for k in groups[g])+'</tbody></table>'
+size_body=f'''    <h2>粗大ごみとは</h2>
+    <p>粗大ごみは、家具や寝具、自転車など、ふだんのごみ袋に入らない大きな家庭のごみのことです。どこからを粗大ごみとするかは市区が決めていて、「一辺30cmを超える物」とする区が多い一方、40cm・50cm・90cmを目安にする市や、大きさではなく「指定袋に入るかどうか」で決める市もあります。</p>
+    <p>引越しで別の市区へ移ると、前の家では普通ごみに出せた物が粗大ごみになる（またはその逆の）ことがあります。下の表は、各市区の記事のもとになった公式ページの「粗大ごみの対象」を短くまとめたものです（{CHECK}確認）。</p>
+
+    <h2>大きさのほかに気をつけること</h2>
+    <ul>
+      <li><b>分解しても粗大ごみ</b>：中央区・台東区・豊島区・練馬区・徳島市などは、分解したり切ったりしても粗大ごみとして扱います。</li>
+      <li><b>小さくても粗大ごみになる物</b>：ストーブ・カセットコンロ・電子レンジなどは、大きさに関係なく粗大ごみとする市があります（越谷市・那覇市・調布市など）。</li>
+      <li><b>重さや長さの上限</b>：重さ（5kg・10kg以上など）で決める市や、長すぎる物・重すぎる物は収集しない市もあります。</li>
+      <li><b>家電4品目は別</b>：エアコン・テレビ・冷蔵庫と冷凍庫・洗濯機と衣類乾燥機は、大きさに関係なく粗大ごみには出せません（<a href="/guide/fees/#kaden">家電リサイクル券の買い方と料金</a>）。</li>
+    </ul>
+
+    <h2>市区ごとの粗大ごみの大きさの基準</h2>
+    <p>市区名を押すと、その市区の記事（申し込み・料金・持ち込み）が開きます。「おおむね」「超える」「以上」などの細かい書き方は市区で違うので、迷う物は申し込みのときに確かめてください。</p>
+    <p>{"・".join(f'<a href="#{g}">{h}</a>' for g,h in SG if groups[g])}</p>
+'''+"".join(f'    <h3 id="{g}">{h}（{len(groups[g])}）</h3>\n    {sizetable(g)}\n' for g,h in SG if groups[g])+f'''
+    <h2>大きさの基準のよくある質問</h2>
+    <h3>粗大ごみは何cmから？</h3>
+    <p>一辺30cm（を超える物、または以上の物）とする市区がいちばん多く、東京23区の多くがこの基準です。ただし横浜市は金属製品30cm・それ以外50cm、さいたま市は90cm以上など、市区で大きく違います。上の表でお住まいの市区を確かめてください。</p>
+    <h3>小さく分解すれば、普通のごみに出せる？</h3>
+    <p>市区によります。分解・切断しても粗大ごみとする区がある一方、袋に入れば普通のごみに出せる市もあります。お住まいの市区の記事から公式ページを確かめてください。</p>
+    <h3>粗大ごみの料金は？</h3>
+    <p>品目と大きさで決まり、処理券（シール）を買って貼るのが基本です（<a href="/guide/shoriken/#ryokin">市区ごとの料金と払い方</a>）。車があれば、施設へ持ち込める市区もあります（<a href="/guide/mochikomi/">粗大ごみの持ち込み</a>）。</p>
+'''
 
 RELATED=''.join(f'<a class="card" href="{u}"><b>{b}</b><span>{sp}</span></a>' for u,b,sp in [
  ("/guide/mochikomi/","粗大ごみの持ち込み","予約・料金・持ち物と、市区ごとの持込先。"),
  ("/guide/shoriken/","処理券（シール）の買い方・貼り方","買える場所と、市区ごとの料金と払い方。"),
  ("/guide/fees/","出し方と料金（役所・郵便局・持込）","市区の回収、家電リサイクル券、持込施設、買取の手順。"),
  ("/guide/late/","引越しの不用品・家具処分","粗大ごみが間に合わないときの4つの方法。"),
+ ("/guide/size/","粗大ごみとは（何cmから？）","市区ごとの大きさの基準を比較。"),
 ]+[(u,b,sp) for u,b,sp,*_ in item_cards])
 
 page("/guide/mochikomi/","粗大ごみの持ち込み｜予約・料金・持ち物と44市区の持込先".replace("44",str(len(ORDER))),
@@ -268,12 +314,17 @@ page("/guide/shoriken/",f"粗大ごみ処理券（シール）の買い方・貼
  f"粗大ごみ処理券（シール・納付券）の買い方と貼り方をまとめました。コンビニなどの取扱所、申し込んでから買う理由、キャッシュレス払い、ほかの市区の券が使えないことと、{len(ORDER)}市区の料金と払い方の一覧です。",
  "粗大ごみ処理券（シール）","粗大ごみ処理券（シール）の買い方・貼り方",
  "粗大ごみの手数料は、処理券やシールを買って貼るのが基本です。どこで買うか、いつ買うか、どう貼るかと、市区ごとの料金と払い方をまとめました。",ken_body)
+page("/guide/size/",f"粗大ごみとは｜何cmから？{nsize}市区の大きさの基準を比較",
+ f"粗大ごみとは何か、何cmから粗大ごみになるかを{nsize}市区の公式ページで調べて比べました。30cm・40cm・50cm・指定袋など市区ごとの基準と、分解しても粗大ごみになる区、家電4品目の扱いもまとめています。",
+ "粗大ごみとは（大きさの基準）","粗大ごみとは（何cmから？市区ごとの大きさの基準）",
+ "粗大ごみになる大きさは、市区によって30cm・40cm・50cm・指定袋に入るかどうかなどと違います。市区ごとの基準を比べました。",size_body)
 for u,b,sp,title,desc,name,h1,body in item_cards:
     page(u,title,desc,f"{name}の捨て方",h1,f"{name}を粗大ごみで出すときの料金を市区ごとに比べ、持ち込み・買取など、ほかの手放し方もまとめました。",body)
 
 # 一覧ページのカードと ItemList、sitemap
 TOPIC=[("/guide/mochikomi/","粗大ごみの持ち込み","予約・料金・持ち物と、市区ごとの持込先。","粗大ごみの持ち込み"),
-       ("/guide/shoriken/","処理券（シール）の買い方・貼り方","コンビニなどの取扱所と、市区ごとの料金と払い方。","粗大ごみ処理券（シール）の買い方・貼り方")]+[(u,b,sp,t.split("｜")[0]) for u,b,sp,t,*_ in item_cards]
+       ("/guide/shoriken/","処理券（シール）の買い方・貼り方","コンビニなどの取扱所と、市区ごとの料金と払い方。","粗大ごみ処理券（シール）の買い方・貼り方"),
+       ("/guide/size/","粗大ごみとは（何cmから？）","市区ごとの大きさの基準を比較。","粗大ごみとは（大きさの基準）")]+[(u,b,sp,t.split("｜")[0]) for u,b,sp,t,*_ in item_cards]
 p=os.path.join(ROOT,"guide/index.html"); g=open(p,encoding="utf-8").read()
 sec='    <!-- topic:start -->\n    <h2 id="topic" style="font-size:20px;margin:40px 0 12px">テーマ別・品目別の出し方</h2>\n    <div class="cards">'+"".join(f'<a class="card" href="{u}"><b>{b}</b><span>{sp}</span></a>' for u,b,sp,_ in TOPIC)+'</div>\n    <!-- topic:end -->\n'
 if "<!-- topic:start -->" in g: g=re.sub(r"    <!-- topic:start -->.*?<!-- topic:end -->\n",sec,g,flags=re.S)
