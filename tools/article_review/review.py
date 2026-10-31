@@ -382,7 +382,13 @@ def review(cfg, root, today, external=False):
 
 
 def is_official(host, cfg):
-    return any(host.endswith(h) or h in host for h in cfg.get("official_hosts", []))
+    """official_hosts の "lg.jp" は末尾一致、"city." のように点で終わるものはホスト名の区切りの頭で一致。"""
+    parts = host.split(".")
+    for h in cfg.get("official_hosts", []):
+        h = h.strip(".")
+        if host == h or host.endswith("." + h) or (h in parts):
+            return True
+    return False
 
 
 def internal_exists(root, cfg, path):
@@ -445,7 +451,7 @@ def write_report(cfg, docs, today, out):
     for x in sorted(docs, key=lambda x: -(x.get("boilerplate") or 0))[:10]:
         L.append(f"- {x.get('entity') or x['file']}: 定型文 {x.get('boilerplate')}・この記事だけの文 約{x.get('unique_chars')}字")
     L += ["", "## ページごとの問題（重い順）", ""]
-    for x in sorted(docs, key=lambda x: min([SEV[i["sev"]] for i in x["issues"]] or [9])):
+    for x in sorted(docs, key=lambda x: (min([SEV[i["sev"]] for i in x["issues"]] or [9]), -(x.get("priority") or 0))):
         if not x["issues"]:
             continue
         L.append(f"### {x.get('entity') or ''} {x['file']}")

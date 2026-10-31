@@ -14,7 +14,7 @@
  "critic_required_for": ["seo"],
  "body_tags": ["main", "article"],
  "entity": {"regex": "^(.+?[都道府県市区町村])の"},
- "official_hosts": ["lg.jp", "go.jp", ".city.", "city.", "town.", "metro.tokyo", "aeha-kadenrecycle.com", "rkc.aeha.or.jp"],
+ "official_hosts": ["lg.jp", "go.jp", "city", "town", "metro.tokyo.jp", "aeha-kadenrecycle.com", "aeha.or.jp"],
  "checked_regex": "(20\\d\\d)年(\\d{1,2})月(\\d{1,2})日に.{0,20}?確認",
  "stale_days": 150,
  "soon_days": 120,
