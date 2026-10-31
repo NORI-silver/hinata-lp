@@ -469,5 +469,14 @@
   "nishio": {
     "web": "none",
     "note": "申し込みは電話か窓口"
+  },
+  "tachikawa": {
+    "web": "open"
+  },
+  "akashi": {
+    "web": "open"
+  },
+  "soka": {
+    "web": "open"
   }
 }
