@@ -29,6 +29,8 @@ open(p,"w",encoding="utf-8").write(s)
 p=os.path.join(ROOT,"sitemap.xml"); s=open(p,encoding="utf-8").read()
 for k in C:
     u=f"{SITE}/guide/{k}/"
-    if u not in s: s=s.replace("</urlset>",f"  <url><loc>{u}</loc><lastmod>2026-10-30</lastmod></url>\n</urlset>")
+    lm=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta",k+".json"),encoding="utf-8")).get("checked","2026-10-30") if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta",k+".json")) else "2026-10-30"
+    if u not in s: s=s.replace("</urlset>",f"  <url><loc>{u}</loc><lastmod>{lm}</lastmod></url>\n</urlset>")
+    else: s=re.sub(r"(<loc>"+re.escape(u)+r"</loc><lastmod>)[^<]*",lambda m:m.group(1)+lm,s)
 open(p,"w",encoding="utf-8").write(s)
 print("hub ok",len(C))

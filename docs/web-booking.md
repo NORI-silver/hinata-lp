@@ -1,4 +1,4 @@
-# ウェブ予約できる自治体（2026-10-30 確認）
+# ウェブ予約できる自治体（2026-10-30〜31 確認）
 
 `python3 tools/guide/areas.py .` が地域記事と `tools/guide/booking.json` から作る一覧。手で直さない。
 予約サイトの「形」は URL から分けたもので、同じ形なら空き枠の見張りを同じしくみで作れる見込み（運営会社は確かめていない）。
@@ -31,7 +31,7 @@
 | [福山市](/guide/fukuyama/) | × 電話など | — | — |  | 申し込みの制度は見当たりません。ステーション収集に出します |
 | [船橋市](/guide/funabashi/) | ◯ だれでも | https://www.sodai-funabashi.jp/ | 独自 |  |  |
 | [岐阜市](/guide/gifu/) | × 電話など | https://logoform.jp/form/BcLm/62949 | logoform.jp（フォーム） |  | 収集の予約は電話だけ。インターネット（オンライン受付）は持ち込み（直接搬入）の予約に使えます |
-| [八戸市](/guide/hachinohe/) | × 電話など | — | — |  | いまは電話だけ。ごみ収集アプリでの受付が2026年11月から始まる予定（市のページで確認） |
+| [八戸市](/guide/hachinohe/) | × 電話など | — | — |  | 2026年10月31日時点では電話だけ。ごみ収集アプリでの受付が2026年11月から始まる予定（市のページで確認） |
 | [八王子市](/guide/hachioji/) | ◯ だれでも | https://sodai.city.hachioji.tokyo.jp/eco/view/hachioji/top.html | /eco/view/ 形式 |  |  |
 | [函館市](/guide/hakodate/) | × 電話など | — | — |  | 申し込みは電話だけ（1回3点まで）。持ち込み先の予約はネットでもできます |
 | [浜松市](/guide/hamamatsu/) | ◯ だれでも | https://www.city.hamamatsu.shizuoka.jp/ippai/gomi/dashikata/dashikata/renrakugomi_line.html<br>https://www.city.hamamatsu.shizuoka.jp/ippai/gomi/dashikata/dashikata/renrakugomi_in_nagare.html | 独自 |  |  |
@@ -84,7 +84,7 @@
 | [盛岡市](/guide/morioka/) | × 電話など | — | — |  | 申し込みは電話だけ（1回3点まで） |
 | [武蔵野市](/guide/musashino/) | ◯ だれでも | https://www2.sodai-web.jp/musashino/index.html | sodai-web.jp |  |  |
 | [長野市](/guide/nagano/) | × 電話など | — | — |  | 申し込みの制度はありません。小さい物はシールを貼って集積所へ、大きい物は資源再生センターへ持ち込み |
-| [長岡市](/guide/nagaoka/) | ◯ だれでも | https://ecolife.e-tumo.jp/sodai-nagaoka-u/ | e-tumo.jp |  |  |
+| [長岡市](/guide/nagaoka/) | ◯ だれでも | https://ecolife.e-tumo.jp/sodai-nagaoka-u/ | e-tumo.jp |  | 1回5点まで |
 | [長崎市](/guide/nagasaki/) | △ 条件つき | https://sodai.city.nagasaki.lg.jp/eco/view/nagasaki/top.html | /eco/view/ 形式 |  | インターネットで申し込めるのは品目一覧にある物だけ。ほかは電話 |
 | [名古屋市](/guide/nagoya/) | ◯ だれでも | https://www.nagoya-sodaigomi.jp/eco/view/nagoya/top.html | /eco/view/ 形式 |  |  |
 | [那覇市](/guide/naha/) | × 一時停止中 | — | — |  | インターネット受付は2026年10月時点で一時停止中（再開は市の公式ページで確認）。いまは電話で |
