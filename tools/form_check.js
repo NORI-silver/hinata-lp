@@ -126,6 +126,10 @@ async function run() {
   check("横浜・ソファ → 市の回収の行に「最短の収集日を調べる」へのリンク", c && /最短の収集日を調べる/.test(cityOpt(c).text), cityOpt(c) && cityOpt(c).text.slice(0, 80));
   check("ソファ → 「譲る」の行があり、おすすめにはしない", c && c.options.some(o => /譲る/.test(o.name) && o.mark === "○"), c && c.options.map(o => o.mark + o.name).join("・"));
 
+  await moveIn(page, 3);
+  c = await cardOf(page, "ソファ");
+  check("急ぎ（3日後）のときは「譲る」を出さない", c && !c.options.some(o => /譲る/.test(o.name)), c && c.options.map(o => o.mark + o.name).join("・"));
+
   // 8. 住所入力・その他の地域
   await fresh(page, base); await addr(page, "佐倉市ユーカリが丘"); await moveIn(page, 30); await item(page, "ベッド");
   check("「佐倉市ユーカリが丘」→ 佐倉市で診断", /佐倉市/.test(await page.textContent("#addrmsg")), await page.textContent("#addrmsg"));

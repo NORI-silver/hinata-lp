@@ -475,8 +475,8 @@ function bookLinks(j){
   const ls=j.key==="other"?(j.ar&&j.ar.bk&&j.ar.bk.w||[]):(INFO[j.key]&&INFO[j.key].links||[]).filter(([t])=>/インターネット|最短|チャット/.test(t));
   return ls.length?`<br>空きを見る：${ls.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("・")}`:"";
 }
-// ジモティーなどで譲る。引き取り手が見つかるとは限らないので、おすすめにはしない
-const GIVE={h:"",k:"give",name:"譲る（ジモティーなど）",desc:`まだ使える物は、<a href="https://jmty.jp/" target="_blank" rel="noopener">ジモティー</a>などで無料で譲る方法もあります。引き取り手が見つかるとは限らないので、引越しまで日がないときは、ほかの出し方も用意しておく`,cost:"¥0（目安）",when:"引き取り手しだい",ok:true};
+// ジモティーなどで譲る。引き取り手が見つかるとは限らないので、おすすめにはせず、日に余裕があるとき（通常の予約で間に合うとき）だけ出す
+const GIVE={h:"",k:"give",name:"譲る（ジモティーなど）",desc:`まだ使える物は、<a href="https://jmty.jp/" target="_blank" rel="noopener">ジモティー</a>などで無料で譲る方法もあります。引き取り手が見つかるとは限らないので、ほかの出し方も用意しておく`,cost:"¥0（目安）",when:"引き取り手しだい",ok:true};
 // 品目ごとの全選択肢。ok=使える / rec=おすすめ
 function itemOptions(it,j){
   const car=A.car==="yes",late=j.d<j.lead,k=routeKey(it,j);
@@ -501,7 +501,7 @@ function itemOptions(it,j){
   if(it.cat==="app") return [
     {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:"リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります",cost:APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
     {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true,k:"buy"},
-    {...GIVE,desc:GIVE.desc.replace("まだ使える物は","製造から年数の浅い物は")},
+    ...(late?[]:[{...GIVE,desc:GIVE.desc.replace("まだ使える物は","製造から年数の浅い物は")}]),
     {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
@@ -510,7 +510,7 @@ function itemOptions(it,j){
     {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
     {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
     {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"10kgで約¥350":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
-    ...(BEDRE.test(it.label)?[]:[GIVE]),
+    ...(late||BEDRE.test(it.label)?[]:[GIVE]),
     {h:"",k:"move",name:to?`新居の${to.n}で出す`:"新居の自治体で出す",desc:`引越し荷物に入れて運び、落ち着いてから出す${to?`。${tfs.length?`${to.n}の料金表では ${feeList(tfs)}（目安）`:`${to.n}の料金は<a href="${to.g}">記事</a>か公式ページで確認`}`:"。新居の自治体を入れると、そこでの料金が出ます"}`,cost:to&&tfs.length&&yen(tfs.map(x=>x[1]))?`運ぶ費用＋${yen(tfs.map(x=>x[1]))}（目安）`:"運ぶ費用が増える",when:"引越し後",ok:true}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
 }
