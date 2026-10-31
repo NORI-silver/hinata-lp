@@ -124,6 +124,17 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .nbtn{display:block;text-align:center;font-size:18px;font-weight:700;color:#fff;background:var(--good);border-radius:12px;padding:14px 16px;text-decoration:none}
 .nbtn:hover{filter:brightness(1.08)}
 .nsteps{margin:0;padding-left:24px;font-size:16px}
+.cost{display:flex;flex-direction:column;gap:8px}
+.cost h3 small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
+.ctbl{width:100%;border-collapse:collapse;background:var(--bg);border-radius:14px;overflow:hidden;font-size:16px}
+.ctbl th,.ctbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.ctbl th{font-weight:700}.ctbl td{text-align:right;font-weight:700;white-space:nowrap}
+.ctbl small{display:block;font-size:13px;font-weight:400;color:var(--muted);white-space:normal}
+.ctbl tr.bad th,.ctbl tr.bad td{color:var(--muted)}
+@media (max-width:520px){.ctbl td{white-space:normal}}
+.wbtn{display:block;width:100%;font-size:17px;font-weight:700;color:var(--accent);background:var(--accent-soft);border:2px solid var(--accent);border-radius:12px;padding:12px 14px;cursor:pointer}
+.ct{display:flex;flex-direction:column;gap:2px;margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:15px;color:var(--ink)}
+.ct b{font-size:15px}.ct span{color:var(--muted);font-size:14px;line-height:1.6}.ct a{font-weight:700}
 .slot{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px 20px;display:flex;flex-direction:column;gap:8px;font-size:16px}
 .slot .nl{font-size:15px;font-weight:700;color:var(--accent)}
 .slot p{margin:0}
@@ -157,7 +168,7 @@ h1 .eyebrow{display:block;font-size:14px;font-weight:700;color:var(--accent);let
 .io .ioc{text-align:right;font-size:16px;font-weight:700;white-space:nowrap}
 .io.rec{background:var(--good-soft)}
 .io.rec .mk{color:var(--good)}
-.io.rec .ion b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:13px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
+.io.rec .ion>b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:13px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
 .io.ng{opacity:.45}
 .io.ng .mk{color:var(--muted)}
 @media (max-width:520px){.io{grid-template-columns:22px minmax(0,1fr)}.io .ioc{grid-column:2;text-align:left}}
@@ -430,20 +441,34 @@ function findArea(v){
   return ks.find(k=>v.includes(AREAS[k].n))||ks.find(k=>v===AREAS[k].n.slice(0,-1))||"";
 }
 // 品目の名前から、料金表の行を探すための言葉
-const FEEKW=[[/ソファ/,/ソファ/],[/マットレス|ベッドマット/,/マット/],[/ベッド/,/ベッド(?!マット)/],[/タンス|箪笥|たんす/,/タンス|たんす|箪笥/],[/布団|ふとん/,/布団|ふとん/],[/食器棚/,/食器棚/],[/本棚/,/本棚/],[/机|デスク/,/机/],[/テーブル/,/テーブル/],[/椅子|いす|イス|チェア/,/いす|椅子|チェア/],[/自転車/,/自転車/],[/電子レンジ|レンジ/,/電子レンジ/],[/掃除機/,/掃除機/],[/扇風機/,/扇風機/],[/ストーブ/,/ストーブ/],[/こたつ|コタツ/,/こたつ/],[/畳|たたみ/,/畳|たたみ/],[/カーペット|じゅうたん|絨毯|ラグ/,/カーペット|じゅうたん/],[/ミシン/,/ミシン/],[/鏡台|ドレッサー/,/鏡台/]];
+const FEEKW=[[/ソファ/,/ソファ/],[/マットレス|ベッドマット/,/マット/],[/ベッド/,/^(?!.*ソファ).*ベッド(?!マット)/],[/タンス|箪笥|たんす/,/タンス|たんす|箪笥/],[/布団|ふとん/,/布団|ふとん/],[/食器棚/,/食器棚/],[/本棚|^棚$/,/本棚|書棚|棚/],[/机|デスク/,/机/],[/テーブル/,/テーブル/],[/椅子|いす|イス|チェア/,/いす|椅子|チェア/],[/自転車/,/自転車/],[/電子レンジ|レンジ/,/電子レンジ/],[/掃除機/,/掃除機/],[/扇風機/,/扇風機/],[/ストーブ/,/ストーブ/],[/こたつ|コタツ/,/こたつ/],[/畳|たたみ/,/畳|たたみ/],[/カーペット|じゅうたん|絨毯|ラグ/,/カーペット|じゅうたん/],[/ミシン/,/ミシン/],[/鏡台|ドレッサー/,/鏡台/]];
 // 「、」で分ける（かっこの中は分けない）
 const segs=t=>{const o=[];let d=0,b="";for(const ch of t){if(ch==="（")d++;if(ch==="）")d--;if(ch==="、"&&!d){o.push(b);b=""}else b+=ch}o.push(b);return o};
 // その地域の料金表から、品目に合う行を返す。[[表示, 収集の料金, 持ち込みの料金],...]
+// 横浜市は記事に料金表がないので、市の「粗大ごみ処理手数料（インターネット品目一覧）」から主な品目を載せる（2026-11-01確認）
+const FEEX={"横浜市":{src:"https://www.sodai.city.yokohama.lg.jp/eco/view/yokohama/dustlistSearch.html",items:[["いす", "200円"], ["応接用いす（1人用）", "500円"], ["応接用いす（2人以上用）", "1,000円"], ["学習机（両袖机以外）", "1,000円"], ["学習机（両袖有り）", "1,500円"], ["カラーボックス（長辺1m未満）", "200円"], ["座いす", "200円"], ["座卓（長辺1m未満）", "500円"], ["座卓（長辺1m以上）", "1,000円"], ["自転車（子供用自転車を含む）", "500円"], ["書棚（長辺1m未満）", "1,000円"], ["書棚（長辺1m以上）", "1,500円"], ["食器棚（長辺1m未満）", "1,000円"], ["食器棚（長辺1m以上）", "1,500円"], ["ソファーベッド", "1,000円"], ["ソファー（1人用）", "500円"], ["ソファー（2人以上用）", "1,000円"], ["たんす（長辺1m未満）", "1,000円"], ["たんす（長辺1m以上）", "1,500円"], ["机（両袖机以外）", "1,000円"], ["机（両袖有り）", "1,500円"], ["電子レンジ", "500円"], ["電動自転車", "500円"], ["テーブル（長辺1m未満）", "500円"], ["テーブル（長辺1m以上）", "1,000円"], ["戸棚・棚（長辺1m未満）", "200円"], ["戸棚・棚（長辺1m以上）", "500円"], ["布団&マットレス（2枚まで1組に）", "200円"], ["ベッド（枠のみ）", "1,000円"], ["ベッドマットレス（スプリング無し）", "1,000円"], ["ベッドマットレス（スプリング付き）", "2,200円"]]}};
 function itemFees(ar,label){
-  if(!ar||!ar.items)return [];
-  const kw=FEEKW.find(([re])=>re.test(label));if(!kw)return [];
+  const items=ar?[...(ar.items||[]),...((FEEX[ar.n]||{}).items||[])]:[];
+  if(!items.length)return [];
+  // 「机・テーブル」のようなチップは、それぞれの言葉で探す
+  const kws=[...new Set([label,...String(label).split("・")].map(x=>FEEKW.find(([re])=>re.test(x))).filter(Boolean))];
+  if(!kws.length)return [];
   const out=[];
-  ar.items.forEach(([t,fee,drop])=>{
-    if(/^粗大ごみ（/.test(t)){out.push([t,fee,drop]);return}
-    segs(t).forEach(x=>{if(kw[1].test(x.replace(/（[^）]*(以外|除|別)[^）]*）/g,"")))out.push([x,fee,drop])});
+  items.forEach(([t,fee,drop])=>{
+    if(/^(粗大ごみ|収集)（/.test(t)){out.push([t,fee,drop]);return}
+    segs(t).forEach(x=>{const y=x.replace(/（[^）]*(以外|除|別)[^）]*）/g,"");if(kws.some(kw=>kw[1].test(y))&&!out.some(o=>o[0]===x&&o[1]===fee))out.push([x,fee,drop])});
   });
   return out;
 }
+// 料金の幅（数値）。[最小, 最大] か null
+const yenNum=a=>{const ns=a.flatMap(x=>(x.match(/[\d,]+(?=円)/g)||[]).map(n=>+n.replace(/,/g,"")));return ns.length?[Math.min(...ns),Math.max(...ns)]:null};
+const yr=([lo,hi])=>"¥"+lo.toLocaleString()+(hi>lo?"〜¥"+hi.toLocaleString():"");
+// 家電4品目のリサイクル料金（主なメーカーの例・税込。名古屋市「家電リサイクル法対象品目の出し方」2026-08-27更新）。このほかにお店の収集運搬料がかかる
+const APPFEE=[[/冷蔵|冷凍/,3740,4730],[/洗濯|乾燥機/,2530,2530],[/テレビ|ＴＶ|TV/i,1870,2970],[/エアコン|室外機/,550,990]];
+const APPSRC="https://www.city.nagoya.jp/kurashi/gomi/1012183/1035059/1012216/1012222.html";
+const appFee=l=>{const x=APPFEE.find(([re])=>re.test(l));return x?[x[1],x[2]]:null};
+// 軽トラック1台分の不用品回収の相場（ミツモア 2026年5月の成約1,467件の中央50%。2026-08-25更新の記事）
+const TRUCK=[9000,14000],TRUCKSRC="https://meetsmore.com/services/unwanted-item-pick-up/media/272763";
 const yen=a=>{const ns=a.flatMap(x=>(x.match(/[\d,]+(?=円)/g)||[]).map(n=>+n.replace(/,/g,"")));if(!ns.length)return a.includes("無料")?"無料":"";const lo=Math.min(...ns),hi=Math.max(...ns);return (a.includes("無料")?"無料":"¥"+lo.toLocaleString())+(hi>lo||a.includes("無料")?"〜¥"+hi.toLocaleString():"")};
 const feeList=fs=>fs.map(([t,f])=>`${esc(t)} ${esc(f)}`).join("、");
 function judge(){const c=CITIES[A.city],ar=AREAS[A.city]||(A.city==="other"&&AREAS[A.area])||null,j={key:A.city,cname:c[0],lead:A.city==="other"&&A.area?leadDays(A.area):c[1],web:c[2],fee:c[3],drop:c[5],url:c[6],d:days(),ar};
@@ -509,7 +534,8 @@ function bkHours(ar){const b=ar.bk;if(!b)return esc(ptOf(ar,"申し込み")||"�
   return [`<b>${WEBTXT[b.web]}</b>${b.note?`：${esc(b.note)}`:""}`,...(b.mail?["インターネットは、先にメールアドレスを登録して申し込みます"]:[]),...(b.t||[esc(ptOf(ar,"申し込み")||"")])].filter(Boolean).join("<br>")}
 // 窓口の情報（7市区は INFO、それ以外は記事の元データから）
 function infoOf(j){const ar=j.ar,bk=ar&&ar.bk||{};return j.key==="other"&&ar?{pref:0,desk:`申し込みの窓口（${ar.og?"大型":"粗大"}ごみ）`,tel:[],hours:bkHours(ar),links:[...(bk.w||[]).map(([t,u])=>[/インターネット|申し?込|LINE|予約|フォーム|チャット/.test(t)?t:`${t}（インターネット受付）`,u]),[`${ar.n}の出し方・料金（このサイトの記事）`,ar.g],...(ar.url?[[`${ar.n}の公式ページ`,ar.url]]:[])],drop:[{name:ptOf(ar,"持ち込み")?`持ち込み：${ptOf(ar,"持ち込み")}`:"持ち込めるかは公式ページで確認"}]}:INFO[j.key]}
-function handlers(j,rs){
+// 出し方ごとの窓口（電話・予約ページ・お店）。品目カードの行の中に出す
+function contacts(j){
   const ar=j.ar,I=infoOf(j),area=j.key==="other"&&!ar?"":j.cname;
   const pref=I.pref?`https://www.aeha-kadenrecycle.com/rkcmap/search.php?sort=address&prefecture_id=${I.pref}`:"https://www.aeha-kadenrecycle.com/";
   const rows=[
@@ -518,12 +544,7 @@ function handlers(j,rs){
     ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
     ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
-  const used=rows.map(r=>[r,rs.filter(it=>itemOptions(it,j).some(o=>o.rec&&o.h===r[0]))]).filter(([,m])=>m.length);
-  if(!used.length) return "";
-  return `<div class="where"><h3 class="sh">連絡先</h3><div class="wl">${used.map(([[k,name,info,links],mine])=>
-    `<div class="w on" id="to-${k}"><span class="wk">${esc(mine.map(r=>r.label).join("・"))}</span><span class="wn">${name}</span>
-      <span class="wd">${info}</span>${links?`<div class="wls">${links}</div>`:""}</div>`).join("")}</div>
-    <p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p></div>`;
+  return Object.fromEntries(rows.map(([k,name,info,links])=>[k,{name,info,links}]));
 }
 // 空きを見られる予約ページ（市区の予約サイト・チャット）。空き日そのものは出さず、見に行く場所へつなぐ
 const bookList=j=>j.key==="other"?(j.ar&&j.ar.bk&&j.ar.bk.w||[]):(INFO[j.key]&&INFO[j.key].links||[]).filter(([t])=>/インターネット|最短|チャット/.test(t));
@@ -555,10 +576,10 @@ function itemOptions(it,j){
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:"多くの自治体で粗大ごみとして収集しない物です。公式ページで確認"}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   if(it.cat==="app") return [
-    {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:"リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります",cost:APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
+    {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:`リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります。リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>で、メーカー・大きさで変わります`,cost:appFee(it.label)?yr(appFee(it.label))+"＋運搬料（目安）":APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
     {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true,k:"buy"},
     ...(late?[]:[{...GIVE,desc:GIVE.desc.replace("まだ使える物は","製造から年数の浅い物は")}]),
-    {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
+    {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:appFee(it.label)?yr(appFee(it.label))+"（目安）":APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   return [
@@ -574,13 +595,38 @@ function itemOptions(it,j){
 function recWhy(k,j){return {post:j.ar&&j.ar.kaden?"家電4品目は家電リサイクルで出すのが基本のため":`家電4品目は${j.nm}では回収しないため`,city:"引越しに間に合う見込みで、費用がいちばん安いため",wait:"通常の予約では間に合わない見込みで、車がないため",drop:"通常の予約では間に合わない見込みで、車で運べるため",buy:A.sell==="yes"?"「売れるなら売りたい」を選んだため":"収集が間に合わない見込みで、車がないため",pc:"家庭のパソコンはメーカー回収が基本のため",move:"通常の予約では間に合わない見込みで、車がなく、寝具は買取で断られることが多いため",hard:"多くの自治体で粗大ごみとして収集しないため"}[k]||""}
 function itemCards(rs,j){
   if(!rs.length) return `<div class="free"><h3>出したい物を入れると、品目ごとの選択肢が出ます</h3></div>`;
+  const C=contacts(j);let shop=false;
+  const ct=o=>{const c=o.ok&&C[o.h];if(!c)return "";let links=c.links;
+    if(o.h==="buy"){if(shop)links=`<a href="#to-buy">近くの買取店と口コミは上の行を見てください</a>`;else shop=true}
+    return `<div class="ct"${o.h==="buy"&&links===c.links?' id="to-buy"':""}><b>${c.name}</b><span>${c.info}</span>${links?`<div class="wls">${links}</div>`:""}</div>`};
   return `<h3 class="sh">品目ごとの出し方</h3><div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
     return `<div class="icard"><div class="ich"><h3>${esc(it.label)}</h3><span class="icat">${CATNAME[it.cat]}</span>${rec&&it.cat!=="unk"?`<span class="irec">おすすめ:${rec.name}</span>`:""}</div>
       <div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
-        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small></span>
+        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small>${ct(o)}</span>
         <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
 }
 const BULKY=c=>["furn","etc","gen"].includes(c);
+// 費用をくらべる：出し方ごとに、出したい物ぜんぶを合わせた目安
+function costBox(rs,j){
+  const bulky=rs.filter(it=>BULKY(it.cat)),apps=rs.filter(it=>it.cat==="app");
+  if(!bulky.length&&!apps.length)return "";
+  const late=j.d<j.lead,car=A.car==="yes",to=AREAS[A.to];
+  const sum=(list,ar,col)=>{let lo=0,hi=0,miss=0;list.forEach(it=>{const r=yenNum(itemFees(ar,it.label).map(x=>x[col]).filter(Boolean));if(r){lo+=r[0];hi+=r[1]}else miss++});return {lo,hi,miss,n:list.length}};
+  const show=(t,unit)=>t.n&&t.miss<t.n?yr([t.lo,t.hi])+(t.miss?`＋ほか${t.miss}点`:"")+"（目安）":unit;
+  const rows=[];
+  if(bulky.length){
+    const c=sum(bulky,j.ar,1);
+    rows.push([`${j.nm}の粗大ごみ収集`,show(c,"1点 数百円〜（公式ページで確認）"),late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
+    if(car){const d=sum(bulky,j.ar,2);rows.push([`${j.nm}の持込施設へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
+    rows.push(["買取に出す（まだ使える物）","¥0（値段がつけば受け取る）","日時はお店に確認",false]);
+    const t=to?sum(bulky,to,1):null;
+    rows.push([to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,"引越し後",false]);
+    rows.push(["不用品回収業者（軽トラック1台分）",`${yr(TRUCK)}（相場・目安）`,"日時は業者と相談",false,`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`]);
+  }
+  if(apps.length){const ts=apps.map(it=>appFee(it.label)).filter(Boolean);
+    rows.push([`家電4品目（${apps.map(it=>esc(it.label)).join("・")}）`,ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,"お店か指定引取場所へ",false,`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`]);}
+  return `<div class="cost"><h3 class="sh">費用をくらべる<small>出したい物を全部合わせた目安</small></h3><table class="ctbl"><tbody>${rows.map(([n,c,w,bad,note])=>`<tr class="${bad?"bad":""}"><th>${n}${note?`<small>${note}</small>`:""}</th><td class="num">${c}<small>${w}</small></td></tr>`).join("")}</tbody></table></div>`;
+}
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
   if(need.some(x=>!x[1])){$("out").innerHTML=`<h2 class="oh">診断結果</h2><div class="free"><h3>${need.filter(x=>!x[1]).map(x=>x[0]).join("・")}を入れると、品目ごとの出し方が出ます</h3><ul class="need">${need.map(([t,ok])=>`<li class="${ok?"ok":""}">${ok?"✓":"○"} ${t}</li>`).join("")}</ul><p>料金・日数は目安です。入力した内容はどこにも送られません。</p></div>`;return}
@@ -591,13 +637,15 @@ function draw(){
   if(j.key==="chiba"&&A.ward&&!SLOT[A.ward])getSlot(A.ward,true);
   let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j)+slotBox(j);
   h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
+  h+=costBox(rs,j);
   h+=itemCards(rs,j);
-  h+=handlers(j,rs);
+  h+=`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;
   h+=newHome(rs);
   $("out").innerHTML=h;
   if(window.hinataShops)window.hinataShops.scan();
   cityTable();
 }
+const WATCHMSG="ありがとうございます。空き枠の見張りはまだ準備中で、申し込みや支払いはできません。それまでは上の予約ページで空きを確かめてください";
 // いちばん上に出す「次にやること」。品目ごとのおすすめから、急ぐものを1つ選ぶ
 const NEXTPRI=["wait","city","drop","buy","post","pc","hard","move"];
 function nextStep(rs,j){
@@ -608,7 +656,7 @@ function nextStep(rs,j){
   const book=(bl.length?bl.slice(0,2).map(([t,u])=>btn(t.replace(/（[^）]*）/g,""),u)):j.url?[btn(`${j.nm}の公式ページを開く`,j.url)]:[]).join("")+(I.tel&&I.tel[0]?`<p class="nd">電話：${telA(I.tel[0][1])}</p>`:"");
   const S={
     city:[`今日、${j.nm}の粗大ごみを予約する`,book+`<ol class="nsteps"><li>予約する（品目と数を伝える）</li><li>処理券（シール）を買って貼る</li><li>収集日の朝に出す</li></ol>`],
-    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p>`],
+    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p><button type="button" class="wbtn" id="watch">空き枠の見張りを頼む（¥500・準備中）</button><p class="nd" id="watchmsg">${A.watch?WATCHMSG:"予約ページの空きをこちらで見張るサービスを準備しています"}</p>`],
     drop:[`車で${j.nm}の持込施設へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
     buy:[`買取店に出張買取を頼む`,btn("近くの買取店を見る","#to-buy",false)+`<p class="nd">値段が合わなければ断っても無料のお店を選びます。</p>`],
     post:[`買い替えのお店か引越し会社に引き取りを頼む`,`<p class="nd">家電4品目は${j.nm}では回収しません。リサイクル料金と運搬料がかかります（数千円〜・目安）。</p>`],
@@ -643,6 +691,7 @@ function cityTable(){
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
+  if(b.id==="watch"){A.watch=true;try{if(window.gtag)gtag("event","watch_interest")}catch(e){}const m=$("watchmsg");if(m)m.textContent=WATCHMSG;return}
   if(b.dataset.ward){A.ward=b.dataset.ward;getSlot(A.ward);return}
   if(b.id==="addfree"){addFree();return}
   if(b.id==="geo"){geoAddr();return}
