@@ -62,7 +62,7 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara"}
 NOMOCHI={"koto","meguro","chuo","mitaka"}
 NOFEE={"shizuoka"}
 def _title(k):
@@ -84,6 +84,7 @@ LATE1={
  "gifu":"受付に電話して、早い収集日がないか聞く",
  "fukuyama":"次のステーション収集日（燃やせる粗大ごみは年4回）を市のページで確かめる",
  "kochi":"次のステーション収集日（月1回）を市のページで確かめる",
+ "himeji":"次の粗大ごみステーションの収集日（月2回）を市のページで確かめる",
  "suita":"大型複雑ごみは収集日に出せます。引越しでまとめて出る分は、市に電話して早い日がないか聞く",
  "aomori":"受付に電話して、次の申込期限日と収集日を聞く（収集は月2回）",
  "oita":"担当の清掃事業所に電話して、早い収集日がないか聞く",

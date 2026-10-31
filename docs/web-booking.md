@@ -7,7 +7,9 @@
 | 地域 | ウェブ予約 | 予約サイト | 形 | メール登録 | メモ |
 |---|---|---|---|---|---|
 | [足立区](/guide/adachi/) | ◯ だれでも | https://ecolife.e-tumo.jp/sodai-adachi-u/ | e-tumo.jp |  |  |
+| [明石市](/guide/akashi/) | ◯ だれでも | https://sodai.city.akashi.lg.jp/ | 独自 |  |  |
 | [秋田市](/guide/akita/) | ◯ だれでも | https://sodai-sys.jp/akita/users/ | 独自 |  | 締め切りは収集希望日の5日前。一覧にない品目は電話 |
+| [尼崎市](/guide/amagasaki/) | ◯ だれでも | https://www.ogatagomi-amagasaki.jp/eco/view/amagasaki/top.html | /eco/view/ 形式 |  |  |
 | [青森市](/guide/aomori/) | × 電話など | — | — |  | 申し込みは電話だけ（ネット・ファクス・メールは不可） |
 | [荒川区](/guide/arakawa/) | ◯ だれでも | https://www2.sodai-web.jp/arakawa/index.html | sodai-web.jp |  |  |
 | [厚木市](/guide/atsugi/) | ◯ だれでも | https://www.sodai-atsugi.jp/eco/view/atsugi/top.html | /eco/view/ 形式 |  |  |
@@ -28,6 +30,7 @@
 | [八王子市](/guide/hachioji/) | ◯ だれでも | https://sodai.city.hachioji.tokyo.jp/eco/view/hachioji/top.html | /eco/view/ 形式 |  |  |
 | [浜松市](/guide/hamamatsu/) | ◯ だれでも | https://www.city.hamamatsu.shizuoka.jp/ippai/gomi/dashikata/dashikata/renrakugomi_line.html<br>https://www.city.hamamatsu.shizuoka.jp/ippai/gomi/dashikata/dashikata/renrakugomi_in_nagare.html | 独自 |  |  |
 | [東大阪市](/guide/higashiosaka/) | △ 条件つき | https://www.ogomi-higashiosaka.jp/eco/view/higashiosaka/top.html | /eco/view/ 形式 |  | インターネット受付は、前に電話で申し込んだことがあり住所・氏名が変わっていない人だけ。初めての人は電話で |
+| [姫路市](/guide/himeji/) | × 電話など | — | — |  | 申し込みの制度はありません。決まった日に粗大ごみステーションへ出します（旧姫路市域） |
 | [枚方市](/guide/hirakata/) | △ 条件つき | https://www.city.hirakata.osaka.jp/0000010721.html | 独自 |  | インターネット予約は、今までに電話で申し込んだことがある人だけ。初めての人・住所が変わった人は電話で |
 | [平塚市](/guide/hiratsuka/) | × 電話など | — | — |  | 申し込みは電話。電話が難しい人は窓口・ファクス・市のフォームでも |
 | [広島市](/guide/hiroshima/) | ◯ だれでも | https://ogatagomi.city.hiroshima.lg.jp/ | 独自 |  |  |
@@ -65,6 +68,7 @@
 | [名古屋市](/guide/nagoya/) | ◯ だれでも | https://www.nagoya-sodaigomi.jp/eco/view/nagoya/top.html | /eco/view/ 形式 |  |  |
 | [那覇市](/guide/naha/) | × 一時停止中 | — | — |  | インターネット受付は2026年10月時点で一時停止中（再開は市の公式ページで確認）。いまは電話で |
 | [中野区](/guide/nakano/) | ◯ だれでも | https://www2.sodai-web.jp/nakano/index.html | sodai-web.jp |  |  |
+| [奈良市](/guide/nara/) | △ 条件つき | https://www.city.nara.lg.jp/site/gomi-syusyu/121812.html | 独自 |  | インターネット受付は、2年以内に電話で申し込んだことがあり、氏名・町名・電話番号が一致する人だけ。キャンセルは電話だけ |
 | [練馬区](/guide/nerima/) | ◯ だれでも | https://www.sodai-nerima.jp/ | 独自 |  |  |
 | [新潟市](/guide/niigata/) | ◯ だれでも | https://www.sodai.city.niigata.jp/<br>https://www.city.niigata.lg.jp/kurashi/gomi/gomishigen/gomidasi/niigata/discard.html | 独自 | 要 |  |
 | [西宮市](/guide/nishinomiya/) | ◯ だれでも | https://www.nishi.or.jp/kurashi/gomi/gominoshushu/seikatsugomi/moshikomi.html | 独自 |  | ウェブのフォームはなく、市の公式LINEで申し込みます（初回は仮受付） |
@@ -107,12 +111,12 @@
 | [横浜市](/guide/yokohama/) | ◯ だれでも | https://www.sodai.city.yokohama.lg.jp/eco/view/yokohama/top.html | /eco/view/ 形式 |  |  |
 | [横須賀市](/guide/yokosuka/) | ◯ だれでも | https://www.yokosuka-sodai.com/receipts/home | 独自 |  |  |
 
-合計: ◯ だれでも 70、× 電話など 11、△ 条件つき 17、× 一時停止中 2
+合計: ◯ だれでも 72、× 電話など 12、△ 条件つき 18、× 一時停止中 2
 
 ## 予約サイトの形ごと（ウェブ予約できる地域）
 
-- 独自（33）：秋田市・茅ヶ崎市・調布市・藤沢市・福岡市・船橋市・浜松市・枚方市・広島市・鹿児島市・柏市・川崎市・越谷市・久留米市・町田市・松山市・水戸市・練馬区・新潟市・西宮市・岡山市・岡崎市・大田区・さいたま市・札幌市・品川区・新宿区・静岡市・草加市・立川市・和歌山市・大和市・横須賀市
-- /eco/view/ 形式（15）：厚木市・八王子市・東大阪市・川口市・北九州市・神戸市・倉敷市・長崎市・名古屋市・仙台市・世田谷区・徳島市・豊橋市・つくば市・横浜市
+- 独自（35）：明石市・秋田市・茅ヶ崎市・調布市・藤沢市・福岡市・船橋市・浜松市・枚方市・広島市・鹿児島市・柏市・川崎市・越谷市・久留米市・町田市・松山市・水戸市・奈良市・練馬区・新潟市・西宮市・岡山市・岡崎市・大田区・さいたま市・札幌市・品川区・新宿区・静岡市・草加市・立川市・和歌山市・大和市・横須賀市
+- /eco/view/ 形式（16）：尼崎市・厚木市・八王子市・東大阪市・川口市・北九州市・神戸市・倉敷市・長崎市・名古屋市・仙台市・世田谷区・徳島市・豊橋市・つくば市・横浜市
 - e-tumo.jp（13）：足立区・文京区・千代田区・中央区・江戸川区・板橋区・北区・港区・大阪市・杉並区・台東区・所沢市・豊島区
 - sodai-web.jp（10）：荒川区・千葉市・葛飾区・江東区・目黒区・三鷹市・武蔵野市・中野区・相模原市・墨田区
 - logoform.jp（フォーム）（5）：福島市・一宮市・宮崎市・西東京市・高松市
