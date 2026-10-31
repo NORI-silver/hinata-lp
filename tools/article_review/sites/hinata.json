@@ -26,6 +26,8 @@
  "must_text": ["目安"],
  "ng_text": ["通知します", "業界最安", "No.1", "件の実績", "必ず間に合"],
  "entity_link_check_types": ["area"],
+ "cross_entity_ok": {"伊丹市": ["city.toyonaka.osaka.jp"]},
+ "cross_entity_ok_note": "豊中市伊丹市クリーンランド（両市の一部事務組合）の持ち込みは豊中市のページに載っている（2026-10-31）",
  "shared_tel_ok": {"0570087200": "東京二十三区家電リサイクル受付センター（23区共通。2026-10-31 江東区・世田谷区の公式で確認）"},
  "types": [
   {"name": "area", "match": "^guide/(?!(fees|late|problem|scam|new-home|how-to-check|mochikomi|shoriken|size|item)/)[a-z]+/index\\.html$",

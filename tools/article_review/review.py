@@ -282,7 +282,8 @@ def review(cfg, root, today, external=False):
                 if others and x["type"] in cfg.get("entity_link_check_types", [x["type"]]):
                     add("links", "mid", f"リンクの文字が別の地域「{others[0]}」: {txt} → {href}", "引用として正しいか確かめる")
                 owner = host_owner.get(u.netloc)
-                if owner and ent not in owner and is_official(u.netloc, cfg) and x["type"] in cfg.get("entity_link_check_types", [x["type"]]):
+                shared = any(u.netloc.endswith(h) for h in cfg.get("cross_entity_ok", {}).get(ent, []))  # 一部事務組合など
+                if owner and not shared and ent not in owner and is_official(u.netloc, cfg) and x["type"] in cfg.get("entity_link_check_types", [x["type"]]):
                     top = owner.most_common(1)[0][0]
                     add("links", "high", f"別の地域（{top}）の公式サイトに飛ぶリンク: {txt} → {href}", "コピーしたまま直し忘れていないか")
             if is_official(u.netloc, cfg):
