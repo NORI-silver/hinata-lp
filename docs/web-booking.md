@@ -58,7 +58,7 @@
 | [和泉市](/guide/izumi/) | ◯ だれでも | — | — |  | 1回6点まで |
 | [鹿児島市](/guide/kagoshima/) | ◯ だれでも | https://sodaigomi-city-kagoshima.jp/kagoshima/Web/login | 独自 |  | 初めての人・住所を変えた人は仮受付になり、市から確認の連絡が来ることがあります |
 | [加古川市](/guide/kakogawa/) | ◯ だれでも | https://s-kantan.com/sodai-kakogawa-u/ | 独自 | 要 |  |
-| [鎌倉市](/guide/kamakura/) | ◯ だれでも | http://sodai-sys.jp/kamakura/users/ | 独自 |  | 仮予約のあと、環境センターから本予約のメールが届きます |
+| [鎌倉市](/guide/kamakura/) | ◯ だれでも | https://sodai-sys.jp/kamakura/users/ | 独自 |  | 仮予約のあと、環境センターから本予約のメールが届きます |
 | [金沢市](/guide/kanazawa/) | ◯ だれでも | https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/gomidasi_benri/line_sodaigomi.html | 独自 |  | 金沢市LINE公式アカウントの「ごみ出しサポート」から。申し込み内容の変更は電話 |
 | [柏市](/guide/kashiwa/) | △ 条件つき | https://kashiwa.sodai.jp/ | 独自 |  | インターネット予約は柏地域だけ。沼南地域はクリーンセンターしらさぎへ電話で |
 | [春日井市](/guide/kasugai/) | ◯ だれでも | https://ttzk.graffer.jp/city-kasugai/smart-apply/apply-procedure-alias/sadai | 独自 |  | 送ったあと市の担当者から電話があり、そこで収集日と料金が決まります（3営業日以内に折り返さないと取り下げになることがあります） |
@@ -80,7 +80,7 @@
 | [郡山市](/guide/koriyama/) | △ 条件つき | https://lgpos.task-asp.net/cu/072036/ea/residents/procedures/apply/56d9cc8a-de9f-4db2-94b6-3399651ab386/start | task-asp.net（フォーム） |  | インターネットで申し込めるのは決められた品目だけ。ほかは電話 |
 | [越谷市](/guide/koshigaya/) | ◯ だれでも | https://www.city.koshigaya.saitama.jp/net/shigenjunkansuishinka/tetsuzukiapp050.html | 独自 |  |  |
 | [江東区](/guide/koto/) | ◯ だれでも | https://www2.sodai-web.jp/koto/index.html | sodai-web.jp | 要 |  |
-| [熊谷市](/guide/kumagaya/) | ◯ だれでも | https://s-kantan.jp/city-kumagaya-saitama-u/profile/userLogin_initDisplay.action?nextURL=CqTLFdO4voajwj31OrTw9DQ9f2VYJzSnVtXuWY28Gc8lkB36Cxx49L47m3NOeU81Di5fGIqMAk9s%0D%0AKTyW032Ql3UrNvJWF1JySYbmbX7brNI7%2FgSfkWZW6FzjJGpIAwOtdGGuJuVBVRj49pBRaLna5Q%3D%3D%0D%0Au%2F2pnQTLAb0%3D%0D%0A | 独自 |  | 運べない家具などの有料リクエスト収集の申し込み。小さい粗大ごみは申し込みなしで集積所へ |
+| [熊谷市](/guide/kumagaya/) | ◯ だれでも | https://www.city.kumagaya.lg.jp/kurashi/kankyo/gomi/sodaigomi.html | 独自 |  | 運べない家具などの有料リクエスト収集の申し込み。小さい粗大ごみは申し込みなしで集積所へ |
 | [熊本市](/guide/kumamoto/) | × 電話など | — | — |  | 申し込みは電話（ごみゼロコール）かファクス |
 | [倉敷市](/guide/kurashiki/) | △ 条件つき | https://kurashiki.eco-ryobi.net/eco/view/kurashiki/top.html | /eco/view/ 形式 |  | インターネットは前に戸別収集を使った人だけ。初めての人は電話 |
 | [呉市](/guide/kure/) | × 電話など | — | — |  | 申し込みの制度はありません。シールを貼って月1回の粗大ごみの日に出します（一部の地区は予約） |
