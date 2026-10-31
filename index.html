@@ -332,6 +332,12 @@ const RKC="0120-319-640";
 // 収集までの日数の目安。official=公式ページの案内（2026-10-30確認） / estimate=公式に日数の記載がなく、このサイトの推定
 const LEADTXT={yokohama:"2週間程度（締め切りは収集日の7日前）",kawasaki:"2週間ほど（収集は月2回）",setagaya:"2週間ほど（収集日は申込時に案内）",suginami:"2〜3週間程度",saitama:"混雑時は1か月ほどかかる場合あり（締め切りは収集日の3営業日前）",chiba:"受付完了から1〜2週間（受付完了まで平日5日ほど）",sakura:"2週間ほど（地区の収集業者に電話で申込）",other:""};
 const LEADSRC={yokohama:"official",kawasaki:"estimate",setagaya:"estimate",suginami:"official",saitama:"official",chiba:"official",sakura:"estimate",other:"estimate"};
+// 7市区以外の収集までの日数（地域記事の元データ＝2026-10-30に各公式ページで確認した文から）。[計算に使う日数, 公式の書き方, "min"=最短の案内なので2週間で計算]
+// 幅があるときは長いほうで計算する。月1回の市は締め切り分を足す（「間に合う」と誤って出さないため）
+const AREALEAD={adachi:[14,"約1週間先になることがある（週末・引越しシーズンは混む）","min"],bunkyo:[28,"繁忙期は2〜3週間以上かかることがある"],chofu:[30,"申し込みから1か月以上かかることがある"],fujisawa:[14,"最大2週間程度（締め切りは収集日の7日前）"],funabashi:[10,"約10日かかることがある"],hamamatsu:[14,"2週間程度かかることがある"],hirakata:[12,"申し込んだ週の翌週の水曜日（年末などは翌々週以降）"],kagoshima:[21,"約2〜3週間"],kitakyushu:[33,"地区ごとに月1回の収集"],kumamoto:[21,"約1週間。転居が多い時期は約3週間"],matsuyama:[45,"申込期間の終わりから約1か月後（1か月以上のことも）"],meguro:[14,"2週間程度かかることがある（3・4月は混む）"],minato:[14,"約2週間"],nagoya:[37,"地域ごとに月1回の収集"],niigata:[14,"ふつう3日〜1週間以降（土日・祝日は収集なし）","min"],nishinomiya:[21,"いまは約2〜3週間先"],okayama:[12,"10日前後"],ota:[14,"約2週間（3・4月は特に混む）"],sagamihara:[30,"受付順で、混むと1か月以上先"],sakai:[13,"申し込んだ日の翌週"],shizuoka:[37,"地域ごとに月1回の収集（締め切りは収集日の1週間前）"],tokushima:[60,"地区ごとに2か月に1回の収集（偶数月に申し込むと奇数月）"],yamato:[4,"電話で申し込んだ場合、受付の翌日から日曜を除く3日以内"],
+  fukuoka:[14,"最短1週間ほど","min"],kawaguchi:[14,"最短で3営業日後の案内","min"],tachikawa:[14,"申込日の7日後（混み具合で変わる）から選べる","min"]};
+const leadDays=k=>AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]:14;
+const leadNote=k=>`（収集までの日数は${AREALEAD[k]&&AREALEAD[k][2]!=="min"?AREALEAD[k][0]+"日":"2週間ほど"}で計算）`;
 const ADDR=[[/佐倉/,"sakura"],[/横浜/,"yokohama"],[/川崎/,"kawasaki"],[/世田谷/,"setagaya"],[/杉並/,"suginami"],[/さいたま|埼玉市/,"saitama"],[/千葉市|千葉県千葉|美浜区|花見川区|稲毛区|若葉区/,"chiba"]];
 const Q=[
   {k:"city",t:"お住まい",one:true,o:Object.entries(CITIES).map(([k,v])=>[k,v[0]])},
@@ -396,7 +402,7 @@ function itemFees(ar,label){
 }
 const yen=a=>{const ns=a.flatMap(x=>(x.match(/[\d,]+(?=円)/g)||[]).map(n=>+n.replace(/,/g,"")));if(!ns.length)return a.includes("無料")?"無料":"";const lo=Math.min(...ns),hi=Math.max(...ns);return (a.includes("無料")?"無料":"¥"+lo.toLocaleString())+(hi>lo||a.includes("無料")?"〜¥"+hi.toLocaleString():"")};
 const feeList=fs=>fs.map(([t,f])=>`${esc(t)} ${esc(f)}`).join("、");
-function judge(){const c=CITIES[A.city],ar=AREAS[A.city]||(A.city==="other"&&AREAS[A.area])||null,j={key:A.city,cname:c[0],lead:c[1],web:c[2],fee:c[3],drop:c[5],url:c[6],d:days(),ar};
+function judge(){const c=CITIES[A.city],ar=AREAS[A.city]||(A.city==="other"&&AREAS[A.area])||null,j={key:A.city,cname:c[0],lead:A.city==="other"&&A.area?leadDays(A.area):c[1],web:c[2],fee:c[3],drop:c[5],url:c[6],d:days(),ar};
   if(A.city==="other"&&ar){j.cname=ar.n;j.url=ar.url||"";j.fee=ptOf(ar,"料金","支払い")||"品目ごと（公式ページで確認）";j.drop=ptOf(ar,"持ち込み")||"持ち込めるかは公式ページで確認";j.web=ar.bk?ar.bk.web==="open"||ar.bk.web==="cond":/インターネット|LINE/.test(ptOf(ar,"申し込み"))}
   // 表示に使う名前。地域がわからないときは「お住まいの市区町村」
   j.nm=A.city==="other"&&!ar?"お住まいの市区町村":j.cname;
@@ -479,7 +485,8 @@ function draw(){
   const j=judge();const rs=itemList();
   const tight=rs.some(it=>it.cat!=="app"&&it.cat!=="unk")&&j.d<j.lead;
   const late=j.d<j.lead;
-  const leadTxt=j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`収集までの目安は「${esc(ptOf(j.ar,"収集まで"))}」です（公式ページの案内。ここでは2週間ほどで計算しています）`:j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算しています）":`収集までの目安は「${LEADTXT[j.key]}」です（${LEADSRC[j.key]==="official"?"公式ページの案内":"公式に日数の記載がないため、このサイトの推定"}）`;
+  const al=j.key==="other"&&AREALEAD[A.area];
+  const leadTxt=al?`収集までの目安は「${al[1]}」です（公式ページの案内。${al[2]==="min"?"最短の案内で、混み具合で延びるため、ここでは2週間ほど":`ここでは${al[0]}日`}で計算しています）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`収集までの目安は「${esc(ptOf(j.ar,"収集まで"))}」です（公式ページの案内。ここでは2週間ほどで計算しています）`:j.key==="other"?(j.ar?"収集までの日数は、公式ページで確かめた案内がまだありません（ここでは2週間ほどで計算する推定です）":"自治体によって違います（ここでは2週間ほどで計算しています）"):`収集までの目安は「${LEADTXT[j.key]}」です（${LEADSRC[j.key]==="official"?"公式ページの案内":"公式に日数の記載がないため、このサイトの推定"}）`;
   let h=`<h2 class="oh">診断結果</h2><div class="status ${late?"late":"ok"}"><div class="cd"><small>引越しまで</small><b class="num"><span>あと</span>${j.d}<span>日</span></b></div>
     <p><span class="pill">${late?"普通の予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br>${j.nm}の粗大ごみの${leadTxt}。実際の予約の空きは確認していません。</p></div>`;
   if(rs.length&&!tight&&!rs.some(it=>it.cat==="app")){
@@ -561,7 +568,7 @@ document.addEventListener("input",e=>{if(e.target.id==="to")setTo(e.target.value
 document.addEventListener("keydown",e=>{if(e.target.id==="to"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setTo(e.target.value)}if(e.target.id==="free"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();addFree()}if(e.target.id==="addr"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setAddr(e.target.value)}});
 function setAddr(v){v=(v||"").trim();if(!v)return;A.addr=v;const hit=ADDR.find(([re])=>re.test(v));
   const ak=hit?"":findArea(v);A.area=ak;
-  if(hit){A.city=hit[1];A.addrmsg=`「${esc(v)}」→ ${CITIES[hit[1]][0]}で診断しています`}else if(ak){A.city="other";A.addrmsg=`「${esc(v)}」→ ${AREAS[ak].n}で診断しています（収集までの日数は2週間ほどで計算）`}else{A.city="other";A.addrmsg=`「${esc(v)}」は対応している市区にないため、その他の地域で診断しています`}
+  if(hit){A.city=hit[1];A.addrmsg=`「${esc(v)}」→ ${CITIES[hit[1]][0]}で診断しています`}else if(ak){A.city="other";A.addrmsg=`「${esc(v)}」→ ${AREAS[ak].n}で診断しています${leadNote(ak)}`}else{A.city="other";A.addrmsg=`「${esc(v)}」は対応している市区にないため、その他の地域で診断しています`}
   drawQs();draw()}
 // 現在地：ブラウザの許可をとってから緯度・経度を取り、国土地理院の逆ジオコーダーで市区町村コードに変える（送るのは緯度・経度だけ）
 const GEOCODE=[[14101,14118,"yokohama"],[14131,14137,"kawasaki"],[13112,13112,"setagaya"],[13115,13115,"suginami"],[11101,11110,"saitama"],[12101,12106,"chiba"],[12212,12212,"sakura"]];
@@ -581,7 +588,7 @@ function geoAddr(){
       const n=+cd,hit=GEOCODE.find(([a,b])=>n>=a&&n<=b),town=(r.results.lv01Nm||"").replace(/^－$/,"");
       A.geobusy=false;
       if(hit){A.city=hit[2];A.addr=CITIES[hit[2]][0]+town;A.addrmsg=`現在地 → ${CITIES[hit[2]][0]}で診断しています。ちがう場合は選び直してください`}
-      else{const nm=await muniName(cd),ak=findArea(nm);A.city="other";A.area=ak;A.addr=nm?nm+town:"";A.addrmsg=ak?`現在地 → ${AREAS[ak].n}で診断しています（収集までの日数は2週間ほどで計算）`:`現在地${nm?`（${esc(nm)}）`:""}は対応している市区にないため、その他の地域で診断しています`}
+      else{const nm=await muniName(cd),ak=findArea(nm);A.city="other";A.area=ak;A.addr=nm?nm+town:"";A.addrmsg=ak?`現在地 → ${AREAS[ak].n}で診断しています${leadNote(ak)}`:`現在地${nm?`（${esc(nm)}）`:""}は対応している市区にないため、その他の地域で診断しています`}
       drawQs();draw();
     }catch(e){fail("現在地から市区町村を調べられませんでした。住所を入力するか、下から選んでください")}
   },e=>fail(e.code===1?"位置情報の利用が許可されませんでした。住所を入力するか、下から選んでください":"現在地を取得できませんでした。住所を入力するか、下から選んでください"),
@@ -594,7 +601,7 @@ document.addEventListener("change",e=>{
   if(t.id==="photo"&&t.files&&t.files[0]){const rd=new FileReader();rd.onload=()=>{const c={label:"写真の物",cat:"unk",photo:rd.result,busy:true};A.custom.push(c);drawQs();draw();recog(c)};rd.readAsDataURL(t.files[0])}
 });
 // 記事からの引き継ぎ：/?city=yokohama で市区を選んだ状態にする（canonical は / のまま）
-try{const qc=new URLSearchParams(location.search).get("city");if(qc&&CITIES[qc])A.city=qc;else if(qc&&AREAS[qc]){A.city="other";A.area=qc;A.addr=AREAS[qc].n;A.addrmsg=`${AREAS[qc].n}で診断しています（収集までの日数は2週間ほどで計算）`}}catch(e){}
+try{const qc=new URLSearchParams(location.search).get("city");if(qc&&CITIES[qc])A.city=qc;else if(qc&&AREAS[qc]){A.city="other";A.area=qc;A.addr=AREAS[qc].n;A.addrmsg=`${AREAS[qc].n}で診断しています${leadNote(qc)}`}}catch(e){}
 // 計測：使われたかどうかだけを数える（入力した内容・市区・写真は送らない）
 const ev=(()=>{const done={};return n=>{if(done[n])return;done[n]=1;try{if(window.gtag)gtag("event",n)}catch(e){}}})();
 document.addEventListener("click",e=>{
