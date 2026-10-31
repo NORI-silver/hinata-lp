@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|
 | [足立区](/guide/adachi/) | ◯ だれでも | https://ecolife.e-tumo.jp/sodai-adachi-u/ | e-tumo.jp |  |  |
 | [明石市](/guide/akashi/) | ◯ だれでも | https://sodai.city.akashi.lg.jp/ | 独自 |  |  |
-| [秋田市](/guide/akita/) | ◯ だれでも | https://sodai-sys.jp/akita/users/ | 独自 |  | 締め切りは収集希望日の5日前。一覧にない品目は電話 |
+| [秋田市](/guide/akita/) | △ 条件つき | https://sodai-sys.jp/akita/users/ | 独自 |  | 締め切りは収集希望日の5日前。一覧にない品目は電話 |
 | [尼崎市](/guide/amagasaki/) | ◯ だれでも | https://www.ogatagomi-amagasaki.jp/eco/view/amagasaki/top.html | /eco/view/ 形式 |  |  |
 | [青森市](/guide/aomori/) | × 電話など | — | — |  | 申し込みは電話だけ（ネット・ファクス・メールは不可） |
 | [荒川区](/guide/arakawa/) | ◯ だれでも | https://www2.sodai-web.jp/arakawa/index.html | sodai-web.jp |  |  |
@@ -30,7 +30,7 @@
 | [八王子市](/guide/hachioji/) | ◯ だれでも | https://sodai.city.hachioji.tokyo.jp/eco/view/hachioji/top.html | /eco/view/ 形式 |  |  |
 | [浜松市](/guide/hamamatsu/) | ◯ だれでも | https://www.city.hamamatsu.shizuoka.jp/ippai/gomi/dashikata/dashikata/renrakugomi_line.html<br>https://www.city.hamamatsu.shizuoka.jp/ippai/gomi/dashikata/dashikata/renrakugomi_in_nagare.html | 独自 |  |  |
 | [東大阪市](/guide/higashiosaka/) | △ 条件つき | https://www.ogomi-higashiosaka.jp/eco/view/higashiosaka/top.html | /eco/view/ 形式 |  | インターネット受付は、前に電話で申し込んだことがあり住所・氏名が変わっていない人だけ。初めての人は電話で |
-| [姫路市](/guide/himeji/) | × 電話など | — | — |  | 申し込みの制度はありません。決まった日に粗大ごみステーションへ出します（旧姫路市域） |
+| [姫路市](/guide/himeji/) | × 電話など | — | — |  | 申し込みの制度はありません。決まった日に粗大ごみステーションへ出します（旧姫路市域）。引越しで出るごみはステーションに出せません |
 | [枚方市](/guide/hirakata/) | △ 条件つき | https://www.city.hirakata.osaka.jp/0000010721.html | 独自 |  | インターネット予約は、今までに電話で申し込んだことがある人だけ。初めての人・住所が変わった人は電話で |
 | [平塚市](/guide/hiratsuka/) | × 電話など | — | — |  | 申し込みは電話。電話が難しい人は窓口・ファクス・市のフォームでも |
 | [広島市](/guide/hiroshima/) | ◯ だれでも | https://ogatagomi.city.hiroshima.lg.jp/ | 独自 |  |  |
@@ -53,7 +53,7 @@
 | [江東区](/guide/koto/) | ◯ だれでも | https://www2.sodai-web.jp/koto/index.html | sodai-web.jp | 要 |  |
 | [熊本市](/guide/kumamoto/) | × 電話など | — | — |  | 申し込みは電話（ごみゼロコール）かファクス |
 | [倉敷市](/guide/kurashiki/) | △ 条件つき | https://kurashiki.eco-ryobi.net/eco/view/kurashiki/top.html | /eco/view/ 形式 |  | インターネットは前に戸別収集を使った人だけ。初めての人は電話 |
-| [久留米市](/guide/kurume/) | ◯ だれでも | https://kurume-sodaigomi.com/receipts/home/<br>https://page.line.me/905lgpyt?openQrModal=true | 独自 |  |  |
+| [久留米市](/guide/kurume/) | △ 条件つき | https://kurume-sodaigomi.com/receipts/home/<br>https://page.line.me/905lgpyt?openQrModal=true | 独自 |  | Web・LINEで申し込めるのは受付品目だけ。ほかは電話。締め切りは収集日の前日から数えて1週間前の17時 |
 | [京都市](/guide/kyoto/) | ◯ だれでも | — | — |  | インターネット受付（年中無休）は、市の公式ページの案内から申し込みます |
 | [町田市](/guide/machida/) | ◯ だれでも | https://www.m-ecokosha.or.jp/ | 独自 |  |  |
 | [松戸市](/guide/matsudo/) | ◯ だれでも | https://lgpos.task-asp.net/cu/122076/ea/residents/procedures/apply/13b97bdc-1bd6-483c-b05d-7bded6ed47d3/start | task-asp.net（フォーム） |  |  |
@@ -62,7 +62,7 @@
 | [港区](/guide/minato/) | ◯ だれでも | https://ecolife.e-tumo.jp/sodai-minato-tokyo-u/offer/offerList_initDisplay | e-tumo.jp |  |  |
 | [三鷹市](/guide/mitaka/) | ◯ だれでも | https://www2.sodai-web.jp/mitaka/index.html | sodai-web.jp |  |  |
 | [水戸市](/guide/mito/) | ◯ だれでも | https://94fef734.form.kintoneapp.com/public/bulky-garbage | 独自 |  | 送信したあとコールセンターから連絡があり、そこで収集日が決まります |
-| [宮崎市](/guide/miyazaki/) | △ 条件つき | http://logoform.jp/form/HxnK/10590 | logoform.jp（フォーム） |  | 受付フォームを送ったあと市から電話があり、そこで受付完了（数日かかることがあります） |
+| [宮崎市](/guide/miyazaki/) | △ 条件つき | https://logoform.jp/form/HxnK/10590 | logoform.jp（フォーム） |  | 受付フォームを送ったあと市から電話があり、そこで受付完了（数日かかることがあります） |
 | [武蔵野市](/guide/musashino/) | ◯ だれでも | https://www2.sodai-web.jp/musashino/index.html | sodai-web.jp |  |  |
 | [長崎市](/guide/nagasaki/) | △ 条件つき | https://sodai.city.nagasaki.lg.jp/eco/view/nagasaki/top.html | /eco/view/ 形式 |  | インターネットで申し込めるのは品目一覧にある物だけ。ほかは電話 |
 | [名古屋市](/guide/nagoya/) | ◯ だれでも | https://www.nagoya-sodaigomi.jp/eco/view/nagoya/top.html | /eco/view/ 形式 |  |  |
@@ -75,7 +75,7 @@
 | [西東京市](/guide/nishitokyo/) | ◯ だれでも | https://logoform.jp/form/AAZE/199944 | logoform.jp（フォーム） |  |  |
 | [大分市](/guide/oita/) | × 電話など | — | — |  | 申し込みは校区ごとの清掃事業所へ電話 |
 | [岡山市](/guide/okayama/) | △ 条件つき | https://sodai.city.okayama.jp/ | 独自 |  | インターネット受付（戸別収集）は、前に電話で申し込んだことがある人が使えます。初めての人は電話で |
-| [岡崎市](/guide/okazaki/) | ◯ だれでも | https://vein.bridgesany.com/okazaki/index.html | 独自 |  | 予約サイトの利用にLINEアカウントが必要。家電4品目は電話 |
+| [岡崎市](/guide/okazaki/) | ◯ だれでも | https://vein.bridgesany.com/okazaki/index.html | 独自 |  | 予約サイトの利用にLINEアカウントが必要 |
 | [大阪市](/guide/osaka/) | ◯ だれでも | https://ecolife.e-tumo.jp/kankyo-osaka-u/ | e-tumo.jp |  |  |
 | [大田区](/guide/ota/) | ◯ だれでも | https://www.ota-sodai.com | 独自 |  |  |
 | [大津市](/guide/otsu/) | ◯ だれでも | https://www.eg-resource.jp/otsu/web | eg-resource.jp |  | 初めての人は仮受付のあと本受付。5点を超える立会収集・一覧にない品目は電話 |
@@ -101,7 +101,7 @@
 | [所沢市](/guide/tokorozawa/) | ◯ だれでも | https://apply.e-tumo.jp/city-tokorozawa-saitama-u/offer/offerList_detail?tempSeq=83938<br>https://apply.e-tumo.jp/city-tokorozawa-saitama-u/inquiry/inquiry_initDisplay | e-tumo.jp |  | 申し込んだあと照会ページで収集日と手数料を確かめて完了する二段階式（反映まで数日かかることがあります） |
 | [徳島市](/guide/tokushima/) | ◯ だれでも | https://sodai.city.tokushima.lg.jp/eco/view/tokushima/top.html | /eco/view/ 形式 |  |  |
 | [豊島区](/guide/toshima/) | ◯ だれでも | https://ecolife.e-tumo.jp/toshima-sodai-u/ | e-tumo.jp |  |  |
-| [豊橋市](/guide/toyohashi/) | △ 条件つき | https://gomi-yoyaku-toyohashi.jp/eco/view/toyohashi/top.html | /eco/view/ 形式 |  | インターネットは2回目から。初めての人と家電4品目は電話 |
+| [豊橋市](/guide/toyohashi/) | △ 条件つき | https://gomi-yoyaku-toyohashi.jp/eco/view/toyohashi/top.html | /eco/view/ 形式 |  | インターネットは2回目から。初めての人は電話 |
 | [豊中市](/guide/toyonaka/) | ◯ だれでも | https://www.eg-resource.jp/toyonaka | eg-resource.jp |  |  |
 | [豊田市](/guide/toyota/) | ◯ だれでも | https://liff.line.me/1645278921-kWRPP32q/?accountId=toyotacity | LINE |  | ウェブのフォームはなく、豊田市LINE公式アカウントから（1回5個まで、6個以上は電話） |
 | [つくば市](/guide/tsukuba/) | ◯ だれでも | https://eco.city.tsukuba.ibaraki.jp/eco/view/tsukuba/top.html | /eco/view/ 形式 |  | 送信した時点では仮の受付。確認メールで決まります。締め切りは収集日の5日前 |
@@ -111,7 +111,7 @@
 | [横浜市](/guide/yokohama/) | ◯ だれでも | https://www.sodai.city.yokohama.lg.jp/eco/view/yokohama/top.html | /eco/view/ 形式 |  |  |
 | [横須賀市](/guide/yokosuka/) | ◯ だれでも | https://www.yokosuka-sodai.com/receipts/home | 独自 |  |  |
 
-合計: ◯ だれでも 72、× 電話など 12、△ 条件つき 18、× 一時停止中 2
+合計: ◯ だれでも 70、△ 条件つき 20、× 電話など 12、× 一時停止中 2
 
 ## 予約サイトの形ごと（ウェブ予約できる地域）
 
