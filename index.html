@@ -252,7 +252,7 @@ details p{margin:8px 0 0;color:var(--muted)}
 <tr><td><a href="https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html" target="_blank" rel="noopener">杉並区</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">処理券A¥200・B¥300の組み合わせ</td><td data-h="収集まで">2〜3週間程度</td><td data-h="持ち込み">日曜のみ・1点¥400（要申込）</td></tr>
 <tr><td><a href="https://www.city.saitama.lg.jp/001/006/010/003/p072165.html" target="_blank" rel="noopener">さいたま市</a></td><td data-h="申し込み">インターネット（24時間）、電話</td><td data-h="料金" class="num">1品¥550（スプリング入りマットレス等は¥1,100〜¥2,200）</td><td data-h="収集まで">混雑時は1か月ほど（締め切りは収集日の3営業日前）</td><td data-h="持ち込み">市の3施設へ持込（予約制）</td></tr>
 <tr><td><a href="https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html" target="_blank" rel="noopener">千葉市</a></td><td data-h="申し込み">インターネット・LINE、電話（一部品目は電話のみ）</td><td data-h="料金" class="num">¥390〜¥1,560</td><td data-h="収集まで">受付完了から1〜2週間（受付完了まで平日5日ほど）</td><td data-h="持ち込み">清掃施設へ自己搬入</td></tr>
-<tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">2週間ほど（地区の収集業者に電話で申込）（推定）</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・10kgで約¥350）</td></tr>
+<tr><td><a href="https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html" target="_blank" rel="noopener">佐倉市</a></td><td data-h="申し込み">電話（地区ごとの収集業者）</td><td data-h="料金" class="num">市の公式サイトで確認</td><td data-h="収集まで">2週間ほど（地区の収集業者に電話で申込）（推定）</td><td data-h="持ち込み">酒々井リサイクル文化センター（予約不要・料金は市に確認）</td></tr>
 </tbody>
       </table></div>
       <p>市区ごとの申し込み方・料金・持ち込み先・近くの買取店は、地域ごとの記事にまとめています。記事のある市区は、診断の「お住まい」に市区名を入れると、その市区のインターネット予約・電話の窓口つきで診断できます。</p>
@@ -319,7 +319,7 @@ const CITIES={
   suginami:["杉並区",14,true,"処理券A¥200・B¥300の組み合わせ","インターネット（24時間）、電話","日曜のみ・1点¥400（要申込）","https://www.city.suginami.tokyo.jp/guide/gomi/seisou/1004899.html"],
   saitama:["さいたま市",14,true,"1品¥550（スプリング入りマットレス等は¥1,100〜¥2,200）","インターネット（24時間）、電話","市の3施設へ持込（予約制）","https://www.city.saitama.lg.jp/001/006/010/003/p072165.html"],
   chiba:["千葉市",14,true,"¥390〜¥1,560","インターネット・LINE、電話（一部品目は電話のみ）","清掃施設へ自己搬入","https://www.city.chiba.jp/kankyo/junkan/shushugyomu/sodaigomi.html"],
-  sakura:["佐倉市",14,false,"市の公式サイトで確認","電話（地区ごとの収集業者）","酒々井リサイクル文化センター（予約不要・10kgで約¥350）","https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html"],
+  sakura:["佐倉市",14,false,"市の公式サイトで確認","電話（地区ごとの収集業者）","酒々井リサイクル文化センター（予約不要・料金は市に確認）","https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html"],
   other:["その他の地域",14,false,"自治体ごと","自治体ごと","自治体ごと",""]
 };
 // 窓口の連絡先（2026-10-30 に各自治体の公式ページで確認）。tel:[表示名,番号]、links:[表示名,URL]
@@ -337,7 +337,7 @@ const INFO={
   chiba:{pref:12,desk:"千葉市 粗大ごみ受付センター",tel:[["電話（申込専用）","043-302-5374"]],hours:"電話は月〜金 9:00〜16:00・土 9:00〜11:30（日曜・祝日・年末年始は休み）",links:[["インターネットで申し込む","https://www.sodai-web.jp/chiba/index.html"],["LINEで申し込む","https://liff.line.me/1657017695-eNx9ljGp/index.html"]],
     drop:[{name:"中央・美浜環境事業所",tel:"043-231-6342"},{name:"花見川・稲毛環境事業所",tel:"043-259-1145"},{name:"若葉・緑環境事業所",tel:"043-292-4930",note:"品目ごとの手数料（¥390〜¥1,560）・1日10個まで",url:"https://www.city.chiba.jp/kankyo/junkan/shushugyomu/jikohannyu.html"}]},
   sakura:{pref:12,desk:"佐倉市役所 廃棄物対策課",tel:[["電話（問い合わせ）","043-484-6149"]],hours:"収集の予約は、地区ごとに決まった収集業者へ電話で申し込みます",links:[["地区ごとの申込先を見る（市の公式ページ）","https://www.city.sakura.lg.jp/soshiki/haikibutsutaisakuka/60/4487.html"]],
-    drop:[{name:"酒々井リサイクル文化センター（酒々井町墨1506）",note:"予約不要・10kgで約¥350（目安）"}]},
+    drop:[{name:"酒々井リサイクル文化センター（酒々井町墨1506）",note:"予約不要・料金は佐倉市 廃棄物対策課に確認"}]},
   other:{pref:0,desk:"お住まいの自治体の粗大ごみ受付",tel:[],hours:"自治体の公式サイトで「粗大ごみ」のページを確認してください",links:[],drop:[{name:"自治体の受入施設",note:"持ち込めるかどうかは自治体で確認"}]}
 };
 // 買取チェーンの例（提携先ではありません）。口コミは Google マップで見られるようにする
@@ -521,7 +521,7 @@ function itemOptions(it,j){
     {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:cityDesc,cost:cityCost,when:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
     {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
     {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
-    {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"10kgで約¥350":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
+    {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
     ...(late||BEDRE.test(it.label)?[]:[GIVE]),
     {h:"",k:"move",name:to?`新居の${to.n}で出す`:"新居の自治体で出す",desc:`引越し荷物に入れて運び、落ち着いてから出す${to?`。${tfs.length?`${to.n}の料金表では ${feeList(tfs)}（目安）`:`${to.n}の料金は<a href="${to.g}">記事</a>か公式ページで確認`}`:"。新居の自治体を入れると、そこでの料金が出ます"}`,cost:to&&tfs.length&&yen(tfs.map(x=>x[1]))?`運ぶ費用＋${yen(tfs.map(x=>x[1]))}（目安）`:"運ぶ費用が増える",when:"引越し後",ok:true}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
