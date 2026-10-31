@@ -62,7 +62,7 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki"}
 NOMOCHI={"koto","meguro","chuo","mitaka"}
 NOFEE={"shizuoka"}
 def _title(k):
@@ -102,6 +102,24 @@ LATE1={
  "kasukabe":"電話で「多量排出」（2トン車1台5,000円）を頼む",
  "kurume":"電話で「特別申込み収集」（2トンダンプ1台8,530円）を頼む",
  "takamatsu":"受付に電話して、早い収集日がないか聞く（市外へ引っ越す人は電話で申し込みます）",
+ "fuji":"次の「不燃・粗大・危険ごみの日」（月1回）を市のページで確かめる",
+ "toyama":"環境センターに電話して、戸別有料収集の早い日がないか聞く",
+ "kure":"次の粗大ごみの日（月1回）をカレンダーで確かめる",
+ "hakodate":"受付に電話して、早い収集日がないか聞く",
+ "hachinohe":"受付に電話して、早い収集日がないか聞く",
+ "morioka":"受付に電話して、早い収集日がないか聞く",
+ "ichihara":"受付に電話して、早い収集日がないか聞く",
+ "yachiyo":"受付に電話して、早い収集日がないか聞く",
+ "yokkaichi":"受付に電話して、早い収集日がないか聞く",
+ "neyagawa":"受付に電話して、早い収集日がないか聞く",
+ "nagano":"大きい物は資源再生センターへ持ち込む。引越しでたくさん出るときは、有料の一時多量ごみ収集を電話で頼む",
+ "kofu":"処理券を貼って、次の燃えないごみの日に出す",
+ "takarazuka":"受付に電話して、早い収集日がないか聞く（初めての人はインターネットで申し込めません）",
+ "tsu":"持ち込める日時を、施設の専用サイトで確かめる",
+ "isesaki":"次の収集日を収集カレンダーで確かめる",
+ "otagunma":"処理シールを貼って、次のごみステーションの収集日に出す（申し込み不要）",
+ "takatsuki":"月1回の収集日に出す。間に合わないときは、引越しの臨時ごみを電話で頼む",
+ "ibaraki":"月1回の収集日に出す（1家庭3点まで）。間に合わないときは、臨時ごみを電話で予約する",
 }
 LATE3={
  "soka":"少しなら環境業務センターへ持ち込む（引越しで一度にたくさん出る分は持ち込めません）",
