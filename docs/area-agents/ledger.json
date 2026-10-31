@@ -259,8 +259,10 @@
   },
   "machida": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック4回目"
+   "by": "rich-articles",
+   "note": "主な品目の料金表21行（いまと2027年1月からの2列、市の料金表PDF）",
+   "seo": "2026-10-31",
+   "checked": "2026-10-31"
   },
   "matsudo": {
    "fact": "2026-10-31",
