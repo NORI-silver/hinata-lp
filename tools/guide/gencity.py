@@ -65,6 +65,8 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
 OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki"}
+# 申し込み制の収集がない市（「収集の予約が」と書かない）
+NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga"}
 NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe"}
 NOFEE={"shizuoka"}
 def _title(k):
@@ -177,12 +179,13 @@ LATE1={
  "kyotanabe":"受付に電話して、早い収集日がないか聞く",
  "kameoka":"エコトピア亀岡へ前日までに予約して持ち込む",
  "fujieda":"クリーンセンター志太へ予約して自分で持ち込む",
- "yaizu":"クリーンセンター志太へ自分で持ち込む",
+ "yaizu":"クリーンセンター志太へ予約して自分で持ち込む",
  "higashihiroshima":"市の処理施設へ自分で持ち込む（多いときは先に市へ申請）",
  "koga":"クリーンセンターへ自分で持ち込む",
  "daito":"7点以上は環境室に電話して、有料の臨時（引越）ごみを頼む",
  "kadoma":"6点以上は受付センターに電話して、有料の臨時ごみを頼む",
- "matsubara":"8点を超える分は市が集めないので、持ち込み先を市のページで確かめる",
+ "matsubara":"8点を超える分は市が集めないので、許可業者に頼めるか市に確かめる",
+ "kuki":"受付に電話して、早い収集日がないか聞く",
 }
 LATE3={
  "kishiwada":"可燃ごみ・金属ごみが多いときは岸和田貝塚クリーンセンターへ（粗大ごみを持ち込めるかは組合に確認）",
@@ -271,6 +274,7 @@ for k,(name,title,desc) in C.items():
     if MOVER.get(k): mv_intro=f"<p>{name}の公式ページでは、引越しや転入について次のように案内しています（{CK}確認）。最後の3つは、どの市区でも気をつけたいことです。</p>"
     else: mv_intro=f"<p>前の家から持ってきた家具などを{name}で粗大ごみに出すときの決まりは、{name}の公式ページには特に書かれていませんでした（{CK}確認）。{name}の家庭のごみとして申し込むので、申し込むときに「引越しで持ってきた物」と伝えて確かめると安心です。</p>"
     late1=LATE1.get(k,"予約ページをこまめに見る（キャンセルで早い日が空くことがあります）")
+    lateh="市の収集日が引越しに間に合わないときは" if k in NOYOYAKU else "収集の予約が引越しに間に合わないときは"
     _l3=LATE3.get(k,"自家用車があれば、上の持ち込み先へ")  # "" は持ち込みできない市
     late3="" if k in NOMOCHI or not _l3 else "<li>"+_l3+"</li>"
     extra="".join(f"<li>{x}</li>" for x in MOVER.get(k,[]))
@@ -285,7 +289,7 @@ for k,(name,title,desc) in C.items():
     </ul>
 
     <h2>引越しで間に合わないとき</h2>
-    <p>収集の予約が引越しに間に合わないときは、次の順番で考えます。</p>
+    <p>{lateh}、次の順番で考えます。</p>
     <ol>
       <li>{late1}</li>
       <li>まだ使える物は買取に出す（下の買取店へ）</li>

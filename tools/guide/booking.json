@@ -471,8 +471,7 @@
     "note": "申し込みは電話か窓口"
   },
   "kuki": {
-    "web": "cond",
-    "note": "受付条件は衛生組合の予約ページで確認"
+    "web": "open"
   },
   "higashikurume": {
     "web": "open"
@@ -500,7 +499,7 @@
   },
   "fukaya": {
     "web": "none",
-    "note": "申し込みは電話のみ"
+    "note": "申し込みの記載なし（毎週火曜の収集日に出す）"
   },
   "kazo": {
     "web": "cond",
@@ -549,8 +548,7 @@
     "note": "前に電話で申し込んだ人だけ"
   },
   "kadoma": {
-    "web": "cond",
-    "note": "利用条件は市のページで確認"
+    "web": "open"
   },
   "matsubara": {
     "web": "open"
@@ -571,7 +569,7 @@
     "web": "open"
   },
   "kariya": {
-    "web": "cond",
+    "web": "open",
     "note": "LINEアカウントが必要"
   },
   "komaki": {

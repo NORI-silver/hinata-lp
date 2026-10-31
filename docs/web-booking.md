@@ -34,7 +34,7 @@
 | [富士見市](/guide/fujimi/) | ◯ だれでも | https://ecody.jp/fujimi | 独自 |  |  |
 | [ふじみ野市](/guide/fujimino/) | × 電話など | — | — |  | 申し込み不要（シール券を貼って集積所へ） |
 | [藤沢市](/guide/fujisawa/) | ◯ だれでも | https://sodai-sys.jp/fujisawa/users/ | 独自 |  |  |
-| [深谷市](/guide/fukaya/) | × 電話など | — | — |  | 申し込みは電話のみ |
+| [深谷市](/guide/fukaya/) | × 電話など | — | — |  | 申し込みの記載なし（毎週火曜の収集日に出す） |
 | [福井市](/guide/fukui/) | ◯ だれでも | https://shinsei.e-fukui.lg.jp/SksJuminWeb/EntryForm?id=b9Lkahm3 | 独自 | 要 | メールアドレスを入れると申請のしかたがメールで届きます（1人1件まで） |
 | [福岡市](/guide/fukuoka/) | ◯ だれでも | https://sodaigomi-kankyo.city.fukuoka.lg.jp/<br>https://www.city.fukuoka.lg.jp/kankyo/kateigomi/hp/LINE-sodaigomi.html | 独自 |  |  |
 | [福島市](/guide/fukushima/) | △ 条件つき | https://logoform.jp/form/PBtX/801001 | logoform.jp（フォーム） |  | フォームは仮受付。担当者からの電話で正式な申し込みになります |
@@ -69,14 +69,14 @@
 | [伊丹市](/guide/itami/) | ◯ だれでも | https://itami-sodai.jp | 独自 |  | ネットは先にキャッシュレスで払い、立ち会い不要。初めての人は先に受付センターに確かめるよう案内されています |
 | [いわき市](/guide/iwaki/) | △ 条件つき | https://www.city.iwaki.lg.jp/www/contents/1722312210664/index.html | 独自 |  | 市公式LINEで1回3個まで。一覧にない品目と、枠がいっぱいのときは電話 |
 | [和泉市](/guide/izumi/) | ◯ だれでも | — | — |  | 1回6点まで |
-| [門真市](/guide/kadoma/) | △ 条件つき | https://www.city.kadoma.osaka.jp/kurashi/gomi/9/5/22408.html | 独自 |  | 利用条件は市のページで確認 |
+| [門真市](/guide/kadoma/) | ◯ だれでも | https://www.city.kadoma.osaka.jp/kurashi/gomi/9/5/22408.html | 独自 |  |  |
 | [鹿児島市](/guide/kagoshima/) | ◯ だれでも | https://sodaigomi-city-kagoshima.jp/kagoshima/Web/login | 独自 |  | 初めての人・住所を変えた人は仮受付になり、市から確認の連絡が来ることがあります |
 | [加古川市](/guide/kakogawa/) | ◯ だれでも | https://s-kantan.com/sodai-kakogawa-u/ | 独自 | 要 |  |
 | [鎌ケ谷市](/guide/kamagaya/) | × 電話など | — | — |  | 申し込みは電話のみ |
 | [鎌倉市](/guide/kamakura/) | ◯ だれでも | https://sodai-sys.jp/kamakura/users/ | 独自 |  | 仮予約のあと、環境センターから本予約のメールが届きます |
 | [亀岡市](/guide/kameoka/) | ◯ だれでも | https://logoform.jp/procedure/JbYC/270 | logoform.jp（フォーム） |  |  |
 | [金沢市](/guide/kanazawa/) | ◯ だれでも | https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/gomidasi_benri/line_sodaigomi.html | 独自 |  | 金沢市LINE公式アカウントの「ごみ出しサポート」から。申し込み内容の変更は電話 |
-| [刈谷市](/guide/kariya/) | △ 条件つき | https://vein.bridgesany.com/kariya/index.html | 独自 |  | LINEアカウントが必要 |
+| [刈谷市](/guide/kariya/) | ◯ だれでも | https://vein.bridgesany.com/kariya/index.html | 独自 |  | LINEアカウントが必要 |
 | [柏市](/guide/kashiwa/) | △ 条件つき | https://kashiwa.sodai.jp/ | 独自 |  | インターネット予約は柏地域だけ。沼南地域はクリーンセンターしらさぎへ電話で |
 | [春日井市](/guide/kasugai/) | ◯ だれでも | https://ttzk.graffer.jp/city-kasugai/smart-apply/apply-procedure-alias/sadai | 独自 |  | 送ったあと市の担当者から電話があり、そこで収集日と料金が決まります（3営業日以内に折り返さないと取り下げになることがあります） |
 | [春日部市](/guide/kasukabe/) | ◯ だれでも | — | — |  | 返事は次の開庁日以降。引越しなどの多量排出は電話だけ |
@@ -102,7 +102,7 @@
 | [郡山市](/guide/koriyama/) | △ 条件つき | https://lgpos.task-asp.net/cu/072036/ea/residents/procedures/apply/56d9cc8a-de9f-4db2-94b6-3399651ab386/start | task-asp.net（フォーム） |  | インターネットで申し込めるのは決められた品目だけ。ほかは電話 |
 | [越谷市](/guide/koshigaya/) | ◯ だれでも | https://www.city.koshigaya.saitama.jp/net/shigenjunkansuishinka/tetsuzukiapp050.html | 独自 |  |  |
 | [江東区](/guide/koto/) | ◯ だれでも | https://www2.sodai-web.jp/koto/index.html | sodai-web.jp | 要 |  |
-| [久喜市](/guide/kuki/) | △ 条件つき | http://www.crt-kuki.miyashiro.saitama.jp/people/trash/internet-reservation/ | 独自 |  | 受付条件は衛生組合の予約ページで確認 |
+| [久喜市](/guide/kuki/) | ◯ だれでも | https://www.crt-kuki.miyashiro.saitama.jp/people/trash/internet-reservation/ | 独自 |  |  |
 | [熊谷市](/guide/kumagaya/) | ◯ だれでも | https://www.city.kumagaya.lg.jp/kurashi/kankyo/gomi/sodaigomi.html | 独自 |  | 運べない家具などの有料リクエスト収集の申し込み。小さい粗大ごみは申し込みなしで集積所へ |
 | [熊本市](/guide/kumamoto/) | × 電話など | — | — |  | 申し込みは電話（ごみゼロコール）かファクス |
 | [倉敷市](/guide/kurashiki/) | △ 条件つき | https://kurashiki.eco-ryobi.net/eco/view/kurashiki/top.html | /eco/view/ 形式 |  | インターネットは前に戸別収集を使った人だけ。初めての人は電話 |
@@ -216,7 +216,7 @@
 | [横須賀市](/guide/yokosuka/) | ◯ だれでも | https://www.yokosuka-sodai.com/receipts/home | 独自 |  |  |
 | [座間市](/guide/zama/) | ◯ だれでも | https://page.line.me/810zmawg?openQrModal=true<br>https://www.city.zama.kanagawa.jp/shisei/koho/hashin/1005094.html | 独自 |  | 市のLINE公式アカウントから |
 
-合計: ◯ だれでも 119、△ 条件つき 38、× 電話など 52
+合計: ◯ だれでも 122、△ 条件つき 35、× 電話など 52
 
 ## 予約サイトの形ごと（ウェブ予約できる地域）
 
