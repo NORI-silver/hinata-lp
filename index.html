@@ -39,7 +39,7 @@
 {"@type":"Question","name":"粗大ごみは引越しの何日前に申し込めばいいですか？","acceptedAnswer":{"@type":"Answer","text":"自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。"}},
 {"@type":"Question","name":"粗大ごみの料金はいくらですか？","acceptedAnswer":{"@type":"Answer","text":"自治体と品目の大きさで決まります。たとえば千葉市は390円から1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日に各市の公式サイトで確認）。正確な金額は各自治体の手数料一覧で確認してください。ほかの市区の料金と払い方は、粗大ごみ処理券（シール）の記事に一覧があります。"}},
 {"@type":"Question","name":"この診断にお金はかかりますか？","acceptedAnswer":{"@type":"Answer","text":"かかりません。診断は無料です。市や郵便局、買取店への支払いは、それぞれに直接行います。"}},
-{"@type":"Question","name":"入力した内容や写真はどこかに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。"}}
+{"@type":"Question","name":"入力した内容や写真はどこかに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。千葉市の今の最短収集日を調べるときは、選んだ区だけを使って千葉市の予約サイトに問い合わせます。"}}
 ]}
 </script>
 <style>
@@ -124,6 +124,12 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .nbtn{display:block;text-align:center;font-size:18px;font-weight:700;color:#fff;background:var(--good);border-radius:12px;padding:14px 16px;text-decoration:none}
 .nbtn:hover{filter:brightness(1.08)}
 .nsteps{margin:0;padding-left:24px;font-size:16px}
+.slot{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px 20px;display:flex;flex-direction:column;gap:8px;font-size:16px}
+.slot .nl{font-size:15px;font-weight:700;color:var(--accent)}
+.slot p{margin:0}
+.slot .sd{font-size:18px}.slot .sd b{font-size:26px}
+.slot .sv{font-weight:700}.slot .sv.ok{color:var(--good)}.slot .sv.late{color:var(--warn)}
+.slot small{font-size:14px;color:var(--muted)}
 .status{margin:0;background:var(--bg);border-radius:18px;padding:16px 20px;font-size:18px;line-height:1.6}
 .status .num{font-size:28px;margin:0 2px}
 .status small{display:block;margin-top:4px;font-size:15px;color:var(--muted)}
@@ -284,7 +290,7 @@ details p{margin:8px 0 0;color:var(--muted)}
       <details><summary>粗大ごみは引越しの何日前に申し込めばいいですか？</summary><p>自治体や時期によって違いますが、申し込みから収集まで1〜3週間ほどかかることがあります。3〜4月の引越しシーズンはさらに混むので、引越し日が決まったらすぐに申し込むと安心です。</p></details>
       <details><summary>粗大ごみの料金はいくらですか？</summary><p>自治体と品目の大きさで決まります。たとえば千葉市は390円〜1,560円、川崎市は300円・600円・1,200円の3区分です（2026年10月30日確認）。正確な金額は各自治体の手数料一覧で確認してください。ほかの市区の料金と払い方は、<a href="/guide/shoriken/#ryokin">粗大ごみ処理券（シール）の記事</a>に一覧があります。</p></details>
       <details><summary>この診断にお金はかかりますか？</summary><p>かかりません。市や郵便局、買取店への支払いは、それぞれに直接行います。</p></details>
-      <details><summary>入力した内容や写真はどこかに送られますか？</summary><p>送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。</p></details>
+      <details><summary>入力した内容や写真はどこかに送られますか？</summary><p>送られません。診断はお使いのブラウザの中だけで行い、入力内容や写真は保存しません。アクセス数を知るために Google アナリティクスを使っていますが、入力内容や写真は送りません。買取店の口コミを表示するときは、市区の名前だけを使って Google マップに問い合わせます。千葉市の今の最短収集日を調べるときは、選んだ区だけを使って千葉市の予約サイトに問い合わせます。</p></details>
     </section>
   </main>
 
@@ -444,7 +450,35 @@ function judge(){const c=CITIES[A.city],ar=AREAS[A.city]||(A.city==="other"&&ARE
   if(A.city==="other"&&ar){j.cname=ar.n;j.url=ar.url||"";j.fee=ptOf(ar,"料金","支払い")||"品目ごと（公式ページで確認）";j.drop=ptOf(ar,"持ち込み")||"持ち込めるかは公式ページで確認";j.web=ar.bk?ar.bk.web==="open"||ar.bk.web==="cond":/インターネット|LINE/.test(ptOf(ar,"申し込み"))}
   // 表示に使う名前。地域がわからないときは「お住まいの市区町村」
   j.nm=A.city==="other"&&!ar?"お住まいの市区町村":j.cname;
+  // 千葉市は、予約サイトで調べた今の最短収集日があれば、それで間に合うかを判定する
+  const sl=A.city==="chiba"&&A.ward&&SLOT[A.ward];
+  if(sl&&sl.ok){const dd=new Date(sl.date+"T00:00:00");j.lead=Math.max(0,Math.round((dd-today)/DAY));j.live=sl}
   return j}
+// ── 千葉市の今の最短収集日（backend/reviews.gs の kind=slot が千葉市の予約サイトの公開ページを読む） ──
+// reviews.js と同じ Apps Script のウェブアプリ
+const GAS_URL="https://script.google.com/macros/s/AKfycbw36d8YjMsAUqsVjVIU8u7ORWclYjX0kyid2XcGlljrHyJIjPJGmp3jEADxTr56UskjvA/exec";
+const WARDS={chiba:[["12101","中央区"],["12102","花見川区"],["12103","稲毛区"],["12104","若葉区"],["12105","緑区"],["12106","美浜区"]]};
+const SLOT={};
+const hm=t=>t.slice(5,10).replace("-","/").replace(/^0/,"")+" "+t.slice(11,16);
+function wardOf(city,t){const w=(WARDS[city]||[]).find(([,n])=>(t||"").includes(n));return w?w[0]:""}
+function getSlot(w,quiet){
+  if(SLOT[w]&&!SLOT[w].err)return quiet||draw();
+  SLOT[w]={busy:true};if(!quiet)draw();
+  fetch(GAS_URL+"?"+new URLSearchParams({kind:"slot",city:"chiba",ward:w})).then(r=>r.json()).then(x=>{SLOT[w]=x&&x.ok?x:{err:true}}).catch(()=>{SLOT[w]={err:true}}).then(draw);
+}
+function slotBox(j){
+  if(j.key!=="chiba")return "";
+  const ws=WARDS.chiba,w=A.ward,x=w&&SLOT[w],wn=w?ws.find(a=>a[0]===w)[1]:"";
+  const pick=`<div class="chips">${ws.map(([c,n])=>`<button type="button" class="chip" data-ward="${c}" aria-pressed="${c===w}">${n}</button>`).join("")}</div>`;
+  let body;
+  if(!w) body=`<p>区を選ぶと、千葉市の予約サイトで<b>今の最短収集日</b>を調べます（15秒ほどかかります）。</p>${pick}`;
+  else if(x&&x.busy) body=`<p>${wn}の最短収集日を、千葉市の予約サイトで調べています…（15秒ほど）</p>`;
+  else if(x&&x.ok){const dd=new Date(x.date+"T00:00:00"),ok=Math.round((dd-today)/DAY)<=j.d;
+    body=`<p class="sd">${wn}の今の最短収集日は <b>${md(dd)}</b></p><p class="sv ${ok?"ok":"late"}">${ok?"引越し日までに収集できます。早めに申し込みましょう":"引越し日には間に合いません。取り消しで早い日が空くこともあります"}</p>
+      <small>${hm(x.checkedAt)}に<a href="${x.source}" target="_blank" rel="noopener">千葉市の予約サイト</a>で確認。品物の数や申し込むタイミングで変わる目安です</small>${pick}`}
+  else body=`<p>今の最短収集日を調べられませんでした。<a href="https://www.sodai-web.jp/sodai/shortest_calendar.na?id=09" target="_blank" rel="noopener">千葉市の予約サイト</a>で確かめてください。</p>${pick}`;
+  return `<div class="slot"><span class="nl">千葉市の今の最短収集日</span>${body}</div>`;
+}
 
 function itemList(){return A.custom.map(c=>({label:c.label,cat:c.cat}))}
 const APPCOST="数千円〜（目安）";
@@ -528,7 +562,7 @@ function itemOptions(it,j){
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   return [
-    {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:cityDesc,cost:cityCost,when:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
+    {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:cityDesc,cost:cityCost,when:j.live?`今の最短は${md(add(j.lead))}（${hm(j.live.checkedAt)}時点）`:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:j.live?`今の最短収集日は${md(add(j.lead))}で、引越しに間に合いません（${hm(j.live.checkedAt)}時点）`:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
     {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
     {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
     {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
@@ -554,8 +588,9 @@ function draw(){
   const late=j.d<j.lead;
   const al=j.key==="other"&&AREALEAD[A.area];
   const leadTxt=al?`「${al[1]}」（公式ページの案内）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`「${esc(ptOf(j.ar,"収集まで"))}」（公式ページの案内）`:j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算）":`「${LEADTXT[j.key]}」（${LEADSRC[j.key]==="official"?"公式ページの案内":"このサイトの推定"}）`;
-  let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j);
-  h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。</small></p>`;
+  if(j.key==="chiba"&&A.ward&&!SLOT[A.ward])getSlot(A.ward,true);
+  let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j)+slotBox(j);
+  h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
   h+=itemCards(rs,j);
   h+=handlers(j,rs);
   h+=newHome(rs);
@@ -608,6 +643,7 @@ function cityTable(){
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.ward){A.ward=b.dataset.ward;getSlot(A.ward);return}
   if(b.id==="addfree"){addFree();return}
   if(b.id==="geo"){geoAddr();return}
   if(b.dataset.rmc!==undefined){A.custom.splice(+b.dataset.rmc,1);drawQs();draw();return}
@@ -617,7 +653,7 @@ document.addEventListener("click",e=>{
   const k=b.dataset.k,v=b.dataset.v;if(!k)return;
   const q=Q.find(x=>x.k===k);
   if(k==="items"){const i=A.custom.findIndex(c=>!c.photo&&c.label===v);i<0?A.custom.push({label:v,cat:classify(v)}):A.custom.splice(i,1);drawQs();draw();return}
-  if(k==="city"){A.addrmsg="";A.addr="";A.area=""}
+  if(k==="city"){A.addrmsg="";A.addr="";A.area="";A.ward=""}
   if(k==="days"){A.days=v;A.move=""}
   else A[k]=v;
   drawQs();draw();
@@ -652,7 +688,7 @@ function addFree(){const el=$("free");const v=(el&&el.value||"").trim();if(!v)re
   v.split(/[、,，\n]+/).map(x=>x.trim()).filter(Boolean).forEach(x=>A.custom.push({label:x,cat:classify(x)}));drawQs();draw();const f=$("free");if(f)f.focus()}
 document.addEventListener("input",e=>{if(e.target.id==="to")setTo(e.target.value)});
 document.addEventListener("keydown",e=>{if(e.target.id==="to"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setTo(e.target.value)}if(e.target.id==="free"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();addFree()}if(e.target.id==="addr"&&e.key==="Enter"&&!e.isComposing){e.preventDefault();setAddr(e.target.value)}});
-function setAddr(v){v=(v||"").trim();if(!v)return;A.addr=v;const hit=ADDR.find(([re])=>re.test(v));
+function setAddr(v){v=(v||"").trim();if(!v)return;A.addr=v;A.ward=wardOf("chiba",v);const hit=ADDR.find(([re])=>re.test(v));
   const ak=hit?"":findArea(v);A.area=ak;
   if(hit){A.city=hit[1];A.addrmsg=`「${esc(v)}」→ ${CITIES[hit[1]][0]}で診断しています`}else if(ak){A.city="other";A.addrmsg=`「${esc(v)}」→ ${AREAS[ak].n}で診断しています${leadNote(ak)}`}else{A.city="other";A.addrmsg=`「${esc(v)}」は対応している市区にないため、その他の地域で診断しています`}
   drawQs();draw()}
@@ -671,7 +707,7 @@ function geoAddr(){
       const lat=p.coords.latitude.toFixed(5),lon=p.coords.longitude.toFixed(5);
       const r=await (await fetch(`https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${lat}&lon=${lon}`)).json();
       const cd=r&&r.results&&r.results.muniCd;if(!cd) return fail("現在地の市区町村がわかりませんでした（日本の外かもしれません）。住所を入力するか、下から選んでください");
-      const n=+cd,hit=GEOCODE.find(([a,b])=>n>=a&&n<=b),town=(r.results.lv01Nm||"").replace(/^－$/,"");
+      const n=+cd,hit=GEOCODE.find(([a,b])=>n>=a&&n<=b),town=(r.results.lv01Nm||"").replace(/^－$/,"");A.ward=WARDS.chiba.some(w=>+w[0]===n)?String(n):"";
       A.geobusy=false;
       if(hit){const nm=(await muniName(cd)).replace(/^(東京都|北海道|(?:京都|大阪)府|.{2,3}県)/,"");A.geobusy=false;A.city=hit[2];A.addr=(nm||CITIES[hit[2]][0])+town;A.addrmsg=`現在地 → ${CITIES[hit[2]][0]}で診断しています。ちがう場合は選び直してください`}
       else{const nm=await muniName(cd),ak=findArea(nm);A.city="other";A.area=ak;A.addr=nm?nm+town:"";A.addrmsg=ak?`現在地 → ${AREAS[ak].n}で診断しています${leadNote(ak)}`:`現在地${nm?`（${esc(nm)}）`:""}は対応している市区にないため、その他の地域で診断しています`}

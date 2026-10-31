@@ -7,6 +7,8 @@
  *   プロジェクトの設定 → スクリプト プロパティ に PLACES_API_KEY を追加 →
  *   デプロイ → 新しいデプロイ → 種類「ウェブアプリ」・実行ユーザー「自分」・アクセス「全員」→ URL を reviews.js の GAS_URL に入れる。
  *
+ * 千葉市の最短収集日（kind=slot）もこのスクリプトで調べる（下の slot_）。キーは要らない。
+ *
  * 規約（Google Maps Platform）に合わせて：点数・口コミは毎回取り寄せて保存しない（場所のIDだけは保存してよい）。
  * 出どころの表示「Google Maps」、書いた人（名前・アイコン・プロフィールへのリンク）、元の口コミへのリンクはサイト側で出す。
  */
@@ -23,6 +25,7 @@ function doGet(e) {
   try {
     if (p.kind === 'shops') return json_(shops_(String(p.city || '')));
     if (p.kind === 'reviews') return json_(reviews_(String(p.city || ''), Number(p.chain)));
+    if (p.kind === 'slot') return json_(slot_(String(p.city || ''), String(p.ward || '')));
   } catch (err) {
     console.error(err);
   }
@@ -83,4 +86,48 @@ function place_(city, chain, fields) {
   });
   if (res.getResponseCode() !== 200) return null;
   return JSON.parse(res.getContentText());
+}
+
+// ── 最短収集日（2026-10-31 Nori「千葉市で入れる」）──────────────────────────────
+// 千葉市の粗大ごみ受付（sodai-web.jp）の、だれでも見られる「収集日の確認（最短収集日）」ページを、
+// 診断で区を選んだときに1回だけ読む。ログイン・申し込みはしない。
+// 市のサーバーの負担を増やさないため、区ごとに30分は前の結果を使い、1日の問い合わせ回数に上限をつける。
+var SLOT_CITIES = {
+  chiba: {url:'https://www.sodai-web.jp/sodai/shortest_calendar.na?id=09', post:'https://www.sodai-web.jp/sodai/mo.awfzft.on.awfzft.na',
+    wards:{'12101':'中央区','12102':'花見川区','12103':'稲毛区','12104':'若葉区','12105':'緑区','12106':'美浜区'}}
+};
+var SLOT_CACHE_SEC = 1800, SLOT_DAILY_LIMIT = 300;
+var SLOT_UA = 'hinata-slot/1.0 (+https://hinata.shiokonbu.com/about/)';
+
+function slot_(city, ward) {
+  var c = SLOT_CITIES[city];
+  if (!c || !c.wards[ward]) return {ok:false, error:'unknown'};
+  var cache = CacheService.getScriptCache(), key = 'SLOT_' + city + '_' + ward, hit = cache.get(key);
+  if (hit) return JSON.parse(hit);
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(30000)) return {ok:false, error:'busy'};
+  try {
+    hit = cache.get(key); // 待っている間にほかの人が調べていたら、それを使う
+    if (hit) return JSON.parse(hit);
+    var props = PropertiesService.getScriptProperties(), day = 'SLOTDAY_' + Utilities.formatDate(new Date(), TZ, 'yyyyMMdd');
+    var used = Number(props.getProperty(day)) || 0;
+    if (used >= SLOT_DAILY_LIMIT) return {ok:false, error:'limit'};
+    props.setProperty(day, String(used + 2));
+    var g = UrlFetchApp.fetch(c.url, {muteHttpExceptions:true, followRedirects:true, headers:{'User-Agent':SLOT_UA}});
+    if (g.getResponseCode() !== 200) return {ok:false, error:'unavailable'};
+    var html = g.getContentText('UTF-8'), fid = (html.match(/name="paraselene\$form\$id"[^>]*value="([^"]+)"/) || [])[1];
+    var hd = g.getAllHeaders()['Set-Cookie'], ck = [].concat(hd || []).map(function(x) { return String(x).split(';')[0]; }).join('; ');
+    if (!fid || !ck) return {ok:false, error:'unavailable'};
+    var r = UrlFetchApp.fetch(c.post, {method:'post', muteHttpExceptions:true, followRedirects:true,
+      headers:{'User-Agent':SLOT_UA, 'Cookie':ck, 'Referer':c.url},
+      payload:{'paraselene$form$id':fid, 'paraselene_form_ajax':'-1', 'paraselene_dummy':'-1', 'paraselene_page_ukey':'-1', 'address1-2':ward, 'confirm_collection_date':''}});
+    var m = r.getContentText('UTF-8').match(/id="shortest_collection_date"[^>]*>\s*(\d{4})年(\d{1,2})月(\d{1,2})日/);
+    if (!m) return {ok:false, error:'unavailable'};
+    var out = {ok:true, city:city, ward:ward, wardName:c.wards[ward], date:m[1] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[3]).slice(-2),
+      checkedAt:Utilities.formatDate(new Date(), TZ, "yyyy-MM-dd'T'HH:mm"), source:c.url};
+    cache.put(key, JSON.stringify(out), SLOT_CACHE_SEC);
+    return out;
+  } finally {
+    lock.releaseLock();
+  }
 }
