@@ -46,7 +46,7 @@ import glob as _g
 for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta","*.json"))):
     _m=json.load(open(_f,encoding="utf-8"))
     if not os.path.exists(os.path.join(CD,_m["key"]+".html")): continue
-    C[_m["key"]]=(_m["name"],_m["title"],_m["desc"]); REGION[_m["key"]]=_m["region"]
+    C[_m["key"]]=(_m["name"],_m.get("title",""),_m["desc"]); REGION[_m["key"]]=_m["region"]
     if _m.get("mover"): MOVER[_m["key"]]=_m["mover"]
 
 # 都道府県（「近くの地域」で同じ都道府県を先に出すため）。meta に pref があればそちらを使う
@@ -56,13 +56,15 @@ _P={"東京都":"setagaya suginami adachi arakawa bunkyo chiyoda chuo edogawa it
  "北海道":"sapporo","宮城県":"sendai","新潟県":"niigata","岡山県":"okayama","広島県":"hiroshima","徳島県":"tokushima","愛媛県":"matsuyama",
  "福岡県":"fukuoka kitakyushu","熊本県":"kumamoto","鹿児島県":"kagoshima","沖縄県":"naha"}
 PREF={k:pf for pf,ks in _P.items() for k in ks.split()}
+CHKD={}  # 地域ごとの確認日（meta の checked。無ければ DATE）
 for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),"meta","*.json"))):
     _m=json.load(open(_f,encoding="utf-8"))
     if _m.get("pref"): PREF[_m["key"]]=_m["pref"]
+    if _m.get("checked"): CHKD[_m["key"]]=_m["checked"]
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki"}
 NOMOCHI={"koto","meguro","chuo","mitaka"}
 NOFEE={"shizuoka"}
 def _title(k):
@@ -102,6 +104,32 @@ LATE1={
  "kasukabe":"電話で「多量排出」（2トン車1台5,000円）を頼む",
  "kurume":"電話で「特別申込み収集」（2トンダンプ1台8,530円）を頼む",
  "takamatsu":"受付に電話して、早い収集日がないか聞く（市外へ引っ越す人は電話で申し込みます）",
+ "fuji":"少しなら次の「不燃・粗大・危険ごみの日」（月1回）に。大きい・多いときは前日までに予約して新環境クリーンセンターへ",
+ "toyama":"環境センターに電話して、戸別有料収集の早い日がないか聞く",
+ "kure":"少しなら次の粗大ごみの日（月1回）に出す。引越しでまとめて出る分はクリーンセンターくれへ持ち込む",
+ "hakodate":"受付に電話して、早い収集日がないか聞く",
+ "hachinohe":"受付に電話して、早い収集日がないか聞く",
+ "morioka":"受付に電話して、早い収集日がないか聞く",
+ "ichihara":"受付に電話して、早い収集日がないか聞く",
+ "yachiyo":"引越しでたくさん出るときは、前もって清掃センターに連絡して持ち込む",
+ "yokkaichi":"受付に電話して、早い収集日がないか聞く",
+ "neyagawa":"受付に電話して、早い収集日がないか聞く",
+ "nagano":"大きい物は資源再生センターへ持ち込む。引越しでたくさん出るときは、有料の一時多量ごみ収集を電話で頼む",
+ "kofu":"少しなら処理券を貼って次の燃えないごみの日に。引越しでたくさん出るときは甲府・峡東クリーンセンターへ",
+ "takarazuka":"受付に電話して、早い収集日がないか聞く（初めての人はインターネットで申し込めません）",
+ "tsu":"施設の案内で持ち込める日時を確かめて、分けて持ち込む",
+ "isesaki":"少しなら次の収集日に出す。一度にたくさん出る分は集積所に出せないので、清掃リサイクルセンター21へ（前もって申請）",
+ "otagunma":"少しなら処理シールを貼って次のごみステーションの収集日に。多いときや大きい物はリサイクルプラザへ持ち込む",
+ "takatsuki":"少しなら月1回の収集日に。引越しでまとめて出る分は、臨時ごみを電話で頼む（4〜5日前まで）",
+ "ibaraki":"少しなら月1回の収集日に（1家庭3点まで）。引越しでまとめて出る分は、臨時ごみを電話で予約する",
+ "kasugai":"受付に電話して、早い収集日がないか聞く",
+ "matsue":"受付に電話して、早い収集日がないか聞く",
+ "fukui":"受付に電話して、早い収集日がないか聞く",
+ "ageo":"受付に電話して、早い収集日がないか聞く",
+ "kanazawa":"受付に電話して、早い収集日がないか聞く",
+ "matsumoto":"受付に電話して、早い収集日がないか聞く",
+ "iwaki":"受付に電話して、早い収集日がないか聞く",
+ "saga":"委託業者の臨時収集（1週間前まで）を頼むか、清掃工場へ持ち込む",
 }
 LATE3={
  "soka":"少しなら環境業務センターへ持ち込む（引越しで一度にたくさん出る分は持ち込めません）",
@@ -117,7 +145,8 @@ def cards(keys,base="/guide/"):
     return "".join(f'<a class="card" href="/guide/{k}/"><b>{C[k][0]}の粗大ごみ</b><span>申し込み・料金・持ち込み・家電の出し方</span></a>' for k in keys)
 for k,(name,title,desc) in C.items():
     url=f"{SITE}/guide/{k}/"
-    art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":DATE,"dateModified":DATE,"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"about":{"@type":"City","name":name}}
+    D=CHKD.get(k,DATE); y,mo,da=D.split("-"); CK=f"{int(y)}年{int(mo)}月{int(da)}日"
+    art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":D,"dateModified":D,"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"about":{"@type":"City","name":name}}
     bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":SITE+"/"},{"@type":"ListItem","position":2,"name":"粗大ごみの基礎知識","item":SITE+"/guide/"},{"@type":"ListItem","position":3,"name":f"{name}の粗大ごみ","item":url}]}
     h=HEAD_TPL+f'''<title>{title}</title>
 <meta name="description" content="{desc}">
@@ -150,13 +179,13 @@ for k,(name,title,desc) in C.items():
   <header class="hero">
     <h1>{name}の粗大ごみの出し方と料金</h1>
     <p>申し込み方法、料金と払い方、出し方、持ち込み先、家電4品目、引越しで急ぐときの方法を、{name}の公式ページをもとにまとめました。</p>
-    <p class="meta">{CHECK}に{name}の公式ページで確認・料金や日数は目安です</p>
+    <p class="meta">{CK}に{name}の公式ページで確認・料金や日数は目安です</p>
   </header>
   <article>
 '''
     body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
-    if MOVER.get(k): mv_intro=f"<p>{name}の公式ページでは、引越しや転入について次のように案内しています（{CHECK}確認）。最後の3つは、どの市区でも気をつけたいことです。</p>"
-    else: mv_intro=f"<p>前の家から持ってきた家具などを{name}で粗大ごみに出すときの決まりは、{name}の公式ページには特に書かれていませんでした（{CHECK}確認）。{name}の家庭のごみとして申し込むので、申し込むときに「引越しで持ってきた物」と伝えて確かめると安心です。</p>"
+    if MOVER.get(k): mv_intro=f"<p>{name}の公式ページでは、引越しや転入について次のように案内しています（{CK}確認）。最後の3つは、どの市区でも気をつけたいことです。</p>"
+    else: mv_intro=f"<p>前の家から持ってきた家具などを{name}で粗大ごみに出すときの決まりは、{name}の公式ページには特に書かれていませんでした（{CK}確認）。{name}の家庭のごみとして申し込むので、申し込むときに「引越しで持ってきた物」と伝えて確かめると安心です。</p>"
     late1=LATE1.get(k,"予約ページをこまめに見る（キャンセルで早い日が空くことがあります）")
     late3="" if k in NOMOCHI else "<li>"+LATE3.get(k,"自家用車があれば、上の持ち込み先へ")+"</li>"
     extra="".join(f"<li>{x}</li>" for x in MOVER.get(k,[]))
@@ -214,7 +243,7 @@ for k,(name,title,desc) in C.items():
     <div class="cards"><a class="card" href="/guide/late/"><b>間に合わないときの出し方</b><span>4つの方法と基本の流れ。</span></a><a class="card" href="/guide/fees/"><b>出し方と料金（役所・郵便局・持込）</b><span>市区の回収、家電リサイクル券、持込施設、買取の手順と料金の目安。</span></a><a class="card" href="/guide/mochikomi/"><b>粗大ごみの持ち込み</b><span>予約・料金・持ち物と、市区ごとの持込先。</span></a><a class="card" href="/guide/shoriken/"><b>処理券（シール）の買い方・貼り方</b><span>コンビニなどの取扱所と、市区ごとの料金と払い方。</span></a></div>
   </section>
 '''
-    foot=FOOT.replace("</body>",'<script src="/reviews.js" defer></script>\n</body>')
+    foot=FOOT.replace("</body>",'<script src="/reviews.js" defer></script>\n</body>').replace("2026年10月30日に確認",f"{CK}に確認")
     p=os.path.join(ROOT,"guide",k,"index.html"); os.makedirs(os.path.dirname(p),exist_ok=True)
     open(p,"w",encoding="utf-8").write(h+body+tail+foot)
     print(k,len(title),len(desc))

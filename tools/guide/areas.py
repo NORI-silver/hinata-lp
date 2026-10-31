@@ -9,7 +9,7 @@ import glob, html, json, os, re, sys
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "."
 HERE = os.path.dirname(os.path.abspath(__file__))
-CHECKED = "2026-10-30"
+CHECKED = "2026-10-30〜31"
 
 def txt(s):
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", s))).strip()

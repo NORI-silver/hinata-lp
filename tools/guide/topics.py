@@ -5,7 +5,7 @@
 # キーワードは docs/keywords.md（キーワードプランナー 2026-10-31）。gencity.py → hub.py → areas.py のあとに実行する。
 import json,os,re,sys
 ROOT=sys.argv[1]; HERE=os.path.dirname(os.path.abspath(__file__)); CD=os.path.join(HERE,"city")
-SITE="https://hinata.shiokonbu.com"; DATE="2026-10-31"; CHECK="2026年10月30日"
+SITE="https://hinata.shiokonbu.com"; DATE="2026-10-31"; CHECK="2026年10月30〜31日"
 src=open(os.path.join(HERE,"gencity.py"),encoding="utf-8").read()
 _cwd=os.getcwd(); os.chdir(ROOT)
 ns={"__file__":os.path.join(HERE,"gencity.py"),"sys":sys,"os":os}; exec("import json,os,re,sys\n"+src.split("fees=open")[0].split("\n",1)[1].replace("ROOT=sys.argv[1];","ROOT=\"\";"),ns)
