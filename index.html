@@ -126,6 +126,11 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .nsteps{margin:0;padding-left:24px;font-size:16px}
 .cost,.place{display:flex;flex-direction:column;gap:8px}
 .cfor{margin:6px 0 0;font-size:16px;font-weight:700}
+.faqr{display:flex;flex-direction:column;gap:10px}
+.fq{background:var(--bg);border-radius:14px;padding:14px 16px}
+.fq-q{margin:0 0 6px;font-size:17px;font-weight:700;color:var(--accent)}
+.fq-a{font-size:16px;line-height:1.7}.fq-a p{margin:0 0 6px}.fq-a ul,.fq-a ol{margin:0 0 6px;padding-left:22px}
+.fq-s{font-size:14px;color:var(--muted)}
 .cchart{background:var(--bg);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px}
 .chd{margin:0 0 4px;font-size:17px;line-height:1.6}.chd b{color:var(--good)}
 .cbr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"l v" "t t" "s s";gap:2px 8px;align-items:end}
@@ -693,6 +698,33 @@ function placeBox(rs,j){
   const rows=[...G.entries()].sort((a,b)=>(b[1].rec.length>0)-(a[1].rec.length>0)||pri(a[1].k)-pri(b[1].k));
   return `<div class="place"><h3 class="sh">まとめ：どこに何を頼めるか<small>◎＝おすすめ　○＝ここでも出せる</small></h3><table class="ctbl ptbl"><tbody>${rows.map(([,g])=>`<tr><th>${g.name}</th><td>${g.rec.map(t=>`<span class="pi rec">◎ ${t}</span>`).join("")}${g.ok.map(t=>`<span class="pi">○ ${t}</span>`).join("")}</td></tr>`).join("")}</tbody></table></div>`;
 }
+// はじめての人の疑問に、入力に合わせて順に答える（Nori 2026-11-01 のユーザー像）
+const SCAMSRC="https://www.kokusen.go.jp/news/data/n-20221102_1.html";
+function faqBox(rs,j){
+  const L=list=>list.map(it=>`<b>${esc(it.label)}</b>`).join("・");
+  const apps=rs.filter(it=>it.cat==="app"),pcs=rs.filter(it=>it.cat==="pc"),hards=rs.filter(it=>it.cat==="hard"),bulky=rs.filter(it=>BULKY(it.cat));
+  const late=j.d<j.lead,to=AREAS[A.to];
+  const ng=[...(apps.length?[`${L(apps)}は家電リサイクルの対象です。買い替えのお店か引越し会社に引き取ってもらいます（リサイクル料金＋運搬料）`]:[]),
+    ...(pcs.length?[`${L(pcs)}はメーカーが回収します（PCリサイクルマークがあれば無料）`]:[]),
+    ...(hards.length?[`${L(hards)}は多くの自治体で収集しない物です。買ったお店やメーカー、専門の回収に相談します`]:[])];
+  let fee="";if(bulky.length){let lo=0,hi=0,miss=0;bulky.forEach(it=>{const r=yenNum(itemFees(j.ar,it.label).map(x=>x[1]).filter(Boolean));if(r){lo+=r[0];hi+=r[1]}else miss++});
+    fee=miss<bulky.length?`${L(bulky)}を全部出すと ${yr([lo,hi])}${miss?`＋ほか${miss}点`:""}（目安）。`:`1点 数百円〜数千円（目安）。品目ごとの料金は${j.nm}の公式ページで確認。`}
+  const when=j.unk?`収集までの日数は自治体ごとに違います。${esc(j.nm)}は、このサイトではまだ確かめていないので、引越しが決まったらすぐ申し込み、収集日を聞いてください。`
+    :!isFinite(j.lead)?`${esc(j.nm)}には、家まで取りに来る粗大ごみの収集がありません。持ち込みか、買取・新居で出す方法を選びます。`
+    :late?`${esc(j.nm)}は、申し込んでから収集まで${j.lead}日ほどかかる見込みで、引越しまでのあと${j.d}日では<b>ふつうの予約は間に合わない見込み</b>です。取り消しで早い日が空くこともあるので、予約ページは見てみてください。`
+    :`${esc(j.nm)}は、申し込んでから収集まで${j.lead}日ほど。<b>今日申し込めば、早くて${md(add(j.lead))}頃</b>に収集の見込みです。引越しの日に近いほど予約は埋まりやすいので、早めに。`;
+  const Q=[
+    ["市（区）に頼めない物はある？",(ng.length?`<ul>${ng.map(x=>`<li>${x}</li>`).join("")}</ul>`:`<p>入れた物は、どれも${esc(j.nm)}の粗大ごみに出せる見込みです。</p>`)+`<p class="fq-s">ほかにも、エアコン・テレビ・冷蔵庫（冷凍庫）・洗濯機（衣類乾燥機）の家電4品目と、パソコン、ピアノ・タイヤ・消火器・バイクなどは、多くの自治体で粗大ごみとして出せません。</p>`],
+    ["いつまでに申し込めばいい？",`<p>${when}</p>`],
+    ["やり方は？",`<ol><li>${j.unk?"電話かインターネットで申し込む（品目と数を伝える）":"電話かインターネットで申し込む（品目と数を伝える）"}</li><li>言われた手数料ぶんの処理券（シール）をコンビニなどで買い、品目に貼る</li><li>収集日の朝、決められた場所（家の前など）に出す。<b>取りに来てくれるので、車はいりません</b></li></ol>`],
+    ["費用はいくら？",`<p>${fee||"出したい物を入れると出ます。"}車で施設に自分で持ち込むと、安くなる自治体もあります（<b>持ち込みには車が必要</b>）。</p>`],
+    ["リサイクルショップは、家まで来てくれる？",`<p>大きな家具・家電は、多くの買取チェーンが<b>出張買取</b>をしています。電話かインターネットで日時を決めると家まで見に来て、その場で値段を出します。</p>`],
+    ["売れる？　売れなくても引き取ってくれる？",`<p>まだ使える・目立つ傷や汚れがない・製造から年数が浅い物は値段がつきやすいです。使った布団・マットレスなどはほぼ断られます。</p><p><b>値段がつかない物は、引き取ってもらえないか、有料での引き取りになることがあります（お店しだい）。</b>予約のときに「売れなかった物はどうなるか」を聞き、断られた物は市の収集か持ち込みで出します。</p>`],
+    ["間に合わなくて新居に運んだら、いくら損？",`<p>損になるのは2つです。</p><ul><li><b>引越し代の増えた分</b>：荷物の量やトラックの大きさで決まるので、決まった相場はありません。見積もりのときに「この家具を運ばない場合」の金額も聞くと、差がわかります</li><li><b>新居の自治体の手数料</b>：結局どこかで払います${to?`（${esc(to.n)}の料金は下の「新居の${esc(to.n)}で出すとき」）`:"（新居の自治体を入れると料金が出ます）"}</li></ul><p class="fq-s"><a href="/guide/new-home/">新居で出すときの注意</a></p>`],
+    ["軽トラ積み放題って、いくら？　ぼったくられない？",`<p>相場は<b>軽トラック1台分 ${yr(TRUCK)}</b>（<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ</a>）。ただ、広告では「2トントラック 2万5,000円」だったのに、積み込んだあと<b>25万円</b>を請求された例もあります（<a href="${SCAMSRC}" target="_blank" rel="noopener">国民生活センター</a>）。</p><p>家庭のごみを回収できるのは、市区町村の許可・委託を受けた業者だけです。頼む前に、総額を書いた見積もりをもらいましょう。<a href="/guide/scam/">ぼったくりの見分け方</a></p>`]
+  ];
+  return `<div class="faqr"><h3 class="sh">はじめての人へ：よくある疑問</h3>${Q.map(([q,a])=>`<div class="fq"><p class="fq-q">Q. ${q}</p><div class="fq-a">${a}</div></div>`).join("")}</div>`;
+}
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
   if(need.some(x=>!x[1])){$("out").innerHTML=`<h2 class="oh">診断結果</h2><div class="free"><h3>${need.filter(x=>!x[1]).map(x=>x[0]).join("・")}を入れると、品目ごとの出し方が出ます</h3><ul class="need">${need.map(([t,ok])=>`<li class="${ok?"ok":""}">${ok?"✓":"○"} ${t}</li>`).join("")}</ul><p>料金・日数は目安です。入力した内容はどこにも送られません。</p></div>`;return}
@@ -706,6 +738,7 @@ function draw(){
   else h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${al&&al[2]==="none"?"市の戸別収集はありません":late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
   h+=placeBox(rs,j);
   h+=costBox(rs,j);
+  h+=faqBox(rs,j);
   h+=itemCards(rs,j);
   h+=j.unk?`<p class="wsub">${esc(j.nm)}の受付・料金は、このサイトではまだ確かめていません。${j.url?`<a href="${j.url}" target="_blank" rel="noopener">${esc(j.nm)}の公式サイト</a>か、`:""}<a href="${j.q}" target="_blank" rel="noopener">検索</a>で「粗大ごみ」のページを確認してください</p>`:`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;
   h+=newHome(rs);
