@@ -126,14 +126,17 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .nsteps{margin:0;padding-left:24px;font-size:16px}
 .cost,.place{display:flex;flex-direction:column;gap:8px}
 .cfor{margin:6px 0 0;font-size:16px;font-weight:700}
-.cchart{background:var(--bg);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
-.cbr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";gap:4px 8px;align-items:center}
+.cchart{background:var(--bg);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.chd{margin:0 0 4px;font-size:17px;line-height:1.6}.chd b{color:var(--good)}
+.cbr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"l v" "t t" "s s";gap:2px 8px;align-items:end}
 .cbl{grid-area:l;font-size:15px;font-weight:700}.cbl small{margin-left:6px;font-size:12px;font-weight:700;color:var(--muted)}
-.cbv{grid-area:v;text-align:right;font-size:15px;font-weight:700}
-.cbt{grid-area:t;position:relative;height:14px;background:var(--tint);border-radius:7px}
-.cbt i{position:absolute;top:0;bottom:0;background:var(--accent,#2B6CB0);border-radius:7px}
+.cbv{grid-area:v;text-align:right;font-size:20px;font-weight:700}
+.cbs{grid-area:s;font-size:12px;color:var(--muted)}
+.cbt{grid-area:t;position:relative;height:22px;background:var(--tint);border-radius:6px;overflow:hidden}
+.cbt i{position:absolute;top:0;bottom:0;left:0;background:var(--accent)}.cbt i.hi{opacity:.35}
 .cbr.best .cbt i{background:var(--good)}.cbr.best .cbl,.cbr.best .cbv{color:var(--good)}
 .cbr.bad .cbt i{background:var(--faint)}.cbr.bad .cbl,.cbr.bad .cbv{color:var(--muted)}
+.cax{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:4px;margin-top:-6px}
 .cbn{margin:0;font-size:13px;color:var(--muted)}
 .cbuy{margin:0;font-size:15px;background:var(--bg);border-radius:14px;padding:12px 14px}
 .cbest.cng{background:var(--muted)}
@@ -638,11 +641,19 @@ function itemCards(rs,j){
 const BULKY=c=>["furn","etc","gen"].includes(c);
 // 費用をくらべる：出し方ごとに、出したい物ぜんぶを合わせた目安
 // 横棒グラフ：出し方ごとの払うお金の幅（下限〜上限）。金額がわからない出し方は棒なし
+// グラフ：0円から伸びる横棒。濃い部分＝安いとき、うすい部分＝高いときまで。金額がわからない出し方は棒の下に文で
+const mid=r=>Math.round(((r.lo)+(r.hi||r.lo))/2/100)*100;
 function chart(rows){
-  const max=Math.max(...rows.filter(r=>isFinite(r.lo)).map(r=>r.hi||r.lo));if(!isFinite(max)||max<=0)return "";
-  const pc=v=>Math.max(0,Math.min(100,v/max*100));
-  return `<div class="cchart" role="img" aria-label="出し方ごとの払うお金の目安のグラフ">${rows.map(r=>{const ok=isFinite(r.lo),hi=r.hi||r.lo;
-    return `<div class="cbr${r.bad?" bad":""}${r.best?" best":""}"><span class="cbl">${esc(r.s)}${r.bad?"<small>間に合わない</small>":""}</span>${ok?`<span class="cbt"><i style="left:${pc(r.lo)}%;width:${Math.max(2,pc(hi)-pc(r.lo))}%"></i></span>`:""}<span class="cbv num">${ok?yr([r.lo,hi]):"金額は確認"}</span></div>`}).join("")}<p class="cbn">棒は目安の幅（安いとき〜高いとき）。くわしくは下の表</p></div>`;
+  const known=rows.filter(r=>isFinite(r.lo)),unk=rows.filter(r=>!isFinite(r.lo));
+  const max=Math.max(...known.map(r=>r.hi||r.lo));if(!known.length||!(max>0))return "";
+  const pc=v=>Math.max(0,Math.min(100,v/max*100)),yen1=v=>"¥"+v.toLocaleString("ja-JP");
+  const ok=known.filter(r=>!r.bad),best=ok[0],rival=ok[ok.length-1];
+  const head=best?`<p class="chd">${unk.some(r=>!r.bad&&!r.mv)?"金額がわかる中で":""}いちばん安いのは<b>${esc(best.s)}</b>（約${yen1(mid(best))}）${rival&&rival!==best?`。${esc(rival.s)}より<b>約${yen1(mid(rival)-mid(best))}安い</b>`:""}</p>`:"";
+  return `<div class="cchart" role="img" aria-label="出し方ごとの払うお金の目安のグラフ">${head}${known.map(r=>{const hi=r.hi||r.lo;
+    return `<div class="cbr${r.bad?" bad":""}${r===best?" best":""}"><span class="cbl">${esc(r.s)}${r.bad?"<small>間に合わない</small>":""}</span><span class="cbv num">約${yen1(mid(r))}</span><span class="cbt"><i class="lo" style="width:${Math.max(2,pc(r.lo))}%"></i><i class="hi" style="left:${pc(r.lo)}%;width:${pc(hi)-pc(r.lo)}%"></i></span><span class="cbs num">${yr([r.lo,hi])}</span></div>`}).join("")}
+    <div class="cax num"><span>¥0</span><span>${yen1(max)}</span></div>
+    ${unk.length?`<p class="cbn">金額がわからない出し方：${unk.map(r=>`${esc(r.s)}（${r.s==="新居で出す"?"引越しの見積もりで確認":"施設で確認"}）`).join("、")}</p>`:""}
+    <p class="cbn">棒の濃い部分は安いとき、うすい部分は高いときまでの目安です</p></div>`;
 }
 function costBox(rs,j){
   const bulky=rs.filter(it=>BULKY(it.cat)),apps=rs.filter(it=>it.cat==="app");
