@@ -125,6 +125,11 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .nbtn:hover{filter:brightness(1.08)}
 .nsteps{margin:0;padding-left:24px;font-size:16px}
 .cost,.place{display:flex;flex-direction:column;gap:8px}
+.cfor{margin:6px 0 0;font-size:16px;font-weight:700}
+.cbuy{margin:0;font-size:15px;background:var(--bg);border-radius:14px;padding:12px 14px}
+.cbest.cng{background:var(--muted)}
+.ctbl tr.best th,.ctbl tr.best td{background:color-mix(in srgb,var(--good) 10%,transparent)}
+.cbest{display:table;margin:0 0 4px;padding:1px 8px;border-radius:8px;background:var(--good);color:#fff;font-size:12px;font-weight:700}
 .cost h3 small,.place h3 small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
 .ctbl{width:100%;border-collapse:collapse;background:var(--bg);border-radius:14px;overflow:hidden;font-size:16px}
 .ctbl thead th,.ctbl thead td{font-size:13px;font-weight:700;color:var(--muted);background:var(--bg2,transparent);padding:8px 14px}
@@ -629,21 +634,29 @@ function costBox(rs,j){
   const late=j.d<j.lead,car=A.car==="yes",to=AREAS[A.to];
   const sum=(list,ar,col)=>{let lo=0,hi=0,miss=0;list.forEach(it=>{const r=yenNum(itemFees(ar,it.label).map(x=>x[col]).filter(Boolean));if(r){lo+=r[0];hi+=r[1]}else miss++});return {lo,hi,miss,n:list.length}};
   const show=(t,unit)=>t.n&&t.miss<t.n?yr([t.lo,t.hi])+(t.miss?`＋ほか${t.miss}点`:"")+"（目安）":unit;
+  const low=t=>t.n&&t.miss<t.n?t.lo:Infinity;
+  // 行：{n:出し方, c:払うお金, w:補足, bad:間に合わない, lo:並べ替え用の下限, note}
   const rows=[];
   if(bulky.length){
     const c=sum(bulky,j.ar,1);
-    if(isFinite(j.lead))rows.push([`${j.nm}の粗大ごみ収集`,show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
-    if(car){const d=sum(bulky,j.ar,2);rows.push([`${dropLabel(j)}へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
-    rows.push(["買取に出す（まだ使える物）","¥0","値段がつけば、逆にお金を受け取れます（査定しだい）",false]);
+    if(isFinite(j.lead))rows.push({n:`${j.nm}の粗大ごみ収集`,c:show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),w:j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,bad:late,lo:low(c)});
+    if(car){const d=sum(bulky,j.ar,2);rows.push({n:`${dropLabel(j)}へ自分で運ぶ`,c:show(d,"施設で確認"),w:"予約・日時は施設に確認",lo:low(d)})}
     const t=to?sum(bulky,to,1):null;
-    rows.push([to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,"引越し後",false]);
-    rows.push(["不用品回収業者（軽トラック1台分）",`${yr(TRUCK)}（相場・目安）`,"日時は業者と相談",false,`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`]);
+    rows.push({n:to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",c:`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,w:"引越し後",lo:Infinity,mv:1});
+    rows.push({n:"不用品回収業者（軽トラック1台分）",c:`${yr(TRUCK)}（相場・目安）`,w:"日時は業者と相談",lo:TRUCK[0],note:`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`});
+    // 安い順。間に合わない出し方はいちばん下
+    rows.sort((x,y)=>(!!x.bad-!!y.bad)||(x.lo-y.lo));
+    const top=rows.find(r=>!r.bad&&isFinite(r.lo));if(top)top.best=rows.some(r=>!r.bad&&!r.mv&&!isFinite(r.lo))?"金額がわかる中で最安":"いちばん安い";
   }
+  const tr=r=>`<tr class="${r.bad?"bad":""}${r.best?" best":""}"><th>${r.best?`<span class="cbest">${r.best}</span>`:""}${r.bad?`<span class="cbest cng">間に合わない見込み</span>`:""}${r.n}${r.note?`<small>${r.note}</small>`:""}</th><td class="num">${r.c}<small>${r.w}</small></td></tr>`;
+  const names=list=>list.map(it=>esc(it.label)).join("・");
+  let h=`<div class="cost"><h3 class="sh">費用をくらべる<small>払うお金の目安です。安い順に並べています</small></h3>`;
+  if(bulky.length)h+=`<p class="cfor">粗大ごみ（${names(bulky)}）を全部出すと</p><table class="ctbl"><thead><tr><th>出し方</th><td>払うお金</td></tr></thead><tbody>${rows.map(tr).join("")}</tbody></table>
+    <p class="cbuy"><b>まだ使える物は、買取にも出せます。</b>売れれば払うお金は ¥0 で、逆にお金を受け取れます。売れるかどうかはお店の査定しだいなので、売れなかった物は上の出し方で出します。</p>`;
   if(apps.length){const ts=apps.map(it=>appFee(it.label)).filter(Boolean);
-    rows.push([`家電4品目（${apps.map(it=>esc(it.label)).join("・")}）`,ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,"お店か指定引取場所へ",false,`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`]);}
-  return `<div class="cost"><h3 class="sh">費用をくらべる<small>出したい物を全部合わせて、あなたが払うお金の目安です。買取で受け取れるお金は含めていません</small></h3><table class="ctbl"><thead><tr><th>出し方</th><td>払うお金</td></tr></thead><tbody>${rows.map(([n,c,w,bad,note])=>`<tr class="${bad?"bad":""}"><th>${n}${note?`<small>${note}</small>`:""}</th><td class="num">${c}<small>${w}</small></td></tr>`).join("")}</tbody></table></div>`;
+    h+=`<p class="cfor">${bulky.length?"このほかに、":""}家電（${names(apps)}）は粗大ごみでは出せないので別にかかります</p><table class="ctbl"><tbody>${tr({n:"家電リサイクル（お店か指定引取場所へ）",c:ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,w:"買取で売れれば ¥0",note:`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`})}</tbody></table>`;}
+  return h+`</div>`;
 }
-// まとめ：出し先ごとに、どの品目を頼めるか（◎＝おすすめ、○＝ここでも出せる）
 function placeBox(rs,j){
   const G=new Map();
   rs.filter(it=>it.cat!=="unk").forEach(it=>itemOptions(it,j).filter(o=>o.ok).forEach(o=>{const g=o.name;
