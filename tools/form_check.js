@@ -167,7 +167,7 @@ async function run() {
   // 9. 料金は「目安」と出る
   await fresh(page, base); await city(page, "kawasaki"); await moveIn(page, 30); await item(page, "タンス"); await item(page, "冷蔵庫");
   const costs = await page.$$eval("#out .io:not(.ng) .ioc", es => es.map(e => e.textContent.trim()).filter(t => /¥|円/.test(t)));
-  const bad = costs.filter(t => !/目安|受取/.test(t));
+  const bad = costs.filter(t => !/目安|払うお金 ¥0/.test(t));
   check("金額にはすべて「目安」がつく", !bad.length, bad.join(" | "));
 
   // 10. スマホで横にはみ出さない・押しやすい
