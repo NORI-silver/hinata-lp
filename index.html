@@ -124,12 +124,14 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .nbtn{display:block;text-align:center;font-size:18px;font-weight:700;color:#fff;background:var(--good);border-radius:12px;padding:14px 16px;text-decoration:none}
 .nbtn:hover{filter:brightness(1.08)}
 .nsteps{margin:0;padding-left:24px;font-size:16px}
-.cost{display:flex;flex-direction:column;gap:8px}
-.cost h3 small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
+.cost,.place{display:flex;flex-direction:column;gap:8px}
+.cost h3 small,.place h3 small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
 .ctbl{width:100%;border-collapse:collapse;background:var(--bg);border-radius:14px;overflow:hidden;font-size:16px}
 .ctbl th,.ctbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
 .ctbl th{font-weight:700}.ctbl td{text-align:right;font-weight:700;white-space:nowrap}
 .ctbl small{display:block;font-size:13px;font-weight:400;color:var(--muted);white-space:normal}
+.ptbl th{width:42%}.ptbl td{text-align:left;white-space:normal;font-weight:400}
+.pi{display:inline-block;margin:2px 8px 2px 0;font-size:16px}.pi.rec{font-weight:700;color:var(--good)}
 .ctbl tr.bad th,.ctbl tr.bad td{color:var(--muted)}
 @media (max-width:520px){.ctbl td{white-space:normal}}
 .wbtn{display:block;width:100%;font-size:17px;font-weight:700;color:var(--accent);background:var(--accent-soft);border:2px solid var(--accent);border-radius:12px;padding:12px 14px;cursor:pointer}
@@ -640,6 +642,16 @@ function costBox(rs,j){
     rows.push([`家電4品目（${apps.map(it=>esc(it.label)).join("・")}）`,ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,"お店か指定引取場所へ",false,`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`]);}
   return `<div class="cost"><h3 class="sh">費用をくらべる<small>出したい物を全部合わせた目安</small></h3><table class="ctbl"><tbody>${rows.map(([n,c,w,bad,note])=>`<tr class="${bad?"bad":""}"><th>${n}${note?`<small>${note}</small>`:""}</th><td class="num">${c}<small>${w}</small></td></tr>`).join("")}</tbody></table></div>`;
 }
+// まとめ：出し先ごとに、どの品目を頼めるか（◎＝おすすめ、○＝ここでも出せる）
+function placeBox(rs,j){
+  const G=new Map();
+  rs.filter(it=>it.cat!=="unk").forEach(it=>itemOptions(it,j).filter(o=>o.ok).forEach(o=>{const g=o.name;
+    if(!G.has(g))G.set(g,{name:o.name,k:o.k||"",rec:[],ok:[]});G.get(g)[o.rec?"rec":"ok"].push(esc(it.label))}));
+  if(!G.size)return "";
+  const pri=g=>{const i=NEXTPRI.indexOf(g);return i<0?99:i};
+  const rows=[...G.entries()].sort((a,b)=>(b[1].rec.length>0)-(a[1].rec.length>0)||pri(a[1].k)-pri(b[1].k));
+  return `<div class="place"><h3 class="sh">まとめ：どこに何を頼めるか<small>◎＝おすすめ　○＝ここでも出せる</small></h3><table class="ctbl ptbl"><tbody>${rows.map(([,g])=>`<tr><th>${g.name}</th><td>${g.rec.map(t=>`<span class="pi rec">◎ ${t}</span>`).join("")}${g.ok.map(t=>`<span class="pi">○ ${t}</span>`).join("")}</td></tr>`).join("")}</tbody></table></div>`;
+}
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
   if(need.some(x=>!x[1])){$("out").innerHTML=`<h2 class="oh">診断結果</h2><div class="free"><h3>${need.filter(x=>!x[1]).map(x=>x[0]).join("・")}を入れると、品目ごとの出し方が出ます</h3><ul class="need">${need.map(([t,ok])=>`<li class="${ok?"ok":""}">${ok?"✓":"○"} ${t}</li>`).join("")}</ul><p>料金・日数は目安です。入力した内容はどこにも送られません。</p></div>`;return}
@@ -651,6 +663,7 @@ function draw(){
   let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j)+slotBox(j);
   if(j.unk)h+=`<p class="status"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">収集までの日数は公式サイトで確認</span><br><small>${esc(j.nm)}の粗大ごみは、このサイトではまだ確かめていません。申し込むときに収集日を聞き、引越しに間に合わなければ、下の買取・持ち込み・新居で出す方法を選んでください。</small></p>`;
   else h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${al&&al[2]==="none"?"市の戸別収集はありません":late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
+  h+=placeBox(rs,j);
   h+=costBox(rs,j);
   h+=itemCards(rs,j);
   h+=j.unk?`<p class="wsub">${esc(j.nm)}の受付・料金は、このサイトではまだ確かめていません。${j.url?`<a href="${j.url}" target="_blank" rel="noopener">${esc(j.nm)}の公式サイト</a>か、`:""}<a href="${j.q}" target="_blank" rel="noopener">検索</a>で「粗大ごみ」のページを確認してください</p>`:`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;
