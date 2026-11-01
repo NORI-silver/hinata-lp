@@ -85,7 +85,7 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 /* 道具 */
 .tool{background:var(--tint);border-radius:24px;padding:24px}
 @media (max-width:640px){.tool{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));border-radius:0;padding:20px max(16px,env(safe-area-inset-left,0px))}}
-.grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:20px;align-items:start}
+.grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:24px;align-items:start}
 @media (max-width:880px){.grid{grid-template-columns:minmax(0,1fr)}}
 .panel{background:var(--bg);border-radius:18px;padding:22px;box-shadow:0 1px 2px rgba(20,50,74,.05),0 8px 28px rgba(20,50,74,.06)}
 .qs{display:flex;flex-direction:column;gap:22px;position:sticky;top:16px;counter-reset:q}
@@ -128,9 +128,11 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .cfor{margin:6px 0 0;font-size:16px;font-weight:700}
 .tofaq{margin:0;font-size:15px}.tofaq a{font-weight:700}
 .faqr{display:flex;flex-direction:column;gap:10px}
-.fgrid{display:grid;gap:10px;grid-template-columns:1fr}@media(min-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
+.faqr{container-type:inline-size}.fgrid{display:grid;gap:10px;grid-template-columns:1fr}@container (min-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
 .fq{background:var(--bg);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
-.fq-q{margin:0;font-size:17px;font-weight:700;color:var(--accent)}
+.fq-q{margin:0;font-size:17px;font-weight:700;color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.tld{font-size:14px;color:var(--ink)}.tld b{font-size:24px;margin:0 2px}
+.tlcard{border:2px solid var(--line)}
 .fq-s{margin:0;font-size:13px;color:var(--muted);line-height:1.6}
 .sort{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .sort li{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;font-size:16px}
@@ -225,6 +227,9 @@ h1 .eyebrow{display:block;font-size:14px;font-weight:700;color:var(--accent);let
 .io .ion b{display:block;font-size:17px;font-weight:700}
 .io small{display:block;font-size:15px;color:var(--muted);line-height:1.6}
 .io .ioc{text-align:right;font-size:16px;font-weight:700;white-space:nowrap}
+.io.rec{grid-template-columns:22px minmax(0,1fr)}.io.rec .ioc{grid-column:2;text-align:left}
+.io.alt{padding:6px 10px;align-items:center}.io.alt .ion b{font-size:15px;font-weight:600}.io.alt .ioc{font-size:14px}.io.alt.ng .ion b{font-size:14px}.io.alt small{font-size:13px}
+.io small,.io .ioc small{overflow-wrap:anywhere;white-space:normal}
 .io.rec{background:var(--good-soft)}
 .io.rec .mk{color:var(--good)}
 .io.rec .ion>b::after{content:"おすすめ";display:inline-block;margin-left:8px;font-size:13px;color:#fff;background:var(--good);border-radius:999px;padding:1px 8px;vertical-align:2px}
@@ -673,9 +678,10 @@ function itemCards(rs,j){
     return `<div class="ct"${o.h==="buy"&&links===c.links?' id="to-buy"':""}><b>${c.name}</b><span>${c.info}</span>${links?`<div class="wls">${links}</div>`:""}</div>`};
   return `<h3 class="sh">内訳：品目ごとの出し方</h3><div class="cards">${rs.map(it=>{const os=itemOptions(it,j);const rec=os.find(o=>o.rec)||os.find(o=>o.ok);
     return `<div class="icard"><div class="ich"><h3>${esc(it.label)}</h3><span class="icat">${CATNAME[it.cat]}</span>${rec&&it.cat!=="unk"?`<span class="irec">おすすめ:${rec.name}</span>`:""}</div>
-      <div class="iol">${os.map(o=>`<div class="io ${o.ok?"":"ng"} ${o.rec?"rec":""}"><span class="mk">${o.ok?(o.rec?"◎":"○"):"×"}</span>
-        <span class="ion"><b>${o.name}</b><small>${o.ok?o.desc:o.why}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small>${ct(o)}</span>
-        <span class="ioc num">${o.ok?`${o.cost||""}<small>${o.when||""}</small>`:""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
+      <div class="iol">${[rec,...os.filter(o=>o!==rec&&o.ok),...os.filter(o=>o!==rec&&!o.ok)].filter(Boolean).map(o=>o===rec?`<div class="io ${o.rec?"rec":""}"><span class="mk">${o.rec?"◎":"○"}</span>
+        <span class="ion"><b>${o.name}</b><small>${o.desc}${o.rec&&recWhy(o.k,j)?`<br><span class="rwhy">おすすめの理由：${recWhy(o.k,j)}</span>`:""}</small>${ct(o)}</span>
+        <span class="ioc num">${o.cost||""}<small>${o.when||""}</small></span></div>`
+        :`<div class="io alt ${o.ok?"":"ng"}"><span class="mk">${o.ok?"○":"×"}</span><span class="ion"><b>${o.name}</b>${o.ok?"":`<small>${o.why}</small>`}</span><span class="ioc num">${o.ok?o.cost||"":""}</span></div>`).join("")}</div></div>`}).join("")}</div>`;
 }
 const BULKY=c=>["furn","etc","gen"].includes(c);
 // 費用をくらべる：出し方ごとに、出したい物ぜんぶを合わせた目安
@@ -692,7 +698,7 @@ function chart(rows){
     return `<div class="cbr${r.bad?" bad":""}${r===best?" best":""}"><span class="cbl">${esc(r.s)}${r.bad?"<small>間に合わない</small>":""}</span><span class="cbv num">約${yen1(mid(r))}</span><span class="cbt"><i class="lo" style="width:${Math.max(2,pc(r.lo))}%"></i><i class="hi" style="left:${pc(r.lo)}%;width:${pc(hi)-pc(r.lo)}%"></i></span><span class="cbs num">${yr([r.lo,hi])}</span></div>`}).join("")}
     <div class="cax num"><span>¥0</span><span>${yen1(max)}</span></div>
     ${unk.length?`<p class="cbn">金額がわからない出し方：${unk.map(r=>`${esc(r.s)}（${r.s==="新居で出す"?"引越しの見積もりで確認":"施設で確認"}）`).join("、")}</p>`:""}
-    <p class="cbn">棒の濃い部分は安いとき、うすい部分は高いときまでの目安です</p></div>`;
+    <p class="cbn">棒の濃い部分は安いとき、うすい部分は高いときまでの目安です。市区の料金は公式ページの料金表、回収業者は<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月・軽トラック1台分）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです（<a href="/guide/scam/">高額請求に注意</a>）</p></div>`;
 }
 function costBox(rs,j){
   const bulky=rs.filter(it=>BULKY(it.cat)),apps=rs.filter(it=>it.cat==="app");
@@ -717,7 +723,7 @@ function costBox(rs,j){
   const tr=r=>`<tr class="${r.bad?"bad":""}${r.best?" best":""}"><th>${r.best?`<span class="cbest">${r.best}</span>`:""}${r.bad?`<span class="cbest cng">間に合わない見込み</span>`:""}${r.n}${r.note?`<small>${r.note}</small>`:""}</th><td class="num">${r.c}<small>${r.w}</small></td></tr>`;
   const names=list=>list.map(it=>esc(it.label)).join("・");
   let h=`<div class="cost"><h3 class="sh">費用をくらべる<small>払うお金の目安です。安い順に並べています</small></h3>`;
-  if(bulky.length)h+=`<p class="cfor">粗大ごみ（${names(bulky)}）を全部出すと</p>${chart(rows)}<table class="ctbl"><thead><tr><th>出し方</th><td>払うお金</td></tr></thead><tbody>${rows.map(tr).join("")}</tbody></table>
+  if(bulky.length)h+=`<p class="cfor">粗大ごみ（${names(bulky)}）を全部出すと</p>${chart(rows)}
     <p class="cbuy"><b>まだ使える物は、買取にも出せます。</b>売れれば払うお金は ¥0 で、逆にお金を受け取れます。売れるかどうかはお店の査定しだいなので、売れなかった物は上の出し方で出します。</p>`;
   if(apps.length){const ts=apps.map(it=>appFee(it.label)).filter(Boolean);
     h+=`<p class="cfor">${bulky.length?"このほかに、":""}家電（${names(apps)}）は粗大ごみでは出せないので別にかかります</p><table class="ctbl"><tbody>${tr({n:"家電リサイクル（お店か指定引取場所へ）",c:ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,w:"買取で売れれば ¥0",note:`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`})}</tbody></table>`;}
@@ -730,11 +736,12 @@ function placeBox(rs,j){
   if(!G.size)return "";
   const pri=g=>{const i=NEXTPRI.indexOf(g);return i<0?99:i};
   const rows=[...G.entries()].sort((a,b)=>(b[1].rec.length>0)-(a[1].rec.length>0)||pri(a[1].k)-pri(b[1].k));
-  return `<div class="place"><h3 class="sh">まとめ：どこに何を頼めるか<small>◎＝おすすめ　○＝ここでも出せる</small></h3><table class="ctbl ptbl"><tbody>${rows.map(([,g])=>`<tr><th>${g.name}</th><td>${g.rec.map(t=>`<span class="pi rec">◎ ${t}</span>`).join("")}${g.ok.map(t=>`<span class="pi">○ ${t}</span>`).join("")}</td></tr>`).join("")}</tbody></table></div>`;
+  const app=rs.some(it=>it.cat==="app");
+  return `<div class="place"><h3 class="sh">まとめ：どこに何を頼めるか<small>◎＝おすすめ　○＝ここでも出せる</small></h3><table class="ctbl ptbl"><tbody>${rows.map(([,g])=>`<tr><th>${g.name}</th><td>${g.rec.map(t=>`<span class="pi rec">◎ ${t}</span>`).join("")}${g.ok.map(t=>`<span class="pi">○ ${t}</span>`).join("")}</td></tr>`).join("")}</tbody></table>${app?`<p class="fq-s">エアコン・テレビ・冷蔵庫（冷凍庫）・洗濯機（衣類乾燥機）の家電4品目は、法律でどの市区町村も粗大ごみとして回収しません</p>`:""}</div>`;
 }
 // はじめての人の疑問に、入力に合わせて順に答える（Nori 2026-11-01 のユーザー像）
 const SCAMSRC="https://www.kokusen.go.jp/news/data/n-20221102_1.html";
-function faqBox(rs,j){
+function faqBox(rs,j,part){
   const E=t=>esc(t),apps=rs.filter(it=>it.cat==="app"),late=j.d<j.lead,to=AREAS[A.to],yen1=v=>"¥"+v.toLocaleString("ja-JP");
   const card=(q,body,note="")=>`<div class="fq"><p class="fq-q">${q}</p>${body}${note?`<p class="fq-s">${note}</p>`:""}</div>`;
   // 1. 市に頼める？：品目ごとに ○／× と行き先
@@ -748,9 +755,10 @@ function faqBox(rs,j){
     const span=Math.max(j.d,j.unk?j.d:j.lead)*1.12||1,x=n=>Math.min(100,n/span*100);
     const pts=[[0,"今日",md(add(0)),"now"],...(j.unk?[]:[[j.lead,"収集（早くて）",md(add(j.lead)),late?"ng":"ok"]]),[j.d,"引越し",md(add(j.d)),"mv up"]];
     const src=j.live?"予約サイトで調べた今の最短日":(j.key==="other"?(AREALEAD[A.area]||(j.ar&&ptOf(j.ar,"収集まで"))):LEADSRC[j.key]==="official")?"公式ページの案内":"このサイトの推定",off=j.url?`<a href="${j.url}" target="_blank" rel="noopener">${E(j.nm)}の公式ページ</a>で確認`:"";
-    q2=card("いつまでに申し込む？",`<div class="tl"><div class="tl-bar">${!j.unk?`<span class="tl-fill ${late?"ng":"ok"}" style="width:${x(j.lead)}%"></span>`:""}${pts.map(([n,l,d,c])=>`<span class="tl-pt ${c}" style="left:${x(n)}%"><i></i><b>${l}</b><small>${d}</small></span>`).join("")}</div></div>
+    q2=card(`いつまでに申し込む？<span class="tld">引越しまで あと<b class="num">${j.d}</b>日</span>`,`<div class="tl"><div class="tl-bar">${!j.unk?`<span class="tl-fill ${late?"ng":"ok"}" style="width:${x(j.lead)}%"></span>`:""}${pts.map(([n,l,d,c])=>`<span class="tl-pt ${c}" style="left:${x(n)}%"><i></i><b>${l}</b><small>${d}</small></span>`).join("")}</div></div>
       <p class="tl-msg ${j.unk?"":late?"ng":"ok"}">${j.unk?`収集日は申し込むと決まります。今日申し込みましょう`:late?`✕ ふつうの予約では間に合わない見込み`:`✓ ${md(add(j.d-j.lead))}までに申し込めば間に合う見込み`}</p>`,j.unk?"":`収集までの日数は目安（${src}）です。予約は埋まりやすいので早めに。${off}`);
   }
+  if(part==="tl")return q2.replace('<div class="fq">','<div class="fq tlcard">');
   // 3. やり方：3ステップ
   const steps=!isFinite(j.lead)?"":`<ol class="st3"><li><span class="ic">📞</span><b>申し込む</b><small>電話かネット</small></li><li><span class="ic">🏷️</span><b>手数料を払う</b><small>多くはシールを買って貼る</small></li><li><span class="ic">🏠</span><b>朝、家の前に出す</b><small>取りに来てくれる</small></li></ol>
     <div class="tags"><span class="tag ok">🚗 車 いらない</span><span class="tag warn">💪 家の外までは自分で運ぶ</span></div>`;
@@ -766,7 +774,7 @@ function faqBox(rs,j){
     <div class="scam"><span class="sl">ぼったくりの例</span><div class="sr"><span class="sa">広告<b class="num">¥25,000</b></span><span class="sx">→</span><span class="sb">請求<b class="num">¥250,000</b></span></div><small>2トントラックで頼んだ例。積み込んだあとに10倍の金額を言われた</small></div>
     <div class="tags"><span class="tag ok">✓ 市区町村の許可業者かを、市のホームページで確かめる</span><span class="tag ok">✓ 総額の見積もりを先にもらう</span></div>`,
     `相場は<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ</a>、例は<a href="${SCAMSRC}" target="_blank" rel="noopener">国民生活センター</a>の相談例。<a href="/guide/scam/">ぼったくりの見分け方</a>`);
-  return `<div class="faqr" id="faq"><h3 class="sh">はじめての人へ：図で見る粗大ごみ</h3><div class="fgrid">${q1}${q2}${q3}${q4}${q5}${q6}</div></div>`;
+  return `<div class="faqr" id="faq"><h3 class="sh">はじめての人へ：やり方・買取・相場を図で</h3><div class="fgrid">${q3}${q4}${q5}${q6}</div></div>`;
 }
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
@@ -777,13 +785,13 @@ function draw(){
   const leadTxt=al?`「${al[1]}」（公式ページの案内）`:j.key==="other"&&j.ar&&ptOf(j.ar,"収集まで")?`「${esc(ptOf(j.ar,"収集まで"))}」（公式ページの案内）`:j.key==="other"?"自治体によって違います（ここでは2週間ほどで計算）":`「${LEADTXT[j.key]}」（${LEADSRC[j.key]==="official"?"公式ページの案内":"このサイトの推定"}）`;
   if(j.key==="chiba"&&A.ward&&!SLOT[A.ward])getSlot(A.ward,true);
   let h=`<h2 class="oh">診断結果：${esc(j.nm)}</h2>`+nextStep(rs,j)+slotBox(j);
-  h+=`<p class="tofaq"><a href="#faq">はじめての人へ：図で見る（頼める物・日程・やり方・買取・軽トラの相場）</a></p>`;
   if(j.unk)h+=`<p class="status"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">収集までの日数は公式サイトで確認</span><br><small>${esc(j.nm)}の粗大ごみは、このサイトではまだ確かめていません。申し込むときに収集日を聞き、引越しに間に合わなければ、下の買取・持ち込み・新居で出す方法を選んでください。</small></p>`;
-  else h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${al&&al[2]==="none"?"市の戸別収集はありません":late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
+  else if(!isFinite(j.lead))h+=`<p class="status ${late?"late":"ok"}"><b>引越しまで あと<span class="num">${j.d}</span>日</b>　<span class="pill">${al&&al[2]==="none"?"市の戸別収集はありません":late?"ふつうの予約では間に合わないかも":"今から予約すれば間に合いそう"}</span><br><small>${j.live?`${j.nm}の予約サイトで調べた今の最短収集日（${md(add(j.lead))}）で判定しています。`:`${j.nm}の粗大ごみは、収集まで${leadTxt}。予約の空きは確認していません。`}</small></p>`;
+  if(!j.unk&&isFinite(j.lead))h+=faqBox(rs,j,"tl");
   h+=placeBox(rs,j);
   h+=costBox(rs,j);
-  h+=itemCards(rs,j);
   h+=faqBox(rs,j);
+  h+=itemCards(rs,j);
   h+=j.unk?`<p class="wsub">${esc(j.nm)}の受付・料金は、このサイトではまだ確かめていません。${j.url?`<a href="${j.url}" target="_blank" rel="noopener">${esc(j.nm)}の公式サイト</a>か、`:""}<a href="${j.q}" target="_blank" rel="noopener">検索</a>で「粗大ごみ」のページを確認してください</p>`:`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;
   h+=newHome(rs);
   $("out").innerHTML=h;
