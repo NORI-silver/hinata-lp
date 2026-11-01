@@ -692,12 +692,18 @@ function chart(rows){
   const known=rows.filter(r=>isFinite(r.lo)),unk=rows.filter(r=>!isFinite(r.lo));
   const max=Math.max(...known.map(r=>r.hi||r.lo));if(!known.length||!(max>0))return "";
   const pc=v=>Math.max(0,Math.min(100,v/max*100)),yen1=v=>"¥"+v.toLocaleString("ja-JP");
-  const ok=known.filter(r=>!r.bad),best=ok[0],rival=ok[ok.length-1];
-  const head=best?`<p class="chd">${unk.some(r=>!r.bad&&!r.mv)?"金額がわかる中で":""}いちばん安いのは<b>${esc(best.s)}</b>（約${yen1(mid(best))}）${rival&&rival!==best?`。${esc(rival.s)}より<b>約${yen1(mid(rival)-mid(best))}安い</b>`:""}</p>`:"";
+  // 回収業者（相場）は「いちばん安い」にしない：無許可の業者が多く、市の料金がわからない・間に合わないときに最安に見えてしまうため
+  const ok=known.filter(r=>!r.bad),cand=ok.filter(r=>!r.ex),best=cand[0],rival=ok[ok.length-1];
+  const cheap=known.filter(r=>!r.ex)[0],col=known.find(r=>r.ex),under=r=>!col||mid(r)<mid(col);
+  const alt=A.car==="yes"?"持ち込み・買取・新居で出す":"買取・新居で出す";
+  const head=best&&under(best)?`<p class="chd">${unk.some(r=>!r.bad&&!r.mv)?"金額がわかる中で":""}いちばん安いのは<b>${esc(best.s)}</b>（約${yen1(mid(best))}）${rival&&rival!==best&&mid(rival)>mid(best)?`。${esc(rival.s)}より<b>約${yen1(mid(rival)-mid(best))}安い</b>`:""}</p>`
+    :best?`<p class="chd"><b>${esc(best.s)}</b>は約${yen1(mid(best))}です</p>`
+    :cheap&&cheap.bad?`<p class="chd">${under(cheap)?"いちばん安いのは":""}<b>${esc(cheap.s)}</b>（約${yen1(mid(cheap))}）${under(cheap)?"ですが、":"は"}引越しに間に合わない見込みです。${alt}も考えてください</p>`
+    :`<p class="chd">${unk.find(r=>r.city)?`<b>${esc(unk.find(r=>r.city).s)}</b>の料金（1点 数百円〜）は公式サイトで確かめてください。`:""}回収業者に頼むと下の相場ほどかかります</p>`;
   return `<div class="cchart" role="img" aria-label="出し方ごとの払うお金の目安のグラフ">${head}${known.map(r=>{const hi=r.hi||r.lo;
     return `<div class="cbr${r.bad?" bad":""}${r===best?" best":""}"><span class="cbl">${esc(r.s)}${r.bad?"<small>間に合わない</small>":""}</span><span class="cbv num">約${yen1(mid(r))}</span><span class="cbt"><i class="lo" style="width:${Math.max(2,pc(r.lo))}%"></i><i class="hi" style="left:${pc(r.lo)}%;width:${pc(hi)-pc(r.lo)}%"></i></span><span class="cbs num">${yr([r.lo,hi])}</span></div>`}).join("")}
     <div class="cax num"><span>¥0</span><span>${yen1(max)}</span></div>
-    ${unk.length?`<p class="cbn">金額がわからない出し方：${unk.map(r=>`${esc(r.s)}（${r.s==="新居で出す"?"引越しの見積もりで確認":"施設で確認"}）`).join("、")}</p>`:""}
+    ${unk.length?`<p class="cbn">金額がわからない出し方：${unk.map(r=>`${esc(r.s)}（${r.mv?"引越しの見積もりで確認":r.city?"公式サイトで確認":"施設で確認"}）`).join("、")}</p>`:""}
     <p class="cbn">棒の濃い部分は安いとき、うすい部分は高いときまでの目安です。市区の料金は公式ページの料金表、回収業者は<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月・軽トラック1台分）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです（<a href="/guide/scam/">高額請求に注意</a>）</p></div>`;
 }
 function costBox(rs,j){
@@ -711,14 +717,14 @@ function costBox(rs,j){
   const rows=[];
   if(bulky.length){
     const c=sum(bulky,j.ar,1);
-    if(isFinite(j.lead))rows.push({s:`${j.nm}の収集`,hi:c.hi,n:`${j.nm}の粗大ごみ収集`,c:show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),w:j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,bad:late,lo:low(c)});
+    if(isFinite(j.lead))rows.push({s:`${j.nm}の収集`,hi:c.hi,n:`${j.nm}の粗大ごみ収集`,c:show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),w:j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,bad:late,lo:low(c),city:1});
     if(car){const d=sum(bulky,j.ar,2);rows.push({s:"自分で持込",hi:d.hi,n:`${dropLabel(j)}へ自分で運ぶ`,c:show(d,"施設で確認"),w:"予約・日時は施設に確認",lo:low(d)})}
     const t=to?sum(bulky,to,1):null;
     rows.push({s:"新居で出す",n:to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",c:`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,w:"引越し後",lo:Infinity,mv:1});
-    rows.push({s:"回収業者",hi:TRUCK[1],n:"不用品回収業者（軽トラック1台分）",c:`${yr(TRUCK)}（相場・目安）`,w:"日時は業者と相談",lo:TRUCK[0],note:`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`});
+    rows.push({s:"回収業者",hi:TRUCK[1],n:"不用品回収業者（軽トラック1台分）",c:`${yr(TRUCK)}（相場・目安）`,w:"日時は業者と相談",lo:TRUCK[0],ex:1,note:`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`});
     // 安い順。間に合わない出し方はいちばん下
     rows.sort((x,y)=>(!!x.bad-!!y.bad)||(x.lo-y.lo));
-    const top=rows.find(r=>!r.bad&&isFinite(r.lo));if(top)top.best=rows.some(r=>!r.bad&&!r.mv&&!isFinite(r.lo))?"金額がわかる中で最安":"いちばん安い";
+    const top=rows.find(r=>!r.bad&&!r.ex&&isFinite(r.lo)&&r.lo<TRUCK[0]);if(top)top.best=rows.some(r=>!r.bad&&!r.mv&&!isFinite(r.lo))?"金額がわかる中で最安":"いちばん安い";
   }
   const tr=r=>`<tr class="${r.bad?"bad":""}${r.best?" best":""}"><th>${r.best?`<span class="cbest">${r.best}</span>`:""}${r.bad?`<span class="cbest cng">間に合わない見込み</span>`:""}${r.n}${r.note?`<small>${r.note}</small>`:""}</th><td class="num">${r.c}<small>${r.w}</small></td></tr>`;
   const names=list=>list.map(it=>esc(it.label)).join("・");
@@ -776,6 +782,10 @@ function faqBox(rs,j,part){
     `相場は<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ</a>、例は<a href="${SCAMSRC}" target="_blank" rel="noopener">国民生活センター</a>の相談例。<a href="/guide/scam/">ぼったくりの見分け方</a>`);
   return `<div class="faqr" id="faq"><h3 class="sh">はじめての人へ：やり方・買取・相場を図で</h3><div class="fgrid">${q3}${q4}${q5}${q6}</div></div>`;
 }
+let lastDiag={};
+// 計測：同じイベントは1ページ1回だけ（again=true なら毎回）
+const sent={};
+function track(n,p,again){if(!again){if(sent[n])return;sent[n]=1}try{if(window.gtag)gtag("event",n,p||{})}catch(e){}}
 function draw(){
   const rs=itemList(),need=[["お住まい",!!A.city],["引越し日",!!(A.move||A.days)],["出したい物",rs.length>0]];
   if(need.some(x=>!x[1])){$("out").innerHTML=`<h2 class="oh">診断結果</h2><div class="free"><h3>${need.filter(x=>!x[1]).map(x=>x[0]).join("・")}を入れると、品目ごとの出し方が出ます</h3><ul class="need">${need.map(([t,ok])=>`<li class="${ok?"ok":""}">${ok?"✓":"○"} ${t}</li>`).join("")}</ul><p>料金・日数は目安です。入力した内容はどこにも送られません。</p></div>`;return}
@@ -795,13 +805,19 @@ function draw(){
   h+=j.unk?`<p class="wsub">${esc(j.nm)}の受付・料金は、このサイトではまだ確かめていません。${j.url?`<a href="${j.url}" target="_blank" rel="noopener">${esc(j.nm)}の公式サイト</a>か、`:""}<a href="${j.q}" target="_blank" rel="noopener">検索</a>で「粗大ごみ」のページを確認してください</p>`:`<p class="wsub">連絡先は2026年10月30日に各公式ページで確認しました${j.url?`（<a href="${j.url}" target="_blank" rel="noopener">${j.cname}の公式ページ</a>）`:""}</p>`;
   h+=newHome(rs);
   $("out").innerHTML=h;
+  // 計測：診断結果が出た（地域の種類・間に合うか・すすめた出し方の種類だけ。市区名や品目は送らない）
+  // diag_done は1ページ1回なので、入力の途中で最初に結果が出たときの値になる（分析のときの注意）
+  lastDiag={area:j.unk?"none":j.key==="other"?"article":"detail",late:j.unk?"unknown":late?"yes":"no",next:lastNext||"none"};
+  if(lastNext)track("diag_done",lastDiag);
   if(window.hinataShops)window.hinataShops.scan();
 }
 const WATCHMSG="ありがとうございます。空き枠の見張りはまだ準備中で、申し込みや支払いはできません。それまでは上の予約ページで空きを確かめてください";
 // いちばん上に出す「次にやること」。品目ごとのおすすめから、急ぐものを1つ選ぶ
 const NEXTPRI=["wait","city","drop","buy","post","pc","hard","move"];
+let lastNext="";
 function nextStep(rs,j){
   const ks=rs.map(it=>({it,k:routeKey(it,j)})),k=NEXTPRI.find(p=>ks.some(x=>x.k===p));
+  lastNext=k||"";
   if(!k) return `<div class="next"><span class="nl">次にやること</span><p class="nt">出したい物の名前を入れてください</p><p class="nd">「食器棚」「電子レンジ」のように名前を入れると、出し方がわかります</p></div>`;
   const who=ks.filter(x=>x.k===k).map(x=>esc(x.it.label)).join("・"),I=infoOf(j),bl=bookList(j);
   const btn=(t,u,ext=true)=>`<a class="nbtn" href="${u}"${ext?' target="_blank" rel="noopener"':""}>${esc(t)}</a>`;
@@ -837,7 +853,7 @@ function newHome(rs){
 function setTo(v){A.toq=(v||"").trim();A.to=findArea(A.toq);const m=$("tomsg");if(m)m.innerHTML=toMsg();draw()}
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
-  if(b.id==="watch"){A.watch=true;try{if(window.gtag)gtag("event","watch_interest")}catch(e){}const m=$("watchmsg");if(m)m.textContent=WATCHMSG;return}
+  if(b.id==="watch"){A.watch=true;try{if(window.gtag)gtag("event","watch_interest",{area:lastDiag.area,late:lastDiag.late})}catch(e){}const m=$("watchmsg");if(m)m.textContent=WATCHMSG;return}
   if(b.dataset.ward){A.ward=b.dataset.ward;getSlot(A.ward);return}
   if(b.id==="addfree"){addFree();return}
   if(b.id==="geo"){geoAddr();return}
@@ -954,10 +970,11 @@ try{const qc=new URLSearchParams(location.search).get("city");if(qc&&CITIES[qc])
 // 記事の市区は、県コード（家電の指定引取場所の県）のために市区町村の一覧も読む
 if(A.area)loadMunis().then(()=>draw());
 // 計測：使われたかどうかだけを数える（入力した内容・市区・写真は送らない）
-const ev=(()=>{const done={};return n=>{if(done[n])return;done[n]=1;try{if(window.gtag)gtag("event",n)}catch(e){}}})();
+const ev=n=>track(n);
 document.addEventListener("click",e=>{
   if(e.target.closest("#qs button,#qs .photo"))ev("use_tool");
   const a=e.target.closest("#out a");if(!a)return;
+  if(a.closest(".next"))track("next_click",{next:lastNext||"none",area:lastDiag.area,ext:a.target==="_blank"?"yes":"no"},true);
   const h=a.getAttribute("href")||"";
   if(h.startsWith("tel:"))gtag&&gtag("event","tel_click");
   else if(a.target==="_blank")gtag&&gtag("event","outbound_click",{link_domain:a.hostname});
