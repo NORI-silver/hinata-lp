@@ -1,11 +1,23 @@
 {
  "note": "エリア担当Agentの台帳。runs=動いた記録（担当・日付・PR）。areas=地域ごとに checked（担当が最後に見た日）・fact（公式と照合した日）・seo（検索向けに直した日）。記事チェックなど別の作業で照合したときも fact を書く。",
- "runs": [],
+ "runs": [
+  {
+   "date": "2026-11-01",
+   "agent": "tokyo-east",
+   "areas": [
+    "adachi",
+    "bunkyo",
+    "taito"
+   ],
+   "pr": null
+  }
+ ],
  "areas": {
   "adachi": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック1回目"
+   "by": "tokyo-east",
+   "note": "料金表は品目別PDF（documents/46173/gomihp.pdf）が取得できず保留。次回はPDFを読める環境で",
+   "checked": "2026-11-01"
   },
   "akashi": {
    "fact": "2026-10-31",
@@ -41,8 +53,9 @@
   },
   "bunkyo": {
    "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック2回目"
+   "by": "tokyo-east",
+   "note": "料金表はPDFの2段組が崩れるため保留（rich-articles と同じ判断）",
+   "checked": "2026-11-01"
   },
   "chiba": {
    "fact": "2026-10-31",
@@ -498,9 +511,11 @@
    "note": "記事チェック5回目"
   },
   "taito": {
-   "fact": "2026-10-31",
-   "by": "article-review",
-   "note": "記事チェック2回目"
+   "fact": "2026-11-01",
+   "by": "tokyo-east",
+   "note": "料金表にセミダブル1,800円・マッサージチェア等2,700円、費用の例5点5,200円（令和5年10月改定の公式で照合）",
+   "checked": "2026-11-01",
+   "seo": "2026-11-01"
   },
   "takamatsu": {
    "fact": "2026-10-31",
