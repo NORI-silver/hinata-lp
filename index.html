@@ -521,7 +521,7 @@ function routeKey(it,j){
   if(j.web) return "wait";
   return bed?"move":"buy";
 }
-const HNAME=j=>({city:`${j.nm}の粗大ごみ受付`,post:"家電リサイクル",buy:"買取店",drop:`${j.nm}の持込施設`});
+const HNAME=j=>({city:`${j.nm}の粗大ごみ受付`,post:"家電リサイクル",buy:"買取店",drop:dropLabel(j)});
 const telA=n=>`<a href="tel:${n.replace(/-/g,"")}">${n}</a>`;
 const extA=(t,u)=>`<a class="wa" href="${u}" target="_blank" rel="noopener">${t}</a>`;
 const mapQ=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
@@ -529,6 +529,20 @@ const mapQ=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURICompon
 const WEBTXT={open:"インターネットで予約できます",cond:"インターネット予約は条件つきです",stop:"インターネット受付は一時停止中です",none:"インターネットでは収集の予約ができません"};
 function bkHours(ar){const b=ar.bk;if(!b)return esc(ptOf(ar,"申し込み")||"公式ページで確認");
   return [`<b>${WEBTXT[b.web]}</b>${b.note?`：${esc(b.note)}`:""}`,...(b.mail?["インターネットは、先にメールアドレスを登録して申し込みます"]:[]),...(b.t||[esc(ptOf(ar,"申し込み")||"")])].filter(Boolean).join("<br>")}
+// 持込施設の具体的な名前。7市区は INFO の施設名、記事のある地域は「持ち込み」欄の「〇〇へ」から取る。わからなければ ""
+const FACRE=/センター|工場|プラザ|事業所|中継所|ヤード|清掃|焼却|組合|会館|パーク|処理場|ランド|クリーン|園$/;
+function facName(j){
+  const unp=t=>String(t).replace(/（[^）]*）/g,"").trim();
+  if(INFO[j.key]&&j.key!=="other"){const ns=INFO[j.key].drop.map(d=>unp(d.name)).filter(n=>FACRE.test(n)&&!/確認|持ち込み場所/.test(n));return ns.length>1?`${ns[0]}など${ns.length}か所`:ns.join("")}
+  const t=j.ar&&ptOf(j.ar,"持ち込み");if(!t||/持ち込めない|できない|制度なし|見当たらない|確かめられ/.test(t.split("。")[0]))return "";
+  const first=t.split("。")[0],m=first.match(/^(.+?)へ/);
+  const f=unp(first),n=(m?unp(m[1]):f.split("、")[0]).replace(/^.*(は|して)/,"").replace(/など$/,"");
+  if(!(n&&n.length<=30&&FACRE.test(n)&&!/^(\d+つの|市の|区の|町の)/.test(n)))return "";
+  // 燃やせる物・燃やせない物で施設が分かれるときなど、ほかにも施設があれば「など」をつける
+  return /センター|工場|プラザ|パーク/.test(f.slice(f.indexOf(n)+n.length))?n+"など":n;
+}
+// 「船橋粗大ごみ中継所（世田谷区の持込施設）」のように、名前のあとに何の施設かを補う
+const dropLabel=j=>{const f=facName(j);return f?`${f}（${j.nm}の持込施設）`:`${j.nm}の持込施設`};
 // 窓口の情報（7市区は INFO、それ以外は記事の元データから）
 function infoOf(j){const ar=j.ar,bk=ar&&ar.bk||{};
   if(j.unk)return {pref:A.muni?Math.floor(A.muni[0]/1000):0,desk:`${j.nm}の粗大ごみの受付`,tel:[],hours:"申し込み方・料金・収集までの日数は、市区町村の公式サイトの「粗大ごみ」のページで確かめてください（このサイトではまだ確かめていません）",links:[...(j.url?[[`${j.nm}の公式サイト`,j.url]]:[]),[`「${A.muni?A.muni[1]+A.muni[2]:"市区町村名"} 粗大ごみ」を検索`,j.q]],drop:[{name:"持ち込めるかは公式サイトで確認"}]};
@@ -585,7 +599,7 @@ function itemOptions(it,j){
     {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:j.unk?`申し込むときに収集日を確かめ、引越し（${md(add(j.d))}）に間に合わなければ、ほかの出し方を選びます。`+cityDesc:cityDesc,cost:cityCost,when:j.unk?"収集日は申し込みで決まります（公式サイトで確認）":j.live?`今の最短は${md(add(j.lead))}（${hm(j.live.checkedAt)}時点）`:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:!isFinite(j.lead)?`${j.nm}には、申し込みで集める市の戸別収集がありません（持ち込みか許可業者に頼みます）`:j.live?`今の最短収集日は${md(add(j.lead))}で、引越しに間に合いません（${hm(j.live.checkedAt)}時点）`:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
     {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:j.unk?"まず通常の申し込みで、いつ収集できるかを確かめます":late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
     {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
-    {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${j.nm}の持込施設へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
+    {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${dropLabel(j)}へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
     ...(late||BEDRE.test(it.label)?[]:[GIVE]),
     {h:"",k:"move",name:to?`新居の${to.n}で出す`:"新居の自治体で出す",desc:`引越し荷物に入れて運び、落ち着いてから出す${to?`。${tfs.length?`${to.n}の料金表では ${feeList(tfs)}（目安）`:`${to.n}の料金は<a href="${to.g}">記事</a>か公式ページで確認`}`:"。新居の自治体を入れると、そこでの料金が出ます"}`,cost:to&&tfs.length&&yen(tfs.map(x=>x[1]))?`運ぶ費用＋${yen(tfs.map(x=>x[1]))}（目安）`:"運ぶ費用が増える",when:"引越し後",ok:true}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
@@ -616,7 +630,7 @@ function costBox(rs,j){
   if(bulky.length){
     const c=sum(bulky,j.ar,1);
     if(isFinite(j.lead))rows.push([`${j.nm}の粗大ごみ収集`,show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
-    if(car){const d=sum(bulky,j.ar,2);rows.push([`${j.nm}の持込施設へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
+    if(car){const d=sum(bulky,j.ar,2);rows.push([`${dropLabel(j)}へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
     rows.push(["買取に出す（まだ使える物）","¥0（値段がつけば受け取る）","日時はお店に確認",false]);
     const t=to?sum(bulky,to,1):null;
     rows.push([to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,"引越し後",false]);
@@ -656,7 +670,7 @@ function nextStep(rs,j){
   const S={
     city:[j.unk?`今日、${j.nm}の粗大ごみの申し込み方と収集日を確かめる`:`今日、${j.nm}の粗大ごみを予約する`,book+`<ol class="nsteps"><li>${j.unk?"申し込む（品目と数を伝え、収集日を確かめる）":"予約する（品目と数を伝える）"}</li><li>${j.unk?"案内どおりに手数料を払う":"処理券（シール）を買って貼る"}</li><li>収集日の朝に出す</li></ol>`],
     wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p><button type="button" class="wbtn" id="watch">空き枠の見張りを頼む（¥500・準備中）</button><p class="nd" id="watchmsg">${A.watch?WATCHMSG:"予約ページの空きをこちらで見張るサービスを準備しています"}</p>`],
-    drop:[`車で${j.nm}の持込施設へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
+    drop:[`車で${dropLabel(j)}へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
     buy:[`買取店に出張買取を頼む`,btn("近くの買取店を見る","#to-buy",false)+`<p class="nd">値段が合わなければ断っても無料のお店を選びます。</p>`],
     post:[`買い替えのお店か引越し会社に引き取りを頼む`,`<p class="nd">家電4品目は${j.nm}では回収しません。リサイクル料金と運搬料がかかります（数千円〜・目安）。</p>`],
     pc:[`メーカーに回収を申し込む`,`<p class="nd">PCリサイクルマークがあれば無料です。先にデータを消しておきます。</p>`],
