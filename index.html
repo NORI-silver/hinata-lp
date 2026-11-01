@@ -127,6 +127,7 @@ header p{margin:0;color:var(--muted);font-size:16px;max-width:60ch}
 .cost,.place{display:flex;flex-direction:column;gap:8px}
 .cost h3 small,.place h3 small{display:block;font-size:14px;font-weight:400;color:var(--muted)}
 .ctbl{width:100%;border-collapse:collapse;background:var(--bg);border-radius:14px;overflow:hidden;font-size:16px}
+.ctbl thead th,.ctbl thead td{font-size:13px;font-weight:700;color:var(--muted);background:var(--bg2,transparent);padding:8px 14px}
 .ctbl th,.ctbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
 .ctbl th{font-weight:700}.ctbl td{text-align:right;font-weight:700;white-space:nowrap}
 .ctbl small{display:block;font-size:13px;font-weight:400;color:var(--muted);white-space:normal}
@@ -556,7 +557,7 @@ function contacts(j){
   const rows=[
     ["city",I.desk,`${I.tel.map(([l,n])=>`${l} ${telA(n)}`).join("<br>")}${I.tel.length?"<br>":""}${I.hours}`,I.links.map(([t,u])=>extA(t,u)).join(""),`対応:家具、布団、自転車など<br>対応しない:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:${j.fee}`],
     ["post","家電リサイクル券センター（家電4品目）",`電話 ${telA(RKC)}<br>買い替えるお店・買ったお店に引き取ってもらうか、郵便局でリサイクル券を払い込んで指定引取場所へ運びます`,extA("近くの指定引取場所を探す",pref),"対応:冷蔵庫・洗濯機・テレビ・エアコン<br>料金:メーカー・大きさで違います"],
-    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(A.muni?`${n} ${A.muni[1]}${A.muni[2]}`:n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>料金:受取 ¥0〜"],
+    ["buy",`買取チェーン店${area?`（${area}周辺）`:""}`,"近くのお店と、Google マップの口コミを見られます",j.key==="other"?(A.area&&AREAS[A.area]?`<div class="shops" data-city="${A.area}" data-name="${esc(AREAS[A.area].n)}"></div>`:SHOPS.map(n=>extA(`${n}を地図で見る`,mapQ(A.muni?`${n} ${A.muni[1]}${A.muni[2]}`:n))).join("")):`<div class="shops" data-city="${j.key}"></div>`,"対応:まだ使える家具・家電<br>対応しない:壊れた物、汚れの強い物<br>払うお金:¥0（値段がつけば受け取れる）"],
     ["drop",I.drop.length>1?`${j.cname}の持込施設（${I.drop.length}か所）`:I.drop[0].name,I.drop.map(d=>`${I.drop.length>1?`${d.name}${d.tel?` ${telA(d.tel)}`:""}`:`${d.tel?`電話 ${telA(d.tel)}<br>`:""}`}${d.note?`${I.drop.length>1?"<br>":""}${d.note}`:""}`).join("<br>"),I.drop.filter(d=>d.url).map(d=>extA(d.ul||"持ち込みの案内（公式ページ）",d.url)).join(""),"対応:家具・自転車など（自家用車で運べる物）<br>対応しない:家電4品目"]
   ];
   return Object.fromEntries(rows.map(([k,name,info,links])=>[k,{name,info,links}]));
@@ -581,18 +582,18 @@ function itemOptions(it,j){
   if(it.cat==="unk") return [{h:"",name:"品目名を入れて判定",desc:"「食器棚」「電子レンジ」のように名前を入れると、出し先がわかります",cost:"",ok:true,rec:true}];
   if(it.cat==="pc") return [
     {h:"",k:"pc",name:"メーカーに回収を申し込む",desc:"PCリサイクルマークがついていれば、メーカーが無料で回収します（マークがない物は料金がかかります）。先にデータを消しておく",cost:"マークありは無料（目安）",when:"日時はメーカーに確認",ok:true},
-    {h:"buy",k:"buy",name:"買取に出す",desc:"年数の浅い物は値段がつくことがあります。データを消してから",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
+    {h:"buy",k:"buy",name:"買取に出す",desc:"年数の浅い物は値段がつくことがあります。データを消してから",cost:"払うお金 ¥0",when:"値段がつけば、逆にお金を受け取れます。日時はお店に確認",ok:true},
     {h:"",k:"small",name:"自治体の小型家電の回収",desc:`回収ボックスなどで受け付けている自治体があります。対象になるかは${off||`${j.nm}の公式ページ`}で確認`,cost:"自治体で確認",when:"",ok:true},
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:"家庭のパソコンはメーカーが回収するきまり（資源有効利用促進法）で、多くの自治体では粗大ごみとして出せません。公式ページで確認"}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   if(it.cat==="hard") return [
     {h:"",k:"hard",name:"お店・メーカー・専門の回収に相談",desc:`多くの自治体で粗大ごみとして収集しない物です（処理が難しい物）。買ったお店やメーカー、専門の回収業者に引き取りを相談します。${j.nm}での出し方は${off||"公式ページ"}で確認`,cost:"お店に確認",when:"日時はお店に確認",ok:true},
-    {h:"buy",k:"buy",name:"買取に出す",desc:"ピアノやバイクなどは、値段がつくことがあります",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
+    {h:"buy",k:"buy",name:"買取に出す",desc:"ピアノやバイクなどは、値段がつくことがあります",cost:"払うお金 ¥0",when:"値段がつけば、逆にお金を受け取れます。日時はお店に確認",ok:true},
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:"多くの自治体で粗大ごみとして収集しない物です。公式ページで確認"}
   ].map(o=>({...o,rec:o.ok&&o.k===k}));
   if(it.cat==="app") return [
     {h:"post",name:"お店か引越し会社に引き取ってもらう",desc:`リサイクル料金と運搬料を払って引き渡す。郵便局でリサイクル券を払い込む方法もあります。リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>で、メーカー・大きさで変わります`,cost:appFee(it.label)?yr(appFee(it.label))+"＋運搬料（目安）":APPCOST,when:"日時はお店に確認",ok:true,k:"post"},
-    {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true,k:"buy"},
+    {h:"buy",name:"買取に出す",desc:"製造から年数の浅い物は値段がつくことがあります。出張・キャンセル無料の店を選ぶ",cost:"払うお金 ¥0",when:"値段がつけば、逆にお金を受け取れます。日時はお店に確認",ok:true,k:"buy"},
     ...(late?[]:[{...GIVE,desc:GIVE.desc.replace("まだ使える物は","製造から年数の浅い物は")}]),
     {h:"drop",name:"指定引取場所へ自分で持込",desc:"郵便局でリサイクル券を払い込んで持ち込むと運搬料がかからない",cost:appFee(it.label)?yr(appFee(it.label))+"（目安）":APPCOST,when:"平日",ok:car,why:"自家用車が必要",k:"drop"},
     {h:"city",name:`${j.nm}の粗大ごみ回収`,ok:false,why:j.ar&&j.ar.kaden?`家電4品目は家電リサイクル法の対象で、粗大ごみとは手続きが別です。${esc(j.ar.kaden)}`:`家電4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）は${j.nm}では回収しません（家電リサイクル法）`}
@@ -600,7 +601,7 @@ function itemOptions(it,j){
   return [
     {h:"city",k:"city",name:`${j.nm}の粗大ごみ回収`,desc:j.unk?`申し込むときに収集日を確かめ、引越し（${md(add(j.d))}）に間に合わなければ、ほかの出し方を選びます。`+cityDesc:cityDesc,cost:cityCost,when:j.unk?"収集日は申し込みで決まります（公式サイトで確認）":j.live?`今の最短は${md(add(j.lead))}（${hm(j.live.checkedAt)}時点）`:`早くて${md(add(j.lead))}頃（目安・空きは未確認）`,ok:!late,why:!isFinite(j.lead)?`${j.nm}には、申し込みで集める市の戸別収集がありません（持ち込みか許可業者に頼みます）`:j.live?`今の最短収集日は${md(add(j.lead))}で、引越しに間に合いません（${hm(j.live.checkedAt)}時点）`:`目安どおりなら収集は${md(add(j.lead))}頃で、引越しに間に合わない可能性があります（空きは未確認）`},
     {h:"city",k:"wait",name:`${j.nm}の予約ページで空き枠を再確認`,desc:`取り消しなどで早い日が空くことがあります。予約ページをこまめに見て、${md(add(Math.max(0,j.d-1)))}までに収集できる日が出たら申し込む${feeLine}${bookLinks(j)}`,cost:cityCost,when:"空きは公式ページで確認",ok:late&&j.web,why:j.unk?"まず通常の申し込みで、いつ収集できるかを確かめます":late?"電話受付のみのため、空きを確認しにくい自治体です":"通常の予約で間に合います"},
-    {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"受取 ¥0〜",when:"日時はお店に確認",ok:true},
+    {h:"buy",k:"buy",name:"買取に出す",desc:BEDRE.test(it.label)?"布団・マットレスなど使った寝具や敷物は、買取で断られることが多い物です":"まだ使える物なら出張で引き取り。値段が合わなければ断っても無料の店を選ぶ",cost:"払うお金 ¥0",when:"値段がつけば、逆にお金を受け取れます。日時はお店に確認",ok:true},
     {h:"drop",k:"drop",name:j.key==="other"&&!j.ar?"受入施設へ自分で持込":`${dropLabel(j)}へ自分で持込`,desc:j.key==="sakura"?"酒々井リサイクル文化センター。予約不要":`${esc(j.drop)}${dropFs.length?`。持ち込みの料金表では ${dropFs.map(([t,,d])=>`${esc(t)} ${esc(d)}`).join("、")}（目安）`:""}`,cost:j.key==="sakura"?"料金は市に確認":dropFs.length&&yen(dropFs.map(x=>x[2]))?yen(dropFs.map(x=>x[2]))+"（目安）":"自治体で確認",when:j.key==="sakura"?"予約不要":"予約・日時は施設に確認",ok:car,why:"自家用車が必要"},
     ...(late||BEDRE.test(it.label)?[]:[GIVE]),
     {h:"",k:"move",name:to?`新居の${to.n}で出す`:"新居の自治体で出す",desc:`引越し荷物に入れて運び、落ち着いてから出す${to?`。${tfs.length?`${to.n}の料金表では ${feeList(tfs)}（目安）`:`${to.n}の料金は<a href="${to.g}">記事</a>か公式ページで確認`}`:"。新居の自治体を入れると、そこでの料金が出ます"}`,cost:to&&tfs.length&&yen(tfs.map(x=>x[1]))?`運ぶ費用＋${yen(tfs.map(x=>x[1]))}（目安）`:"運ぶ費用が増える",when:"引越し後",ok:true}
@@ -633,14 +634,14 @@ function costBox(rs,j){
     const c=sum(bulky,j.ar,1);
     if(isFinite(j.lead))rows.push([`${j.nm}の粗大ごみ収集`,show(c,j.unk?"公式サイトで確認":"1点 数百円〜（公式ページで確認）"),j.unk?"収集日は申し込みで決まります":late?"引越しに間に合わない見込み":`早くて${md(add(j.lead))}頃`,late]);
     if(car){const d=sum(bulky,j.ar,2);rows.push([`${dropLabel(j)}へ自分で運ぶ`,show(d,"施設で確認"),"予約・日時は施設に確認",false])}
-    rows.push(["買取に出す（まだ使える物）","¥0（値段がつけば受け取る）","日時はお店に確認",false]);
+    rows.push(["買取に出す（まだ使える物）","¥0","値段がつけば、逆にお金を受け取れます（査定しだい）",false]);
     const t=to?sum(bulky,to,1):null;
     rows.push([to?`新居の${to.n}まで運んで出す`:"新居まで運んで出す",`引越し代の増額（見積もりで確認）＋${t&&t.miss<t.n?`${to.n}の手数料 `+show(t,""):"新居の自治体の手数料"}`,"引越し後",false]);
     rows.push(["不用品回収業者（軽トラック1台分）",`${yr(TRUCK)}（相場・目安）`,"日時は業者と相談",false,`<a href="${TRUCKSRC}" target="_blank" rel="noopener">ミツモアの成約データ（2026年5月）</a>。家庭のごみを回収できるのは市区町村の許可・委託を受けた業者だけです。<a href="/guide/scam/">高額請求に注意</a>`]);
   }
   if(apps.length){const ts=apps.map(it=>appFee(it.label)).filter(Boolean);
     rows.push([`家電4品目（${apps.map(it=>esc(it.label)).join("・")}）`,ts.length?yr([ts.reduce((a,x)=>a+x[0],0),ts.reduce((a,x)=>a+x[1],0)])+"＋お店の運搬料（目安）":APPCOST,"お店か指定引取場所へ",false,`リサイクル料金は<a href="${APPSRC}" target="_blank" rel="noopener">主なメーカーの例</a>（メーカー・大きさで変わります）`]);}
-  return `<div class="cost"><h3 class="sh">費用をくらべる<small>出したい物を全部合わせた目安</small></h3><table class="ctbl"><tbody>${rows.map(([n,c,w,bad,note])=>`<tr class="${bad?"bad":""}"><th>${n}${note?`<small>${note}</small>`:""}</th><td class="num">${c}<small>${w}</small></td></tr>`).join("")}</tbody></table></div>`;
+  return `<div class="cost"><h3 class="sh">費用をくらべる<small>出したい物を全部合わせて、あなたが払うお金の目安です。買取で受け取れるお金は含めていません</small></h3><table class="ctbl"><thead><tr><th>出し方</th><td>払うお金</td></tr></thead><tbody>${rows.map(([n,c,w,bad,note])=>`<tr class="${bad?"bad":""}"><th>${n}${note?`<small>${note}</small>`:""}</th><td class="num">${c}<small>${w}</small></td></tr>`).join("")}</tbody></table></div>`;
 }
 // まとめ：出し先ごとに、どの品目を頼めるか（◎＝おすすめ、○＝ここでも出せる）
 function placeBox(rs,j){
