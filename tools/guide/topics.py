@@ -21,6 +21,9 @@ FONTS=re.search(r'<link rel="icon".*?guide\.css">\n',fees,re.S).group(0)
 ORDER=[k for r in RORDER for k in C if REGION[k]==r]
 def pt(k): return {x[0]:x[1] for x in A[k]["pt"]}
 
+import datetime as _dt
+_TODAY=_dt.datetime.now(_dt.timezone(_dt.timedelta(hours=9))).date().isoformat()  # 日本時間
+MOD={}  # path -> dateModified（sitemap の lastmod にも使う）
 def page(path,title,desc,crumb,h1,lead,body):
     url=f"{SITE}{path}"
     art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":DATE,"dateModified":DATE,"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/about/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"}}
@@ -74,6 +77,17 @@ def page(path,title,desc,crumb,h1,lead,body):
     p=os.path.join(ROOT,path.strip("/"),"index.html"); os.makedirs(os.path.dirname(p),exist_ok=True)
     out=h+FOOT
     out=re.sub(r'<a class="card" hidden href="#">.*?</a>','',out)
+    # 更新日：本文（構造化データ以外）が前と同じなら前の dateModified・datePublished を引き継ぐ。変わったら今日
+    strip=lambda x:re.sub(r'<script type="application/ld\+json">.*?</script>','',x,flags=re.S)
+    if os.path.exists(p):
+        old=open(p,encoding="utf-8").read()
+        om=re.search(r'"datePublished": "([^"]+)", "dateModified": "([^"]+)"',old)
+        if om:
+            mod=om.group(2) if strip(old)==strip(out) else _TODAY
+            out=out.replace(f'"datePublished": "{DATE}", "dateModified": "{DATE}"',f'"datePublished": "{om.group(1)}", "dateModified": "{mod}"',1)
+    else:
+        out=out.replace(f'"datePublished": "{DATE}", "dateModified": "{DATE}"',f'"datePublished": "{_TODAY}", "dateModified": "{_TODAY}"',1)
+    MOD[path]=re.search(r'"dateModified": "([^"]+)"',out).group(1)
     open(p,"w",encoding="utf-8").write(out)
     print(path,len(title),len(desc))
 
@@ -260,6 +274,17 @@ kaden_body=f'''    <h2>家電リサイクル券とは</h2>
     </table></div>
     <p class="src">パナソニック・シャープ・日立・三菱電機などの料金（{CHECK}、<a href="{RKC_PRICE}" target="_blank" rel="noopener">家電リサイクル券センターの料金一覧</a>で確認）。冷蔵庫・冷凍庫は内容積170L以下が小、171L以上が大です（<a href="https://www.city.shinjuku.lg.jp/seikatsu/file09_01_00019.html" target="_blank" rel="noopener">新宿区の案内</a>）。テレビは画面の大きさで小・大が分かれます。メーカーで料金が違うので、お持ちの物のメーカー名で確かめてください。</p>
 
+    <h2 id="hinmoku">品目ごとの処分のポイント</h2>
+    <p>4品目とも市区町村の粗大ごみでは回収しません。料金は上の表と同じ主要メーカーの目安です。</p>
+    <h3 id="reizouko">冷蔵庫・冷凍庫の処分</h3>
+    <p>リサイクル料金は小（170L以下）3,740円、大（171L以上）4,730円が目安です。運ぶ前に中を空にして電源を抜き、霜や受け皿の水を捨てておきます。大きく重いので、自分で運べないときはお店か市区が案内する受付先に頼みます。</p>
+    <h3 id="tv">テレビの処分</h3>
+    <p>液晶・有機EL・プラズマのテレビは小1,870円、大2,970円が目安で、画面の大きさで小・大が分かれます。ブラウン管テレビも対象です（料金はメーカーの一覧で確かめてください）。</p>
+    <h3 id="sentakuki">洗濯機・衣類乾燥機の処分</h3>
+    <p>リサイクル料金は2,530円が目安です。運ぶ前に給水ホースと排水ホースの水を抜いておきます。</p>
+    <h3 id="aircon">エアコンの処分</h3>
+    <p>リサイクル料金は550円〜990円が目安で、室内機と室外機で1台です。取り外しには工事が要るので、取り外しの費用は別にかかります。買い替えのときにお店に取り外しと引き取りを頼むのがかんたんです。</p>
+
     <h2 id="yubinkyoku">郵便局での買い方（郵便局振込方式）</h2>
     <ol>
       <li><b>メーカー名と大きさを調べる</b>：本体のラベルでメーカー名を、冷蔵庫は内容積（L）、テレビは画面の大きさを確かめます。メーカーがわからない・もうない場合は、払い込む前に家電リサイクル券センターに聞きます。</li>
@@ -324,6 +349,16 @@ ITEMS=[
   "自転車の捨て方・処分方法",
   '''    <p>自転車は、多くの市区で粗大ごみとして出せます。タイヤの大きさ（インチ）や電動アシストかどうかで料金が変わる市区があります。持ち込みなら安くなる区もあります（江戸川区は収集900円、持ち込み400円）。</p>
     <p>まだ乗れる自転車は、買取や譲渡も考えられます。人に譲るときなどは防犯登録の手続きが必要になることがあるので、お住まいの都道府県の防犯登録の案内で確かめてください。</p>
+'''),
+ ("carpet","カーペット","カーペット・ラグ",["カーペット","じゅうたん","絨毯","ラグ"],"",
+  "カーペット・ラグの捨て方",
+  '''    <p>カーペット・じゅうたん・ラグは、多くの市区で粗大ごみとして出せる品目です。広さ（畳数）や電気カーペットかどうかで料金が変わる市区があり、下の表のように市区で違います。</p>
+    <p>市区によっては、決められた大きさまで切れば、燃やすごみなどの普通のごみとして出せる場合があります。切ってよいか、どの大きさまでかは市区ごとに違うので、お住まいの市区の分け方で確かめてください（<a href="/guide/size/">市区ごとの大きさの基準</a>）。</p>
+'''),
+ ("microwave","電子レンジ","電子レンジ",["電子レンジ","オーブンレンジ"],"",
+  "電子レンジの捨て方・処分方法",
+  '''    <p>電子レンジは、家電リサイクル法の4品目（冷蔵庫・冷凍庫、洗濯機・衣類乾燥機、テレビ、エアコン）には入らないので、市区のごみとして出せます。ただし、出し方は市区で分かれます。大きさの基準を超えると粗大ごみ、超えなければ燃やさないごみ（不燃ごみ）や小型家電の回収に出せる市区もあります。一方で、越谷市・那覇市のように、電子レンジは大きさに関係なく粗大ごみとする市もあります。</p>
+    <p>まず、お住まいの市区で電子レンジが粗大ごみになる大きさかどうかを確かめてください（<a href="/guide/size/">市区ごとの大きさの基準</a>）。下の表は、市区の粗大ごみの品目一覧に電子レンジ・オーブンレンジが載っている市区の料金です。</p>
 '''),
  ("bed","マットレス","マットレス・ベッド",["ベッド","マットレス"],r"ベビーベッド|ソファーベッド|マットレス別|マットレスを除く|マットは別|ベッドマットを除く|マットレス・毛布を除く",
   "マットレス・ベッドの捨て方",
@@ -461,7 +496,9 @@ g=g[:m.start(2)]+json.dumps(d,ensure_ascii=False)+g[m.end(2):]
 open(p,"w",encoding="utf-8").write(g)
 p=os.path.join(ROOT,"sitemap.xml"); sm=open(p,encoding="utf-8").read()
 for u in urls:
-    if u not in sm: sm=sm.replace("</urlset>",f"  <url><loc>{u}</loc><lastmod>{DATE}</lastmod></url>\n</urlset>")
+    lm=MOD.get(u[len(SITE):],DATE)
+    if u not in sm: sm=sm.replace("</urlset>",f"  <url><loc>{u}</loc><lastmod>{lm}</lastmod></url>\n</urlset>")
+    else: sm=re.sub(r"(<loc>"+re.escape(u)+r"</loc><lastmod>)[^<]*",lambda m:m.group(1)+lm,sm)
 open(p,"w",encoding="utf-8").write(sm)
 # 出し方の記事とトップに、全地域記事への地方別リンクを入れる（<!-- arealinks:start --> 〜 end の間）
 al="".join(f'<p><b>{r}</b>：'+"・".join(f'<a href="/guide/{k}/">{C[k][0]}</a>' for k in ORDER if REGION[k]==r)+"</p>" for r in RORDER if any(REGION[k]==r for k in ORDER))
