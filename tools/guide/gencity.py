@@ -69,6 +69,22 @@ def _pub(k):
     try: return _sp.run(["git","log","--diff-filter=A","--format=%as","--","guide/"+k+"/index.html"],cwd=ROOT,capture_output=True,text=True).stdout.split()[-1]
     except Exception: return None
 
+
+# 料金表で各品目が最初に出てくるセル（td）から、品目ページ（/guide/item/）へ1本だけリンク（「布団乾燥機」のような行が増えたら ITEMLINK を見直す）
+ITEMLINK=[("sofa",r"ソファ"),("bed",r"(?<!ベビー)(?<!ソファー)(?<!ソファ)ベッド|マットレス"),("futon",r"布団|ふとん"),("bicycle",r"自転車"),("carpet",r"カーペット|じゅうたん|絨毯|ラグ"),("microwave",r"電子レンジ|オーブンレンジ")]
+def itemlinks(body):
+    done=set()
+    def tbl(m):
+        t=m.group(0)
+        def cell(c):
+            inner=c.group(2)
+            if "<a " in inner: return c.group(0)
+            for key,pat in ITEMLINK:
+                if key not in done and re.search(pat,inner):
+                    done.add(key); return f'{c.group(1)}<a href="/guide/item/{key}/">{inner}</a>{c.group(3)}'
+            return c.group(0)
+        return re.sub(r"(<td(?=[\s>])[^>]*>)(.*?)(</td>)",cell,t,flags=re.S)
+    return re.sub(r"<table.*?</table>",tbl,body,flags=re.S)
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
 OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta"}
@@ -436,5 +452,6 @@ for k,(name,title,desc) in C.items():
 '''
     foot=FOOT.replace("</body>",'<script src="/reviews.js" defer></script>\n</body>').replace("2026年10月30日に確認",f"{CK}に確認")
     p=os.path.join(ROOT,"guide",k,"index.html"); os.makedirs(os.path.dirname(p),exist_ok=True)
+    body=itemlinks(body)
     open(p,"w",encoding="utf-8").write(h+body+tail+foot)
     print(k,len(title),len(desc))
