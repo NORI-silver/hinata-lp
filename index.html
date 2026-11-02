@@ -811,6 +811,9 @@ function draw(){
   if(lastNext)track("diag_done",lastDiag);
   if(window.hinataShops)window.hinataShops.scan();
 }
+// 空き枠の見張りボタンを出す地域：予約サイトの「最短収集日」を登録なしで見られるところ（2026-11-02 確認：千葉市・葛飾区・墨田区。sodai-web の他の区市は確認ページがなく、e-tumo は規約で対象外）
+const WATCHABLE=["chiba","katsushika","sumida"];
+const canWatch=j=>WATCHABLE.includes(j.key==="other"?A.area:j.key);
 const WATCHMSG="ありがとうございます。空き枠の見張りはまだ準備中で、申し込みや支払いはできません。それまでは上の予約ページで空きを確かめてください";
 // いちばん上に出す「次にやること」。品目ごとのおすすめから、急ぐものを1つ選ぶ
 const NEXTPRI=["wait","city","drop","buy","post","pc","hard","move"];
@@ -824,7 +827,7 @@ function nextStep(rs,j){
   const book=(bl.length?bl.slice(0,2).map(([t,u])=>btn(t.replace(/（[^）]*）/g,""),u)):j.url?[btn(`${j.nm}の公式${j.unk?"サイト":"ページ"}を開く`,j.url)]:[]).concat(j.unk?[btn(`「${j.nm} 粗大ごみ」を検索`,j.q)]:[]).join("")+(I.tel&&I.tel[0]?`<p class="nd">電話：${telA(I.tel[0][1])}</p>`:"");
   const S={
     city:[j.unk?`今日、${j.nm}の粗大ごみの申し込み方と収集日を確かめる`:`今日、${j.nm}の粗大ごみを予約する`,book+`<ol class="nsteps"><li>${j.unk?"申し込む（品目と数を伝え、収集日を確かめる）":"予約する（品目と数を伝える）"}</li><li>${j.unk?"案内どおりに手数料を払う":"処理券（シール）を買って貼る"}</li><li>収集日の朝に出す</li></ol>`],
-    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p><button type="button" class="wbtn" id="watch">空き枠の見張りを頼む（¥500・準備中）</button><p class="nd" id="watchmsg">${A.watch?WATCHMSG:"予約ページの空きをこちらで見張るサービスを準備しています"}</p>`],
+    wait:[`${j.nm}の予約ページで、${md(add(Math.max(0,j.d-1)))}までの空きを探す`,book+`<p class="nd">取り消しで早い日が空くことがあります。空きがなければ、下の品目ごとの出し方から選びます。</p>${canWatch(j)?`<button type="button" class="wbtn" id="watch">空き枠の見張りを頼む（¥500・準備中）</button><p class="nd" id="watchmsg">${A.watch?WATCHMSG:"予約ページの空きをこちらで見張るサービスを準備しています"}</p>`:""}`],
     drop:[`車で${dropLabel(j)}へ運ぶ`,I.drop.filter(d=>d.url).slice(0,1).map(d=>btn("持ち込みの案内を見る",d.url)).join("")+`<p class="nd">${I.drop.length>1?`${esc(j.nm)}の持込施設（${I.drop.length}か所）`:esc(I.drop[0].name)}。予約が必要か、先に確認してください。</p>`],
     buy:[`買取店に出張買取を頼む`,btn("近くの買取店を見る","#to-buy",false)+`<p class="nd">値段が合わなければ断っても無料のお店を選びます。</p>`],
     post:[`買い替えのお店か引越し会社に引き取りを頼む`,`<p class="nd">家電4品目は${j.nm}では回収しません。リサイクル料金と運搬料がかかります（数千円〜・目安）。</p>`],
