@@ -61,6 +61,13 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
     _m=json.load(open(_f,encoding="utf-8"))
     if _m.get("pref"): PREF[_m["key"]]=_m["pref"]
     if _m.get("checked"): CHKD[_m["key"]]=_m["checked"]
+# 更新日（dateModified）：確認日と、記事を厚くした日（ledger の seo・checked）の新しいほう。sitemap の lastmod（hub.py）とそろえる
+_LED=json.load(open(os.path.join(ROOT,"docs","area-agents","ledger.json"),encoding="utf-8")).get("areas",{}) if os.path.exists(os.path.join(ROOT,"docs","area-agents","ledger.json")) else {}
+# 公開日（datePublished）：公開ページ（guide/<key>/index.html）を最初にコミットした日（author date）。取れなければ確認日
+import subprocess as _sp
+def _pub(k):
+    try: return _sp.run(["git","log","--diff-filter=A","--format=%as","--","guide/"+k+"/index.html"],cwd=ROOT,capture_output=True,text=True).stdout.split()[-1]
+    except Exception: return None
 
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
@@ -328,7 +335,7 @@ def cards(keys,base="/guide/"):
 for k,(name,title,desc) in C.items():
     url=f"{SITE}/guide/{k}/"
     D=CHKD.get(k,DATE); y,mo,da=D.split("-"); CK=f"{int(y)}年{int(mo)}月{int(da)}日"
-    art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":D,"dateModified":D,"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"about":{"@type":"City","name":name}}
+    art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":_pub(k) or D,"dateModified":max([D]+[_LED.get(k,{}).get(x) or "" for x in ("seo","checked")]),"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/about/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"about":{"@type":"City","name":name}}
     bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":SITE+"/"},{"@type":"ListItem","position":2,"name":"粗大ごみの基礎知識","item":SITE+"/guide/"},{"@type":"ListItem","position":3,"name":f"{name}の粗大ごみ","item":url}]}
     h=HEAD_TPL+f'''<title>{title}</title>
 <meta name="description" content="{desc}">
@@ -361,7 +368,7 @@ for k,(name,title,desc) in C.items():
   <header class="hero">
     <h1>{name}の粗大ごみの出し方と料金</h1>
     <p>申し込み方法、料金と払い方、出し方、持ち込み先、家電4品目、引越しで急ぐときの方法を、{name}の公式ページをもとにまとめました。</p>
-    <p class="meta">{CK}に{name}の公式ページで確認・料金や日数は目安です</p>
+    <p class="meta">{CK}に{name}の公式ページで確認・料金や日数は目安です（<a href="/about/">運営者と調べ方</a>）</p>
   </header>
   <article>
 '''

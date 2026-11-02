@@ -23,7 +23,7 @@ def pt(k): return {x[0]:x[1] for x in A[k]["pt"]}
 
 def page(path,title,desc,crumb,h1,lead,body):
     url=f"{SITE}{path}"
-    art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":DATE,"dateModified":DATE,"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"}}
+    art={"@context":"https://schema.org","@type":"Article","headline":title,"description":desc,"inLanguage":"ja","datePublished":DATE,"dateModified":DATE,"mainEntityOfPage":url,"image":SITE+"/og.png","author":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/about/"},"publisher":{"@type":"Organization","name":"粗大ごみ手配ナビ","url":SITE+"/"}}
     bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":SITE+"/"},{"@type":"ListItem","position":2,"name":"粗大ごみの基礎知識","item":SITE+"/guide/"},{"@type":"ListItem","position":3,"name":crumb,"item":url}]}
     h=HEAD_TPL+f'''<title>{title}</title>
 <meta name="description" content="{desc}">
@@ -56,7 +56,7 @@ def page(path,title,desc,crumb,h1,lead,body):
   <header class="hero">
     <h1>{h1}</h1>
     <p>{lead}</p>
-    <p class="meta">{CHECK}に各市区の公式ページで確認・料金や日数は目安です</p>
+    <p class="meta">{CHECK}に各市区の公式ページで確認・料金や日数は目安です（<a href="/about/">運営者と調べ方</a>）</p>
   </header>
   <article>
 {body}
