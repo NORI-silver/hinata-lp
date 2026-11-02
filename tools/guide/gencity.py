@@ -71,7 +71,7 @@ def _pub(k):
 
 
 # 料金表で各品目が最初に出てくるセル（td）から、品目ページ（/guide/item/）へ1本だけリンク（「布団乾燥機」のような行が増えたら ITEMLINK を見直す）
-ITEMLINK=[("sofa",r"ソファ"),("bed",r"(?<!ベビー)(?<!ソファー)(?<!ソファ)ベッド|マットレス"),("futon",r"布団|ふとん"),("bicycle",r"自転車"),("carpet",r"カーペット|じゅうたん|絨毯|ラグ"),("microwave",r"電子レンジ|オーブンレンジ")]
+ITEMLINK=[("sofa",r"ソファー|ソファ"),("bed",r"(?<!ベビー)(?<!ソファー)(?<!ソファ)ベッド|マットレス"),("futon",r"布団|ふとん"),("bicycle",r"自転車"),("carpet",r"カーペット|じゅうたん|絨毯|ラグ"),("microwave",r"電子レンジ|オーブンレンジ")]
 def itemlinks(body):
     done=set()
     def tbl(m):
@@ -80,9 +80,18 @@ def itemlinks(body):
             inner=c.group(2)
             if "<a " in inner: return c.group(0)
             for key,pat in ITEMLINK:
-                if key not in done and re.search(pat,inner):
-                    done.add(key); return f'{c.group(1)}<a href="/guide/item/{key}/">{inner}</a>{c.group(3)}'
-            return c.group(0)
+                if key in done: continue
+                parts=re.split(r"(<[^>]+>)",inner)
+                hit=False
+                for i,p in enumerate(parts):
+                    if hit or p.startswith("<") or (i>0 and parts[i-1].startswith("<a ")): continue
+                    for m in re.finditer(pat,p):
+                        # 「マットレス・毛布を除く」「ラグ以外」のような除く言い方（読点・括弧までの間）は飛ばす
+                        if re.search(r"除く|を除|以外|別",re.split(r"[、。）)]",p[m.end():],maxsplit=1)[0]): continue
+                        parts[i]=p[:m.start()]+f'<a href="/guide/item/{key}/">{m.group(0)}</a>'+p[m.end():]
+                        done.add(key); hit=True; break
+                inner="".join(parts)
+            return c.group(1)+inner+c.group(3)
         return re.sub(r"(<td(?=[\s>])[^>]*>)(.*?)(</td>)",cell,t,flags=re.S)
     return re.sub(r"<table.*?</table>",tbl,body,flags=re.S)
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
@@ -346,6 +355,48 @@ fees=open(os.path.join(ROOT,"guide/fees/index.html"),encoding="utf-8").read()
 HEAD_TPL=fees.split("<title>")[0]  # doctype..viewport/robots
 FOOT=fees[fees.index("  <footer class=\"foot\">"):]
 FONTS=re.search(r'<link rel="icon".*?guide\.css">\n',fees,re.S).group(0)
+def _region_order(k):
+    # 同じ地方。区は区どうし・市は市どうしを優先し、記事ごとに並びをずらして偏らないようにする。同じ都道府県を先に
+    same=[x for x in C if REGION[x]==REGION[k]]
+    kind=lambda x:C[x][0][-1]
+    pref=[x for x in same if kind(x)==kind(k)]
+    i=pref.index(k); pref=pref[i+1:]+pref[:i]
+    order=pref+[x for x in same if kind(x)!=kind(k)]
+    pk=PREF.get(k)
+    if pk: order=[x for x in order if PREF.get(x)==pk]+[x for x in order if PREF.get(x)!=pk]
+    return order
+# 「近くの地域」：記事の市区から100km以内を近い順に最大6件（座標は coords.json）。足りない分は同じ県→同じ地方で埋める。
+# どの記事からも1本以下しかリンクされない地域は、いちばん近い記事の6件目と入れ替えて最低2本にする
+import math as _math
+_CO={k:v for k,v in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"coords.json"),encoding="utf-8")).items() if not k.startswith("_")}
+def _km(a,b):
+    (la1,lo1),(la2,lo2)=_CO[a],_CO[b]; r=_math.pi/180
+    h=_math.sin((la2-la1)*r/2)**2+_math.cos(la1*r)*_math.cos(la2*r)*_math.sin((lo2-lo1)*r/2)**2
+    return 12742*_math.asin(_math.sqrt(h))
+NEAR,NEARALL={},{}
+_noco=[k for k in C if k not in _CO]
+if _noco: print("警告：座標の無い地域（tools/guide/coords.json に足す）:",", ".join(_noco))
+for k in C:
+    near=sorted((x for x in C if x!=k and k in _CO and x in _CO and _km(k,x)<=100),key=lambda x:_km(k,x))[:6]
+    NEARALL[k]=len(near)==6
+    # 埋め合わせは300km以内まで（那覇に九州の市を並べない）。座標の無い地域は同じ県・地方の並び
+    NEAR[k]=near+[x for x in _region_order(k) if x!=k and x not in near and (k not in _CO or x not in _CO or _km(k,x)<=300)][:6-len(near)]
+def _inb():
+    n={k:0 for k in C}
+    for v in NEAR.values():
+        for x in v: n[x]+=1
+    return n
+for _ in range(3):
+    _n=_inb()
+    for t in [x for x in C if _n[x]<2 and x in _CO]:
+        for j in sorted((x for x in C if x!=t and x in _CO and t not in NEAR[x]),key=lambda x:_km(t,x)):
+            if _n[t]>=2: break
+            last=NEAR[j][-1]
+            # 100km以内の記事なら6件目と入れ替え。遠い場合は、相手の6件目が近くの地域でない（同じ地方で埋めた）ときだけ
+            if _n[last]>2 and (_km(t,j)<=100 or _km(j,last)>100):
+                NEAR[j]=NEAR[j][:-1]+[t]; _n[last]-=1; _n[t]+=1
+_low=[k for k,v in _inb().items() if v<2]
+if _low: print("警告：「近くの地域」からのリンクが2本未満の地域:",", ".join(_low))
 def cards(keys,base="/guide/"):
     return "".join(f'<a class="card" href="/guide/{k}/"><b>{C[k][0]}の粗大ごみ</b><span>申し込み・料金・持ち込み・家電の出し方</span></a>' for k in keys)
 for k,(name,title,desc) in C.items():
@@ -424,16 +475,8 @@ for k,(name,title,desc) in C.items():
     # 診断ツールの CITIES にある市区だけ、その市区を選んだ状態で開く（/?city=key）
     if k in DIAG: cta_href,cta_go=f"/?city={k}",f"{name}で出し方を診断する"
     else: cta_href,cta_go="/","無料で診断する"
-    # 同じ地方から最大6件。区は区どうし・市は市どうしを優先し、記事ごとに並びをずらして偏らないようにする
-    same=[x for x in C if REGION[x]==REGION[k]]
-    kind=lambda x:C[x][0][-1]
-    pref=[x for x in same if kind(x)==kind(k)]
-    i=pref.index(k); pref=pref[i+1:]+pref[:i]
-    order=pref+[x for x in same if kind(x)!=kind(k)]
-    # 同じ都道府県を先に（23区は区どうし、市は市どうしの順はそのまま）
-    pk=PREF.get(k)
-    if pk: order=[x for x in order if PREF.get(x)==pk]+[x for x in order if PREF.get(x)!=pk]
-    others=order[:6]
+    others=NEAR[k]
+    rel_h="近くの地域の粗大ごみ" if NEARALL[k] else "近くの地域・同じ地方の粗大ごみ"
     tail=f'''  </article>
   <a class="cta" href="{cta_href}">
     <b>あなたの粗大ごみ、どう出すのがいい？</b>
@@ -441,7 +484,7 @@ for k,(name,title,desc) in C.items():
     <span class="go">{cta_go}</span>
   </a>
   <section class="related" aria-label="ほかの地域">
-    <h2>同じ県・地方の粗大ごみ</h2>
+    <h2>{rel_h}</h2>
     <div class="cards">{cards(others)}</div>
     <p style="margin-top:12px;font-size:14px"><a href="/guide/#area">ほかの地域の記事を見る</a>・<a href="/guide/how-to-check/">記事のない市町村の調べ方</a></p>
   </section>

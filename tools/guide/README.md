@@ -5,6 +5,7 @@
 - `city/<key>.html`：記事の本文（区市ごとの申し込み・料金・持ち込み・家電など）
 - `meta/<key>.json`：title・description・地方・「引っ越してきた人へ」の文（最初の13地域は `gencity.py` の中）
 - `gencity.py`：本文に、ヘッダー・共通の欄（引っ越してきた人へ／間に合わないとき／買取店）・近くの地域・フッターを付けて書き出す
+- `coords.json`：地域ごとの緯度・経度（geolonia/japanese-addresses、CC BY 4.0 の町字の代表点の中央値、2026-11-02取得）。「近くの地域」の並び順だけに使う。新しい地域を足したら座標も足す（無いと gencity.py が警告し、同じ県・地方の並びになる）
 - `hub.py`：`/guide/` の地域一覧・ItemList・`sitemap.xml` を作り直す
 
 ```
