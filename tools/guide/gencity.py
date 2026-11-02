@@ -70,6 +70,37 @@ def _pub(k):
     except Exception: return None
 
 
+# 見出しに id と小さな目次。持ち込みの見出しは、決まった2つの形だけ「〇〇市の粗大ごみの持ち込み（…）」に（できない・休止などは触らない）
+H2ID=[("moshikomi",r"^申し込み"),("ryokin",r"料金"),("dashikata",r"出し方"),("kaden",r"家電"),("mochikomi",r"持ち込|持込|搬入")]
+TOCNAME={"moshikomi":"申し込み","ryokin":"料金","dashikata":"出し方","kaden":"家電4品目","mochikomi":"持ち込み"}
+def headings(body,k,name):
+    noun="大型ごみ" if k in OOGATA else "粗大ごみ"
+    used={}
+    def h2(m):
+        t=m.group(1)
+        for hid,pat in H2ID:
+            if hid not in used and re.search(pat,t):
+                used[hid]=True
+                if hid=="mochikomi":
+                    g=re.fullmatch(r"急ぐときは(.+?)[へに](?:持ち込む|運ぶ)(?:（(.+?)）)?",t)
+                    if g: t=f"{name}の{noun}の持ち込み（急ぐとき・{g.group(1)}"+(f"・{g.group(2)}" if g.group(2) else "")+"）"
+                    elif t=="急ぐときは無料で持ち込む": t=f"{name}の{noun}の持ち込み（急ぐとき・無料）"
+                    elif t=="持ち込みとリユース": t=f"{name}の{noun}の持ち込みとリユース"
+                    elif t=="持ち込み" and k not in NOMOCHI: t=f"{name}の{noun}の持ち込み"
+                return f'<h2 id="{hid}">{t}</h2>'
+        return m.group(0)
+    body=re.sub(r"<h2>([^<]*)</h2>",h2,body)
+    if "mochikomi" in used and not re.search(r"できな|できません|休止|持ち込めな|原則",re.search(r'<h2 id="mochikomi">([^<]*)',body).group(1)):
+        # ポイント欄の「急ぐとき」の行から持ち込みの節へ
+        body=re.sub(r"(<li>急ぐとき：[^\n]*?(?:持ち込|持込|搬入)[^\n]*?)</li>",lambda m:m.group(1)+' <a href="#mochikomi">くわしく</a></li>' if "<a " not in m.group(1) and not re.search(r"できな|できません|休止|持ち込めな",m.group(1)) else m.group(0),body,count=1)
+    if len(used)>=3:
+        nav='\n    <nav class="toc" aria-label="目次">'+"".join(f'<a href="#{h}">{TOCNAME[h]}</a>' for h,_ in H2ID if h in used)+"</nav>\n"
+        if "</div>" in body[:body.find("<h2")] and '<div class="point">' in body[:body.find("<h2")]:
+            i=body.find("</div>",body.find('<div class="point">'))+len("</div>")
+            body=body[:i]+nav+body[i:]
+        else:
+            i=body.find("<h2"); body=body[:i]+nav.strip()+"\n\n    "+body[i:]
+    return body
 # 料金表で各品目が最初に出てくるセル（td）から、品目ページ（/guide/item/）へ1本だけリンク（「布団乾燥機」のような行が増えたら ITEMLINK を見直す）
 ITEMLINK=[("sofa",r"ソファー|ソファ"),("bed",r"(?<!ベビー)(?<!ソファー)(?<!ソファ)ベッド|マットレス"),("futon",r"布団|ふとん"),("bicycle",r"自転車"),("carpet",r"カーペット|じゅうたん|絨毯|ラグ"),("microwave",r"電子レンジ|オーブンレンジ")]
 def itemlinks(body):
@@ -495,6 +526,6 @@ for k,(name,title,desc) in C.items():
 '''
     foot=FOOT.replace("</body>",'<script src="/reviews.js" defer></script>\n</body>').replace("2026年10月30日に確認",f"{CK}に確認")
     p=os.path.join(ROOT,"guide",k,"index.html"); os.makedirs(os.path.dirname(p),exist_ok=True)
-    body=itemlinks(body)
+    body=itemlinks(headings(body,k,name))
     open(p,"w",encoding="utf-8").write(h+body+tail+foot)
     print(k,len(title),len(desc))

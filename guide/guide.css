@@ -42,6 +42,8 @@ article li::marker{color:var(--accent);font-weight:700}
 .point{background:var(--tint);border-radius:18px;padding:18px 20px;margin:32px 0 16px}
 .point b{font-family:var(--f-display);color:var(--ink)}
 .point ul{margin:8px 0 0}
+.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin:0 0 8px}
+.toc::before{content:"目次";font-weight:700;color:var(--ink)}
 .tblw{overflow-x:auto;margin:0 0 8px}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
