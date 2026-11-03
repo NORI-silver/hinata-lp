@@ -26,7 +26,7 @@
 - 狙うキーワードと検索数は `docs/keywords.md`（キーワードプランナー 2026-10-31取得）。流入の本命は「市区名＋粗大ごみ（＋持ち込み・料金）」、次に品目別「〇〇 捨て方／処分」。トップと /guide/late/ は「引越し 不用品 処分」「引越し 家具 処分」「粗大ごみ 出し方」が主、「引越し 間に合わない」（月170）は副。タイトル28〜35字目安、description 80〜120字。
 - 構造化データ：WebApplication と FAQPage（`index.html` の `ld+json`。FAQ本文と同じ内容にそろえる）。
 - ページを足したら `sitemap.xml` に追加し lastmod を更新する。
-- アクセス解析（GA4）は全ページの `<head>` で2つに送る（2026-11-03 Nori）：`G-ZYX17VBTWB`＝shiokonbu.com 総合（プロパティ 292677591、全サブドメイン共通。消さない）と `G-WH8048D4E6`＝hinata 単体。新しいページも `index.html` と同じ2行の `gtag("config", …)` にする。
+- アクセス解析（GA4）は全ページの `<head>` で2つに送る（2026-11-03 Nori）：`G-ZYX17VBTWB`＝shiokonbu.com 総合（プロパティ 292677591、全サブドメイン共通。消さない）と `G-QMEKFM72CG`＝hinata 単体（SHIOKONBU アカウントの hinata.shiokonbu.com プロパティ、2026-11-03 作成。以前の G-WH8048D4E6 は持ち主不明のため置き換え）。新しいページも `index.html` と同じ2行の `gtag("config", …)` にする。
 - 変更したら `python3 tools/seo_check.py .` を実行し、NG を0にしてから PR を出す（PR ごとに GitHub Actions でも自動で走る）。
 - SEOの改善は **批判役を立てて** 進める（2026-10-31 Nori）。案を別のエージェントに批判させ、残った案だけ実装し、実装後の差分ももう一度批判させてから PR。手順は `docs/seo-playbook.md`。
 - 定期のSEO作業（週2回、Claude）の手順は `docs/seo-playbook.md`、記録は `docs/seo-log.md`。
