@@ -1,13 +1,13 @@
 {
  "generated": "2026-11-08",
- "total": 775210,
+ "total": 780210,
  "gsc": false,
  "agents": [
   {
    "id": "tokyo-west",
    "label": "東京23区・西（練馬・世田谷・杉並・板橋ほか）",
    "score": 117670,
-   "share": 0.1518,
+   "share": 0.1508,
    "areas": 7,
    "tiers": {
     "A": [
@@ -27,7 +27,7 @@
    "id": "tokyo-central",
    "label": "東京23区・都心と南（大田・品川・江東・新宿・港ほか）",
    "score": 105730,
-   "share": 0.1364,
+   "share": 0.1355,
    "areas": 9,
    "tiers": {
     "A": [
@@ -50,7 +50,7 @@
    "id": "tokyo-east",
    "label": "東京23区・東（江戸川・足立・葛飾・墨田・台東・文京・荒川）",
    "score": 85120,
-   "share": 0.1098,
+   "share": 0.1091,
    "areas": 7,
    "tiers": {
     "A": [
@@ -71,7 +71,7 @@
    "id": "kanagawa",
    "label": "神奈川（横浜・川崎・相模原ほか）",
    "score": 114680,
-   "share": 0.1479,
+   "share": 0.147,
    "areas": 14,
    "tiers": {
     "A": [
@@ -99,9 +99,9 @@
   {
    "id": "shutoken",
    "label": "埼玉・千葉・東京多摩・北関東",
-   "score": 109920,
-   "share": 0.1418,
-   "areas": 73,
+   "score": 110920,
+   "share": 0.1422,
+   "areas": 75,
    "tiers": {
     "A": [
      "chiba",
@@ -162,12 +162,14 @@
      "nagareyama",
      "narashino",
      "narita",
+     "nasushiobara",
      "niiza",
      "noda",
      "ome",
      "otagunma",
      "oyama",
      "sakado",
+     "sano",
      "sayama",
      "tama",
      "tochigi",
@@ -187,9 +189,9 @@
   {
    "id": "kansai",
    "label": "関西（大阪・堺・神戸・京都ほか）",
-   "score": 101390,
-   "share": 0.1308,
-   "areas": 41,
+   "score": 101890,
+   "share": 0.1306,
+   "areas": 42,
    "tiers": {
     "A": [
      "osaka",
@@ -213,6 +215,7 @@
      "suita",
      "ashiya",
      "daito",
+     "higashiomi",
      "hikone",
      "ibaraki",
      "ikeda",
@@ -243,9 +246,9 @@
   {
    "id": "chiho",
    "label": "名古屋・福岡・仙台ほか地方（北海道・東北・中部・中国・四国・九州・沖縄）",
-   "score": 140700,
-   "share": 0.1815,
-   "areas": 109,
+   "score": 144200,
+   "share": 0.1848,
+   "areas": 116,
    "tiers": {
     "A": [
      "nagoya",
@@ -287,8 +290,11 @@
      "fukui",
      "hachinohe",
      "handa",
+     "hatsukaichi",
      "higashihiroshima",
      "hirosaki",
+     "hofu",
+     "ichinoseki",
      "imabari",
      "inazawa",
      "isahaya",
@@ -305,6 +311,7 @@
      "kasuga",
      "kasugai",
      "kirishima",
+     "kitami",
      "kofu",
      "komaki",
      "kure",
@@ -316,6 +323,7 @@
      "mishima",
      "miyakonojo",
      "nagaoka",
+     "niihama",
      "nishio",
      "nobeoka",
      "numazu",
@@ -325,6 +333,7 @@
      "omuta",
      "onomichi",
      "osaki",
+     "oshu",
      "saga",
      "sasebo",
      "seto",
@@ -332,6 +341,7 @@
      "shunan",
      "suzuka",
      "takaoka",
+     "tokai",
      "tomakomai",
      "tottori",
      "toyokawa",
@@ -2591,6 +2601,16 @@
    "top": []
   },
   {
+   "key": "hatsukaichi",
+   "name": "廿日市市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
    "key": "higashihiroshima",
    "name": "東広島市",
    "agent": "chiho",
@@ -2614,6 +2634,16 @@
    "key": "higashimurayama",
    "name": "東村山市",
    "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "higashiomi",
+   "name": "東近江市",
+   "agent": "kansai",
    "kw_volume": 0,
    "gsc_impressions": null,
    "score": 500,
@@ -2671,6 +2701,16 @@
    "top": []
   },
   {
+   "key": "hofu",
+   "name": "防府市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
    "key": "ibaraki",
    "name": "茨木市",
    "agent": "kansai",
@@ -2684,6 +2724,16 @@
    "key": "ichihara",
    "name": "市原市",
    "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "ichinoseki",
+   "name": "一関市",
+   "agent": "chiho",
    "kw_volume": 0,
    "gsc_impressions": null,
    "score": 500,
@@ -3041,6 +3091,16 @@
    "top": []
   },
   {
+   "key": "kitami",
+   "name": "北見市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
    "key": "kodaira",
    "name": "小平市",
    "agent": "shutoken",
@@ -3321,9 +3381,29 @@
    "top": []
   },
   {
+   "key": "nasushiobara",
+   "name": "那須塩原市",
+   "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
    "key": "neyagawa",
    "name": "寝屋川市",
    "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "niihama",
+   "name": "新居浜市",
+   "agent": "chiho",
    "kw_volume": 0,
    "gsc_impressions": null,
    "score": 500,
@@ -3461,6 +3541,16 @@
    "top": []
   },
   {
+   "key": "oshu",
+   "name": "奥州市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
    "key": "otagunma",
    "name": "太田市",
    "agent": "shutoken",
@@ -3504,6 +3594,16 @@
    "key": "sanda",
    "name": "三田市",
    "agent": "kansai",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "sano",
+   "name": "佐野市",
+   "agent": "shutoken",
    "kw_volume": 0,
    "gsc_impressions": null,
    "score": 500,
@@ -3614,6 +3714,16 @@
    "key": "toda",
    "name": "戸田市",
    "agent": "shutoken",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "tokai",
+   "name": "東海市",
+   "agent": "chiho",
    "kw_volume": 0,
    "gsc_impressions": null,
    "score": 500,
