@@ -127,16 +127,17 @@ def itemlinks(body):
     return re.sub(r"<table.*?</table>",tbl,body,flags=re.S)
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta","ebetsu","ikoma","hatsukaichi","niihama"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta","ebetsu","ikoma","hatsukaichi","niihama","komatsu"}
 # 申し込み制の収集がない市（「収集の予約が」と書かない）
-NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara","yatsushiro","tsuruoka","nobeoka","hatsukaichi","ichinoseki","oshu"}
-NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe"}
+NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara","yatsushiro","tsuruoka","nobeoka","hatsukaichi","ichinoseki","oshu","hakusan","tajimi","otaru","tondabayashi","habikino"}
+NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe","otaru"}
 NOFEE={"shizuoka"}
 # 市の粗大ごみ収集がない市（title に「申込」を入れない）
-NOSHU={"joetsu","kakegawa","matsusaka","yaizu","fujieda","ueda","yatsushiro","tsuruoka","ichinoseki","oshu"}
+NOSHU={"joetsu","kakegawa","matsusaka","yaizu","fujieda","ueda","yatsushiro","tsuruoka","ichinoseki","oshu","otaru"}
 def _title(k):
     n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
-    has_c="受付センター" in body and k not in {"joetsu"}
+    has_c="受付センター" in body and k not in {"joetsu","tondabayashi"}
+    if k in NOSHU and k in NOMOCHI: return f"{n}の粗大ごみの出し方｜許可業者・料金・家電・買取"
     if k in OOGATA: return f"{n}の大型ごみ（粗大ごみ）の出し方｜料金・持ち込み・申込"
     if k in NOMOCHI: return f"{n}の粗大ごみの出し方｜料金・申込・受付センター・買取"
     if k in NOSHU: return f"{n}の粗大ごみの出し方｜持ち込み・料金・家電・買取"
