@@ -1,13 +1,13 @@
 {
  "generated": "2026-11-08",
- "total": 785210,
+ "total": 787210,
  "gsc": false,
  "agents": [
   {
    "id": "tokyo-west",
    "label": "東京23区・西（練馬・世田谷・杉並・板橋ほか）",
    "score": 117670,
-   "share": 0.1499,
+   "share": 0.1495,
    "areas": 7,
    "tiers": {
     "A": [
@@ -27,7 +27,7 @@
    "id": "tokyo-central",
    "label": "東京23区・都心と南（大田・品川・江東・新宿・港ほか）",
    "score": 105730,
-   "share": 0.1347,
+   "share": 0.1343,
    "areas": 9,
    "tiers": {
     "A": [
@@ -50,7 +50,7 @@
    "id": "tokyo-east",
    "label": "東京23区・東（江戸川・足立・葛飾・墨田・台東・文京・荒川）",
    "score": 85120,
-   "share": 0.1084,
+   "share": 0.1081,
    "areas": 7,
    "tiers": {
     "A": [
@@ -71,7 +71,7 @@
    "id": "kanagawa",
    "label": "神奈川（横浜・川崎・相模原ほか）",
    "score": 115180,
-   "share": 0.1467,
+   "share": 0.1463,
    "areas": 15,
    "tiers": {
     "A": [
@@ -101,7 +101,7 @@
    "id": "shutoken",
    "label": "埼玉・千葉・東京多摩・北関東",
    "score": 110920,
-   "share": 0.1413,
+   "share": 0.1409,
    "areas": 75,
    "tiers": {
     "A": [
@@ -190,9 +190,9 @@
   {
    "id": "kansai",
    "label": "関西（大阪・堺・神戸・京都ほか）",
-   "score": 102890,
-   "share": 0.131,
-   "areas": 44,
+   "score": 103390,
+   "share": 0.1313,
+   "areas": 45,
    "tiers": {
     "A": [
      "osaka",
@@ -228,6 +228,7 @@
      "kakogawa",
      "kameoka",
      "kashihara",
+     "kawachinagano",
      "kawanishi",
      "kishiwada",
      "kusatsu",
@@ -249,9 +250,9 @@
   {
    "id": "chiho",
    "label": "名古屋・福岡・仙台ほか地方（北海道・東北・中部・中国・四国・九州・沖縄）",
-   "score": 147700,
-   "share": 0.1881,
-   "areas": 123,
+   "score": 149200,
+   "share": 0.1895,
+   "areas": 126,
    "tiers": {
     "A": [
      "nagoya",
@@ -311,6 +312,8 @@
      "joetsu",
      "kakamigahara",
      "kakegawa",
+     "kani",
+     "kanoya",
      "karatsu",
      "kariya",
      "kasuga",
@@ -338,6 +341,7 @@
      "ogaki",
      "okinawashi",
      "omuta",
+     "onojo",
      "onomichi",
      "osaki",
      "oshu",
@@ -3031,6 +3035,26 @@
    "top": []
   },
   {
+   "key": "kani",
+   "name": "可児市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kanoya",
+   "name": "鹿屋市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
    "key": "karatsu",
    "name": "唐津市",
    "agent": "chiho",
@@ -3074,6 +3098,16 @@
    "key": "kasugai",
    "name": "春日井市",
    "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "kawachinagano",
+   "name": "河内長野市",
+   "agent": "kansai",
    "kw_volume": 0,
    "gsc_impressions": null,
    "score": 500,
@@ -3583,6 +3617,16 @@
   {
    "key": "omuta",
    "name": "大牟田市",
+   "agent": "chiho",
+   "kw_volume": 0,
+   "gsc_impressions": null,
+   "score": 500,
+   "tier": "C",
+   "top": []
+  },
+  {
+   "key": "onojo",
+   "name": "大野城市",
    "agent": "chiho",
    "kw_volume": 0,
    "gsc_impressions": null,
