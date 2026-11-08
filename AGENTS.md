@@ -39,7 +39,7 @@
 | `404.html` `robots.txt` `sitemap.xml` | 手書き |
 | `favicon.svg` `apple-touch-icon.png` `og.png` | アイコン・OGP画像 |
 | `docs/ai-backup.md` `.github/workflows/ai-backup.yml` | Issue にラベル「ai」で動く予備のAI |
-| `data/munis.js` `tools/guide/munis.py` | 全国の市区町村の一覧（国土地理院の市区町村コード＋Wikidata の公式サイトのうち自治体のドメインで開けたもの＋地域記事のキー）。診断の入力候補。地域記事を足したら areas.py のあとに実行（記事のキーが付く） |
+| `data/munis.js` `tools/guide/munis.py` | 全国の市区町村の一覧（国土地理院の市区町村コード＋Wikidata の公式サイトのうち自治体のドメインで開けたもの＋地域記事のキー）。診断の入力候補。地域記事を足したら areas.py のあとに実行（記事のキーが付く）。キーだけ付け直すなら `python3 tools/guide/munis.py . --keys-only`（ネットに出ない） |
 | `data/areas.js` `tools/guide/areas.py` | 診断で使う地域データ（品目ごとの料金・新居の自治体の情報）。地域記事の元データから自動生成。記事を直したら `python3 tools/guide/areas.py .` を実行し直す |
 | `tools/guide/booking.json` `docs/web-booking.md` | 地域ごとのウェブ予約の状態（だれでも／条件つき／停止中／電話など）。予約サイトのリンクと電話は記事の「申し込み方法」から areas.py が取り出し、診断の受付欄に出す。一覧は areas.py が docs/web-booking.md に書き出す |
 | `tools/guide/topics.py` | 持ち込み・処理券・大きさの基準（/guide/size/）・品目別（布団・ソファ・自転車・マットレス・ベッド）のまとめページを地域記事の元データから作る。地域記事を直したら areas.py のあとに実行 |

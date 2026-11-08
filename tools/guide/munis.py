@@ -9,6 +9,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "."
 CHECK = "--no-check" not in sys.argv
+# --keys-only: 公式サイトは今の data/munis.js のまま、記事のキーだけ付け直す（Wikidata・国土地理院を取りに行かない）
+KEYS_ONLY = "--keys-only" in sys.argv
 UA = {"User-Agent": "hinata-lp-munis/1.0 (https://hinata.shiokonbu.com/)"}
 # 北方領土の6村は受付がないので除く
 SKIP = {1695, 1696, 1697, 1698, 1699, 1700}
@@ -59,9 +61,32 @@ def alive(u):
         return False
 
 
+def load_current():
+    """今の data/munis.js から、国土地理院の一覧と公式サイトを作り直す（--keys-only 用）"""
+    js = subprocess.run(["node", "-e", 'global.window={};require(process.argv[1]+"/data/munis.js");console.log(JSON.stringify(window.HINATA_MUNIS))', ROOT],
+                        capture_output=True, text=True, check=True).stdout
+    rows = json.loads(js)
+    name = {r[0]: r[2] for r in rows}
+    mu, wd = {}, {}
+    for c, p, n, u, k, pc in rows:
+        if pc:
+            par = name[pc]
+            mu[c] = (p, par + "　" + n[len(par):])
+        else:
+            mu[c] = (p, n)
+            if u:
+                wd[c] = [u if u.startswith("http") else "https://" + u]
+    return mu, wd
+
+
 def main():
-    mu = load_gsi()
-    wd = load_wikidata()
+    global CHECK
+    if KEYS_ONLY:
+        mu, wd = load_current()
+        CHECK = False
+    else:
+        mu = load_gsi()
+        wd = load_wikidata()
     js = subprocess.run(["node", "-e", 'global.window={};require(process.argv[1]+"/data/areas.js");'
                          'console.log(JSON.stringify(Object.fromEntries(Object.entries(window.HINATA_AREAS).map(([k,v])=>[k,[v.n,v.url||""]]))))', ROOT],
                         capture_output=True, text=True, check=True).stdout
