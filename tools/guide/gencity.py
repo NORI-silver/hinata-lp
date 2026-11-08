@@ -129,7 +129,7 @@ def itemlinks(body):
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
 OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta"}
 # 申し込み制の収集がない市（「収集の予約が」と書かない）
-NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara"}
+NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara"}
 NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe"}
 NOFEE={"shizuoka"}
 def _title(k):
