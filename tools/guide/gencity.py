@@ -129,15 +129,16 @@ def itemlinks(body):
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
 OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta","ebetsu","ikoma","hatsukaichi","niihama","komatsu"}
 # 申し込み制の収集がない市（「収集の予約が」と書かない）
-NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara","yatsushiro","tsuruoka","nobeoka","hatsukaichi","ichinoseki","oshu","hakusan","tajimi","otaru","tondabayashi","habikino"}
-NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe","otaru"}
+NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara","yatsushiro","tsuruoka","nobeoka","hatsukaichi","ichinoseki","oshu","hakusan","tajimi","otaru","tondabayashi","habikino","kawachinagano","kani","kanoya"}
+NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe","otaru","kani"}
 NOFEE={"shizuoka"}
 # 市の粗大ごみ収集がない市（title に「申込」を入れない）
-NOSHU={"joetsu","kakegawa","matsusaka","yaizu","fujieda","ueda","yatsushiro","tsuruoka","ichinoseki","oshu","otaru"}
+NOSHU={"joetsu","kakegawa","matsusaka","yaizu","fujieda","ueda","yatsushiro","tsuruoka","ichinoseki","oshu","otaru","kanoya"}
 def _title(k):
     n=C[k][0]; body=open(os.path.join(CD,k+".html"),encoding="utf-8").read()
-    has_c="受付センター" in body and k not in {"joetsu","tondabayashi"}
+    has_c="受付センター" in body and k not in {"joetsu","tondabayashi","onojo"}
     if k in NOSHU and k in NOMOCHI: return f"{n}の粗大ごみの出し方｜許可業者・料金・家電・買取"
+    if k in NOMOCHI and k in NOYOYAKU: return f"{n}の粗大ごみの出し方｜料金・シール・家電・買取"
     if k in OOGATA: return f"{n}の大型ごみ（粗大ごみ）の出し方｜料金・持ち込み・申込"
     if k in NOMOCHI: return f"{n}の粗大ごみの出し方｜料金・申込・受付センター・買取"
     if k in NOSHU: return f"{n}の粗大ごみの出し方｜持ち込み・料金・家電・買取"
@@ -147,6 +148,9 @@ def _title(k):
 for _k in list(C): C[_k]=(C[_k][0],_title(_k),C[_k][2])
 # 地域ごとのタイトル・説明（記事を厚くした地域だけ。その地域ならではの事実を1つ入れる。料金の数字は入れない）
 TITLE={
+ "kanoya":"鹿屋市の粗大ごみの出し方｜清掃センターへの持ち込み・許可業者",
+ "kani":"可児市の粗大ごみの出し方｜シール・月1回の収集・許可業者・家電",
+ "onojo":"大野城市の粗大ごみの出し方｜料金・23日締切・コールセンター・持ち込み",
  "yokohama":"横浜市の粗大ごみの出し方｜料金表・持ち込み4か所・7日前締切",
  "osaka":"大阪市の粗大ごみの出し方｜料金表・工場への持ち込み・ネット申込",
  "kawasaki":"川崎市の粗大ごみの出し方｜料金・布団は5枚で1個・受付センター",

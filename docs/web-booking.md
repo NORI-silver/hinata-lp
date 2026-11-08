@@ -106,6 +106,8 @@
 | [鎌倉市](/guide/kamakura/) | ◯ だれでも | https://sodai-sys.jp/kamakura/users/ | 独自 |  | 仮予約のあと、環境センターから本予約のメールが届きます |
 | [亀岡市](/guide/kameoka/) | ◯ だれでも | https://logoform.jp/procedure/JbYC/270 | logoform.jp（フォーム） |  |  |
 | [金沢市](/guide/kanazawa/) | ◯ だれでも | https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gomigenryosuishinka/gyomuannai/1/3/gomidasi_benri/line_sodaigomi.html | 独自 |  | 金沢市LINE公式アカウントの「ごみ出しサポート」から。申し込み内容の変更は電話 |
+| [可児市](/guide/kani/) | × 電話など | — | — |  | 申し込み不要。150×80×60cm以内・20kg程度までの物に520円の粗大ごみシールを貼り、月1回の日に不燃物集積場へ。超える物・引越しの多量ごみは市の許可業者に直接頼む（持ち込みはできない） |
+| [鹿屋市](/guide/kanoya/) | × 電話など | — | — |  | 市の粗大ごみ収集はありません。肝属地区清掃センターへ自分で持ち込むか、市の許可業者に頼みます |
 | [唐津市](/guide/karatsu/) | ◯ だれでも | https://logoform.jp/form/ktkc/930905 | logoform.jp（フォーム） |  | 予約が要るのは唐津・浜玉地区（オンラインフォームか電話）。ほかの地区は粗大ごみ収集日に指定のステーションへ |
 | [刈谷市](/guide/kariya/) | ◯ だれでも | https://vein.bridgesany.com/kariya/index.html | 独自 |  | LINEアカウントが必要 |
 | [橿原市](/guide/kashihara/) | × 電話など | — | — |  | 申し込みの案内なし（月1回の粗大ごみの日） |
@@ -114,6 +116,7 @@
 | [春日井市](/guide/kasugai/) | ◯ だれでも | https://ttzk.graffer.jp/city-kasugai/smart-apply/apply-procedure-alias/sadai | 独自 |  | 送ったあと市の担当者から電話があり、そこで収集日と料金が決まります（3営業日以内に折り返さないと取り下げになることがあります） |
 | [春日部市](/guide/kasukabe/) | ◯ だれでも | — | — |  | 返事は次の開庁日以降。引越しなどの多量排出は電話だけ |
 | [葛飾区](/guide/katsushika/) | ◯ だれでも | https://www2.sodai-web.jp/katsushika/index.html | sodai-web.jp |  |  |
+| [河内長野市](/guide/kawachinagano/) | × 電話など | — | — |  | 粗大ごみは申し込み不要（地域ごとに月1回、粗大ごみシールを1点1枚貼ってステーションへ。無料分は月3枚、超えると1枚500円）。ネットのフォームは引越しなどの臨時ごみとスプリング入りマットレスの収集だけ |
 | [川越市](/guide/kawagoe/) | × 電話など | — | — |  | 申し込みは電話 |
 | [川口市](/guide/kawaguchi/) | ◯ だれでも | https://www.sodai-kawaguchi.jp/eco/view/kawaguchi/top.html | /eco/view/ 形式 |  |  |
 | [川西市](/guide/kawanishi/) | ◯ だれでも | https://ecolife.e-tumo.jp/oogata-kawanishi-u/offer/offerList_initDisplay.action | e-tumo.jp |  |  |
@@ -203,6 +206,7 @@
 | [沖縄市](/guide/okinawashi/) | ◯ だれでも | https://logoform.jp/form/7EYC/812712 | logoform.jp（フォーム） |  |  |
 | [青梅市](/guide/ome/) | ◯ だれでも | https://www.city.ome.tokyo.jp/soshiki/23/100846.html | 独自 |  | 青梅市LINE公式アカウントから。市が確かめてから予約が決まります |
 | [大牟田市](/guide/omuta/) | × 電話など | — | — |  | 申し込みは電話かファクス |
+| [大野城市](/guide/onojo/) | × 電話など | — | — |  | 申し込みは市コールセンターへ電話（年中無休 8:00〜21:00）か循環型社会推進課の窓口。毎月23日締め切りで翌月第1週に収集 |
 | [尾道市](/guide/onomichi/) | × 電話など | — | — |  | 申し込みは電話だけ。引越しなどの多量の粗大ごみは個別収集では受け付けない |
 | [大阪市](/guide/osaka/) | ◯ だれでも | https://ecolife.e-tumo.jp/kankyo-osaka-u/ | e-tumo.jp |  |  |
 | [大崎市](/guide/osaki/) | × 電話など | — | — |  | 市が申し込みを受けて集める収集は地域ごとに違う。古川・三本木は古川三本木クリーンセンターに電話（処理券）、ほかの地域は総合支所に確認。処理施設へ持ち込むか許可業者へも |
@@ -287,7 +291,7 @@
 | [米子市](/guide/yonago/) | × 電話など | — | — |  | 申し込み制の粗大ごみ収集はなし。自転車など燃えない大きなごみは収集シールを貼ってカレンダーの日に出す。ソファーなど分けられない物は許可業者か持ち込み |
 | [座間市](/guide/zama/) | ◯ だれでも | https://page.line.me/810zmawg?openQrModal=true<br>https://www.city.zama.kanagawa.jp/shisei/koho/hashin/1005094.html | 独自 |  | 市のLINE公式アカウントから |
 
-合計: ◯ だれでも 141、△ 条件つき 44、× 電話など 95
+合計: ◯ だれでも 141、△ 条件つき 44、× 電話など 99
 
 ## 予約サイトの形ごと（ウェブ予約できる地域）
 
