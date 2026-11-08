@@ -70,19 +70,23 @@
 | [池田市](/guide/ikeda/) | × 電話など | — | — |  | 申し込みが要るかは業務センターに確認 |
 | [今治市](/guide/imabari/) | × 電話など | — | — |  | 申し込みは電話のみ（地区ごとの申込期間） |
 | [稲城市](/guide/inagi/) | ◯ だれでも | https://www.sodai-inagi.jp/ | 独自 |  |  |
+| [稲沢市](/guide/inazawa/) | ◯ だれでも | https://logoform.jp/form/GEKK/1205408 | logoform.jp（フォーム） |  |  |
 | [印西市](/guide/inzai/) | × 電話など | — | — |  | 申し込みは電話のみ |
 | [入間市](/guide/iruma/) | ◯ だれでも | https://lin.ee/CLMytWg | 独自 |  | 市の公式LINEから |
 | [諫早市](/guide/isahaya/) | × 電話など | — | — |  | 申し込み不要（月1回の粗大ごみの日に出す） |
 | [伊勢崎市](/guide/isesaki/) | × 電話など | — | — |  | 申し込みの制度はありません。収集カレンダーの日に、名前を書いた紙を貼って集積所へ出します |
+| [石巻市](/guide/ishinomaki/) | × 電話など | — | — |  | 申し込みは地区ごとの電話だけ（収集日の1週間前まで・1回3品） |
 | [板橋区](/guide/itabashi/) | ◯ だれでも | https://ecolife.e-tumo.jp/itabashi_sodai-u/ | e-tumo.jp |  |  |
 | [伊丹市](/guide/itami/) | ◯ だれでも | https://itami-sodai.jp | 独自 |  | ネットは先にキャッシュレスで払い、立ち会い不要。初めての人は先に受付センターに確かめるよう案内されています |
 | [いわき市](/guide/iwaki/) | △ 条件つき | https://www.city.iwaki.lg.jp/www/contents/1722312210664/index.html | 独自 |  | 市公式LINEで1回3個まで。一覧にない品目と、枠がいっぱいのときは電話 |
+| [岩国市](/guide/iwakuni/) | ◯ だれでも | https://shinsei.pref.yamaguchi.lg.jp/nM6HEQdS<br>https://shinsei.pref.yamaguchi.lg.jp/wDVEMGZ1<br>https://shinsei.pref.yamaguchi.lg.jp/Rp3aPRGL<br>https://shinsei.pref.yamaguchi.lg.jp/XC7ajMla<br>https://shinsei.pref.yamaguchi.lg.jp/H34tlK1P<br>https://shinsei.pref.yamaguchi.lg.jp/kVfVv2YU<br>https://shinsei.pref.yamaguchi.lg.jp/a4WzpnLw<br>https://shinsei.pref.yamaguchi.lg.jp/ge47eiid | 独自 |  | 山口県の電子申請（地域ごとのフォーム）か電話。収集日の7日前まで、1回10点まで |
 | [磐田市](/guide/iwata/) | ◯ だれでも | https://www.city.iwata.shizuoka.jp/kurashi_tetsuzuki/gomi_recycle/gomi/1013066.html | 独自 |  | 市公式LINE（仮受付のあと本受付） |
 | [和泉市](/guide/izumi/) | ◯ だれでも | — | — |  | 1回6点まで |
 | [出雲市](/guide/izumo/) | × 電話など | — | — |  | 申し込みは電話のみ |
 | [上越市](/guide/joetsu/) | × 電話など | — | — |  | 市の粗大ごみ収集なし（持ち込みか許可業者） |
 | [門真市](/guide/kadoma/) | ◯ だれでも | https://www.city.kadoma.osaka.jp/kurashi/gomi/9/5/22408.html | 独自 |  |  |
 | [鹿児島市](/guide/kagoshima/) | ◯ だれでも | https://sodaigomi-city-kagoshima.jp/kagoshima/Web/login | 独自 |  | 初めての人・住所を変えた人は仮受付になり、市から確認の連絡が来ることがあります |
+| [各務原市](/guide/kakamigahara/) | × 電話など | — | — |  | 申し込みは要らない。月1回の「分別して出すごみ」の日にステーションへ無料で出すか、北清掃センターへ持ち込む |
 | [掛川市](/guide/kakegawa/) | × 電話など | — | — |  | 市の戸別収集なし（持ち込みか許可業者） |
 | [加古川市](/guide/kakogawa/) | ◯ だれでも | https://s-kantan.com/sodai-kakogawa-u/ | 独自 | 要 |  |
 | [鎌ケ谷市](/guide/kamagaya/) | × 電話など | — | — |  | 申し込みは電話のみ |
@@ -127,6 +131,7 @@
 | [久留米市](/guide/kurume/) | △ 条件つき | https://kurume-sodaigomi.com/receipts/home/<br>https://page.line.me/905lgpyt?openQrModal=true | 独自 |  | Web・LINEで申し込めるのは受付品目だけ。ほかは電話。締め切りは収集日の前日から数えて1週間前の17時 |
 | [草津市](/guide/kusatsu/) | ◯ だれでも | https://lin.ee/5gQPgRP | 独自 |  | ウェブの予約サイトはなく、市のLINEから。締め切りは収集日の7日前 |
 | [釧路市](/guide/kushiro/) | △ 条件つき | https://www.city.kushiro.lg.jp/kurashi/gomi/1019376.html<br>https://www.city.kushiro.lg.jp/_res/projects/default_project/_page_/001/004/221/sodaidenshikanou1.pdf | 独自 |  | 釧路地域・申込可能リストの品物だけ。1回8点まで |
+| [桑名市](/guide/kuwana/) | ◯ だれでも | https://sodai-sys.jp/kuwana/users/ | 独自 |  | ネット予約は品目一覧にある物だけ（収集日の10営業日前まで・カード払い・写真の添付が要る）。一覧にない物は電話で |
 | [京田辺市](/guide/kyotanabe/) | × 電話など | — | — |  | 申し込みは電話のみ |
 | [京都市](/guide/kyoto/) | ◯ だれでも | — | — |  | インターネット受付（年中無休）は、市の公式ページの案内から申し込みます |
 | [町田市](/guide/machida/) | ◯ だれでも | https://www.m-ecokosha.or.jp/ | 独自 |  |  |
@@ -178,6 +183,7 @@
 | [沖縄市](/guide/okinawashi/) | ◯ だれでも | https://logoform.jp/form/7EYC/812712 | logoform.jp（フォーム） |  |  |
 | [青梅市](/guide/ome/) | ◯ だれでも | https://www.city.ome.tokyo.jp/soshiki/23/100846.html | 独自 |  | 青梅市LINE公式アカウントから。市が確かめてから予約が決まります |
 | [大牟田市](/guide/omuta/) | × 電話など | — | — |  | 申し込みは電話かファクス |
+| [尾道市](/guide/onomichi/) | × 電話など | — | — |  | 申し込みは電話だけ。引越しなどの多量の粗大ごみは個別収集では受け付けない |
 | [大阪市](/guide/osaka/) | ◯ だれでも | https://ecolife.e-tumo.jp/kankyo-osaka-u/ | e-tumo.jp |  |  |
 | [大田区](/guide/ota/) | ◯ だれでも | https://www.ota-sodai.com | 独自 |  |  |
 | [太田市](/guide/otagunma/) | × 電話など | — | — |  | 戸別収集は電話で予約。処理シールを貼ってごみステーションに出す方法は申し込み不要 |
@@ -201,6 +207,7 @@
 | [品川区](/guide/shinagawa/) | ◯ だれでも | https://shinagawa-sodai.com/items | 独自 |  |  |
 | [新宿区](/guide/shinjuku/) | ◯ だれでも | https://www.shinjuku-sodai.com | 独自 | 要 |  |
 | [静岡市](/guide/shizuoka/) | △ 条件つき | http://gomi.city.shizuoka.jp/gomi/ | 独自 |  | インターネット受付は2回目から。初めての人・住所が変わった人は電話で |
+| [周南市](/guide/shunan/) | ◯ だれでも | https://sodai-sys.jp/shunan/users/ | 独自 |  |  |
 | [草加市](/guide/soka/) | ◯ だれでも | https://www.sodai-soka.jp/ | 独自 |  |  |
 | [杉並区](/guide/suginami/) | ◯ だれでも | https://ecolife.e-tumo.jp/kankyo-suginami-tokyo-u/ | e-tumo.jp |  |  |
 | [吹田市](/guide/suita/) | × 電話など | — | — |  | 大型複雑ごみは申し込み不要（収集日に出す）。引越しごみは電話 |
@@ -209,6 +216,7 @@
 | [立川市](/guide/tachikawa/) | ◯ だれでも | https://sodaigomi.city.tachikawa.lg.jp/Public | 独自 |  |  |
 | [台東区](/guide/taito/) | ◯ だれでも | https://ecolife.e-tumo.jp/taitosodai-u/<br>https://www.city.taito.lg.jp/kurashi/gomi/wakekata/gomiinfo/sodaigomi/tyattotukaikata.html | e-tumo.jp |  |  |
 | [高松市](/guide/takamatsu/) | △ 条件つき | https://logoform.jp/form/dV7M/107290 | logoform.jp（フォーム） |  | 1回3点まで。品目リストにない物と、市外へ引っ越す人は電話 |
+| [高岡市](/guide/takaoka/) | × 電話など | — | — |  | ネット予約なし。戸別の収集（臨時収集）は環境政策課 0766-22-2144 へ電話（月〜金 8:30〜17:00）。または高岡市ストックヤードへ持ち込み |
 | [宝塚市](/guide/takarazuka/) | △ 条件つき | https://www.sodai-takarazuka.jp/eco/view/takarazuka/top.html | /eco/view/ 形式 |  | 初めての人と、2014年4月から使っていない人は、先に電話で申し込みます。名前・住所が変わったときも電話 |
 | [高崎市](/guide/takasaki/) | × 電話など | — | — |  | 申し込みは電話（市が案内する地域ごとの受付先） |
 | [高槻市](/guide/takatsuki/) | × 電話など | — | — |  | 申し込みの制度はありません。月1回の収集日に出します。引越しの臨時ごみは電話 |
@@ -230,6 +238,7 @@
 | [土浦市](/guide/tsuchiura/) | △ 条件つき | https://logoform.jp/form/gkP6/372733 | logoform.jp（フォーム） |  | 本人が申し込み、住所と出す場所が同じときだけ。1回5個まで |
 | [つくば市](/guide/tsukuba/) | ◯ だれでも | https://eco.city.tsukuba.ibaraki.jp/eco/view/tsukuba/top.html | /eco/view/ 形式 |  | 送信した時点では仮の受付。確認メールで決まります。締め切りは収集日の5日前 |
 | [宇部市](/guide/ube/) | △ 条件つき | https://www.city.ube.yamaguchi.jp/kurashi/gomi/dashikata/1001966/1001967/1026124.html | 独自 |  | LINEに載っていない品目は電話 |
+| [上田市](/guide/ueda/) | × 電話など | — | — |  | 市の粗大ごみ収集なし。燃やせる粗大ごみは上田・丸子クリーンセンターへ平日に持ち込み。燃やせない粗大ごみは民間の処理業者へ |
 | [宇治市](/guide/uji/) | × 電話など | — | — |  | 申し込みの制度はありません。大きい物は電話で臨時の有料収集 |
 | [浦添市](/guide/urasoe/) | ◯ だれでも | https://logoform.jp/form/YmYw/1250932 | logoform.jp（フォーム） |  |  |
 | [浦安市](/guide/urayasu/) | △ 条件つき | https://s-kantan.jp/city-urayasu-chiba-u/offer/offerList_detail.action?tempSeq=957 | 独自 |  | 先に電子申請の利用者登録が必要。収集日は選べません。料金表にない品目は電話 |
@@ -245,16 +254,17 @@
 | [四日市市](/guide/yokkaichi/) | × 電話など | — | — |  | 申し込みは電話だけ |
 | [横浜市](/guide/yokohama/) | ◯ だれでも | https://www.sodai.city.yokohama.lg.jp/eco/view/yokohama/top.html | /eco/view/ 形式 |  |  |
 | [横須賀市](/guide/yokosuka/) | ◯ だれでも | https://www.yokosuka-sodai.com/receipts/home | 独自 |  |  |
+| [米子市](/guide/yonago/) | × 電話など | — | — |  | 申し込み制の粗大ごみ収集はなし。自転車など燃えない大きなごみは収集シールを貼ってカレンダーの日に出す。ソファーなど分けられない物は許可業者か持ち込み |
 | [座間市](/guide/zama/) | ◯ だれでも | https://page.line.me/810zmawg?openQrModal=true<br>https://www.city.zama.kanagawa.jp/shisei/koho/hashin/1005094.html | 独自 |  | 市のLINE公式アカウントから |
 
-合計: ◯ だれでも 131、△ 条件つき 38、× 電話など 71
+合計: ◯ だれでも 135、△ 条件つき 38、× 電話など 77
 
 ## 予約サイトの形ごと（ウェブ予約できる地域）
 
-- 独自（87）：我孫子市・明石市・昭島市・秋田市・安城市・旭川市・別府市・茅ヶ崎市・調布市・大東市・海老名市・富士見市・藤沢市・福井市・福岡市・船橋市・秦野市・浜松市・東村山市・彦根市・枚方市・広島市・市川市・稲城市・入間市・伊丹市・いわき市・磐田市・門真市・鹿児島市・加古川市・鎌倉市・金沢市・刈谷市・柏市・春日井市・川崎市・加須市・小平市・国分寺市・小牧市・越谷市・久喜市・熊谷市・久留米市・草津市・釧路市・町田市・松原市・松江市・水戸市・流山市・那覇市・奈良市・習志野市・練馬区・新潟市・西宮市・帯広市・小田原市・大垣市・岡山市・岡崎市・青梅市・大田区・さいたま市・坂戸市・札幌市・佐世保市・瀬戸市・下関市・品川区・新宿区・静岡市・草加市・立川市・戸田市・取手市・鳥取市・宇部市・浦安市・和歌山市・山形市・山口市・大和市・横須賀市・座間市
+- 独自（90）：我孫子市・明石市・昭島市・秋田市・安城市・旭川市・別府市・茅ヶ崎市・調布市・大東市・海老名市・富士見市・藤沢市・福井市・福岡市・船橋市・秦野市・浜松市・東村山市・彦根市・枚方市・広島市・市川市・稲城市・入間市・伊丹市・いわき市・岩国市・磐田市・門真市・鹿児島市・加古川市・鎌倉市・金沢市・刈谷市・柏市・春日井市・川崎市・加須市・小平市・国分寺市・小牧市・越谷市・久喜市・熊谷市・久留米市・草津市・釧路市・桑名市・町田市・松原市・松江市・水戸市・流山市・那覇市・奈良市・習志野市・練馬区・新潟市・西宮市・帯広市・小田原市・大垣市・岡山市・岡崎市・青梅市・大田区・さいたま市・坂戸市・札幌市・佐世保市・瀬戸市・下関市・品川区・新宿区・静岡市・周南市・草加市・立川市・戸田市・取手市・鳥取市・宇部市・浦安市・和歌山市・山形市・山口市・大和市・横須賀市・座間市
 - e-tumo.jp（21）：足立区・上尾市・朝霞市・文京区・千代田区・中央区・江戸川区・ひたちなか市・板橋区・川西市・北区・前橋市・松山市・港区・長岡市・新座市・大阪市・杉並区・台東区・所沢市・豊島区
+- logoform.jp（フォーム）（19）：福島市・東久留米市・日野市・一宮市・稲沢市・亀岡市・小金井市・松本市・三島市・宮崎市・西東京市・沖縄市・小山市・狭山市・高松市・多摩市・土浦市・浦添市・うるま市
 - /eco/view/ 形式（18）：尼崎市・厚木市・八王子市・東大阪市・川口市・北九州市・神戸市・倉敷市・長崎市・名古屋市・佐賀市・仙台市・世田谷区・宝塚市・徳島市・豊橋市・つくば市・横浜市
-- logoform.jp（フォーム）（18）：福島市・東久留米市・日野市・一宮市・亀岡市・小金井市・松本市・三島市・宮崎市・西東京市・沖縄市・小山市・狭山市・高松市・多摩市・土浦市・浦添市・うるま市
 - sodai-web.jp（11）：荒川区・千葉市・葛飾区・江東区・目黒区・三鷹市・武蔵野市・中野区・相模原市・墨田区・八尾市
 - eg-resource.jp（5）：府中市・守口市・大津市・堺市・豊中市
 - task-asp.net（フォーム）（4）：足利市・郡山市・松戸市・宇都宮市
