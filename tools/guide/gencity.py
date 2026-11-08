@@ -127,9 +127,9 @@ def itemlinks(body):
     return re.sub(r"<table.*?</table>",tbl,body,flags=re.S)
 # タイトルはキーワードプランナーの結果（2026-10-31）にそろえる：「市区名＋粗大ごみ」に、検索の多い「持ち込み」「受付センター」を入れる。
 # 市の正式名が「大型ごみ」の市はそれを先に。持ち込みを受け付けていない区は「持ち込み」を入れない。
-OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta"}
+OOGATA={"sapporo","kobe","kyoto","hiroshima","kumamoto","ichikawa","fujisawa","higashiosaka","chigasaki","otsu","amagasaki","nara","tottori","iwaki","odawara","kawanishi","ogaki","tomakomai","hirosaki","obihiro","omuta","ebetsu","ikoma"}
 # 申し込み制の収集がない市（「収集の予約が」と書かない）
-NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara"}
+NOYOYAKU={"fujimino","fukaya","yaizu","fujieda","higashihiroshima","koga","joetsu","hirosaki","matsusaka","kakegawa","fujinomiya","isahaya","kirishima","nagahama","kashihara","ueda","yonago","kakamigahara","yatsushiro","tsuruoka","nobeoka"}
 NOMOCHI={"koto","meguro","chuo","mitaka","kodaira","kokubunji","koganei","zama","toda","kyotanabe","urasoe"}
 NOFEE={"shizuoka"}
 def _title(k):
