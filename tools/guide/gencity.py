@@ -65,6 +65,8 @@ for _f in sorted(_g.glob(os.path.join(os.path.dirname(os.path.abspath(__file__))
 _LED=json.load(open(os.path.join(ROOT,"docs","area-agents","ledger.json"),encoding="utf-8")).get("areas",{}) if os.path.exists(os.path.join(ROOT,"docs","area-agents","ledger.json")) else {}
 # 公開日（datePublished）：公開ページ（guide/<key>/index.html）を最初にコミットした日（author date）。取れなければ確認日
 import subprocess as _sp
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+from bookinglib import booking
 def _pub(k):
     try: return _sp.run(["git","log","--diff-filter=A","--format=%as","--","guide/"+k+"/index.html"],cwd=ROOT,capture_output=True,text=True).stdout.split()[-1]
     except Exception: return None
@@ -75,12 +77,24 @@ H2ID=[("moshikomi",r"^申し込み"),("ryokin",r"料金"),("dashikata",r"出し�
 TOCNAME={"moshikomi":"申し込み","ryokin":"料金","dashikata":"出し方","kaden":"家電4品目","mochikomi":"持ち込み"}
 def headings(body,k,name):
     noun="大型ごみ" if k in OOGATA else "粗大ごみ"
+    # 申し込みの見出しに受付の手段（booking.json と記事の予約サイト・電話の行から。areas.py と同じ判定）
+    bk=booking(k,body); web=bk.get("web")
+    _sec=re.search(r"<h2>[^<]*申し込み[^<]*</h2>(.*?)<h2>",body,re.S)
+    labels=re.findall(r"<li>\s*<b>(.*?)</b>",_sec.group(1)) if _sec else []
+    tel=any("電話" in x for x in labels)  # 電話の欄（tel リンクがなくても、業者へ電話する形も含む）
+    net="インターネット" if any("インターネット" in x for x in labels) or not any("LINE" in x for x in labels) else "LINE"
+    if web=="open": ch=f"{net}・電話" if tel else net
+    elif web=="cond": ch="電話・インターネットは条件つき" if tel else None
+    elif web=="stop": ch="電話・インターネットは停止中" if tel else None
+    else: ch="電話" if tel else None
+    mosh=f"{name}の{noun}の申し込み（{ch}）" if ch else f"{name}の{noun}の申し込み方法"
     used={}
     def h2(m):
         t=m.group(1)
         for hid,pat in H2ID:
             if hid not in used and re.search(pat,t):
                 used[hid]=True
+                if hid=="moshikomi" and t=="申し込み方法": t=mosh
                 if hid=="mochikomi":
                     g=re.fullmatch(r"急ぐときは(.+?)[へに](?:持ち込む|運ぶ)(?:（(.+?)）)?",t)
                     if g: t=f"{name}の{noun}の持ち込み（急ぐとき・{g.group(1)}"+(f"・{g.group(2)}" if g.group(2) else "")+"）"
